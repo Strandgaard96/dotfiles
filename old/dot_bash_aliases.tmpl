@@ -1,0 +1,51 @@
+alias lth='ls -lth'
+alias tlog='cp xtbopt.log traj.xyz'
+alias cz='chezmoi'
+
+export EDITOR=vim
+
+# Useful functions
+# Move 'up' so many directories instead of using several cd ../../, etc.
+up() { cd $(eval printf '../'%.0s {1..$1}) && pwd; }
+
+# Do ls when changing dir
+cd() {
+    builtin cd "$@" && ls -lth
+}
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# Slurm stuff
+alias sq='squeue -u magstr -o "%.18i %.9P %.8j %.8u %.2t %.10M %.6D %R %C %m"'
+
+# Screen
+alias scr='screen -r'
+
+
+# cluster specific aliases
+{{- if eq .chezmoi.hostname "magnus-work" }}
+
+alias nitro='cd /home/magstr/Documents/nitrogenase'
+alias ga='cd /home/magstr/Documents/GB_GA'
+alias gadata='cd /home/magstr/generation_data'
+
+{{- else if eq .chezmoi.hostname "slid" }}
+
+alias nitro='cd ~/nitrogenase'
+alias ..='cd ..'
+alias ga='cd /home/energy/magstr/nitrogenase/schrock/GB_GA'
+
+{{- else if eq .chezmoi.hostname "fend03" }}
+
+alias cmol='conda activate mols_test_new'
+alias ..='cd ..'
+alias ga='cd /groups/kemi/magstr/GB_GA'
+
+{{- end }}
