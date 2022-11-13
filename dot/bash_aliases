@@ -6,6 +6,24 @@ export EDITOR=vim
 # Easy access
 alias dotfiles='cd $HOME/git/dotfiles'
 
+# My own
+alias lth='ls -lth'
+alias tlog='cp xtbopt.log traj.xyz'
+alias cmol='conda activate mols_test_new'
+# Useful functions
+# Move 'up' so many directories instead of using several cd ../../, etc.
+up() { cd $(eval printf '../'%.0s {1..$1}) && pwd; }
+
+# Do ls when changing dir
+cd() {
+    builtin cd "$@" && ls -lth
+}
+# Slurm stuff
+alias sq='squeue -u magstr -o "%.18i %.9P %.8j %.8u %.2t %.10M %.6D %R %C %m"'
+# Screen
+alias scr='screen -r'
+
+
 # Git Shortcuts
 alias gco='git commit'
 alias gca='git commit -a'

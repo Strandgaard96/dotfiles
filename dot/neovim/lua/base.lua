@@ -18,6 +18,9 @@ vim.opt.smarttab=true
 vim.opt.softtabstop=0
 vim.opt.tabstop=4
 
+-- THe stuff i added
+vim.opt.hlsearch=true
+
 vim.opt.ignorecase=true -- Case-insensitive searching
 vim.opt.lazyredraw=true -- will buffer screen updates instead of updating all the time.:help 'ttyfast'
 vim.opt.list=true -- Highlight unwanted spaces
@@ -32,7 +35,7 @@ vim.opt.showmode=false -- insert is already showing in lightline
 vim.opt.swapfile=false
 vim.opt.wrap=false -- Don't ever wordwrap my code
 vim.opt.number=true
-vim.opt.relativenumber=true
+-- vim.opt.relativenumber=true
 vim.opt.scrolloff=8 -- I like cursor to be in center
 vim.opt.sidescroll=1
 vim.opt.sidescrolloff=15
