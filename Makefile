@@ -1,4 +1,3 @@
-
 # Note
 # $@ - sources
 # $< - target

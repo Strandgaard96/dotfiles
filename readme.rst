@@ -1,26 +1,7 @@
 Dotfiles
 ========
 
-For OSX, Debian and whatever HPC I need to work on. Some dotfiles are OS dependent. Check `Makefile` for dependencies, install and symlink setup.
-
-I use `Makefile` to coordinate everything. You should too.
-
-Mac OSX
--------
-
-|macosx|
-
-window manager: yabai
-
-Debian
-------
-
-|debian|
-
-window manager: i3wm
-
-.. |debian| image:: https://raw.githubusercontent.com/charnley/dotfiles/master/setup.deb.x/screenshot.png
-.. |macosx| image:: https://raw.githubusercontent.com/charnley/dotfiles/master/setup.osx/screenshot.png
+My dotfiles. Heavily inspired by `this repo <https://github.com/charnley/dotfiles>`_
 
 Setup
 -----
