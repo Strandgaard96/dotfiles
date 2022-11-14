@@ -159,6 +159,8 @@ ${HOME}/.fzf:
 
 install: dotfiles bin ${HOME}/opt/neovim ${HOME}/.fzf install_${OS} ${HOME}/opt/tmux-3.2a ${HOME}/.oh-my-zsh 
 
+install_remote: dotfiles bin ${HOME}/opt/neovim ${HOME}/.fzf install_${OS} ${HOME}/.oh-my-zsh
+
 install_osx: ${HOME}/opt/homebrew
 	brew bundle --file ./lists/gnu.Brewfile
 	HOMEBREW_CASK_OPTS="--no-quarantine" brew bundle --file ./lists/i3like.Brewfile
