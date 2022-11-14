@@ -1,3 +1,11 @@
+
+vim.cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+  augroup end
+]])
+
 return require('packer').startup(function(use)
 
     -- Packer can manage itself
@@ -14,12 +22,13 @@ return require('packer').startup(function(use)
 
     -- Interface
     use 'nanotech/jellybeans.vim' -- colorscheme
-    use 'folke/tokyonight.nvim'
     use 'vim-airline/vim-airline'
     use 'vim-airline/vim-airline-themes'
     use 'folke/which-key.nvim'  -- I can't remember what <leader><char> does
 
     -- IDE like
+    use "williamboman/nvim-lsp-installer"
+    use 'kabouzeid/nvim-lspinstall'
     use 'windwp/nvim-autopairs'
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-nvim-lsp'
@@ -27,7 +36,6 @@ return require('packer').startup(function(use)
     use 'hrsh7th/cmp-vsnip'
     use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/vim-vsnip'
-    use 'kabouzeid/nvim-lspinstall'
     use 'neovim/nvim-lspconfig'
     use {'nvim-treesitter/nvim-treesitter', run= ':TSUpdate'}
     use 'nvim-treesitter/nvim-treesitter-textobjects'

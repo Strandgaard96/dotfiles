@@ -1,9 +1,16 @@
-
+require("nvim-lsp-installer").setup({
+    automatic_installation = true, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
+    ui = {
+        icons = {
+            server_installed = "✓",
+            server_pending = "➜",
+            server_uninstalled = "✗"
+        }
+    }
+})
 -- More like IDE
 require('lspconfig').pyright.setup{}
 require('lspconfig').bashls.setup{}
-require('lspconfig').tsserver.setup({})
-require('lspconfig').svelte.setup{}
 
 require('nvim-autopairs').setup{}
 require("which-key").setup{}
