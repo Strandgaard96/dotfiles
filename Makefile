@@ -52,12 +52,6 @@ ${HOME}/.config/nvim: ${HOME}/.config
 ${HOME}/.ssh:
 	mkdir -p $@
 
-${HOME}/.i3:
-	mkdir -p $@
-
-${HOME}/.config/i3status: ${HOME}/.config
-	mkdir $@
-
 directories: ${HOME}/bin ${HOME}/opt ${HOME}/.config/nvim
 
 # Executables
@@ -109,6 +103,7 @@ dotfiles: directories dotfiles_defaults dotfiles_$(OS)
 
 dotfiles.x: bindir_deb.x dotfiles_deb.x
 
+# wtf does this do?
 ${HOME}/.%:
 	test -f $@ && mv $@ $@.bk;:
 	ln -s `pwd`/$< $@
@@ -135,38 +130,23 @@ ${HOME}/.vsnip: ./dot/neovim/snippets
 
 dotfiles_osx: ${HOME}/.yabairc ${HOME}/.skhdrc ${HOME}/.gitignore
 
-${HOME}/.yabairc: ./dot.osx/yabairc
-${HOME}/.skhdrc: ./dot.osx/skhdrc
 ${HOME}/.gitignore: ./dot.osx/gitignore
 
 dotfiles_deb: ${HOME}/.inputrc
 
 ${HOME}/.inputrc: ./dot.deb/inputrc
 
-dotfiles_deb.x: ${HOME}/.Xresources ${HOME}/.config/dunstrc ${HOME}/.config/i3status/config ${HOME}/.i3/config
-
-${HOME}/.Xresources: ./dot.deb.x/Xresources
-${HOME}/.config/dunstrc: ./dot.deb.x/dunstrc
-${HOME}/.config/i3status/config: ./dot.deb.x/i3status
-${HOME}/.i3/config: ./dot.deb.x/i3config
-
 #
-
 ${HOME}/.fzf:
 	bash ./setup/fzf_setup.sh
 
 # Meta
 
-install: dotfiles bin ${HOME}/opt/neovim ${HOME}/.fzf install_${OS} ${HOME}/opt/tmux-3.2a ${HOME}/.oh-my-zsh 
+install: dotfiles bin ${HOME}/opt/neovim ${HOME}/.fzf install_${OS} ${HOME}/opt/tmux-3.2a ${HOME}/.oh-my-zsh ${HOME}/.oh-my-zsh
 
-install_remote: dotfiles bin ${HOME}/opt/neovim ${HOME}/.fzf install_${OS} ${HOME}/.oh-my-zsh
+# tmux installation is troublesome and not needed on remotes anyway. So made new target for this
+install_remote: dotfiles bin ${HOME}/opt/neovim ${HOME}/.fzf install_${OS} ${HOME}/.oh-my-zsh ${HOME}/.oh-my-zsh
 
-install_osx: ${HOME}/opt/homebrew
-	brew bundle --file ./lists/gnu.Brewfile
-	HOMEBREW_CASK_OPTS="--no-quarantine" brew bundle --file ./lists/i3like.Brewfile
-
-${HOME}/opt/homebrew:
-	bash ./setup.osx/setup_brew.sh
 
 install_deb:
 	@#

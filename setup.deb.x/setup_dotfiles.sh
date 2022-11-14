@@ -13,13 +13,6 @@ ln -sf $cwd/dot/tmux.conf $HOME/.tmux.conf
 ln -sf $cwd/dot/condarc $HOME/.condarc
 ln -sf $cwd/dot/gitconfig $HOME/.gitconfig
 
-# i3 / urxvt
-mkdir -p $HOME/.i3
-mkdir -p $HOME/.config/i3status
-ln -sf $cwd/dot.deb.x/Xresources $HOME/.Xresources
-ln -sf $cwd/dot.deb.x/i3status $HOME/.config/i3status/config
-ln -sf $cwd/dot.deb.x/i3config $HOME/.i3/config
-
 # .ssh
 mkdir -p $HOME/.ssh
 ln -sf $cwd/dot/ssh_config $HOME/.ssh/config

@@ -8,4 +8,4 @@
 docker build --no-cache -t dotfiles .
 
 # Run a container
-docker run --interactive --tty --rm --user username dotfiles
+docker run --interactive --tty --user magstr dotfiles

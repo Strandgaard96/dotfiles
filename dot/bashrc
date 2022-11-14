@@ -98,7 +98,7 @@ case $HOSTNAME in
         export PS1NOGIT="True";;
     magnus-work )
         export PS1="$IBlue\h $Cyan\W$Color_Off";;
-    slid )
+    *slid* )
         export EASYBUILD_PREFIX_ME=/home/niflheim/jchang/modules
         module use $EASYBUILD_PREFIX_ME/modules/all
         export EASYBUILD_PREFIX=/home/energy/modules
@@ -158,21 +158,7 @@ if `tty -s`; then mesg n; fi
 # Source local bashrc if present
 if test -f $HOME/.bashrc_local; then source $HOME/.bashrc_local; fi
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('${HOME}/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "${HOME}/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "${HOME}/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="${HOME}/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
 
-export NVM_DIR="$HOME/opt/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# TODOS
+# Could be interesting to check this prompt
+# https://github.com/mathiasbynens/dotfiles/blob/main/.bash_prompt
