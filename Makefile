@@ -62,7 +62,7 @@ directories: ${HOME}/bin ${HOME}/.config/nvim
 ${HOME}/bin/vim:
 	ln -fs `pwd`/bin.$(OS)/vim ${HOME}/bin/vim
 
-${HOME}/opt/neovim: ${HOME}/opt/nvm
+${HOME}/opt/neovim:
 	bash setup.$(OS)/nvim_setup.sh
 	bash setup/neovim_packer.sh
 	NEOVIM_SETUP=1 ${HOME}/bin/vim --headless -c 'autocmd User PackerComplete quitall' -c 'silent PackerSync'
@@ -71,11 +71,6 @@ ${HOME}/opt/tmux-3.2a:
 	bash ./setup/tmux_compile.sh 1> /dev/null
 	bash ./setup/tmux_tpm.sh
 	bash ./setup/tmux_plugins.sh
-
-${HOME}/opt/nvm:
-	bash ./setup/javascript_nvm.sh
-	bash ./setup/javascript_node.sh
-	bash ./setup/javascript_yarn.sh
 
 ${HOME}/bin/zsh:
 	bash ./setup/zsh_install.sh
