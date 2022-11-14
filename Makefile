@@ -40,6 +40,9 @@ tmux_tpm:
 ${HOME}/bin:
 	mkdir -p $@
 
+${HOME}/opt:
+	mkdir -p $@
+
 ${HOME}/.config:
 	mkdir -p $@
 
@@ -55,7 +58,7 @@ ${HOME}/.i3:
 ${HOME}/.config/i3status: ${HOME}/.config
 	mkdir $@
 
-directories: ${HOME}/bin ${HOME}/.config/nvim
+directories: ${HOME}/bin ${HOME}/opt ${HOME}/.config/nvim
 
 # Executables
 
