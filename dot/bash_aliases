@@ -110,13 +110,13 @@ gh() {
 alias gc='gitclone' # from bin
 
 function git_use_private {
-    git config user.name "Jimmy Charnley Kromann"
-    git config user.email "jimmy@charnley.dk"
+    git config user.name "Strandgaard96"
+    git config user.email "magus.str@gmail.com"
 }
 
-function git_use_novartis {
-    git config user.name "Jimmy Charnley Kromann"
-    git config user.email "jimmy.kromann@novartis.com"
+function git_use_work {
+    git config user.name "Strandgaard96"
+    git config user.email "magnus.str@gmail.com"
 }
 
 

@@ -117,7 +117,7 @@ case $HOSTNAME in
         export SCM_OPENGL_SOFTWARE=1
         # set p4vasp environment variables
         export PATH=$PATH:/home/energy/arbh/p4vasp/bin
-        module use /home/energy/stly/modules/modules/all
+        module use /home/energy/stly/modules/modules/all;;
     * )
         export PS1="$Yellow\h$Color_Off $Cyan\W$Color_Off";;
 esac

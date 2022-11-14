@@ -14,6 +14,7 @@ return require('packer').startup(function(use)
 
     -- Interface
     use 'nanotech/jellybeans.vim' -- colorscheme
+    use 'folke/tokyonight.nvim'
     use 'vim-airline/vim-airline'
     use 'vim-airline/vim-airline-themes'
     use 'folke/which-key.nvim'  -- I can't remember what <leader><char> does
