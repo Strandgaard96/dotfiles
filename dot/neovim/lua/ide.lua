@@ -120,6 +120,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   }
 )
 
+-- THIS GIES TROUBLE OF FEND SO I REMOVED IT
 --- Treesitter
 require('nvim-treesitter.install').compilers = { "clang", "gcc" }
 require'nvim-treesitter.configs'.setup {

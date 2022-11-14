@@ -24,3 +24,5 @@
 	ignoreSubmodules = dirty
 [user]
 	useConfigOnly = true
+	name = Strandgaard96
+	email = magnus.str@gmail.com

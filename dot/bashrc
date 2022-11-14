@@ -102,7 +102,7 @@ case $HOSTNAME in
     fend0[1-5].cluster )
         export PS1="$Yellow\h$Color_Off $Cyan\W$Color_Off"
         export PS1NOGIT="True";;
-    laptop )
+    magnus-work )
         export PS1="$Blue\h $Cyan\W$Color_Off";;
     slid )
         export EASYBUILD_PREFIX_ME=/home/niflheim/jchang/modules
@@ -117,7 +117,8 @@ case $HOSTNAME in
         export SCM_OPENGL_SOFTWARE=1
         # set p4vasp environment variables
         export PATH=$PATH:/home/energy/arbh/p4vasp/bin
-        module use /home/energy/stly/modules/modules/all;;
+        module use /home/energy/stly/modules/modules/all
+        export PS1="$Yellow\h$Color_Off $Cyan\W$Color_Off";;
     * )
         export PS1="$Yellow\h$Color_Off $Cyan\W$Color_Off";;
 esac
@@ -176,3 +177,7 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+export NVM_DIR="$HOME/opt/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
