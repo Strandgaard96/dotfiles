@@ -6,6 +6,7 @@ export EDITOR=vim
 # Easy access
 alias dotfiles='cd $HOME/git/dotfiles'
 
+
 # My own
 alias lth='ls -lth'
 alias tlog='cp xtbopt.log traj.xyz'
@@ -61,6 +62,16 @@ function cona_func {
 # alias cona='conda activate'
 alias cona='cona_func'
 alias cond='conda deactivate'
+
+# Functions of bash_aliases
+function ga()
+{
+    case $HOSTNAME in
+        magnus-work )
+            cd ${HOME}/Documents/GB_GA;;
+    esac
+}
+
 
 # git
 function gitclone {
@@ -289,3 +300,5 @@ if test -x "$(command -v sinfo)"; then
     # http://slurm.schedmd.com/squeue.html
     alias qs='squeue -o "%.10i %.9P %.8u %.10j %.12M %.5D %.4C %R"'
 fi
+
+

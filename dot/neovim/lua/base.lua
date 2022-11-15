@@ -111,23 +111,15 @@ inoremap , ,<c-g>u
 inoremap . .<c-g>u
 inoremap [ [<c-g>u
 
+" Map movement keys to danish keyboard
+noremap æ l
+noremap l k
+noremap k j
+noremap j h
+
 " I feel like going back a word should be consistent with w
 nnoremap W b
 vnoremap W b
-
-" Move marked text (Sorry Peter, I use arrow)
-vnoremap <C-j> :m '>+1<CR>gv=gv
-vnoremap <C-k> :m '<-2<CR>gv=gv
-inoremap <C-j> <esc>:m .+1<CR>==i
-inoremap <C-k> <esc>:m .-2<CR>==i
-nnoremap <C-j> :m .+1<CR>==
-nnoremap <C-k> :m .-2<CR>==
-vnoremap <A-Down> :m '>+1<CR>gv=gv
-vnoremap <A-Up> :m '<-2<CR>gv=gv
-inoremap <A-Down> <esc>:m .+1<CR>==i
-inoremap <A-Up> <esc>:m .-2<CR>==i
-nnoremap <A-Down> :m .+1<CR>==
-nnoremap <A-Up> :m .-2<CR>==
 
 " Delete without yank
 nnoremap d "_d
