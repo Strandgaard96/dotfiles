@@ -1,3 +1,5 @@
+# This is where the neovim magic happens
+
 # tl;dr changes to key bindings
 
 ## Basic extension of vim

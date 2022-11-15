@@ -1,4 +1,4 @@
-_tmk() {
+do_tmk() {
     TMUX_SESSIONS=$(tmux ls -F '#S' | xargs)
 
     local cur=${COMP_WORDS[COMP_CWORD]}

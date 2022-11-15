@@ -2,6 +2,7 @@ Dotfiles
 ========
 
 My dotfiles. Heavily inspired by `this repo <https://github.com/charnley/dotfiles>`_
+Huge shoutout
 
 Setup
 -----

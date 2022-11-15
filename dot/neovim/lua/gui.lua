@@ -6,7 +6,7 @@ vim.opt.showcmd=true
 vim.opt.laststatus=2
 vim.opt.cmdheight=1
 
--- Set colorscheme to jellybeans
+-- Set colorscheme to jellybeans. I dont know how to set other themes. This snippet does some magic i dont understand
 vim.api.nvim_exec([[
 let g:jellybeans_overrides = {'background': { 'ctermbg': 'none', '256ctermbg': 'none' },}
 try
@@ -19,7 +19,7 @@ highlight clear SignColumn  " fix bg color for SignColumn (for jellybeans)
 highlight Pmenu ctermbg=none
 ]], false)
 
--- fzf visual
+-- fzf visual # fzf_layout is some variables specific to fzf.
 vim.api.nvim_exec([[
 let $FZF_DEFAULT_OPTS='--reverse'
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }

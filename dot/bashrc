@@ -1,7 +1,7 @@
 
 # Preserve bash history in multiple terminal windows
 export HISTCONTROL=ignoredups:erasedups:ignorespace
-export HISTIGNORE='lth:ls:bf:fg:history:l:sound:dock:undock:headphones:top:l:mocp:rm'
+export HISTIGNORE='lth:ls:bf:fg:history:l:sound:dock:undock:headphones:top:htop:l:mocp:rm'
 export HISTSIZE=100000                   # big big history
 export HISTFILESIZE=100000               # big big history
 shopt -s histappend                      # append to history, don't overwrite it
@@ -12,6 +12,9 @@ export PROMPT_COMMAND='history -a'
 
 # all my aliases
 if test -f ~/.bash_aliases; then . ~/.bash_aliases; fi
+
+# all my functions
+if test -f ~/.bash_functions; then . ~/.bash_functions; fi
 
 # bash completion
 if test -f /etc/bash_completion; then . /etc/bash_completion; fi

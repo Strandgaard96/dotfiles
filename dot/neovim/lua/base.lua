@@ -1,4 +1,4 @@
--- Base vim settings
+-- Base vim settings in the lua syntax
 
 -- vim.o: behaves like :let &{option-name}
 -- vim.go: behaves like :let &g:{option-name}
@@ -9,6 +9,7 @@
 -- vim.opt_global: behaves like :setglobal
 -- vim.opt_local: behaves like :setlocal
 
+-- Indent settings
 vim.opt.autoindent=true
 vim.opt.expandtab=true
 vim.opt.indentexpr=O
@@ -18,8 +19,7 @@ vim.opt.smarttab=true
 vim.opt.softtabstop=0
 vim.opt.tabstop=4
 
--- THe stuff i added
-vim.opt.hlsearch=true
+vim.opt.hlsearch=true -- highlight searched words
 
 vim.opt.ignorecase=true -- Case-insensitive searching
 vim.opt.lazyredraw=true -- will buffer screen updates instead of updating all the time.:help 'ttyfast'
@@ -28,20 +28,22 @@ vim.opt.listchars = {
     tab = '│·',
     trail = '·',
     -- eol = '↵',
-}
-vim.opt.mouse='a'
-vim.opt.hlsearch=false -- I don't like to look at highlighted text
-vim.opt.showmode=false -- insert is already showing in lightline
+} -- Show hidden characters, In this case list things
+
+vim.opt.mouse='a' -- Mouse is on for all modes
+-- vim.opt.hlsearch=false -- Turn on if you want to remove highlighted text
+vim.opt.showmode=false -- insert is already showing in lightline -- I am not sure what effect this has
 vim.opt.swapfile=false
 vim.opt.wrap=false -- Don't ever wordwrap my code
-vim.opt.number=true
--- vim.opt.relativenumber=true
-vim.opt.scrolloff=8 -- I like cursor to be in center
+vim.opt.number=true -- Line number
+-- vim.opt.relativenumber=true --Show relative line numbers from current line
+vim.opt.scrolloff=8 -- Offsets the cursor from the top when scrolling
 vim.opt.sidescroll=1
 vim.opt.sidescrolloff=15
 vim.opt.signcolumn='yes:1' -- always show sign column (bookmarks, gitgutter,..)
 vim.opt.smartcase=true -- if a pattern contains an uppercase letter, it is case sensitive
 
+-- Some wildcard options
 vim.opt.wildmode={'longest','list','full'}
 vim.opt.wildignore={
     '*.pyc',
@@ -53,6 +55,9 @@ vim.opt.wildignore={
 }
 
 -- Buffer specific
+-- _G is some global namespace
+-- Im am not sure what is happening here. But this stuff is automatic and used to do some nice stuff for me
+-- These commands are somwhow handling space/tab formats when opening files.
 _G._autocommands = {}
 _G._autocommands.is_space_or_tab = function()
     -- Check space or tab format. If space, check space width and update buffer
@@ -95,18 +100,21 @@ _G._autocommands.find_indent_width = function(lines)
 
 end
 
+-- Here the autocmd is defined. After reading buffer it is run.
 -- TODO Is there a lua interface for BufReadPost?
 vim.api.nvim_exec([[
 autocmd BufReadPost * lua _autocommands.is_space_or_tab()
 ]], false)
 
--- Overwrite default behavior
+-- these two define the commands W and Q as the regular lower case to prevent typo from exiting/saving vim
 vim.api.nvim_exec([[ command W w ]], false) -- common typo
 vim.api.nvim_exec([[ command Q q ]], false) -- common typo
+
+ -- A series of classic vim commands :D Changing some mappings
 vim.api.nvim_exec([[
-" More sane undo (undo breakpoints on char)
+" More sane undo (undo breakpoints on char) # Not sure how this works
 inoremap " "<c-g>u
-inoremap ( (<c-g>u
+inoremap ( (<c-g>u:
 inoremap , ,<c-g>u
 inoremap . .<c-g>u
 inoremap [ [<c-g>u
@@ -117,11 +125,11 @@ noremap l k
 noremap k j
 noremap j h
 
-" I feel like going back a word should be consistent with w
+" I feel like going back a word should be consistent with w. Move backwards one word. Usual is b and B
 nnoremap W b
 vnoremap W b
 
-" Delete without yank
+" Delete without yank. This text is just removed
 nnoremap d "_d
 nnoremap D "_D
 vnoremap d "_d
@@ -131,7 +139,7 @@ nnoremap n nzzzv
 nnoremap N Nzzzv
 nnoremap J mzJ`z
 
-" Reselect visual selection after indenting
+" Reselect visual selection after indenting # Neat
 vnoremap < <gv
 vnoremap > >gv
 
@@ -141,7 +149,7 @@ vnoremap y myy`y
 
 ]], true)
 
--- Set default behavior for filetypes
+-- Set default behavior for filetypes # I dont know whats going one here kekw
 vim.api.nvim_exec([[
 au BufRead,BufNewFile *.md,*.mdx,*.markdown setfiletype markdown
 au BufRead,BufNewFile Jenkinsfile,*.Jenkinsfile setfiletype groovy
@@ -161,16 +169,17 @@ endif
 -- Disable filetype plugin (it overwrites tab/indentation settings)
 vim.api.nvim_exec([[filetype plugin off]], false)
 
--- Spelling
+-- Spelling # do  :set spell to highlight possible spelling mistakes. Probably wont use this too much
 vim.opt.spelllang="en"
 vim.opt.spellsuggest="best,10" -- show only the top 10 candidates
 
-vim.opt.autoread=true -- Update buffer if file has changed
+vim.opt.autoread=true -- Update buffer if file has changed outside vim.
+-- https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
 vim.api.nvim_exec([[
 autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
 ]],false)
 
--- Useful commands
+-- Useful commands # WHAT DOES THIS DO I DONT KNOW
 vim.api.nvim_exec([[
 command -nargs=0 -range SortWords <line1>,<line2>call setline('.',join(sort(split(getline('.'),' ')),' '))
 ]],false)

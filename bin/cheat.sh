@@ -2,6 +2,10 @@
 
 # https://github.com/ThePrimeagen/.dotfiles/blob/master/bin/.local/bin/tmux-cht.sh
 
+##################
+#  NOT WORKING  #
+##################
+
 # set -x
 set -e
 set -u
