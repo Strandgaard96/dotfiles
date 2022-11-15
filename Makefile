@@ -88,20 +88,12 @@ bindir_dev:
 bindir_deb:
 	@bash ./setup/install_bin_directories.sh bin.deb
 
-bindir_deb.x:
-	@bash ./setup/install_bin_directories.sh bin.deb.x
-
-bindir_osx:
-	@bash ./setup/install_bin_directories.sh bin.osx
-
 bindir_hpc:
 	@bash ./setup/install_bin_directories.sh bin.hpc
 
 # Dotfiles
 
 dotfiles: directories dotfiles_defaults dotfiles_$(OS)
-
-dotfiles.x: bindir_deb.x dotfiles_deb.x
 
 # wtf does this do?
 ${HOME}/.%:
@@ -127,10 +119,6 @@ ${HOME}/.config/alacritty: ./dot/alacritty
 ${HOME}/.config/nvim/init.lua: ./dot/neovim/init.lua
 ${HOME}/.config/nvim/lua: ./dot/neovim/lua
 ${HOME}/.vsnip: ./dot/neovim/snippets
-
-dotfiles_osx: ${HOME}/.yabairc ${HOME}/.skhdrc ${HOME}/.gitignore
-
-${HOME}/.gitignore: ./dot.osx/gitignore
 
 dotfiles_deb: ${HOME}/.inputrc
 

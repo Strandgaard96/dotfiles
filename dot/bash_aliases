@@ -157,12 +157,6 @@ if [[ $TMUX ]]; then
     alias clear='clear && tmux clear-history'
 fi
 
-# TODO Set cd alias to git root if deep in repo
-
-alias cd.='cd ..'
-alias cd..='cd ..'
-alias cd...='cd ../..'
-alias b='cd ..'
 
 function fast_edit()
 {

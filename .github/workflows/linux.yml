@@ -1,6 +1,9 @@
 name: Test Ubuntu
 
-on: [push]
+on:
+  push:
+    paths:
+      - '**.yml'
 
 jobs:
   build:
