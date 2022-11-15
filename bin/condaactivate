@@ -1,4 +1,0 @@
-#!/bin/bash
-
-conda activate
-test -d ./env && conda activate ./env

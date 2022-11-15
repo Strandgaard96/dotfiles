@@ -100,7 +100,7 @@ ${HOME}/.%:
 	test -f $@ && mv $@ $@.bk;:
 	ln -s `pwd`/$< $@
 
-dotfiles_defaults: ${HOME}/.bashrc ${HOME}/.bash_profile ${HOME}/.bash_aliases ${HOME}/.bash_paths ${HOME}/.condarc ${HOME}/.gitconfig ${HOME}/.tmux.conf ${HOME}/.tmux-osx ${HOME}/.tmux-linux ${HOME}/.config/nvim/init.lua ${HOME}/.config/nvim/lua ${HOME}/.vsnip ${HOME}/.zshrc ${HOME}/.config/alacritty ${HOME}/.config/neofetch ${HOME}/.hushlogin
+dotfiles_defaults: ${HOME}/.bashrc ${HOME}/.bash_profile ${HOME}/.bash_aliases ${HOME}/.bash_paths ${HOME}/.condarc ${HOME}/.gitconfig ${HOME}/.tmux.conf ${HOME}/.tmux-osx ${HOME}/.tmux-linux ${HOME}/.config/nvim/init.lua ${HOME}/.config/nvim/lua ${HOME}/.vsnip ${HOME}/.zshrc ${HOME}/.config/neofetch ${HOME}/.hushlogin
 
 ${HOME}/.bash_aliases: ./dot/bash_aliases
 ${HOME}/.bash_paths: ./dot/bash_paths
@@ -115,7 +115,6 @@ ${HOME}/.tmux.conf: ./dot/tmux.conf
 ${HOME}/.zshrc: ./dot/zshrc
 
 ${HOME}/.config/neofetch: ./dot/neofetch
-${HOME}/.config/alacritty: ./dot/alacritty
 ${HOME}/.config/nvim/init.lua: ./dot/neovim/init.lua
 ${HOME}/.config/nvim/lua: ./dot/neovim/lua
 ${HOME}/.vsnip: ./dot/neovim/snippets

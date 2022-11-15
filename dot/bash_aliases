@@ -1,5 +1,10 @@
 #!/bin/bash
 
+
+# Bash aliases and function
+# ---------------------
+
+
 # Set standard editor
 export EDITOR=vim
 
@@ -11,6 +16,7 @@ alias dotfiles='cd $HOME/git/dotfiles'
 alias lth='ls -lth'
 alias tlog='cp xtbopt.log traj.xyz'
 alias cmol='conda activate mols_test_new'
+alias cl = 'clear'
 # Useful functions
 # Move 'up' so many directories instead of using several cd ../../, etc.
 up() { cd $(eval printf '../'%.0s {1..$1}) && pwd; }
@@ -22,7 +28,6 @@ alias sq='squeue -u magstr -o "%.18i %.9P %.8j %.8u %.2t %.10M %.6D %R %C %m"'
 # Screen
 alias scr='screen -r'
 
-alias ga='cd /home/magstr/Documents/GB_GA'
 
 # Git Shortcuts
 alias gco='git commit'
@@ -69,6 +74,12 @@ function ga()
     case $HOSTNAME in
         magnus-work )
             cd ${HOME}/Documents/GB_GA;;
+        *slid* )
+            cd ${HOME}/nitrogenase/schrock/GB_GA;;
+        fend0[1-5].cluster )
+            cd ${HOME}/GB_GA;;
+        * )
+            echo "Not configured for this host";;
     esac
 }
 
@@ -254,18 +265,6 @@ extract () {
     fi
 }
 
-work()
-{
-    # Activate node and activate python env
-    nvm use node
-    test -d ./env && cona
-}
-
-dework(){
-    nvm deactivate
-    conda deactivate
-}
-
 # Get code snippets
 cheat()
 {
@@ -283,7 +282,7 @@ alias emoji_run='echo -n "ᕕ( ᐛ )ᕗ" | yank'
 # if local
 test -f $HOME/.bash_aliases.local && source $HOME/.bash_aliases.local
 
-# slurm specific commands
+# slurm specific commands that are only set is slurm is present
 if test -x "$(command -v sinfo)"; then
     alias s_idle='sinfo | grep idle'
     alias s_busy='sinfo | grep alloc; sinfo | grep mix'
