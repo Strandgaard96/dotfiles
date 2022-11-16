@@ -16,7 +16,6 @@ alias dotfiles='cd $HOME/git/dotfiles'
 alias lth='ls -lth'
 alias tlog='cp xtbopt.log traj.xyz'
 alias cmol='conda activate mols_test_new'
-alias cl = 'clear'
 # Useful functions
 # Move 'up' so many directories instead of using several cd ../../, etc.
 up() { cd $(eval printf '../'%.0s {1..$1}) && pwd; }
@@ -68,7 +67,6 @@ function cona_func {
 alias cona='cona_func'
 alias cond='conda deactivate'
 
-# Functions of bash_aliases
 function ga()
 {
     case $HOSTNAME in

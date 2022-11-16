@@ -129,10 +129,10 @@ ${HOME}/.fzf:
 
 # Meta
 
-install: dotfiles bin ${HOME}/opt/neovim ${HOME}/.fzf install_${OS} ${HOME}/opt/tmux-3.2a ${HOME}/.oh-my-zsh ${HOME}/.oh-my-zsh
+install: dotfiles bin ${HOME}/opt/neovim ${HOME}/.fzf install_${OS} ${HOME}/opt/tmux-3.2a ${HOME}/bin/zsh ${HOME}/.oh-my-zsh ${HOME}/.oh-my-zsh
 
 # tmux installation is troublesome and not needed on remotes anyway. So made new target for this
-install_remote: dotfiles bin ${HOME}/opt/neovim ${HOME}/.fzf install_${OS} ${HOME}/.oh-my-zsh ${HOME}/.oh-my-zsh
+install_remote: dotfiles bin ${HOME}/opt/neovim ${HOME}/.fzf install_${OS} ${HOME}/bin/zsh ${HOME}/.oh-my-zsh ${HOME}/.oh-my-zsh
 
 
 install_deb:
