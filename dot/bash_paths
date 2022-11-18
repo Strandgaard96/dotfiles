@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Set and source relevant paths
+#------
+
+
 # My own bins
 if test -d "$HOME/bin"; then PATH="$HOME/bin:$PATH"; fi
 
@@ -18,19 +22,16 @@ if test -d "/opt/bin"; then PATH="/opt/bin:$PATH"; fi
 if test -d "/opt/sbin"; then PATH="/opt/sbin:$PATH"; fi
 if test -d "/snap/bin"; then PATH="/snap/bin:$PATH"; fi
 
-# Setup conda generally
+# Look for conda at these locations
 if test -d "$HOME/opt/anaconda3"; then CONDA_PREFIX="$HOME/opt/anaconda3"; fi
 if test -d "$HOME/opt/miniconda3"; then CONDA_PREFIX="$HOME/opt/miniconda3"; fi
 if test -d "$HOME/miniconda3"; then CONDA_PREFIX="$HOME/miniconda3"; fi
 
+# Add conda to path
 test -d $CONDA_PREFIX/etc/profile.d && source $CONDA_PREFIX/etc/profile.d/conda.sh
 unset CONDA_PREFIX  # don't activate by default
 
-# Rust manager
-test -d "$HOME/opt/cargo/" && source $HOME/opt/cargo/env
-test -d "$HOME/.cargo/" && source $HOME/.cargo/env
-
-# intel license
+# intel license, Not sure if i need this
 if test -d $HOME/intel/licenses; then
     for x in $HOME/intel/licenses/*.lic; do
         export INTEL_LICENSE_FILE=$x

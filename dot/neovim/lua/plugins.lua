@@ -1,4 +1,6 @@
+-- Importing plugins
 
+--Auto run PackerCompile when plugins.lua is updated. Obtained from Packer git page.
 vim.cmd([[
   augroup packer_user_config
     autocmd!
@@ -6,6 +8,7 @@ vim.cmd([[
   augroup end
 ]])
 
+-- Set plugins
 return require('packer').startup(function(use)
 
     -- Packer can manage itself
@@ -46,10 +49,9 @@ return require('packer').startup(function(use)
     use 'airblade/vim-gitgutter' -- Git indication
     use 'APZelos/blamer.nvim' -- Git blame line
 
-    -- Svelte development
-    use 'JoosepAlviste/nvim-ts-context-commentstring' -- For context comment
-    use 'evanleck/vim-svelte'
-    use 'pangloss/vim-javascript'
-    use 'HerringtonDarkholme/yats.vim'
+    ---Want to add--
+    -- https://github.com/tpope/vim-fugitive
+    -- https://github.com/junegunn/vim-peekaboo
+    -- https://github.com/preservim/vimux
 
 end)

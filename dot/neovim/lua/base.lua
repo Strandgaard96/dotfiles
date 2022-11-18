@@ -110,44 +110,6 @@ autocmd BufReadPost * lua _autocommands.is_space_or_tab()
 vim.api.nvim_exec([[ command W w ]], false) -- common typo
 vim.api.nvim_exec([[ command Q q ]], false) -- common typo
 
- -- A series of classic vim commands :D Changing some mappings
-vim.api.nvim_exec([[
-" More sane undo (undo breakpoints on char) # Not sure how this works
-inoremap " "<c-g>u
-inoremap ( (<c-g>u:
-inoremap , ,<c-g>u
-inoremap . .<c-g>u
-inoremap [ [<c-g>u
-
-" Map movement keys to danish keyboard
-noremap æ l
-noremap l k
-noremap k j
-noremap j h
-
-" I feel like going back a word should be consistent with w. Move backwards one word. Usual is b and B
-nnoremap W b
-vnoremap W b
-
-" Delete without yank. This text is just removed
-nnoremap d "_d
-nnoremap D "_D
-vnoremap d "_d
-
-" keep me centered when jumping
-nnoremap n nzzzv
-nnoremap N Nzzzv
-nnoremap J mzJ`z
-
-" Reselect visual selection after indenting # Neat
-vnoremap < <gv
-vnoremap > >gv
-
-" Maintain the cursor position when yanking a visual selection
-" http://ddrscott.github.io/blog/2016/yank-without-jank/
-vnoremap y myy`y
-
-]], true)
 
 -- Set default behavior for filetypes # I dont know whats going one here kekw
 vim.api.nvim_exec([[
@@ -179,7 +141,7 @@ vim.api.nvim_exec([[
 autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
 ]],false)
 
--- Useful commands # WHAT DOES THIS DO I DONT KNOW
+-- Useful commands # This is a custom function! When you do :SortWords this function is run!
 vim.api.nvim_exec([[
 command -nargs=0 -range SortWords <line1>,<line2>call setline('.',join(sort(split(getline('.'),' ')),' '))
 ]],false)

@@ -56,7 +56,6 @@ fi
 #  Bunch-o-predefined colors.  Makes reading code easier than escape sequences.
 #  Found here : https://gist.github.com/vratiu/9780109
 
-
 # Reset
 Color_Off="\[\033[0m\]"       # Text Reset
 
@@ -165,3 +164,5 @@ if test -f $HOME/.bashrc_local; then source $HOME/.bashrc_local; fi
 # TODOS
 # Could be interesting to check this prompt
 # https://github.com/mathiasbynens/dotfiles/blob/main/.bash_prompt
+
+

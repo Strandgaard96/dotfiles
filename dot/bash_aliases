@@ -1,32 +1,21 @@
 #!/bin/bash
 
-
 # Bash aliases and function
 # ---------------------
-
 
 # Set standard editor
 export EDITOR=vim
 
 # Easy access
-alias dotfiles='cd $HOME/git/dotfiles'
+alias dotf='cd $HOME/git/dotfiles'
 
-
-# My own
-alias lth='ls -lth'
+# Sort according to modified and see timestamps
+alias ll='ls -lth'
+# Easy copy xtb logfiles to traj
 alias tlog='cp xtbopt.log traj.xyz'
-alias cmol='conda activate mols_test_new'
-# Useful functions
-# Move 'up' so many directories instead of using several cd ../../, etc.
-up() { cd $(eval printf '../'%.0s {1..$1}) && pwd; }
 
-# Do ls when changing dir
-
-# Slurm stuff
-alias sq='squeue -u magstr -o "%.18i %.9P %.8j %.8u %.2t %.10M %.6D %R %C %m"'
 # Screen
 alias scr='screen -r'
-
 
 # Git Shortcuts
 alias gco='git commit'
@@ -42,31 +31,58 @@ alias gs='git status -s'
 alias gph='git push'
 alias gpl='git pull --rebase'
 
+# Call function to show branch commit log
 alias ggl='fzf_log'
 
-# Annoying mac uses different ls
-if [[ $(uname -s) == Linux ]]
-then
-    alias ls='ls --color'
-else
-    alias ls='ls -G'
-fi
-alias l='ls -lh'
-
-
-# conda
-function cona_func {
-    if test -d ./env
-    then
-        conda activate ./env
-    else
-        conda activate "$@"
-    fi
-}
-# alias cona='conda activate'
-alias cona='cona_func'
+alias cona='conda activate'
 alias cond='conda deactivate'
+alias cmol='conda activate mols_test'
 
+# Call function
+alias gc='gitclone' # from bin
+
+# tmux
+# TODO When starting a new session use tmg as default
+alias tm='tmux'
+alias tma='tmux_attach'
+alias tml='tmux ls'
+alias tmk='tmux kill-session -t $1'
+alias tmg='tmux new -s $(basename $(pwd))'
+
+# tmux clean. Kill all integer tmux sessions
+alias tmclean='tmux ls -F "#{session_name}" | while read -r line; do if [[ $line =~ ^-?[0-9]+$  ]]; then tmux kill-session -t $line; fi; done'
+
+# Clear scrollback buffer if in tmux
+if [[ $TMUX ]]; then
+    alias clear_tm='clear && tmux clear-history'
+fi
+
+# Call awesome function
+alias e='fast_edit'
+alias vi='vim'
+
+# Get outward facing ip
+alias myip='echo $(curl -s https://api.ipify.org)'
+
+# if local
+test -f $HOME/.bash_aliases.local && source $HOME/.bash_aliases.local
+
+# slurm specific commands that are only set is slurm is present
+if test -x "$(command -v sinfo)"; then
+    alias s_idle='sinfo | grep idle'
+    alias s_busy='sinfo | grep alloc; sinfo | grep mix'
+    alias q='squeue -u $USER'
+    alias ql='squeue | grep $USER | wc -l'
+
+    alias sq='squeue -u magstr -o "%.18i %.9P %.8j %.8u %.2t %.10M %.6D %R %C %m"'
+
+fi
+
+
+#------ FUNCTIONS ------
+#!/bin/bash
+
+# Set alias for repo  based on host
 function ga()
 {
     case $HOSTNAME in
@@ -81,8 +97,12 @@ function ga()
     esac
 }
 
+function git_use_private {
+    git config user.name "Strandgaard96"
+    git config user.email "magus.str@gmail.com"
+}
 
-# git
+# Git clone function
 function gitclone {
 
     url=$1
@@ -97,7 +117,7 @@ function gitclone {
 
 }
 
-
+# Show commits in branch if in repo
 fzf_log() {
     hash=$(git log --color=always --format="%h%d %an %ae %s %cr" "$@" | fzf -m | awk '{print $1}' | xargs)
     echo -n $hash | yank
@@ -112,11 +132,12 @@ is_in_git_repo() {
     git rev-parse HEAD > /dev/null 2>&1
 }
 
-
+# fzf downards from current line
 fzf-down() {
     fzf --height 50% "$@" --border
 }
 
+# Show commits in branch.
 gh() {
     is_in_git_repo || return
     git log --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --graph --color=always |
@@ -126,47 +147,7 @@ gh() {
     grep -o "[a-f0-9]\{7,\}"
 }
 
-alias gc='gitclone' # from bin
-
-function git_use_private {
-    git config user.name "Strandgaard96"
-    git config user.email "magus.str@gmail.com"
-}
-
-function git_use_work {
-    git config user.name "Strandgaard96"
-    git config user.email "magnus.str@gmail.com"
-}
-
-
-# tmux
-# TODO When starting a new session use tmg as default
-alias tm='tmux'
-alias tma='tmux_attach'
-alias tml='tmux ls'
-alias tmk='tmux kill-session -t $1'
-alias tmg='tmux new -s $(basename $(pwd))'
-
-function tmux_attach()
-{
-    # Fuzzy find session if no session is given
-    if test ! -z "$1"
-    then
-        tmux attach -dt $1
-    else
-        tmux attach -dt `tmux ls | fzf | cut -f1 -d":"`
-    fi
-}
-
-# tmux clean. Kill all integer tmux sessions
-alias tmclean='tmux ls -F "#{session_name}" | while read -r line; do if [[ $line =~ ^-?[0-9]+$  ]]; then tmux kill-session -t $line; fi; done'
-
-# Clear scrollback buffer if in tmux
-if [[ $TMUX ]]; then
-    alias clear='clear && tmux clear-history'
-fi
-
-
+# Look for files in folder and edit. Super nice and fast
 function fast_edit()
 {
     # Quickly go to folder and find the files you want to edit
@@ -186,22 +167,7 @@ function fast_edit()
     fi
 }
 
-alias e='fast_edit'
-alias vi='vim'
-
-# easy rsync
-alias rs='rsync -azvh --progress'
-
-# download a song easy
-alias youtube-audio='youtube-dl --extract-audio --audio-format best'
-
-# spotify
-# alias spotplay="dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
-# alias spotnext="dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
-# alias spotprev="dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
-# alias spotstop="dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop"
-
-# Prompt settings
+# Set conda env prompt
 _conda_info() {
     if test -n "$CONDA_PREFIX"
     then
@@ -213,32 +179,7 @@ _conda_info() {
     echo -n "$CONDA_ENV"
 }
 
-precmd_conda_info() {
-    if [[ -n $CONDA_PREFIX ]]; then
-      if [[ $(basename $CONDA_PREFIX) == "miniconda3" ]]; then
-        # Without this, it would display conda version
-        CONDA_ENV="(base) "
-      else
-        # For all environments that aren't (base)
-        CONDA_ENV="($(basename $CONDA_PREFIX)) "
-      fi
-    # When no conda environment is active, don't show anything
-    else
-    CONDA_ENV=""
-    fi
-}
-
-
-# https://twitter.com/ctrlshifti/status/1160812366293901314
-alias please="sudo"
-
-# make directory and change directory
-function take {
-  mkdir -p $1
-  cd $1
-}
-
-# Can't remmeber all the different extraction commands
+# Extraction function for all types
 extract () {
     if [ -f $1 ] ; then
         case $1 in
@@ -263,33 +204,30 @@ extract () {
     fi
 }
 
+# Move 'up' so many directories instead of using several cd ../../, etc.
+up() { cd $(eval printf '../'%.0s {1..$1}) && pwd; }
+
+# make directory and change directory
+function take {
+  mkdir -p $1
+  cd $1
+}
+
 # Get code snippets
 cheat()
 {
     where="$1"; shift
-    IFS=+ curl "https://cht.sh/$where/ $*"
+    echo "https://cht.sh/$where/$*"
+    IFS=+ curl "https://cht.sh/$where/$*"
 }
 
-# Get outward facing ip
-alias myip='echo $(curl -s https://api.ipify.org)'
-
-# fun
-alias emoji_shrug='echo -n "¯\_(ツ)_/¯" | yank'
-alias emoji_run='echo -n "ᕕ( ᐛ )ᕗ" | yank'
-
-# if local
-test -f $HOME/.bash_aliases.local && source $HOME/.bash_aliases.local
-
-# slurm specific commands that are only set is slurm is present
-if test -x "$(command -v sinfo)"; then
-    alias s_idle='sinfo | grep idle'
-    alias s_busy='sinfo | grep alloc; sinfo | grep mix'
-
-    alias q='squeue -u $USER'
-    alias ql='squeue | grep $USER | wc -l'
-
-    # http://slurm.schedmd.com/squeue.html
-    alias qs='squeue -o "%.10i %.9P %.8u %.10j %.12M %.5D %.4C %R"'
-fi
-
-
+function tmux_attach()
+{
+    # Fuzzy find session if no session is given
+    if test ! -z "$1"
+    then
+        tmux attach -dt $1
+    else
+        tmux attach -dt `tmux ls | fzf | cut -f1 -d":"`
+    fi
+}

@@ -1,7 +1,10 @@
 -- settings related to interface
 
+--Set the stuff in the bottom left
 vim.opt.ruler=true -- show the ruler
+-- See https://vimhelp.org/options.txt.html#%27statusline%27 for formatting explanation
 vim.opt.rulerformat=[[=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)]]
+
 vim.opt.showcmd=true
 vim.opt.laststatus=2
 vim.opt.cmdheight=1
@@ -25,7 +28,7 @@ let $FZF_DEFAULT_OPTS='--reverse'
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 ]], false)
 
--- Airline theme
+-- Airline theme # colors  the different modes in vim. Makes it look nicer.
 vim.api.nvim_exec([[
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
@@ -47,7 +50,7 @@ let g:bookmark_sign = '•'
 ]], false)
 
 
---  Git
+--  Git # Setting gutter symbols for git changes. Like you have in pycharm
 vim.api.nvim_exec([[
 let g:gitgutter_sign_added = '|'
 let g:gitgutter_sign_modified = '|'

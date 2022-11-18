@@ -1,3 +1,4 @@
+-- Should probably change to mason-lsp
 require("nvim-lsp-installer").setup({
     automatic_installation = true, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
     ui = {
@@ -9,8 +10,9 @@ require("nvim-lsp-installer").setup({
     }
 })
 -- More like IDE
-
+--For completing the brackets/parentheis etc when typing
 require('nvim-autopairs').setup{}
+-- For key hints when learning vim
 require("which-key").setup{}
 
 -- Auto signature hints
@@ -33,7 +35,7 @@ cmp.event:on( 'confirm_done',
 )
 
 
--- comment
+-- sets up commenting stuff. Not that useful for me.
 require("Comment").setup {
   ignore = "^$",
   pre_hook = function(ctx)
