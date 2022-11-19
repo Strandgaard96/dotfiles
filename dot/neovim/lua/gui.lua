@@ -22,6 +22,10 @@ highlight clear SignColumn  " fix bg color for SignColumn (for jellybeans)
 highlight Pmenu ctermbg=none
 ]], false)
 
+
+-- Lua
+--vim.cmd[[colorscheme tokyonight-night]]
+
 -- fzf visual # fzf_layout is some variables specific to fzf.
 vim.api.nvim_exec([[
 let $FZF_DEFAULT_OPTS='--reverse'

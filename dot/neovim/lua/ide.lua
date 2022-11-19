@@ -25,6 +25,24 @@ require('lsp_signature').setup({
 
 })
 
+--colortscheme tokyonight
+require("tokyonight").setup({
+  -- use the night style
+  style = "night",
+  -- disable italic for functions
+  styles = {
+    functions = {}
+  },
+  sidebars = { "qf", "vista_kind", "terminal", "packer" },
+  -- Change the "hint" color to the "orange" color, and make the "error" color bright red
+  on_colors = function(colors)
+    colors.hint = colors.orange
+    colors.error = "#ff0000"
+  end
+})
+
+
+
 -- locals
 local cmp = require'cmp'
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
@@ -118,5 +136,58 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   }
 )
 
--- THIS GIES TROUBLE OF FEND SO I REMOVED IT
---- Treesitter
+--- Treesitter. Gives nice highlighting for languages!!!
+
+-- Not sure what this line does, i think it gives error when included.
+-- require('nvim-treesitter.install').compilers = { "clang", "gcc" }
+
+local status_ok, configs = pcall(require, "nvim-treesitter.configs")
+if not status_ok then
+	return
+end
+configs.setup {
+  context_commentstring = {
+    enable = true,
+    enable_autocmd = false,
+  },
+    -- ignore_install = { "javascript" }, -- List of parsers to ignore installing
+    -- ensure_installed can be "all" or a list of languages { "python", "javascript" }
+    -- ensure_installed = "maintained",
+    ensure_installed = { "bash", "c", "javascript", "json", "lua", "python", "typescript", "tsx", "css", "rust", "java", "yaml", "markdown", "markdown_inline" },
+
+    highlight = {enable = true,},
+
+    -- need for proper indentation handling (especially for bracket pairs)
+    indent = {
+      enable = true
+    },
+
+    incremental_selection = {
+      enable = true,  -- you can also use a table with list of langs here (e.g. { "python", "javascript" })
+      disable = { "cpp", "lua" },
+      keymaps = {                       -- mappings for incremental selection (visual mappings)
+        init_selection = "gnn",         -- maps in normal mode to init the node/scope selection
+        node_incremental = "grn",       -- increment to the upper named parent
+        scope_incremental = "grc",      -- increment to the upper scope (as defined in locals.scm)
+        node_decremental = "grm",       -- decrement to the previous node
+      }
+    },
+
+    -- Additioanl plugin that enables text objects. See https://vonheikemen.github.io/devlog/tools/neovim-plugins-to-get-started/
+    textobjects = {
+      -- These are provided by
+      select = {
+        enable = true,  -- you can also use a table with list of langs here (e.g. { "python", "javascript" })
+        keymaps = {
+          -- You can use the capture groups defined here:
+          -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects/blob/master/queries/c/textobjects.scm
+          ["af"] = "@function.outer",
+          ["if"] = "@function.inner",
+          ["ab"] = "@block.outer",
+          ["ib"] = "@block.inner",
+          ["as"] = "@statement.outer",
+          ["is"] = "@statement.inner",
+        },
+      },
+    },
+}
