@@ -50,6 +50,8 @@ return require('packer').startup(function(use)
     use 'airblade/vim-gitgutter' -- Git indication
     use 'APZelos/blamer.nvim' -- Git blame line
 
+    use {'nvim-lualine/lualine.nvim',requires = { 'kyazdani42/nvim-web-devicons', opt = true }}
+
     ---Want to add--
     -- https://github.com/tpope/vim-fugitive
     -- https://github.com/junegunn/vim-peekaboo

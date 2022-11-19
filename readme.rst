@@ -1,8 +1,8 @@
 Dotfiles
 ========
 
-My dotfiles. Heavily inspired by `this repo <https://github.com/charnley/dotfiles>`_
-Huge shoutout
+My dotfiles. Entirely based on `this repo <https://github.com/charnley/dotfiles>`_ , huge shoutout
+
 
 Setup
 -----
@@ -13,6 +13,10 @@ Setup
 
     make install_apt # only for systems you have sudo
     make install # Compile and download dependencies (such as tmux and neovim)
+
+    # Install without tmux on remote as this often gives compiler issues
+    make install_remote # Compile and download dependencies (such as zsh and neovim)
+
 
 .. code-block:: bash
 

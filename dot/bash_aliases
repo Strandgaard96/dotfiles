@@ -14,6 +14,9 @@ alias ll='ls -lth'
 # Easy copy xtb logfiles to traj
 alias tlog='cp xtbopt.log traj.xyz'
 
+# Sort according to modified and see timestamps
+alias cl='clear'
+
 # Screen
 alias scr='screen -r'
 

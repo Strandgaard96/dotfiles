@@ -41,6 +41,13 @@ require("tokyonight").setup({
   end
 })
 
+-- Lualine
+--require('lualine').setup {
+--  options = {
+--    icons_enabled = false,
+--    theme = 'onelight',
+--    },
+--}
 
 
 -- locals
@@ -150,10 +157,10 @@ configs.setup {
     enable = true,
     enable_autocmd = false,
   },
-    -- ignore_install = { "javascript" }, -- List of parsers to ignore installing
+    ignore_install = { "javascript" }, -- List of parsers to ignore installing
     -- ensure_installed can be "all" or a list of languages { "python", "javascript" }
     -- ensure_installed = "maintained",
-    ensure_installed = { "bash", "c", "javascript", "json", "lua", "python", "typescript", "tsx", "css", "rust", "java", "yaml", "markdown", "markdown_inline" },
+    ensure_installed = { "bash", "c", "json", "lua", "python", "typescript", "css", "rust", "java", "yaml", "markdown", "markdown_inline" },
 
     highlight = {enable = true,},
 

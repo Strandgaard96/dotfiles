@@ -1,5 +1,6 @@
 -- settings related to interface
 
+-- Currently the ruler options are not sourced somehow.
 --Set the stuff in the bottom left
 vim.opt.ruler=true -- show the ruler
 -- See https://vimhelp.org/options.txt.html#%27statusline%27 for formatting explanation
@@ -21,6 +22,8 @@ endtry
 highlight clear SignColumn  " fix bg color for SignColumn (for jellybeans)
 highlight Pmenu ctermbg=none
 ]], false)
+
+
 
 
 -- Lua
