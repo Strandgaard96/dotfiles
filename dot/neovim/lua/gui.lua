@@ -1,33 +1,15 @@
 -- settings related to interface
 
--- Currently the ruler options are not sourced somehow.
---Set the stuff in the bottom left
-vim.opt.ruler=true -- show the ruler
+-- Ruler options are overruled by vim-airline so only needed if you dont have the plugin
+--Set the stuff in the bottom statusline
+--vim.opt.ruler=true -- show the ruler
 -- See https://vimhelp.org/options.txt.html#%27statusline%27 for formatting explanation
-vim.opt.rulerformat=[[=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)]]
+--vim.opt.rulerformat=[[=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)]]
 
 vim.opt.showcmd=true
 vim.opt.laststatus=2
 vim.opt.cmdheight=1
 
--- Set colorscheme to jellybeans. I dont know how to set other themes. This snippet does some magic i dont understand
-vim.api.nvim_exec([[
-let g:jellybeans_overrides = {'background': { 'ctermbg': 'none', '256ctermbg': 'none' },}
-try
-    colorscheme jellybeans
-catch /^Vim\%((\a\+)\)\=:E185/
-    " Probably first installation
-endtry
-
-highlight clear SignColumn  " fix bg color for SignColumn (for jellybeans)
-highlight Pmenu ctermbg=none
-]], false)
-
-
-
-
--- Lua
---vim.cmd[[colorscheme tokyonight-night]]
 
 -- fzf visual # fzf_layout is some variables specific to fzf.
 vim.api.nvim_exec([[
@@ -35,8 +17,10 @@ let $FZF_DEFAULT_OPTS='--reverse'
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 ]], false)
 
+-- NB THIS OVERRIDES RULER SETTINGS !
 -- Airline theme # colors  the different modes in vim. Makes it look nicer.
 vim.api.nvim_exec([[
+let g:airline_theme='jellybeans'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline#extensions#tabline#show_close_button = 0
