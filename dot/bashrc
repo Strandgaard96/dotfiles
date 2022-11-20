@@ -90,7 +90,8 @@ PathFull="\W"
 NewLine="\n"
 Jobs="\j"
 
-# Source local bashrc if present
+# Run this to get the file curl -L https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh > ~/.bash_git
+# Source git file to have promp work
 if test -f $HOME/.bash_git; then source $HOME/.bash_git; fi
 
 case $HOSTNAME in
@@ -158,7 +159,6 @@ if `tty -s`; then mesg n; fi
 
 # Source local bashrc if present
 if test -f $HOME/.bashrc_local; then source $HOME/.bashrc_local; fi
-
 
 # TODOS
 # Could be interesting to check this prompt
