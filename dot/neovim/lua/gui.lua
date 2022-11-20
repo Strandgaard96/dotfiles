@@ -19,6 +19,7 @@ let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 
 -- NB THIS OVERRIDES RULER SETTINGS !
 -- Airline theme # colors  the different modes in vim. Makes it look nicer.
+-- https://github.com/vim-airline/vim-airline
 vim.api.nvim_exec([[
 let g:airline_theme='jellybeans'
 let g:airline#extensions#tabline#enabled = 1

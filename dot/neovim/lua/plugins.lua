@@ -41,8 +41,11 @@ return require('packer').startup(function(use)
     use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/vim-vsnip'
     use 'neovim/nvim-lspconfig'
+
     use {'nvim-treesitter/nvim-treesitter', run= ':TSUpdate'}
     use 'nvim-treesitter/nvim-treesitter-textobjects'
+    use 'JoosepAlviste/nvim-ts-context-commentstring'
+
     use 'rafamadriz/friendly-snippets'
     use 'ray-x/lsp_signature.nvim'  --  https://github.com/ray-x/lsp_signature.nvim
     use 'danymat/neogen'  -- generate docstrings (with treesitter)
@@ -53,7 +56,7 @@ return require('packer').startup(function(use)
     use {'nvim-lualine/lualine.nvim',requires = { 'kyazdani42/nvim-web-devicons', opt = true }}
 
     ---Want to add--
-    -- https://github.com/tpope/vim-fugitive
+    -- https://github.com/tpope/vim-fugitive -- This should replace git-gutter
     -- https://github.com/junegunn/vim-peekaboo
     -- https://github.com/preservim/vimux
     -- https://github.com/nvim-lualine/lualine.nvim

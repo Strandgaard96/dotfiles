@@ -25,21 +25,6 @@ require('lsp_signature').setup({
 
 })
 
---colortscheme tokyonight
-require("tokyonight").setup({
-  -- use the night style
-  style = "night",
-  -- disable italic for functions
-  styles = {
-    functions = {}
-  },
-  sidebars = { "qf", "vista_kind", "terminal", "packer" },
-  -- Change the "hint" color to the "orange" color, and make the "error" color bright red
-  on_colors = function(colors)
-    colors.hint = colors.orange
-    colors.error = "#ff0000"
-  end
-})
 
 -- Lualine
 --require('lualine').setup {
@@ -60,26 +45,7 @@ cmp.event:on( 'confirm_done',
 )
 
 
--- sets up commenting stuff. Not that useful for me.
-require("Comment").setup {
-  ignore = "^$",
-  pre_hook = function(ctx)
-    local U = require 'Comment.utils'
 
-    local location = nil
-    if ctx.ctype == U.ctype.block then
-      location = require('ts_context_commentstring.utils').get_cursor_location()
-    elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.V then
-      location = require('ts_context_commentstring.utils').get_visual_start_location()
-    end
-
-    local commentstr = require('ts_context_commentstring.internal').calculate_commentstring {
-      key = ctx.ctype == U.ctype.line and '__default' or '__multiline',
-      location = location,
-    }
-    return commentstr
-  end,
-}
 
 -- docstring
 -- generate docstring
@@ -198,3 +164,6 @@ configs.setup {
       },
     },
 }
+
+-- sets up commenting stuff. Not that useful for me.
+require("Comment").setup {}

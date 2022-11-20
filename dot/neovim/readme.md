@@ -78,6 +78,7 @@ where osc52 (~/bin/yank) makes the local terminal put content in local clipboard
 - Why not format on buffer write? - Because when I collaborate with other there
   is new format rules for each git repository
 
+
 ## TODO
 
 - TODO https://github.com/elianiva/dotfiles/tree/master/nvim/.config/nvim

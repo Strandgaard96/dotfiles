@@ -90,14 +90,14 @@ PathFull="\W"
 NewLine="\n"
 Jobs="\j"
 
-# export PS1="$Blue\h$Color_Off $Cyan\W$Color_Off"
+# Source local bashrc if present
+if test -f $HOME/.bash_git; then source $HOME/.bash_git; fi
 
 case $HOSTNAME in
     sunray )
-        export PS1="$Red\h$Color_Off $Cyan\W$Color_Off";;
+        export PS1="$Green\h$Color_Off $Cyan\W$Color_Off";;
     fend0[1-5].cluster )
-        export PS1="$Red\h$Color_Off $Cyan\W$Color_Off"
-        export PS1NOGIT="True";;
+        export PS1="$Purple\h$Color_Off $Cyan\W$Color_Off";;
     magnus-work )
         export PS1="$IBlue\h $Cyan\W$Color_Off";;
     *slid* )
@@ -114,10 +114,9 @@ case $HOSTNAME in
         # set p4vasp environment variables
         export PATH=$PATH:/home/energy/arbh/p4vasp/bin
         module use /home/energy/stly/modules/modules/all
-        export PS1="$Yellow\h$Color_Off $Cyan\W$Color_Off"
-        PS1NOGIT="True";;
-    * )
         export PS1="$Yellow\h$Color_Off $Cyan\W$Color_Off";;
+    * )
+        export PS1="$Cyan\h$Color_Off $Cyan\W$Color_Off";;
 esac
 
 # If this is on interactive node, change color
