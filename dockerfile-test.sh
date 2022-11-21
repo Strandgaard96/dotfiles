@@ -5,7 +5,7 @@
 #
 
 # Build the docker image
-docker build --no-cache -t dotfiles .
+docker build -t dotfiles .
 
 # Run a container
-docker run --interactive --tty --user magstr dotfiles
+docker run --interactive --tty --user username dotfiles

@@ -21,10 +21,10 @@ ifeq ($(detected_OS),Linux) # Linux
 endif
 
 # Dummy targets
-.PHONY: vim_plugins install clean dotfiles directories
+.PHONY: vim_plugins install install_remote clean dotfiles directories
 
 # Default targets
-all: dotfiles bin vim_plugins tmux_plugins
+all: dotfiles bin vim_plugins
 
 vim_plugins:
 	NEOVIM_SETUP=1 ${HOME}/bin/vim --headless -c 'autocmd User PackerComplete quitall' -c 'silent PackerSync'
@@ -95,9 +95,11 @@ bindir_hpc:
 
 dotfiles: directories dotfiles_defaults dotfiles_$(OS)
 
-# wtf does this do?
+# This matches stem. If we have a ${HOME}/.bash_paths target feks then this will run
 ${HOME}/.%:
+	# Move previous dotfiles to backup file
 	test -f $@ && mv $@ $@.bk;:
+	# Symbolic lincs to the dotfiles in the repo
 	ln -s `pwd`/$< $@
 
 dotfiles_defaults: ${HOME}/.bashrc ${HOME}/.bash_profile ${HOME}/.bash_aliases ${HOME}/.bash_paths ${HOME}/.condarc ${HOME}/.gitconfig ${HOME}/.tmux.conf ${HOME}/.tmux-osx ${HOME}/.tmux-linux ${HOME}/.config/nvim/init.lua ${HOME}/.config/nvim/lua ${HOME}/.vsnip ${HOME}/.zshrc ${HOME}/.config/neofetch ${HOME}/.hushlogin
@@ -129,10 +131,10 @@ ${HOME}/.fzf:
 
 # Meta
 
-install: dotfiles bin ${HOME}/opt/neovim ${HOME}/.fzf install_${OS} ${HOME}/opt/tmux-3.2a ${HOME}/bin/zsh ${HOME}/.oh-my-zsh ${HOME}/.oh-my-zsh
+install: dotfiles bin ${HOME}/opt/neovim ${HOME}/.fzf install_${OS} ${HOME}/opt/tmux-3.2a ${HOME}/bin/zsh ${HOME}/.oh-my-zsh
 
 # tmux installation is troublesome and not needed on remotes anyway. So made new target for this
-install_remote: dotfiles bin ${HOME}/opt/neovim ${HOME}/.fzf install_${OS} ${HOME}/bin/zsh ${HOME}/.oh-my-zsh ${HOME}/.oh-my-zsh
+install_remote: dotfiles bin ${HOME}/opt/neovim ${HOME}/.fzf install_${OS}
 
 
 install_deb:

@@ -24,6 +24,11 @@ Setup
     git pull # Get latest changed
     make # Check all symlinks and plugins
 
+Testing
+-----
+I have made a dockerfile that works for testing install_remote. Tmux and zsh is still trouble.
+So make install not likely to work. Simply run the docker-test.sh file to setup and enter in docker container
+
 Interesting
 _________________
 https://github.com/brainfucksec/neovim-lua
