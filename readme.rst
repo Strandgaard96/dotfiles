@@ -1,8 +1,7 @@
 Dotfiles
 ========
 
-My dotfiles. Entirely based on `this repo <https://github.com/charnley/dotfiles>`_ , huge shoutout
-
+My dotfiles. Entirely based on `this repo <https://github.com/charnley/dotfiles>`_ with additional modifications and additions.
 
 Setup
 -----

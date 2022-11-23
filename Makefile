@@ -135,7 +135,8 @@ install: dotfiles bin ${HOME}/opt/neovim ${HOME}/.fzf install_${OS} ${HOME}/opt/
 
 # tmux installation is troublesome and not needed on remotes anyway. So made new target for this
 install_remote: dotfiles bin ${HOME}/opt/neovim ${HOME}/.fzf install_${OS}
-
+# Guide for setting up zsh
+# https://www.drewsilcock.co.uk/compiling-zsh
 
 install_deb:
 	@#
