@@ -70,15 +70,22 @@ alias myip='echo $(curl -s https://api.ipify.org)'
 # if local
 test -f $HOME/.bash_aliases.local && source $HOME/.bash_aliases.local
 
-# slurm specific commands that are only set is slurm is present
+# slurm specific commands that are only set if slurm is present
 if test -x "$(command -v sinfo)"; then
     alias s_idle='sinfo | grep idle'
     alias s_busy='sinfo | grep alloc; sinfo | grep mix'
     alias q='squeue -u $USER'
     alias ql='squeue | grep $USER | wc -l'
 
+    # Better squeue format
     alias sq='squeue -u magstr -o "%.18i %.9P %.8j %.8u %.2t %.10M %.6D %R %C %m"'
 
+    # Function to show directory job was submitted from
+    function sub_dir()
+    {
+    job=$1
+    scontrol show job $job | awk -F= '/Command=/{print $2}'
+    }
 fi
 
 
@@ -214,6 +221,13 @@ up() { cd $(eval printf '../'%.0s {1..$1}) && pwd; }
 function take {
   mkdir -p $1
   cd $1
+}
+
+# Remove symlinks in dir
+function remove_sym
+{
+    DIR=$1
+    find -L $DIR -maxdepth 1 -type l -delete
 }
 
 # Get code snippets
