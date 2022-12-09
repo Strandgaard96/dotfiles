@@ -67,6 +67,9 @@ alias vi='vim'
 # Get outward facing ip
 alias myip='echo $(curl -s https://api.ipify.org)'
 
+# Print each PATH entry on a separate line
+alias path='echo -e ${PATH//:/\\n}'
+
 # if local
 test -f $HOME/.bash_aliases.local && source $HOME/.bash_aliases.local
 

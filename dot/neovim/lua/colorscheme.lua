@@ -15,6 +15,15 @@ require("tokyonight").setup({
   end
 })
 
+
+-- Lua
+--require('onedark').setup {
+--    style = 'deep'
+--}
+--require('onedark').load()
+
+
+
 local colorscheme = "tokyonight"
 local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
 if not status_ok then
