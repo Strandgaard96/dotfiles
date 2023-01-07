@@ -1,7 +1,11 @@
-parallel
-python3-dev
-dstat
+i3
+bat
+exa
+polybar
 tree
 git
 curl
 zsh
+xclip
+xsel
+rofi
