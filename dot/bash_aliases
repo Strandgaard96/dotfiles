@@ -93,10 +93,12 @@ fi
 # Check for installed commands and set aliases if active
 command -v bat       &> /dev/null    && alias c='bat'                                              || alias c='cat'
 command -v fd        &> /dev/null    && alias fd='fd --hidden --follow'                            || alias fd='find . -name'
+command -v rg        &> /dev/null    && alias rg='rg --hidden --follow --smart-case 2>/dev/null'   || alias rg='grep --color=auto --exclude-dir=.git -R'
 command -v exa       &> /dev/null    && alias ll='exa -l --group-directories-first --sort modified --reverse --icons --no-user'  || alias ll='ls --color=auto --group-directories-first -lth'
 command -v exa       &> /dev/null    && alias la='ll -a'                                           || alias la='ll -A'
 command -v exa       &> /dev/null    && alias la='ll -a'                                           || alias la='ll -A'
 command -v exa       &> /dev/null    && alias lk='ll -s=size'                                      || alias lk='ll -r --sort=size' # The or statement only executes if the previous returns error.
+
 
 # Font
 # I wollowed this guide to get font that worked with icons: https://bytexd.com/how-to-install-nerd-fonts-on-linux/
@@ -104,18 +106,28 @@ command -v exa       &> /dev/null    && alias lk='ll -s=size'                   
 #------ FUNCTIONS ------
 #!/bin/bash
 
+# Set hostn variable based on if using bash or zsh
+if [ -z ${HOSTNAME+x} ];
+then
+    #echo "var is unset setting zsh syntax";
+    : ${hostn:=$(hostname)}
+else
+    #echo "var is set to '$HOSTNAME'";
+    : ${hostn:=$HOSTNAME}
+fi
+
 # Set alias for repo  based on host
 function ga()
 {
-    case $HOSTNAME in
-        magnus-work )
-            cd ${HOME}/Documents/GB_GA;;
-        *slid* )
-            cd ${HOME}/nitrogenase/schrock/GB_GA;;
-        fend0[1-5].cluster )
-            cd ${HOME}/GB_GA;;
-        * )
-            echo "Not configured for this host";;
+    case $hostn in
+    magnus-work )
+        cd ${HOME}/Documents/GB_GA;;
+    *slid* )
+        cd ${HOME}/nitrogenase/schrock/GB_GA;;
+    fend0[1-5].cluster )
+        cd ${HOME}/GB_GA;;
+    * )
+        echo "Not configured for this host";;
     esac
 }
 

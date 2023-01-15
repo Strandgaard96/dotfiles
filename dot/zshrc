@@ -91,7 +91,7 @@ case $(hostname) in
     fend0[1-5].cluster )
         export PS1="$Purple\h$Color_Off $IBlue\W$Color_Off";;
     magnus-work )
-        PROMPT='${BLUE}>$RESET ';;
+        PROMPT='${BLUE}%m$RESET ${BLUE}>$RESET ';;
     *slid* )l
         export EASYBUILD_PREFIX_ME=/home/niflheim/jchang/modules
         module use $EASYBUILD_PREFIX_ME/modules/all
@@ -108,7 +108,7 @@ case $(hostname) in
         module use /home/energy/stly/modules/modules/all
         export PS1="$Yellow\h$Color_Off $IBlue\W$Color_Off";;
     * )
-        PROMPT='${YELLOW}>$RESET ';;
+        PROMPT='${BLUE}%m ${YELLOW}>$RESET ';;
 esac
 
 
@@ -122,18 +122,16 @@ export KEYTIMEOUT=1
 
 export VI_MODE_SET_CURSOR=true
 
-
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
 # Plugins
 plugins=(
-    # git
     zsh-syntax-highlighting
+    zsh-autosuggestions
 )
 
-# zsh-autosuggestions
 test -d $ZSH && source $ZSH/oh-my-zsh.sh
 
 # History
