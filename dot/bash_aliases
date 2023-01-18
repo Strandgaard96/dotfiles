@@ -54,7 +54,8 @@ alias tmg='tmux new -s $(basename $(pwd))'
 alias tmclean='tmux ls -F "#{session_name}" | while read -r line; do if [[ $line =~ ^-?[0-9]+$  ]]; then tmux kill-session -t $line; fi; done'
 
 # Clear scrollback buffer if in tmux
-if [[ $TMUX ]]; then
+if [ -z "$TMUX" ]
+then
     alias clear_tm='clear && tmux clear-history'
 fi
 
@@ -105,6 +106,8 @@ command -v exa       &> /dev/null    && alias lk='ll -s=size'                   
 
 #------ FUNCTIONS ------
 #!/bin/bash
+
+# Command to replace string in previous command
 
 # Set hostn variable based on if using bash or zsh
 if [ -z ${HOSTNAME+x} ];

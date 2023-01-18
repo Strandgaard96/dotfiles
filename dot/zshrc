@@ -87,12 +87,12 @@ RPROMPT='$(conda_env) $(git_fast_status) %(4~|.../%3~|%~)'
 
 case $(hostname) in
     sunray )
-        export PS1="$Green\h$Color_Off $IBlue\W$Color_Off";;
+        PROMPT='${GREEN}%m$RESET ${GREEN}>$RESET ';;
     fend0[1-5].cluster )
-        export PS1="$Purple\h$Color_Off $IBlue\W$Color_Off";;
+        PROMPT='${PURPLE}%m$RESET ${PURPLE}>$RESET ';;
     magnus-work )
         PROMPT='${BLUE}%m$RESET ${BLUE}>$RESET ';;
-    *slid* )l
+    *slid* )
         export EASYBUILD_PREFIX_ME=/home/niflheim/jchang/modules
         module use $EASYBUILD_PREFIX_ME/modules/all
         export EASYBUILD_PREFIX=/home/energy/modules
@@ -106,7 +106,7 @@ case $(hostname) in
         # set p4vasp environment variables
         export PATH=$PATH:/home/energy/arbh/p4vasp/bin
         module use /home/energy/stly/modules/modules/all
-        export PS1="$Yellow\h$Color_Off $IBlue\W$Color_Off";;
+        PROMPT='${YELLOW}%m$RESET ${YELLOW}>$RESET ';;
     * )
         PROMPT='${BLUE}%m ${YELLOW}>$RESET ';;
 esac

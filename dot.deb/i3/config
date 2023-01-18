@@ -35,11 +35,16 @@ bindsym $mod+shift+l exec i3lock -c 000000 -d & sudo /usr/sbin/pm-suspend
 bindsym Print exec scrot -u -q 100 ~/img/screenshots/screenshot-%y%m%d-%H%M%S.png
 
 # volume bindings
-bindsym Control+Up              exec ~/bin/sound "+1"
-bindsym Control+Down            exec ~/bin/sound "-1"
-bindsym XF86AudioRaiseVolume    exec ~/bin/sound "+1"
-bindsym XF86AudioLowerVolume    exec ~/bin/sound "-1"
-bindsym XF86AudioMute           exec ~/bin/sound "mute"
+#bindsym Control+Up              exec ~/bin/sound "+1"
+#bindsym Control+Down            exec ~/bin/sound "-1"
+#bindsym XF86AudioRaiseVolume    exec ~/bin/sound "+1"
+#bindsym XF86AudioLowerVolume    exec ~/bin/sound "-1"
+#bindsym XF86AudioMute           exec ~/bin/sound "mute"
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl -- set-sink-volume @DEFAULT_SINK@ +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl -- set-sink-volume @DEFAULT_SINK@ -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl -- set-sink-mute @DEFAULT_SINK@ toggle # mute sound
 
 # spotify bindings
 bindsym XF86AudioPlay exec ~/bin/spot
@@ -217,14 +222,15 @@ exec --no-startup-id xsetroot -solid '#131313'
 #for_window [class="^.*"] border pixel 4
 #new_window 1pixel
 
-# interface                border    title      color
-client.focused             #0373bb   #0373bb    #ffffff    #2e9ef4
+# interface      <border> <background> <text> <indicator> <child_border>
+client.focused             #037400   #037400    #ffffff    #2e9ef4
 client.focused_inactive    #222222   #222222    #ffffff    #484e50
 client.unfocused           #222222   #222222    #ffffff    #222222
 client.urgent              #2f343a   #900000    #ffffff    #900000
 
 # Start i3bar to display a workspace bar (plus the system information i3status
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh --materia --material
+#exec_always --no-startup-id $HOME/.config/polybar/launch.sh --blocks
+exec_always --no-startup-id ~/.config/polybar/launch.sh i3
 
 # finds out, if available)
 #bar {
