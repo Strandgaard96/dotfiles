@@ -126,7 +126,7 @@ configs.setup {
     ignore_install = { "javascript" }, -- List of parsers to ignore installing
     -- ensure_installed can be "all" or a list of languages { "python", "javascript" }
     -- ensure_installed = "maintained",
-    ensure_installed = { "bash", "c", "json", "lua", "python", "typescript", "css", "rust", "java", "yaml", "markdown", "markdown_inline" },
+    ensure_installed = { "bash", "c", "json", "lua", "python", "yaml", "markdown", "markdown_inline" },
 
     highlight = {enable = true,},
 
