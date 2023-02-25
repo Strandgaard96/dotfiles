@@ -95,14 +95,14 @@ fi
 command -v bat       &> /dev/null    && alias c='bat'                                              || alias c='cat'
 command -v fd        &> /dev/null    && alias fd='fd --hidden --follow'                            || alias fd='find . -name'
 command -v rg        &> /dev/null    && alias rg='rg --hidden --follow --smart-case 2>/dev/null'   || alias rg='grep --color=auto --exclude-dir=.git -R'
-command -v exa       &> /dev/null    && alias ll='exa -l --group-directories-first --sort modified --reverse --icons --no-user'  || alias ll='ls --color=auto --group-directories-first -lth'
+command -v exa       &> /dev/null    && alias ll='exa -l --group-directories-first --sort modified --reverse --icons --no-user --color-scale'  || alias ll='ls --color=auto --group-directories-first -lth'
 command -v exa       &> /dev/null    && alias la='ll -a'                                           || alias la='ll -A'
 command -v exa       &> /dev/null    && alias la='ll -a'                                           || alias la='ll -A'
 command -v exa       &> /dev/null    && alias lk='ll -s=size'                                      || alias lk='ll -r --sort=size' # The or statement only executes if the previous returns error.
 
 
 # Font
-# I wollowed this guide to get font that worked with icons: https://bytexd.com/how-to-install-nerd-fonts-on-linux/
+# I followed this guide to get font that worked with icons: https://bytexd.com/how-to-install-nerd-fonts-on-linux/
 
 #------ FUNCTIONS ------
 #!/bin/bash
@@ -275,13 +275,25 @@ function tmux_attach()
         tmux attach -dt `tmux ls | fzf | cut -f1 -d":"`
     fi
 }
+function gr_last()
+{
+    for a in $(find . -name '*orca.out');
+    do
+        grep "FINAL" $a /dev/null | tail -n 1;
+    done
+}
+
+# One liner for delte multiple files mathicng patterns recursively
+#find . \( -name "*.er" -o -name "*.err" -o -name "*.opt" -o -name "*orca_trj.xyz" -o -name "*.out" \) -type f -delete
+
+
 
 ### FUN ###
-disappointed() { echo -n " ಠ_ಠ " |tee /dev/tty| xclip -selection clipboard; }
+disappointed() { echo -n " ಠ_ಠ \n" |tee /dev/tty| xclip -selection clipboard; }
 
-flip() { echo -n "（╯°□°）╯ ┻━┻" |tee /dev/tty| xclip -selection clipboard; }
+flip() { echo -n "（╯°□°）╯ ┻━┻\n" |tee /dev/tty| xclip -selection clipboard; }
 
-shrug() { echo -n "¯\_(ツ)_/¯" |tee /dev/tty| xclip -selection clipboard; }
+shrug() { echo -n "¯\_(ツ)_/¯\n" |tee /dev/tty| xclip -selection clipboard; }
 
 # Only works on zsh
 #matrix() { echo -e "\e[1;40m" ; clear ; while :; do echo $LINES $COLUMNS $(( $RANDOM % $COLUMNS)) $(( $RANDOM % 72 )) ;sleep 0.05; done|awk '{ letters="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()"; c=$4;        letter=substr(letters,c,1);a[$3]=0;for (x in a) {o=a[x];a[x]=a[x]+1; printf "\033[%s;%sH\033[2;32m%s",o,x,letter; printf "\033[%s;%sH\033[1;37m%s\033[0;0H",a[x],x,letter;if (a[x] >= $1) { a[x]=0; } }}' }

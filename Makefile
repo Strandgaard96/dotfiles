@@ -21,13 +21,10 @@ ifeq ($(detected_OS),Linux) # Linux
 endif
 
 # Dummy targets
-.PHONY: vim_plugins install install_remote clean dotfiles directories
+.PHONY: install install_remote clean dotfiles directories
 
 # Default targets
-all: dotfiles bin vim_plugins
-
-vim_plugins:
-	NEOVIM_SETUP=1 ${HOME}/bin/vim --headless -c 'autocmd User PackerComplete quitall' -c 'silent PackerSync'
+all: dotfiles bin
 
 tmux_plugins:
 	bash ./setup/tmux_plugins.sh
@@ -61,8 +58,7 @@ ${HOME}/bin/vim:
 
 ${HOME}/opt/neovim:
 	bash setup.$(OS)/nvim_setup.sh
-	bash setup/neovim_packer.sh
-	NEOVIM_SETUP=1 ${HOME}/bin/vim --headless -c 'autocmd User PackerComplete quitall' -c 'silent PackerSync'
+	NEOVIM_SETUP=1
 
 ${HOME}/opt/tmux-3.2a:
 	bash ./setup/tmux_compile.sh 1> /dev/null

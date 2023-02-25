@@ -1,8 +1,5 @@
 -- Key maps :D
 
--- Leader key
-vim.g.mapleader = ","
-
 vim.api.nvim_set_keymap('n', '<Leader>ob', ':Buffers<cr>', {noremap = true}) -- Search open files
 vim.api.nvim_set_keymap('n', '<Leader>os', ':BLines<cr>', {noremap = true}) -- Search lines in current buffer
 vim.api.nvim_set_keymap('n', '<leader>og', ':GitFiles<cr>', {noremap = true}) -- Search all files registered with git

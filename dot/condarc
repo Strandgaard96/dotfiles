@@ -1,5 +1,8 @@
 auto_activate_base: false
-changeps1: False
+changeps1: false
 env_prompt: '({name}) '
 pkgs_dirs:
   - ~/.conda/pkgs/
+channels:
+  - conda-forge
+  - defaults

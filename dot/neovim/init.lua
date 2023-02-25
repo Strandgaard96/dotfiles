@@ -1,5 +1,21 @@
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "--single-branch",
+    "https://github.com/folke/lazy.nvim.git",
+    lazypath,
+  })
+end
+vim.opt.runtimepath:prepend(lazypath)
 
-require 'plugins' -- Install all plugins
+-- Leader key. This is required to be here by laxy!
+vim.g.mapleader = ","
+
+require("lazy").setup("plugins")
+
 require 'base' -- Standard VIM settings
 require 'maps' -- Most key mappings
 require 'gui' -- Everything related to visual
