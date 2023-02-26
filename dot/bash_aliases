@@ -100,7 +100,6 @@ command -v exa       &> /dev/null    && alias la='ll -a'                        
 command -v exa       &> /dev/null    && alias la='ll -a'                                           || alias la='ll -A'
 command -v exa       &> /dev/null    && alias lk='ll -s=size'                                      || alias lk='ll -r --sort=size' # The or statement only executes if the previous returns error.
 
-
 # Font
 # I followed this guide to get font that worked with icons: https://bytexd.com/how-to-install-nerd-fonts-on-linux/
 

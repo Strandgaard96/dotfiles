@@ -10,6 +10,9 @@ shopt -s histappend                      # append to history, don't overwrite it
 export PROMPT_COMMAND='history -a'
 # export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
+# source and export paths before aliases to ensure binaries are detected in ~/bin
+source $HOME/.bash_paths
+
 # all my aliases
 if test -f ~/.bash_aliases; then . ~/.bash_aliases; fi
 
@@ -25,9 +28,6 @@ if test -f /etc/bash_completion; then . /etc/bash_completion; fi
 
 #if test -f $HOME/git/dotfiles/bash_completion/tma; then . $HOME/git/dotfiles/bash_completion/tma; fi
 #if test -f $HOME/git/dotfiles/bash_completion/tmk; then . $HOME/git/dotfiles/bash_completion/tmk; fi
-
-# source and export paths
-source $HOME/.bash_paths
 
 # I would like to have colours in my terminal
 if test $TERM == "xterm"; then export TERM=xterm-256color; fi

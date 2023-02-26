@@ -9,9 +9,9 @@ if [ -f ~/.bashrc ]; then
 fi
 
 # Save a ton of history
-HISTSIZE=20000
+HISTSIZE=200000
 HISTFILE=~/.history
-SAVEHIST=20000
+SAVEHIST=200000
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
