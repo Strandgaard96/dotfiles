@@ -60,4 +60,7 @@ Links for inspiration on future additions.
 - `<https://github.com/brainfucksec/neovim-lua>`_
 - `<https://github.com/mathiasbynens/dotfiles>`_
 
+Some script for downloading binaries.
+- https://gist.github.com/sjparkinson/327dc78c60ab81a06c946630b4288910
+
 
