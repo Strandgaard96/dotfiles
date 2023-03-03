@@ -61,6 +61,9 @@ vim.api.nvim_exec([[
 let g:sneak#label = 1
 let g:sneak#target_labels = 'qwertasdfgzxcv'
 
+" This is because , is my leader key. Now \ is the backwards key for sneak
+map \ <Plug>Sneak_,
+
 map f <Plug>Sneak_f
 map F <Plug>Sneak_F
 map t <Plug>Sneak_t

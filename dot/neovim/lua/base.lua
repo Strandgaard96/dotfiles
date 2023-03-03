@@ -30,7 +30,9 @@ vim.opt.listchars = {
     -- eol = '↵',
 } -- Show hidden characters, In this case list things
 
+-- https://unix.stackexchange.com/questions/139578/copy-paste-for-vim-is-not-working-when-mouse-set-mouse-a-is-on
 vim.opt.mouse='a' -- Mouse is on for all modes
+
 -- vim.opt.hlsearch=false -- Turn on if you want to remove highlighted text
 vim.opt.showmode=false -- insert is already showing in lightline -- I am not sure what effect this has
 vim.opt.swapfile=false

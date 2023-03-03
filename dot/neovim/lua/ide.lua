@@ -9,6 +9,7 @@ require("nvim-lsp-installer").setup({
         }
     }
 })
+
 -- More like IDE
 --For completing the brackets/parentheis etc when typing
 require('nvim-autopairs').setup{}
