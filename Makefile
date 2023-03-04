@@ -112,7 +112,6 @@ ${HOME}/.tmux-osx: ./dot/tmux.osx.conf
 ${HOME}/.tmux.conf: ./dot/tmux.conf
 ${HOME}/.zshrc: ./dot/zshrc
 
-${HOME}/.config/neofetch: ./dot/neofetch
 ${HOME}/.config/nvim/init.lua: ./dot/neovim/init.lua
 ${HOME}/.config/nvim/lua: ./dot/neovim/lua
 ${HOME}/.vsnip: ./dot/neovim/snippets
@@ -140,10 +139,8 @@ install_deb:
 install_apt:
 	sudo apt-get install $$(cat ./lists/packages.apt)
 
+install_binaries:
+	bash .setup/get_binaries.sh
+
 install_fonts:
 	bash ./fonts/setup_mononoki.sh
-
-symlink_clean:
-	# TODO if there and is symlink, rm. For example, if symlink points to dotfiles, but is deprecated
-
-clean: symlink_clean
