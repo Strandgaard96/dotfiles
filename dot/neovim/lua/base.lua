@@ -56,57 +56,6 @@ vim.opt.wildignore={
     '**/.git/*',
 }
 
--- Buffer specific
--- _G is some global namespace
--- Im am not sure what is happening here. But this stuff is automatic and used to do some nice stuff for me
--- These commands are somwhow handling space/tab formats when opening files.
-_G._autocommands = {}
-_G._autocommands.is_space_or_tab = function()
-    -- Check space or tab format. If space, check space width and update buffer
-
-    -- File is very large, just use the default.
-    if vim.fn.getfsize(vim.fn.bufname("%")) > 25600 then
-        return
-    end
-
-    local lines = vim.fn.getbufline(vim.fn.bufname("%"), 1, 250)
-    local lines_tabs = vim.fn.filter(lines, 'v:val =~ "^\\t"')
-    local lines_spaces = vim.fn.filter(lines, 'v:val =~ "^ "')
-
-    if #lines_tabs > #lines_spaces then
-        vim.opt_local.expandtab=false
-    else
-        vim.opt_local.expandtab=true
-        if #lines_spaces > 0 then
-            _G._autocommands.find_indent_width(lines_spaces)
-        end
-    end
-end
-
-_G._autocommands.find_indent_width = function(lines)
-    -- Check the whitespace per-buffer and set tabwidth
-
-    local line = lines[1]
-    local whitespace = 0
-
-    for i = 1, #line do
-        if (string.sub(line, i, i) == " ") then
-            whitespace = whitespace + 1
-        else
-            break
-        end
-    end
-
-    vim.opt_local.shiftwidth = whitespace
-    vim.opt_local.tabstop = whitespace
-
-end
-
--- Here the autocmd is defined. After reading buffer it is run.
--- TODO Is there a lua interface for BufReadPost?
-vim.api.nvim_exec([[
-autocmd BufReadPost * lua _autocommands.is_space_or_tab()
-]], false)
 
 -- these two define the commands W and Q as the regular lower case to prevent typo from exiting/saving vim
 vim.api.nvim_exec([[ command W w ]], false) -- common typo
@@ -138,6 +87,7 @@ vim.opt.spelllang="en"
 vim.opt.spellsuggest="best,10" -- show only the top 10 candidates
 
 vim.opt.autoread=true -- Update buffer if file has changed outside vim.
+
 -- https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
 vim.api.nvim_exec([[
 autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
@@ -152,3 +102,73 @@ command -nargs=0 -range SortWords <line1>,<line2>call setline('.',join(sort(spli
 if vim.api.nvim_win_get_option(0, "diff") then
     vim.opt.diffopt:append("iwhite")
 end
+
+
+local function augroup(name)
+  return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
+end
+
+-- Check if we need to reload the file when it changed
+vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
+  group = augroup("checktime"),
+  command = "checktime",
+})
+
+-- Highlight on yank
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = augroup("highlight_yank"),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+})
+
+-- resize splits if window got resized
+vim.api.nvim_create_autocmd({ "VimResized" }, {
+  group = augroup("resize_splits"),
+  callback = function()
+    vim.cmd("tabdo wincmd =")
+  end,
+})
+
+-- go to last loc when opening a buffer
+vim.api.nvim_create_autocmd("BufReadPost", {
+  group = augroup("last_loc"),
+  callback = function()
+    local mark = vim.api.nvim_buf_get_mark(0, '"')
+    local lcount = vim.api.nvim_buf_line_count(0)
+    if mark[1] > 0 and mark[1] <= lcount then
+      pcall(vim.api.nvim_win_set_cursor, 0, mark)
+    end
+  end,
+})
+
+-- close some filetypes with <q>
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("close_with_q"),
+  pattern = {
+    "PlenaryTestPopup",
+    "help",
+    "lspinfo",
+    "man",
+    "notify",
+    "qf",
+    "query", -- :InspectTree
+    "spectre_panel",
+    "startuptime",
+    "tsplayground",
+  },
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+    vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
+  end,
+})
+
+-- wrap and check for spell in text filetypes
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("wrap_spell"),
+  pattern = { "gitcommit", "markdown" },
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.spell = true
+  end,
+})

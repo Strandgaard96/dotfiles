@@ -11,7 +11,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.runtimepath:prepend(lazypath)
 
--- Leader key. This is required to be here by laxy!
+-- Leader key. This is required to be here by lazy!
 vim.g.mapleader = ","
 
 require("lazy").setup("plugins", {
@@ -41,5 +41,6 @@ local is_not_setup = vim.env.NEOVIM_SETUP
 if is_not_setup == nil then
     require 'ide'
 end
+
 
 

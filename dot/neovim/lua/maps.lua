@@ -61,8 +61,11 @@ vim.api.nvim_exec([[
 let g:sneak#label = 1
 let g:sneak#target_labels = 'qwertasdfgzxcv'
 
+" I need to do this to prevent the sneak map. I think there is a bug or something related to lazy. Sneak maps even
+" if i set the other map below.
+unmap ,
 " This is because , is my leader key. Now \ is the backwards key for sneak
-map \ <Plug>Sneak_,
+nmap \ <Plug>Sneak_,
 
 map f <Plug>Sneak_f
 map F <Plug>Sneak_F
