@@ -19,6 +19,8 @@ vim.opt.smarttab=true
 vim.opt.softtabstop=0
 vim.opt.tabstop=4
 
+vim.opt.clipboard = "unnamed,unnamedplus"
+
 vim.opt.hlsearch=true -- highlight searched words
 
 vim.opt.ignorecase=true -- Case-insensitive searching
