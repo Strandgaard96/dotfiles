@@ -1,10 +1,5 @@
 -- Key maps :D
 
-vim.api.nvim_set_keymap('n', '<Leader>ob', ':Buffers<cr>', {noremap = true}) -- Search open files
-vim.api.nvim_set_keymap('n', '<Leader>os', ':BLines<cr>', {noremap = true}) -- Search lines in current buffer
-vim.api.nvim_set_keymap('n', '<leader>og', ':GitFiles<cr>', {noremap = true}) -- Search all files registered with git
-vim.api.nvim_set_keymap('n', '<leader>of', ':Files<cr>', {noremap = true})  -- Search all files under current directory
-
 -- Navigate buffers
 -- Much like a browser, just tab between buffers
 vim.api.nvim_set_keymap('n', 'bn', ':bnext<cr>', {noremap = true})
@@ -32,23 +27,22 @@ vim.keymap.set('n', '<S-p>', ':r ~/.vbuf<cr>')
 -- Remove all white trails
 vim.keymap.set('n', '<Leader>nw', [[:let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>]], {desc="Remove whitespaces"})
 
--- Format buffer
+-- Format buffer based on isort and black
 vim.api.nvim_set_keymap('n', '<Leader>nf', ':!format %<cr>', {silent=true, noremap=true, desc="Format file"})
 
 -- Use paste mode to prevent funcy paste for text copied outside of vim
 vim.api.nvim_set_keymap('n', '<Leader>p', ':set invpaste<cr>', {desc="Toggle pastemode"}) -- for that stackoverflow
 
--- Spelling
--- Add word: zg
--- Correct word: z=
+-- Start spelling mode
 vim.api.nvim_set_keymap('n', '<Leader>z', ':set spell!<cr>', {desc="Toggle spellmode"})
+
 
 -- Git commands
 vim.api.nvim_set_keymap('n', '<leader>gu', ':GitGutterUndoHunk<cr>', {noremap = true, desc='Undo git hunk'})
 vim.api.nvim_set_keymap('n', '<leader>gn', ':GitGutterNextHunk<cr>', {noremap = true, desc='Next git hunk'})
 vim.api.nvim_set_keymap('n', '<leader>gp', ':GitGutterPrevHunk<cr>', {noremap = true, desc='Prev git hunk'})
-vim.api.nvim_set_keymap('n', '<leader>gh', ':GitGutterPreviewsHunk<cr>', {noremap = true, desc='Diff hunk'}) -- what changed in this hunk (close with :pclose)
-vim.api.nvim_set_keymap('n', '<leader>gb', ':BlameToggle<cr>', {noremap = true, desc='Toggle git blame'}) -- Undo block of git changes
+vim.api.nvim_set_keymap('n', '<leader>gh', ':GitGutterPreviewHunk<cr>', {noremap = true, desc='Diff hunk'}) -- what changed in this hunk (close with :pclose)
+vim.api.nvim_set_keymap('n', '<leader>gb', ':BlamerToggle<cr>', {noremap = true, desc='Toggle git blame'}) -- Show commit line is from
 
 -- Cut commands
 vim.api.nvim_set_keymap('n', '<leader>d', '""dd', {noremap = true, desc='Cut line'})

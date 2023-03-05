@@ -6,10 +6,8 @@ return {
   'ap/vim-css-color',              -- Preview CSS Colors
   'chaoren/vim-wordmotion',        -- Better word motion
   'justinmk/vim-sneak',            -- Jump to char. Issuses with leader key mapping
+  {'junegunn/fzf', build= './install --all'},
 
-  --{'junegunn/fzf', build= './install --all'},  -- Fuzzy find searching
-  --'junegunn/fzf.vim',  -- Fuzzy find searching
-  -- Fuzzy Finder (files, lsp, etc)
   { 'nvim-telescope/telescope.nvim', version = '*', dependencies = { 'nvim-lua/plenary.nvim' } },
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built.
@@ -24,7 +22,6 @@ return {
       return vim.fn.executable 'make' == 1
     end,
   },
-
 
   'numToStr/Comment.nvim',     -- For Commenting gcc & gc (Treesitter support)
   'gorkunov/smartpairs.vim',   -- Extend visual selection of bracket

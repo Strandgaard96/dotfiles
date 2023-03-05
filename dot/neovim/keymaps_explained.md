@@ -4,35 +4,33 @@
 
 ## Basic extension of vim
 
-| key | desc |
-|---|---|
-| ,d | Cut line(s) (old `dd`) |
-| ,gb | Toggle git blame |
-| ,gh | Git show changed |
-| ,gn | Git find next hunk |
-| ,gp | Git find previous hunk |
-| ,gu | Git undo hunk |
-| ,nf | Run format (`~/bin/format file`) |
-| ,nw | Remove all trailing whitespaces |
-| ,ob | Switch to open buffer |
-| ,of | Open new file (:Files) |
-| ,og | Open file (:GitFiles) |
-| ,p | Toggle pastemode |
-| ,y | Copy yank to clipboard (via OSC52) |
-| ,z | Toggle spelling |
-| Shift y | Copy to ~/.vbuf |
-| Shify p | Paste fro ~/.vbuf |
-| Tab | Goto next buffer |
-| Tab+Shift | Goto previous buffer |
-| bd | Delete current buffer |
-| bn | Goto next buffer |
-| bp | Goto previous buffer |
-| f | Jump to character |
+| key                   | desc                                  |
+|-----------------------|---------------------------------------|
+| **Git stuff**         |                                       |
+| ,gb                   | Toggle git blame                      |
+| ,gh                   | Git show changed                      |
+| ,gn                   | Git find next hunk                    |
+| ,gp                   | Git find previous hunk                |
+| ,gu                   | Git undo hunk                         | 
+| **cut/paste**         |                                       |
+| ,d                    | Cut line(s) (old `dd`)                |
+| ,p                    | Toggle pastemode                      |
+| ,y                    | Copy yank to clipboard (via OSC52)    |
+| **Custom formatting** |                                       |
+| ,nf                   | Run format (`~/bin/format file`)      |
+| ,nw                   | Remove all trailing whitespaces       |
+| **Buffer stuff**      |                                       |
+| Shift y               | Copy to ~/.vbuf                       |
+| Tab                   | Goto next buffer                      |
+| Tab+Shift             | Goto previous buffer                  |
+| bd                    | Delete current buffer                 |
+| bn                    | Goto next buffer                      |
+| bp                    | Goto previous buffer                  |
 
 ## IDE Like behavior
 
-| key | desc |
-|---|---|
+| key | desc                |
+|-----|---------------------|
 | ,ld | lsp goto definition |
 | ,ln | lsp rename variable |
 
@@ -41,25 +39,29 @@ TODO note on auto-complete and tab
 
 ## Write mode (Spelling and gramma)
 
-TODO note on spelling
+| key           | desc                      |
+|---------------|---------------------------|
+| ,z            | activate spelling mode    |
+| zg            | Add word to spelling dict |
+
+## Telescope
+
 
 ## Standard VIM
 
-### Standard maps
+### Standard maps i learned
 
-| key | desc |
-| % | goto matching bracket |
-| gi | goto last insertion |
-| gv | goto last visual selection |
-| dit | delete inside tag (e.g. <div>inside</div>) |
+| key         | desc                                           |
+|-------------|------------------------------------------------|
+| %           | switch between matching brackets where you are |
+| gi          | goto last insertion                            |
+| gv          | goto last visual selection                     |
+
 
 ### Live Replacement in NVIM 0.6
+Changes "from" to "to" in this case. The g flag means global replace, so its does it for all occurences. 
 
 :%s/from/to/g
-
-### Add star ending to all lines
-
-    gg<Ctrl-v>G$A*<Esc>
 
 ## Very useful
 
@@ -72,11 +74,6 @@ Yank inside brackets any brackets and send to local clipboard when using tmux/vi
     yiv,y
 
 where osc52 (~/bin/yank) makes the local terminal put content in local clipboard.
-
-## FAQ
-
-- Why not format on buffer write? - Because when I collaborate with other there
-  is new format rules for each git repository
 
 
 ## TODO

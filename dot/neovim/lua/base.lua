@@ -20,9 +20,7 @@ vim.opt.softtabstop=0
 vim.opt.tabstop=4
 
 vim.opt.clipboard = "unnamed,unnamedplus"
-
 vim.opt.hlsearch=true -- highlight searched words
-
 vim.opt.ignorecase=true -- Case-insensitive searching
 vim.opt.lazyredraw=true -- will buffer screen updates instead of updating all the time.:help 'ttyfast'
 vim.opt.list=true -- Highlight unwanted spaces
@@ -63,24 +61,6 @@ vim.opt.wildignore={
 vim.api.nvim_exec([[ command W w ]], false) -- common typo
 vim.api.nvim_exec([[ command Q q ]], false) -- common typo
 
-
--- Set default behavior for filetypes # I dont know whats going one here kekw
-vim.api.nvim_exec([[
-au BufRead,BufNewFile *.md,*.mdx,*.markdown setfiletype markdown
-au BufRead,BufNewFile Jenkinsfile,*.Jenkinsfile setfiletype groovy
-au BufRead,BufNewFile *.src setfiletype fortran
-let fortran_more_precise=1
-let fortran_dialect = "f77"
-let s:extfname = expand("%:e")
-if s:extfname ==? "f90"
-    let fortran_free_source=1
-    unlet! fortran_fixed_source
-else
-    let fortran_fixed_source=1
-    unlet! fortran_free_source
-endif
-]], false)
-
 -- Disable filetype plugin (it overwrites tab/indentation settings)
 vim.api.nvim_exec([[filetype plugin off]], false)
 
@@ -105,7 +85,7 @@ if vim.api.nvim_win_get_option(0, "diff") then
     vim.opt.diffopt:append("iwhite")
 end
 
-
+----- Autocommands from LazyVim!
 local function augroup(name)
   return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
 end
