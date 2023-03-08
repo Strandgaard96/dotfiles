@@ -67,15 +67,8 @@ map t <Plug>Sneak_t
 map T <Plug>Sneak_T
 ]], false)
 
--- Lsp key bindings
+-- Jump snippets
 vim.api.nvim_exec([[
-nnoremap <Leader>ld    <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <Leader>lD    <cmd>lua vim.lsp.buf.declaration()<CR>
-nnoremap <Leader>lr    <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <Leader>li    <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <Leader>lh    <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <Leader>lf    <cmd>lua vim.lsp.buf.formatting()<CR>
-nnoremap <Leader>ln    <cmd>lua vim.lsp.buf.rename()<CR>
 
 " Jump forward or backward in snippets
 imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'

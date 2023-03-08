@@ -26,7 +26,7 @@ require("lazy").setup("plugins", {
     -- increase downloads a lot.
 
     -- This needs to be set to false for older git versions!!!!! Eg remote clusters
-    filter = true,
+    filter = false,
   },
 })
 
