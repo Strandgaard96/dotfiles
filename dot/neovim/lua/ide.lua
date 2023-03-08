@@ -1,21 +1,4 @@
-
-
-
 -- More like IDE
---For completing the brackets/parentheis etc when typing
-require('nvim-autopairs').setup{}
--- For key hints when learning vim
-require("which-key").setup{}
--- Auto signature hints
-require('lsp_signature').setup({
-
-    handler_opts = {
-        border = "single",   -- double, rounded, single, shadow, none
-    },
-    hint_prefix = "",  -- Panda for parameter
-
-})
-
 
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
@@ -90,22 +73,6 @@ local servers = {
 --    },
 --}
 
--- [[ Configure Telescope ]]
--- See `:help telescope` and `:help telescope.setup()`
-require('telescope').setup {
-  defaults = {
-    mappings = {
-      i = {
-        ['<C-u>'] = false,
-        ['<C-d>'] = false,
-      },
-    },
-  },
-}
-
--- Enable telescope fzf native, if installed
-pcall(require('telescope').load_extension, 'fzf')
-
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
@@ -125,12 +92,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 
 -- Extra telescope keybind inspo here: https://github.com/LazyVim/LazyVim/blob/1f7be0bbad3012046a53edb649b3cdc085e7ed54/lua/lazyvim/plugins/editor.lua
 
-
--- docstring
--- generate docstring
-require('neogen').setup()
 vim.api.nvim_set_keymap("n", "<Leader>nd", ":lua require('neogen').generate()<CR>", {noremap=true, silent=true, desc="Generate docstring"})
-
 
 
 --- Treesitter. Gives nice highlighting for languages!!!
@@ -147,7 +109,7 @@ end
 -- See `:help nvim-treesitter`
 configs.setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'lua', 'python', 'rust', 'tsx', 'typescript', 'help', 'vim', "bash", "c", "json", "yaml", "markdown", "markdown_inline"},
+  ensure_installed = { 'lua', 'python', 'help', 'vim', "bash", "c", "json", "yaml", "markdown", "markdown_inline"},
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = true,
@@ -208,12 +170,6 @@ configs.setup {
     },
   },
 }
-
--- sets up commenting stuff. Not that useful for me.
-require("Comment").setup {}
-
--- Setup neovim lua configuration
-require('neodev').setup()
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()

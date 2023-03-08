@@ -41,7 +41,6 @@ vim.api.nvim_exec([[
 let g:bookmark_sign = '•'
 ]], false)
 
-
 --  Git # Setting gutter symbols for git changes. Like you have in pycharm
 vim.api.nvim_exec([[
 let g:gitgutter_sign_added = '|'

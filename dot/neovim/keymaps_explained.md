@@ -84,3 +84,35 @@ where osc52 (~/bin/yank) makes the local terminal put content in local clipboard
 - TODO https://github.com/folke/zen-mode.nvim
 - TODO https://github.com/mizlan/dotfiles/blob/master/.config/nvim/init.lua
 - TODO https://github.com/romainl/vim-cool
+
+
+## Lua stuff 
+This is from the lazy docs. You dunt have to set require(plugin).setup if you set opts :D
+
+More docs: https://www.lazyvim.org/configuration/examples
+
+```lua
+    {
+    "nvim-neorg/neorg",
+    -- lazy-load on filetype
+    ft = "norg",
+    -- custom config that will be executed when loading the plugin
+    config = function()
+      require("neorg").setup()
+    end,
+  },
+
+  -- the above could also be written as:
+  {
+    "nvim-neorg/neorg",
+    ft = "norg",
+    config = true, -- run require("neorg").setup()
+  },
+
+  -- or set custom options:
+  {
+    "nvim-neorg/neorg",
+    ft = "norg",
+    opts = { foo = "bar" }, -- run require("neorg").setup({foo = "bar"})
+  },
+``
