@@ -1,4 +1,3 @@
-
 --colortscheme tokyonight
 require("tokyonight").setup({
   -- use the night style
@@ -16,15 +15,6 @@ require("tokyonight").setup({
     colors.error = "#ff0000"
   end
 })
-
-
--- Lua
---require('onedark').setup {
---    style = 'deep'
---}
---require('onedark').load()
-
-
 
 local colorscheme = "tokyonight"
 local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
