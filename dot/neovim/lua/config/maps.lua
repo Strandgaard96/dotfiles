@@ -67,14 +67,6 @@ map('n', '<Leader>p', ':set invpaste<cr>', { desc = "Toggle pastemode" }) -- for
 -- Start spelling mode
 map('n', '<Leader>z', ':set spell!<cr>', { desc = "Toggle spellmode" })
 
-
--- Git commands
-map('n', '<leader>gu', ':GitGutterUndoHunk<cr>', { noremap = true, desc = 'Undo git hunk' })
-map('n', '<leader>gn', ':GitGutterNextHunk<cr>', { noremap = true, desc = 'Next git hunk' })
-map('n', '<leader>gp', ':GitGutterPrevHunk<cr>', { noremap = true, desc = 'Prev git hunk' })
-map('n', '<leader>gh', ':GitGutterPreviewHunk<cr>', { noremap = true, desc = 'Diff hunk' }) -- what changed in this hunk (close with :pclose)
-map('n', '<leader>gb', ':BlamerToggle<cr>', { noremap = true, desc = 'Toggle git blame' })  -- Show commit line is from
-
 -- Cut commands
 map('n', '<leader>d', '""dd', { noremap = true, desc = 'Cut line' })
 map('v', '<leader>d', '""d', { noremap = true, desc = 'Cut' })
