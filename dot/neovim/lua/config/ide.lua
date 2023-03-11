@@ -8,7 +8,7 @@
 --}
 
 vim.api.nvim_set_keymap("n", "<Leader>nd", ":lua require('neogen').generate()<CR>",
-{ noremap = true, silent = true, desc = "Generate docstring" })
+  { noremap = true, silent = true, desc = "Generate docstring" })
 
 
 --- Treesitter. Gives nice highlighting for languages!!!
@@ -90,4 +90,3 @@ vim.keymap.set('n', '[dis', vim.diagnostic.disable, { desc = "Disable diagnostic
 vim.keymap.set('n', '[ena', vim.diagnostic.enable, { desc = "Enable diagnostic message" })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
-

@@ -73,7 +73,7 @@ map('n', '<leader>gu', ':GitGutterUndoHunk<cr>', { noremap = true, desc = 'Undo 
 map('n', '<leader>gn', ':GitGutterNextHunk<cr>', { noremap = true, desc = 'Next git hunk' })
 map('n', '<leader>gp', ':GitGutterPrevHunk<cr>', { noremap = true, desc = 'Prev git hunk' })
 map('n', '<leader>gh', ':GitGutterPreviewHunk<cr>', { noremap = true, desc = 'Diff hunk' }) -- what changed in this hunk (close with :pclose)
-map('n', '<leader>gb', ':BlamerToggle<cr>', { noremap = true, desc = 'Toggle git blame' }) -- Show commit line is from
+map('n', '<leader>gb', ':BlamerToggle<cr>', { noremap = true, desc = 'Toggle git blame' })  -- Show commit line is from
 
 -- Cut commands
 map('n', '<leader>d', '""dd', { noremap = true, desc = 'Cut line' })
@@ -97,22 +97,22 @@ map('v', 'y', 'myy`y', { noremap = true, desc = 'Maintain the cursor position wh
 
 -- Trouble key maps
 map("n", "<leader>xx", "<cmd>TroubleToggle<cr>",
-  {silent = true, noremap = true}
+  { silent = true, noremap = true }
 )
 map("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>",
-  {silent = true, noremap = true}
+  { silent = true, noremap = true }
 )
 map("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>",
-  {silent = true, noremap = true}
+  { silent = true, noremap = true }
 )
 map("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>",
-  {silent = true, noremap = true}
+  { silent = true, noremap = true }
 )
 map("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>",
-  {silent = true, noremap = true}
+  { silent = true, noremap = true }
 )
 map("n", "gR", "<cmd>TroubleToggle lsp_references<cr>",
-  {silent = true, noremap = true}
+  { silent = true, noremap = true }
 )
 
 -- Unbind this immensly annoying keybind

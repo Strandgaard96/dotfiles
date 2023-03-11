@@ -21,10 +21,10 @@ vim.opt.tabstop = 4
 vim.opt.grepprg = "rg --vimgrep"
 
 vim.opt.clipboard = "unnamed,unnamedplus"
-vim.opt.hlsearch = true -- highlight searched words
+vim.opt.hlsearch = true   -- highlight searched words
 vim.opt.ignorecase = true -- Case-insensitive searching
 vim.opt.lazyredraw = true -- will buffer screen updates instead of updating all the time.:help 'ttyfast'
-vim.opt.list = true     -- Highlight unwanted spaces
+vim.opt.list = true       -- Highlight unwanted spaces
 vim.opt.listchars = {
   tab = '│·',
   trail = '·',
@@ -35,16 +35,16 @@ vim.opt.listchars = {
 vim.opt.mouse = 'a' -- Mouse is on for all modes
 
 -- vim.opt.hlsearch=false -- Turn on if you want to remove highlighted text
-vim.opt.showmode = false    -- insert is already showing in lightline -- I am not sure what effect this has
+vim.opt.showmode = false      -- insert is already showing in lightline -- I am not sure what effect this has
 vim.opt.swapfile = false
-vim.opt.wrap = false        -- Don't ever wordwrap my code
-vim.opt.number = true       -- Line number
+vim.opt.wrap = false          -- Don't ever wordwrap my code
+vim.opt.number = true         -- Line number
 vim.opt.relativenumber = true --Show relative line numbers from current line
-vim.opt.scrolloff = 8       -- Offsets the cursor from the top when scrolling
+vim.opt.scrolloff = 8         -- Offsets the cursor from the top when scrolling
 vim.opt.sidescroll = 1
 vim.opt.sidescrolloff = 15
 vim.opt.signcolumn = 'yes:1' -- always show sign column (bookmarks, gitgutter,..)
-vim.opt.smartcase = true   -- if a pattern contains an uppercase letter, it is case sensitive
+vim.opt.smartcase = true     -- if a pattern contains an uppercase letter, it is case sensitive
 
 -- Some wildcard options
 vim.opt.wildmode = { 'longest', 'list', 'full' }
@@ -57,9 +57,9 @@ vim.opt.wildignore = {
   '**/.git/*',
 }
 
-vim.opt.showcmd=true
-vim.opt.laststatus=2
-vim.opt.cmdheight=1
+vim.opt.showcmd = true
+vim.opt.laststatus = 2
+vim.opt.cmdheight = 1
 
 -- these two define the commands W and Q as the regular lower case to prevent typo from exiting/saving vim
 vim.api.nvim_exec([[ command W w ]], false) -- common typo
@@ -69,7 +69,7 @@ vim.api.nvim_exec([[ command Q q ]], false) -- common typo
 vim.opt.spelllang = "en"
 vim.opt.spellsuggest = "best,10" -- show only the top 10 candidates
 
-vim.opt.autoread = true        -- Update buffer if file has changed outside vim.
+vim.opt.autoread = true          -- Update buffer if file has changed outside vim.
 
 -- https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
 vim.api.nvim_exec([[
