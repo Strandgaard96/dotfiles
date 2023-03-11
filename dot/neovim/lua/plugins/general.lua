@@ -6,30 +6,52 @@ return {
   'MattesGroeger/vim-bookmarks',   -- Easy bookmark shortcuts
   'ap/vim-css-color',              -- Preview CSS Colors
   'chaoren/vim-wordmotion',        -- Better word motion
-  'justinmk/vim-sneak',            -- Jump to char. Issuses with leader key mapping
+
+  {
+    "ggandor/leap.nvim",
+    keys = {
+      { "s", mode = { "n", "x", "o" }, desc = "Leap forward to" },
+      { "S", mode = { "n", "x", "o" }, desc = "Leap backward to" },
+      { "gs", mode = { "n", "x", "o" }, desc = "Leap from windows" },
+    },
+    config = function(_, opts)
+      local leap = require("leap")
+      for k, v in pairs(opts) do
+        leap.opts[k] = v
+      end
+      leap.add_default_mappings(true)
+      vim.keymap.del({ "x", "o" }, "x")
+      vim.keymap.del({ "x", "o" }, "X")
+    end,
+  },
+
   {'junegunn/fzf', build= './install --all'},
+
+  "LunarVim/bigfile.nvim", -- disables unnecesary stuff for big files
 
   {'numToStr/Comment.nvim',config=true},     -- For Commenting gcc & gc (Treesitter support)
   'gorkunov/smartpairs.vim',   -- Extend visual selection of bracket
 
   --Interface
   { 'folke/tokyonight.nvim',         lazy = true }, -- colorscheme
-  --'navarasu/onedark.nvim',
+  --'navarasu/onedark.nvim',<
 
   'vim-airline/vim-airline',
   'vim-airline/vim-airline-themes',
   {'folke/which-key.nvim', config=true},   -- Show
 
+
+  {"folke/trouble.nvim",dependencies = {"kyazdani42/nvim-web-devicons", lazy = true}, config = true},
+
   --IDE like
-  {'windwp/nvim-autopairs',event="VeryLazy",config=true},--For completing the brackets/parentheis etc when typing
+  {'windwp/nvim-autopairs',event="VeryLazy",config=true}, --For auto creating closing bracket
 
   -- Detect tabstop and shiftwidth automatically. Since i added this, i removed the functions doing this before.
   'tpope/vim-sleuth',
 
   {
-      -- Add indentation guides even on blank lines
+      -- Add indentation guides evenairline on blank lines
     'lukas-reineke/indent-blankline.nvim',
-    -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help indent_blankline.txt`
     opts = {
       char = '┊',

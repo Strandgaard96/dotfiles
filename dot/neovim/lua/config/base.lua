@@ -65,9 +65,6 @@ vim.opt.cmdheight=1
 vim.api.nvim_exec([[ command W w ]], false) -- common typo
 vim.api.nvim_exec([[ command Q q ]], false) -- common typo
 
--- Disable filetype plugin (it overwrites tab/indentation settings)
-vim.api.nvim_exec([[filetype plugin off]], false)
-
 -- Spelling # do  :set spell to highlight possible spelling mistakes. Probably wont use this too much
 vim.opt.spelllang = "en"
 vim.opt.spellsuggest = "best,10" -- show only the top 10 candidates
@@ -175,6 +172,7 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_exec([[
 let g:airline_theme='jellybeans'
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#nvimlsp#enabled= 0 " Disable the diagnostics in the statusline
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline#extensions#tabline#show_close_button = 0
 let g:airline_skip_empty_sections = 1
