@@ -98,7 +98,7 @@ ${HOME}/.%:
 	# Symbolic lincs to the dotfiles in the repo
 	ln -s `pwd`/$< $@
 
-dotfiles_defaults: ${HOME}/.bashrc ${HOME}/.bash_profile ${HOME}/.bash_aliases ${HOME}/.bash_paths ${HOME}/.condarc ${HOME}/.gitconfig ${HOME}/.tmux.conf ${HOME}/.tmux-osx ${HOME}/.tmux-linux ${HOME}/.config/nvim/init.lua ${HOME}/.config/nvim/lua ${HOME}/.vsnip ${HOME}/.zshrc ${HOME}/.config/neofetch ${HOME}/.hushlogin
+dotfiles_defaults: ${HOME}/.bashrc ${HOME}/.bash_profile ${HOME}/.bash_aliases ${HOME}/.bash_paths ${HOME}/.condarc ${HOME}/.gitconfig ${HOME}/.tmux.conf ${HOME}/.tmux-osx ${HOME}/.tmux-linux ${HOME}/.config/nvim/init.lua ${HOME}/.config/nvim/lua ${HOME}/.zshrc ${HOME}/.config/neofetch ${HOME}/.hushlogin
 
 ${HOME}/.bash_aliases: ./dot/bash_aliases
 ${HOME}/.bash_paths: ./dot/bash_paths
@@ -114,7 +114,7 @@ ${HOME}/.zshrc: ./dot/zshrc
 
 ${HOME}/.config/nvim/init.lua: ./dot/neovim/init.lua
 ${HOME}/.config/nvim/lua: ./dot/neovim/lua
-${HOME}/.vsnip: ./dot/neovim/snippets
+#${HOME}/.vsnip: ./dot/neovim/snippets
 
 dotfiles_deb: ${HOME}/.inputrc
 
@@ -132,9 +132,6 @@ install: dotfiles bin ${HOME}/opt/neovim ${HOME}/.fzf install_${OS} ${HOME}/opt/
 install_remote: dotfiles bin ${HOME}/opt/neovim ${HOME}/.fzf install_${OS}
 # Guide for setting up zsh
 # https://www.drewsilcock.co.uk/compiling-zsh
-
-install_deb:
-	@#
 
 install_apt:
 	sudo apt-get install $$(cat ./lists/packages.apt)
