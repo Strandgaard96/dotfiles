@@ -166,25 +166,6 @@ vim.api.nvim_create_autocmd("FileType", {
 --vim.opt.rulerformat=[[=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)]]
 
 
--- NB THIS OVERRIDES RULER SETTINGS !
--- Airline theme # colors  the different modes in vim. Makes it look nicer.
--- https://github.com/vim-airline/vim-airline
-vim.api.nvim_exec([[
-let g:airline_theme='jellybeans'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#nvimlsp#enabled= 0 " Disable the diagnostics in the statusline
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline#extensions#tabline#show_close_button = 0
-let g:airline_skip_empty_sections = 1
-let g:airline#extensions#tabline#tab_min_count = 2  " ignored : (
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = ''
-let g:airline#extensions#tabline#right_sep = ' '
-let g:airline#extensions#tabline#right_alt_sep = ''
-let g:airline_powerline_fonts = 0
-au User AirlineAfterInit  :let g:airline_section_z = airline#section#create(['%3p%% %L:%3v'])
-]], false)
-
 -- bookmark
 vim.api.nvim_exec([[
 let g:bookmark_sign = '•'

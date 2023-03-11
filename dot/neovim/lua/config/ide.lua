@@ -9,7 +9,7 @@ end
 -- See `:help nvim-treesitter`
 configs.setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'lua', 'python', 'help', 'vim', "bash", "c", "json", "yaml", "markdown", "markdown_inline" },
+  ensure_installed = { 'lua', 'python', 'help', 'vim', "bash","help", "c", "json", "yaml", "markdown", "markdown_inline" },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = true,
