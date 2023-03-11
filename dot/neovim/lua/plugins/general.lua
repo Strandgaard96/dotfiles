@@ -5,7 +5,7 @@ return {
 
   'MattesGroeger/vim-bookmarks', -- Easy bookmark shortcuts
   'ap/vim-css-color',            -- Preview CSS Colors
-  'chaoren/vim-wordmotion',      -- Better word motion
+  --'chaoren/vim-wordmotion',      -- Better word motion
 
   {
     "ggandor/leap.nvim",

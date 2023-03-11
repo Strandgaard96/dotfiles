@@ -3,6 +3,8 @@
 -- Inspo : https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- https://blog.devgenius.io/create-custom-keymaps-in-neovim-with-lua-d1167de0f2c2
 
+local Util = require "util"
+
 -- Lua function to map
 local function map(mode, lhs, rhs, opts)
   local keys = require("lazy.core.handler").handlers.keys
@@ -115,8 +117,20 @@ map("n", "gR", "<cmd>TroubleToggle lsp_references<cr>",
   { silent = true, noremap = true }
 )
 
+-- save file
+map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
+
+-- Floating terminal keybinds
+map("n", "<leader>ft", function() Util.float_term(nil, { cwd = Util.get_root() }) end, { desc = "Terminal (root dir)" })
+map("n", "<leader>fT", function() Util.float_term() end, { desc = "Terminal (cwd)" })
+map("t", "<esc><esc>", "<c-\\><c-n>", {desc = "Enter Normal Mode"})
+
 -- Unbind this immensly annoying keybind
 map('n', 'q:', '<nop>', { noremap = true, desc = 'Quit on mistype' })
+
+vim.api.nvim_set_keymap("n", "<Leader>nd", ":lua require('neogen').generate()<CR>",
+  { noremap = true, silent = true, desc = "Generate docstring" })
+
 
 --" I feel like going back a word should be consistent with w. Move backwards one word. Usual is b and B
 --nnoremap W b
