@@ -155,18 +155,17 @@ return {
   'gorkunov/smartpairs.vim',             -- Extend visual selection of bracket
 
   --Interface
-  { 'folke/tokyonight.nvim', lazy = true },         -- colorscheme
+  { 'folke/tokyonight.nvim', lazy = true },-- colorscheme
+  { "catppuccin/nvim", name = "catppuccin", lazy=true},
   --'navarasu/onedark.nvim',<
 
-  'vim-airline/vim-airline',
-  'vim-airline/vim-airline-themes',
   { 'folke/which-key.nvim',  config = true }, -- Show
 
 
   { "folke/trouble.nvim",    dependencies = { "kyazdani42/nvim-web-devicons", lazy = true }, config = true },
 
   --IDE like
-  { 'windwp/nvim-autopairs', event = "VeryLazy",                                           config = true }, --For auto creating closing bracket
+  { 'windwp/nvim-autopairs', event = "VeryLazy", config = true }, --For auto creating closing bracket
 
   -- Detect tabstop and shiftwidth automatically. Since i added this, i removed the functions doing this before.
   'tpope/vim-sleuth',
