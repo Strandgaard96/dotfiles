@@ -15,8 +15,9 @@ return {
       { 'j-hui/fidget.nvim', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
-      {'folke/neodev.nvim',config=true},
+      { 'folke/neodev.nvim', config = true },
     },
   },
 
 }
+
