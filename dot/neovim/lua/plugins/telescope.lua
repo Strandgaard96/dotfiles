@@ -1,24 +1,4 @@
--- this will return a function that calls telescope.
--- cwd will default to lazyvim.M.get_root
--- for `files`, git_files or find_files will be chosen depending on .git
-local M = {}
-function M.telescope(builtin, opts)
-  local params = { builtin = builtin, opts = opts }
-  return function()
-    builtin = params.builtin
-    opts = params.opts
-    opts = vim.tbl_deep_extend("force", { cwd = M.get_root() }, opts or {})
-    if builtin == "files" then
-      if vim.loop.fs_stat((opts.cwd or vim.loop.cwd()) .. "/.git") then
-        opts.show_untracked = true
-        builtin = "git_files"
-      else
-        builtin = "find_files"
-      end
-    end
-    require("telescope.builtin")[builtin](opts)
-  end
-end
+local Util = require "util"
 
 return {
 
@@ -30,13 +10,13 @@ return {
     version = '*', -- telescope did only one release, so use HEAD for now
     keys = {
       { "<leader>,",       "<cmd>Telescope buffers show_all_buffers=true<cr>",    desc = "Switch Buffer" },
-      { "<leader>/",       M.telescope("live_grep"),                              desc = "Find in Files (Grep)" },
+      { "<leader>/",       Util.telescope("live_grep"),                              desc = "Find in Files (Grep)" },
       { "<leader>:",       "<cmd>Telescope command_history<cr>",                  desc = "Command History" },
-      { "<leader><space>", M.telescope("files"),                                  desc = "Find Files (root dir)" },
+      { "<leader><space>", Util.telescope("files"),                                  desc = "Find Files (root dir)" },
       -- find
       { "<leader>fb",      "<cmd>Telescope buffers<cr>",                          desc = "Buffers" },
-      { "<leader>ff",      M.telescope("files"),                                  desc = "Find Files (root dir)" },
-      { "<leader>fF",      M.telescope("files", { cwd = false }),                 desc = "Find Files (cwd)" },
+      { "<leader>ff",      Util.telescope("files"),                                  desc = "Find Files (root dir)" },
+      { "<leader>fF",      Util.telescope("files", { cwd = false }),                 desc = "Find Files (cwd)" },
       { "<leader>fr",      "<cmd>Telescope oldfiles<cr>",                         desc = "Recent" },
       -- git
       { "<leader>gc",      "<cmd>Telescope git_commits<CR>",                      desc = "commits" },
@@ -47,8 +27,8 @@ return {
       { "<leader>sc",      "<cmd>Telescope command_history<cr>",                  desc = "Command History" },
       { "<leader>sC",      "<cmd>Telescope commands<cr>",                         desc = "Commands" },
       { "<leader>sd",      "<cmd>Telescope diagnostics<cr>",                      desc = "Diagnostics" },
-      { "<leader>sg",      M.telescope("live_grep"),                              desc = "Grep (root dir)" },
-      { "<leader>sG",      M.telescope("live_grep", { cwd = false }),             desc = "Grep (cwd)" },
+      { "<leader>sg",      Util.telescope("live_grep"),                              desc = "Grep (root dir)" },
+      { "<leader>sG",      Util.telescope("live_grep", { cwd = false }),             desc = "Grep (cwd)" },
       { "<leader>sh",      "<cmd>Telescope help_tags<cr>",                        desc = "Help Pages" },
       { "<leader>sH",      "<cmd>Telescope highlights<cr>",                       desc = "Search Highlight Groups" },
       { "<leader>sk",      "<cmd>Telescope keymaps<cr>",                          desc = "Key Maps" },
@@ -56,12 +36,12 @@ return {
       { "<leader>sm",      "<cmd>Telescope marks<cr>",                            desc = "Jump to Mark" },
       { "<leader>so",      "<cmd>Telescope vim_options<cr>",                      desc = "Options" },
       { "<leader>sR",      "<cmd>Telescope resume<cr>",                           desc = "Resume" },
-      { "<leader>sw",      M.telescope("grep_string"),                            desc = "Word (root dir)" },
-      { "<leader>sW",      M.telescope("grep_string", { cwd = false }),           desc = "Word (cwd)" },
-      { "<leader>uC",      M.telescope("colorscheme", { enable_preview = true }), desc = "Colorscheme with preview" },
+      { "<leader>sw",      Util.telescope("grep_string"),                            desc = "Word (root dir)" },
+      { "<leader>sW",      Util.telescope("grep_string", { cwd = false }),           desc = "Word (cwd)" },
+      { "<leader>uC",      Util.telescope("colorscheme", { enable_preview = true }), desc = "Colorscheme with preview" },
       {
         "<leader>ss",
-        M.telescope("lsp_document_symbols", {
+        Util.telescope("lsp_document_symbols", {
           symbols = {
             "Class",
             "Function",
@@ -79,7 +59,7 @@ return {
       },
       {
         "<leader>sS",
-        M.telescope("lsp_workspace_symbols", {
+        Util.telescope("lsp_workspace_symbols", {
           symbols = {
             "Class",
             "Function",
