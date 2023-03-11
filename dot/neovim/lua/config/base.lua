@@ -189,14 +189,3 @@ au User AirlineAfterInit  :let g:airline_section_z = airline#section#create(['%3
 vim.api.nvim_exec([[
 let g:bookmark_sign = '•'
 ]], false)
-
---  Git # Setting gutter symbols for git changes. Like you have in pycharm
-vim.api.nvim_exec([[
-let g:gitgutter_sign_added = '|'
-let g:gitgutter_sign_modified = '|'
-let g:gitgutter_sign_removed = '|'
-let g:gitgutter_sign_modified_removed = '|'
-highlight GitGutterAdd ctermfg=green
-highlight GitGutterChange ctermfg=yellow
-highlight GitGutterDelete ctermfg=red
-]], false)
