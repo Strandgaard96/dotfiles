@@ -55,7 +55,8 @@ local servers = {
   -- gopls = {},
   -- rust_analyzer = {},
   -- tsserver = {},
-
+  -- black = {}
+  pyright = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
@@ -92,7 +93,8 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 
 -- Extra telescope keybind inspo here: https://github.com/LazyVim/LazyVim/blob/1f7be0bbad3012046a53edb649b3cdc085e7ed54/lua/lazyvim/plugins/editor.lua
 
-vim.api.nvim_set_keymap("n", "<Leader>nd", ":lua require('neogen').generate()<CR>", {noremap=true, silent=true, desc="Generate docstring"})
+vim.api.nvim_set_keymap("n", "<Leader>nd", ":lua require('neogen').generate()<CR>",
+{ noremap = true, silent = true, desc = "Generate docstring" })
 
 
 --- Treesitter. Gives nice highlighting for languages!!!
@@ -102,14 +104,14 @@ vim.api.nvim_set_keymap("n", "<Leader>nd", ":lua require('neogen').generate()<CR
 
 local status_ok, configs = pcall(require, "nvim-treesitter.configs")
 if not status_ok then
-	return
+  return
 end
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
 configs.setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'lua', 'python', 'help', 'vim', "bash", "c", "json", "yaml", "markdown", "markdown_inline"},
+  ensure_installed = { 'lua', 'python', 'help', 'vim', "bash", "c", "json", "yaml", "markdown", "markdown_inline" },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = true,
@@ -131,41 +133,41 @@ configs.setup {
       lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
       keymaps = {
         -- You can use the capture groups defined in textobjects.scm
-        ['aa'] = '@parameter.outer',
-        ['ia'] = '@parameter.inner',
-        ['af'] = '@function.outer',
-        ['if'] = '@function.inner',
-        ['ac'] = '@class.outer',
-        ['ic'] = '@class.inner',
+            ['aa'] = '@parameter.outer',
+            ['ia'] = '@parameter.inner',
+            ['af'] = '@function.outer',
+            ['if'] = '@function.inner',
+            ['ac'] = '@class.outer',
+            ['ic'] = '@class.inner',
       },
     },
     move = {
       enable = true,
       set_jumps = true, -- whether to set jumps in the jumplist
       goto_next_start = {
-        [']m'] = '@function.outer',
-        [']]'] = '@class.outer',
+            [']m'] = '@function.outer',
+            [']]'] = '@class.outer',
       },
       goto_next_end = {
-        [']M'] = '@function.outer',
-        [']['] = '@class.outer',
+            [']M'] = '@function.outer',
+            [']['] = '@class.outer',
       },
       goto_previous_start = {
-        ['[m'] = '@function.outer',
-        ['[['] = '@class.outer',
+            ['[m'] = '@function.outer',
+            ['[['] = '@class.outer',
       },
       goto_previous_end = {
-        ['[M'] = '@function.outer',
-        ['[]'] = '@class.outer',
+            ['[M'] = '@function.outer',
+            ['[]'] = '@class.outer',
       },
     },
     swap = {
       enable = true,
       swap_next = {
-        ['<leader>a'] = '@parameter.inner',
+            ['<leader>a'] = '@parameter.inner',
       },
       swap_previous = {
-        ['<leader>A'] = '@parameter.inner',
+            ['<leader>A'] = '@parameter.inner',
       },
     },
   },
@@ -201,47 +203,3 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnos
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
--- nvim-cmp setup
-local cmp = require 'cmp'
-local luasnip = require 'luasnip'
-
-luasnip.config.setup {}
-
-cmp.setup {
-  snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
-  },
-  mapping = cmp.mapping.preset.insert {
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete {},
-    ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    },
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-  },
-  sources = {
-    { name = 'nvim_lsp' },
-    { name = 'luasnip' },
-  },
-}
