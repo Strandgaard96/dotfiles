@@ -10,52 +10,56 @@
 -- vim.opt_local: behaves like :setlocal
 
 -- Indent settings
-vim.opt.autoindent=true
-vim.opt.expandtab=true
-vim.opt.indentexpr=O
-vim.opt.shiftwidth=4
-vim.opt.smartindent=true
-vim.opt.smarttab=true
-vim.opt.softtabstop=0
-vim.opt.tabstop=4
+vim.opt.autoindent = true
+vim.opt.expandtab = true
+vim.opt.indentexpr = O
+vim.opt.shiftwidth = 4
+vim.opt.smartindent = true
+vim.opt.smarttab = true
+vim.opt.softtabstop = 0
+vim.opt.tabstop = 4
+vim.opt.grepprg = "rg --vimgrep"
 
 vim.opt.clipboard = "unnamed,unnamedplus"
-vim.opt.hlsearch=true -- highlight searched words
-vim.opt.ignorecase=true -- Case-insensitive searching
-vim.opt.lazyredraw=true -- will buffer screen updates instead of updating all the time.:help 'ttyfast'
-vim.opt.list=true -- Highlight unwanted spaces
+vim.opt.hlsearch = true -- highlight searched words
+vim.opt.ignorecase = true -- Case-insensitive searching
+vim.opt.lazyredraw = true -- will buffer screen updates instead of updating all the time.:help 'ttyfast'
+vim.opt.list = true     -- Highlight unwanted spaces
 vim.opt.listchars = {
-    tab = '│·',
-    trail = '·',
-    -- eol = '↵',
+  tab = '│·',
+  trail = '·',
+  -- eol = '↵',
 } -- Show hidden characters, In this case list things
 
 -- https://unix.stackexchange.com/questions/139578/copy-paste-for-vim-is-not-working-when-mouse-set-mouse-a-is-on
-vim.opt.mouse='a' -- Mouse is on for all modes
+vim.opt.mouse = 'a' -- Mouse is on for all modes
 
 -- vim.opt.hlsearch=false -- Turn on if you want to remove highlighted text
-vim.opt.showmode=false -- insert is already showing in lightline -- I am not sure what effect this has
-vim.opt.swapfile=false
-vim.opt.wrap=false -- Don't ever wordwrap my code
-vim.opt.number=true -- Line number
-vim.opt.relativenumber=true --Show relative line numbers from current line
-vim.opt.scrolloff=8 -- Offsets the cursor from the top when scrolling
-vim.opt.sidescroll=1
-vim.opt.sidescrolloff=15
-vim.opt.signcolumn='yes:1' -- always show sign column (bookmarks, gitgutter,..)
-vim.opt.smartcase=true -- if a pattern contains an uppercase letter, it is case sensitive
+vim.opt.showmode = false    -- insert is already showing in lightline -- I am not sure what effect this has
+vim.opt.swapfile = false
+vim.opt.wrap = false        -- Don't ever wordwrap my code
+vim.opt.number = true       -- Line number
+vim.opt.relativenumber = true --Show relative line numbers from current line
+vim.opt.scrolloff = 8       -- Offsets the cursor from the top when scrolling
+vim.opt.sidescroll = 1
+vim.opt.sidescrolloff = 15
+vim.opt.signcolumn = 'yes:1' -- always show sign column (bookmarks, gitgutter,..)
+vim.opt.smartcase = true   -- if a pattern contains an uppercase letter, it is case sensitive
 
 -- Some wildcard options
-vim.opt.wildmode={'longest','list','full'}
-vim.opt.wildignore={
-    '*.pyc',
-    '*_build/*',
-    '**/coverage/*',
-    '**/node_modules/*',
-    '**/ios/*',
-    '**/.git/*',
+vim.opt.wildmode = { 'longest', 'list', 'full' }
+vim.opt.wildignore = {
+  '*.pyc',
+  '*_build/*',
+  '**/coverage/*',
+  '**/node_modules/*',
+  '**/ios/*',
+  '**/.git/*',
 }
 
+vim.opt.showcmd=true
+vim.opt.laststatus=2
+vim.opt.cmdheight=1
 
 -- these two define the commands W and Q as the regular lower case to prevent typo from exiting/saving vim
 vim.api.nvim_exec([[ command W w ]], false) -- common typo
@@ -65,24 +69,24 @@ vim.api.nvim_exec([[ command Q q ]], false) -- common typo
 vim.api.nvim_exec([[filetype plugin off]], false)
 
 -- Spelling # do  :set spell to highlight possible spelling mistakes. Probably wont use this too much
-vim.opt.spelllang="en"
-vim.opt.spellsuggest="best,10" -- show only the top 10 candidates
+vim.opt.spelllang = "en"
+vim.opt.spellsuggest = "best,10" -- show only the top 10 candidates
 
-vim.opt.autoread=true -- Update buffer if file has changed outside vim.
+vim.opt.autoread = true        -- Update buffer if file has changed outside vim.
 
 -- https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
 vim.api.nvim_exec([[
 autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
-]],false)
+]], false)
 
 -- Useful commands # This is a custom function! When you do :SortWords this function is run!
 vim.api.nvim_exec([[
 command -nargs=0 -range SortWords <line1>,<line2>call setline('.',join(sort(split(getline('.'),' ')),' '))
-]],false)
+]], false)
 
 -- if diff, ignore whitespace
 if vim.api.nvim_win_get_option(0, "diff") then
-    vim.opt.diffopt:append("iwhite")
+  vim.opt.diffopt:append("iwhite")
 end
 
 ----- Autocommands from LazyVim!
@@ -154,3 +158,47 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.spell = true
   end,
 })
+
+
+-- settings related to interface
+
+-- Ruler options are overruled by vim-airline so only needed if you dont have the plugin
+--Set the stuff in the bottom statusline
+--vim.opt.ruler=true -- show the ruler
+-- See https://vimhelp.org/options.txt.html#%27statusline%27 for formatting explanation
+--vim.opt.rulerformat=[[=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)]]
+
+
+-- NB THIS OVERRIDES RULER SETTINGS !
+-- Airline theme # colors  the different modes in vim. Makes it look nicer.
+-- https://github.com/vim-airline/vim-airline
+vim.api.nvim_exec([[
+let g:airline_theme='jellybeans'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#tabline#show_close_button = 0
+let g:airline_skip_empty_sections = 1
+let g:airline#extensions#tabline#tab_min_count = 2  " ignored : (
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = ''
+let g:airline#extensions#tabline#right_sep = ' '
+let g:airline#extensions#tabline#right_alt_sep = ''
+let g:airline_powerline_fonts = 0
+au User AirlineAfterInit  :let g:airline_section_z = airline#section#create(['%3p%% %L:%3v'])
+]], false)
+
+-- bookmark
+vim.api.nvim_exec([[
+let g:bookmark_sign = '•'
+]], false)
+
+--  Git # Setting gutter symbols for git changes. Like you have in pycharm
+vim.api.nvim_exec([[
+let g:gitgutter_sign_added = '|'
+let g:gitgutter_sign_modified = '|'
+let g:gitgutter_sign_removed = '|'
+let g:gitgutter_sign_modified_removed = '|'
+highlight GitGutterAdd ctermfg=green
+highlight GitGutterChange ctermfg=yellow
+highlight GitGutterDelete ctermfg=red
+]], false)
