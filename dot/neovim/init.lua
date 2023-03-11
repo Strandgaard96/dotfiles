@@ -33,10 +33,4 @@ require("lazy").setup("plugins", {
 require 'config.base'        -- Standard VIM settings
 require 'config.maps'        -- Most key mappings
 require 'config.colorscheme' -- Set colorscheme
-
--- Check if vim is being installed for the first time
-local is_not_setup = vim.env.NEOVIM_SETUP
-
-if is_not_setup == nil then
-  require 'config.ide'
-end
+require 'config.ide'
