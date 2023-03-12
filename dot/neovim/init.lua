@@ -33,3 +33,4 @@ require("lazy").setup("plugins", {
 })
 require("config.maps") -- Most key mappings
 require("config.colorscheme") -- Set colorscheme
+

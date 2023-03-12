@@ -41,6 +41,7 @@ map("n", "bd", ":bdelete<cr>", { noremap = true })
 map("n", "<Tab>", ":bnext<cr>", { noremap = true })
 map("n", "<S-Tab>", ":bprevious<cr>", { noremap = true })
 
+<<<<<<< HEAD
 -- vim script code from https://sunaku.github.io/tmux-yank-osc52.html.
 vim.api.nvim_exec(
 	[[
@@ -65,6 +66,15 @@ autocmd TextYankPost * call CopyYank()
 ]],
 	false
 )
+=======
+-- Yank settings
+-- Send yank register zero to ocs52
+map("n", "<Leader>y", function()
+	local content = vim.fn.getreg("0")
+	local escape = vim.fn.system("yank", content)
+	vim.fn.writefile({ escape }, "/dev/tty", "b")
+end, { desc = "Yank OSC52" })
+>>>>>>> e3abee7 (formatting and refactor.)
 
 -- Useful stuff for copying stuf between vim sessions.
 -- Copy the current visual slection to ~/.vbuf
@@ -85,6 +95,7 @@ map("n", "<Leader>p", ":set invpaste<cr>", { desc = "Toggle pastemode" }) -- for
 
 -- Start spelling mode
 map("n", "<Leader>z", ":set spell!<cr>", { desc = "Toggle spellmode" })
+<<<<<<< HEAD
 --
 -- Delete without yank
 map("n", "d", '"_d', { noremap = true, desc = "Delete without yank" })
@@ -95,6 +106,19 @@ map("v", "d", '"_d', { noremap = true, desc = "Delete without yank" })
 map("n", "<leader>d", "dd", { noremap = true, desc = "Cut line" })
 map("v", "<leader>d", "d", { noremap = true, desc = "Cut" })
 map("n", "<leader>D", "D", { noremap = true, desc = "Cut rest of line" })
+=======
+
+-- Cut commands
+map("n", "<leader>d", '""dd', { noremap = true, desc = "Cut line" })
+map("v", "<leader>d", '""d', { noremap = true, desc = "Cut" })
+map("n", "<leader>D", '""D', { noremap = true, desc = "Cut rest of line" })
+
+-- Map movement keys to danish keyboard
+map("n", "æ", "l", { noremap = true, desc = "Move right" })
+map("n", "l", "k", { noremap = true, desc = "Move Up" })
+map("n", "k", "j", { noremap = true, desc = "Move Down" })
+map("n", "j", "h", { noremap = true, desc = "Move left" })
+>>>>>>> e3abee7 (formatting and refactor.)
 
 -- Reselect visual selection after indenting # Neat
 map("v", "<", "<gv", { noremap = true, desc = "Reselect when indenting" })
@@ -118,8 +142,11 @@ map("n", "<leader>fT", function()
 	Util.float_term()
 end, { desc = "Terminal (cwd)" })
 map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
+<<<<<<< HEAD
 
 map("n", "<leader>ud", Util.toggle_diagnostics, { desc = "Toggle Diagnostics" })
+=======
+>>>>>>> e3abee7 (formatting and refactor.)
 
 -- Unbind this immensly annoying keybind
 map("n", "q:", "<nop>", { noremap = true, desc = "Quit on mistype" })

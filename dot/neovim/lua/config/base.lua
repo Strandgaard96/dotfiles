@@ -74,6 +74,7 @@ vim.opt.spelllang = "en"
 vim.opt.spellsuggest = "best,10" -- show only the top 10 candidates
 
 vim.opt.autoread = true -- Update buffer if file has changed outside vim.
+<<<<<<< HEAD
 --
 -- bookmark
 vim.api.nvim_exec(
@@ -82,6 +83,8 @@ let g:bookmark_sign = '•'
 ]],
 	false
 )
+=======
+>>>>>>> e3abee7 (formatting and refactor.)
 
 -- https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
 vim.api.nvim_exec(
@@ -181,3 +184,14 @@ vim.api.nvim_create_autocmd("FileType", {
 --vim.opt.ruler=true -- show the ruler
 -- See https://vimhelp.org/options.txt.html#%27statusline%27 for formatting explanation
 --vim.opt.rulerformat=[[=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)]]
+<<<<<<< HEAD
+=======
+
+-- bookmark
+vim.api.nvim_exec(
+	[[
+let g:bookmark_sign = '•'
+]],
+	false
+)
+>>>>>>> e3abee7 (formatting and refactor.)
