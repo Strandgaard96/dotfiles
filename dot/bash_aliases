@@ -282,6 +282,12 @@ function gr_last()
     done
 }
 
+# Better help
+function help() {
+    "$@" --help 2>&1 | bat --plain --language=help
+}
+
+
 # One liner for delte multiple files mathicng patterns recursively
 #find . \( -name "*.er" -o -name "*.err" -o -name "*.opt" -o -name "*orca_trj.xyz" -o -name "*.out" \) -type f -delete
 
