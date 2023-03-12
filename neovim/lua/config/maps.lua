@@ -53,10 +53,29 @@ map("n", "<S-Tab>", ":bprevious<cr>", { noremap = true })
 -- greatest remap ever. Paste over word. Preserve the paste.
 map("x", "<leader>p", [["_dP]])
 
+-- Yank settings
+-- Send yank register zero to ocs52
+map("n", "<Leader>y", function()
+	local content = vim.fn.getreg("0")
+	local escape = vim.fn.system("yank", content)
+	vim.fn.writefile({ escape }, "/dev/tty", "b")
+end, { desc = "Yank OSC52" })
+
 -- next greatest remap ever : asbjornHaland
 map({ "n", "v" }, "<leader>y", [["+y]])
 map("n", "<leader>Y", [["+Y]])
 
+-- Remove all white trails
+map("n", "<Leader>nw", [[:let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>]], { desc = "Remove whitespaces" })
+
+-- Format buffer based on isort and black. This func can be found in an lsp !
+map("n", "<Leader>nf", ":!format %<cr>", { silent = true, noremap = true, desc = "Format file" })
+
+-- Use paste mode to prevent funcy paste for text copied outside of vim
+map("n", "<Leader>p", ":set invpaste<cr>", { desc = "Toggle pastemode" }) -- for that stackoverflow
+
+-- Start spelling mode
+map("n", "<Leader>z", ":set spell!<cr>", { desc = "Toggle spellmode" })
 -- Delete without yank
 map("n", "d", '"_d', { noremap = true, desc = "Delete without yank" })
 map("n", "D", '"_D', { noremap = true, desc = "Delete without tank" })
@@ -66,6 +85,17 @@ map("v", "d", '"_d', { noremap = true, desc = "Delete without yank" })
 map("n", "<leader>d", "dd", { noremap = true, desc = "Cut line" })
 map("v", "<leader>d", "d", { noremap = true, desc = "Cut" })
 map("n", "<leader>D", "D", { noremap = true, desc = "Cut rest of line" })
+
+-- Cut commands
+map("n", "<leader>d", '""dd', { noremap = true, desc = "Cut line" })
+map("v", "<leader>d", '""d', { noremap = true, desc = "Cut" })
+map("n", "<leader>D", '""D', { noremap = true, desc = "Cut rest of line" })
+
+-- Map movement keys to danish keyboard
+map("n", "æ", "l", { noremap = true, desc = "Move right" })
+map("n", "l", "k", { noremap = true, desc = "Move Up" })
+map("n", "k", "j", { noremap = true, desc = "Move Down" })
+map("n", "j", "h", { noremap = true, desc = "Move left" })
 
 vim.keymap.set("n", "<Leader>oy", function()
 	local content = vim.fn.getreg("0")
@@ -79,9 +109,31 @@ vim.keymap.set("n", "<Leader>oy", function()
 	f:close()
 end, { desc = "Yank OSC52" })
 
+<<<<<<< HEAD
 ---------------------
 ---- ETC -----
 ---------------------
+=======
+-- Maintain the cursor position when yanking a visual selection
+-- http://ddrscott.github.io/blog/2016/yank-without-jank/
+map("v", "y", "myy`y", { noremap = true, desc = "Maintain the cursor position when yanking a visual selection" })
+
+-- Trouble key maps
+map("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", { silent = true, noremap = true })
+
+-- save file
+map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
+
+-- Floating terminal keybinds
+map("n", "<leader>ft", function()
+Util.float_term(nil, { cwd = Util.get_root() })
+end, { desc = "Terminal (root dir)" })
+map("n", "<leader>fT", function()
+Util.float_term()
+end, { desc = "Terminal (cwd)" })
+map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
+
+map("n", "<leader>ud", Util.toggle_diagnostics, { desc = "Toggle Diagnostics" })
 
 -- Unbind this immensly annoying keybind
 map("n", "q:", "<nop>", { noremap = true, desc = "Quit on mistype" })
