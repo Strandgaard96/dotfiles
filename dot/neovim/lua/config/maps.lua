@@ -3,16 +3,18 @@
 -- Inspo : https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- https://blog.devgenius.io/create-custom-keymaps-in-neovim-with-lua-d1167de0f2c2
 
+local Util = require("util")
+
 -- Lua function to map
 local function map(mode, lhs, rhs, opts)
-  local keys = require("lazy.core.handler").handlers.keys
-  ---@cast keys LazyKeysHandler
-  -- do not create the keymap if a lazy keys handler exists
-  if not keys.active[keys.parse({ lhs, mode = mode }).id] then
-    opts = opts or {}
-    opts.silent = opts.silent ~= false
-    vim.keymap.set(mode, lhs, rhs, opts)
-  end
+	local keys = require("lazy.core.handler").handlers.keys
+	---@cast keys LazyKeysHandler
+	-- do not create the keymap if a lazy keys handler exists
+	if not keys.active[keys.parse({ lhs, mode = mode }).id] then
+		opts = opts or {}
+		opts.silent = opts.silent ~= false
+		vim.keymap.set(mode, lhs, rhs, opts)
+	end
 end
 
 -- Better up and down allegedly
@@ -33,82 +35,88 @@ map("v", ">", ">gv")
 
 -- Navigate buffers
 -- Much like a browser, just tab between buffers
-map('n', 'bn', ':bnext<cr>', { noremap = true })
-map('n', 'bp', ':bprevious<cr>', { noremap = true })
-map('n', 'bd', ':bdelete<cr>', { noremap = true })
-map('n', '<Tab>', ':bnext<cr>', { noremap = true })
-map('n', '<S-Tab>', ':bprevious<cr>', { noremap = true })
+map("n", "bn", ":bnext<cr>", { noremap = true })
+map("n", "bp", ":bprevious<cr>", { noremap = true })
+map("n", "bd", ":bdelete<cr>", { noremap = true })
+map("n", "<Tab>", ":bnext<cr>", { noremap = true })
+map("n", "<S-Tab>", ":bprevious<cr>", { noremap = true })
 
 -- Yank settings
 -- Send yank register zero to ocs52
 map("n", "<Leader>y", function()
-  local content = vim.fn.getreg('0')
-  local escape = vim.fn.system("yank", content)
-  vim.fn.writefile({ escape }, '/dev/tty', 'b')
+	local content = vim.fn.getreg("0")
+	local escape = vim.fn.system("yank", content)
+	vim.fn.writefile({ escape }, "/dev/tty", "b")
 end, { desc = "Yank OSC52" })
 
 -- Useful stuff for copying stuf between vim sessions.
 -- Copy the current visual slection to ~/.vbuf
-map('v', '<S-y>', ':w! ~/.vbuf<cr>')
+map("v", "<S-y>", ":w! ~/.vbuf<cr>")
 -- Copy the current line to the buffer file if no visual selection
-map('n', '<S-y>', ':.w! ~/.vbuf<cr>')
+map("n", "<S-y>", ":.w! ~/.vbuf<cr>")
 -- Paste the contents of the buffer file
-map('n', '<S-p>', ':r ~/.vbuf<cr>')
+map("n", "<S-p>", ":r ~/.vbuf<cr>")
 
 -- Remove all white trails
-map('n', '<Leader>nw', [[:let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>]], { desc = "Remove whitespaces" })
+map("n", "<Leader>nw", [[:let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>]], { desc = "Remove whitespaces" })
 
 -- Format buffer based on isort and black. This func can be found in an lsp !
-map('n', '<Leader>nf', ':!format %<cr>', { silent = true, noremap = true, desc = "Format file" })
+map("n", "<Leader>nf", ":!format %<cr>", { silent = true, noremap = true, desc = "Format file" })
 
 -- Use paste mode to prevent funcy paste for text copied outside of vim
-map('n', '<Leader>p', ':set invpaste<cr>', { desc = "Toggle pastemode" }) -- for that stackoverflow
+map("n", "<Leader>p", ":set invpaste<cr>", { desc = "Toggle pastemode" }) -- for that stackoverflow
 
 -- Start spelling mode
-map('n', '<Leader>z', ':set spell!<cr>', { desc = "Toggle spellmode" })
+map("n", "<Leader>z", ":set spell!<cr>", { desc = "Toggle spellmode" })
 
 -- Cut commands
-map('n', '<leader>d', '""dd', { noremap = true, desc = 'Cut line' })
-map('v', '<leader>d', '""d', { noremap = true, desc = 'Cut' })
-map('n', '<leader>D', '""D', { noremap = true, desc = 'Cut rest of line' })
+map("n", "<leader>d", '""dd', { noremap = true, desc = "Cut line" })
+map("v", "<leader>d", '""d', { noremap = true, desc = "Cut" })
+map("n", "<leader>D", '""D', { noremap = true, desc = "Cut rest of line" })
 
 -- Map movement keys to danish keyboard
-map('n', 'æ', 'l', { noremap = true, desc = 'Move right' })
-map('n', 'l', 'k', { noremap = true, desc = 'Move Up' })
-map('n', 'k', 'j', { noremap = true, desc = 'Move Down' })
-map('n', 'j', 'h', { noremap = true, desc = 'Move left' })
-
+map("n", "æ", "l", { noremap = true, desc = "Move right" })
+map("n", "l", "k", { noremap = true, desc = "Move Up" })
+map("n", "k", "j", { noremap = true, desc = "Move Down" })
+map("n", "j", "h", { noremap = true, desc = "Move left" })
 
 -- Reselect visual selection after indenting # Neat
-map('v', '<', '<gv', { noremap = true, desc = 'Reselect when indenting' })
-map('v', '>', '>gv', { noremap = true, desc = 'Reselect when indenting' })
+map("v", "<", "<gv", { noremap = true, desc = "Reselect when indenting" })
+map("v", ">", ">gv", { noremap = true, desc = "Reselect when indenting" })
 
 -- Maintain the cursor position when yanking a visual selection
 -- http://ddrscott.github.io/blog/2016/yank-without-jank/
-map('v', 'y', 'myy`y', { noremap = true, desc = 'Maintain the cursor position when yanking a visual selection' })
+map("v", "y", "myy`y", { noremap = true, desc = "Maintain the cursor position when yanking a visual selection" })
 
 -- Trouble key maps
-map("n", "<leader>xx", "<cmd>TroubleToggle<cr>",
-  { silent = true, noremap = true }
-)
-map("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>",
-  { silent = true, noremap = true }
-)
-map("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>",
-  { silent = true, noremap = true }
-)
-map("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>",
-  { silent = true, noremap = true }
-)
-map("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>",
-  { silent = true, noremap = true }
-)
-map("n", "gR", "<cmd>TroubleToggle lsp_references<cr>",
-  { silent = true, noremap = true }
-)
+map("n", "<leader>xx", "<cmd>TroubleToggle<cr>", { silent = true, noremap = true })
+map("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", { silent = true, noremap = true })
+map("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", { silent = true, noremap = true })
+map("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>", { silent = true, noremap = true })
+map("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", { silent = true, noremap = true })
+map("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", { silent = true, noremap = true })
+
+-- save file
+map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
+
+-- Floating terminal keybinds
+map("n", "<leader>ft", function()
+	Util.float_term(nil, { cwd = Util.get_root() })
+end, { desc = "Terminal (root dir)" })
+map("n", "<leader>fT", function()
+	Util.float_term()
+end, { desc = "Terminal (cwd)" })
+map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 
 -- Unbind this immensly annoying keybind
-map('n', 'q:', '<nop>', { noremap = true, desc = 'Quit on mistype' })
+map("n", "q:", "<nop>", { noremap = true, desc = "Quit on mistype" })
+
+vim.api.nvim_set_keymap(
+	"n",
+	"<Leader>nd",
+	":lua require('neogen').generate()<CR>",
+	{ noremap = true, silent = true, desc = "Generate docstring" }
+)
 
 --" I feel like going back a word should be consistent with w. Move backwards one word. Usual is b and B
 --nnoremap W b

@@ -185,3 +185,6 @@ test -f $HOME/.zshrc.local && source $HOME/.zshrc.local
 
 # autojump
 if test -f /usr/share/autojump/autojump.sh; then . /usr/share/autojump/autojump.sh; fi
+
+# zoxide
+eval "$(zoxide init zsh)"

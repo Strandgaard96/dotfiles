@@ -27,6 +27,9 @@ curl -L -o $DWNLLDIR/fd-v8.7.0-i686-unknown-linux-musl.tar.gz https://github.com
 tar xzf $DWNLLDIR/fd-v8.7.0-i686-unknown-linux-musl.tar.gz --directory $INSTALL_DIR
 mv $INSTALL_DIR/fd-v8.7.0-i686-unknown-linux-musl/fd ~/bin
 
+# Get and install zoxide
+curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
+
 # TODO
 # Make something that also moves the manual pages for the stuff!!!!!!
 

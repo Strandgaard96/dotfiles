@@ -218,6 +218,10 @@ if test -f $HOME/.bashrc_local; then source $HOME/.bashrc_local; fi
 # autojump
 if test -f /usr/share/autojump/autojump.sh; then . /usr/share/autojump/autojump.sh; fi
 
+# zoxide
+eval "$(zoxide init bash)"
+
+
 # TODOS
 # Could be interesting to check this prompt
 # https://github.com/mathiasbynens/dotfiles/blob/main/.bash_prompt
