@@ -109,11 +109,9 @@ vim.keymap.set("n", "<Leader>oy", function()
 	f:close()
 end, { desc = "Yank OSC52" })
 
-<<<<<<< HEAD
 ---------------------
 ---- ETC -----
 ---------------------
-=======
 -- Maintain the cursor position when yanking a visual selection
 -- http://ddrscott.github.io/blog/2016/yank-without-jank/
 map("v", "y", "myy`y", { noremap = true, desc = "Maintain the cursor position when yanking a visual selection" })
@@ -126,10 +124,10 @@ map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
 
 -- Floating terminal keybinds
 map("n", "<leader>ft", function()
-Util.float_term(nil, { cwd = Util.get_root() })
+	Util.float_term(nil, { cwd = Util.get_root() })
 end, { desc = "Terminal (root dir)" })
 map("n", "<leader>fT", function()
-Util.float_term()
+	Util.float_term()
 end, { desc = "Terminal (cwd)" })
 map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 
@@ -149,6 +147,11 @@ vim.api.nvim_set_keymap(
 map("n", "<leader>su", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 --Make file exectuable. nice.
 map("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+
+-- Delete without yank
+map("n", "d", '"_d', { noremap = true, desc = "Delete without yank" })
+map("n", "D", '"_D', { noremap = true, desc = "Delete without tank" })
+map("v", "d", '"_d', { noremap = true, desc = "Delete without yank" })
 
 -- Reselect visual selection after indenting # Neat
 map("v", "<", "<gv", { noremap = true, desc = "Reselect when indenting" })

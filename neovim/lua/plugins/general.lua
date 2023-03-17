@@ -217,8 +217,6 @@ return {
   }
   ---Want to add--
   -- https://github.com/glepnir/dashboard-nvim
-  -- https://github.com/tpope/vim-fugitive -- This should replace git-gutter
   -- https://github.com/junegunn/vim-peekaboo
   -- https://github.com/preservim/vimux
-  -- https://github.com/nvim-lualine/lualine.nvim
 }
