@@ -1,4 +1,4 @@
-local Util = require "util"
+local Util = require("util")
 
 return {
 
@@ -7,12 +7,11 @@ return {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
     dependencies = { 'nvim-lua/plenary.nvim' },
-    version = '*', -- telescope did only one release, so use HEAD for now
+    version = false, -- telescope did only one release, so use HEAD for now
     keys = {
       { "<leader>,",       "<cmd>Telescope buffers show_all_buffers=true<cr>",    desc = "Switch Buffer" },
       { "<leader>/",       Util.telescope("live_grep"),                              desc = "Find in Files (Grep)" },
       { "<leader>:",       "<cmd>Telescope command_history<cr>",                  desc = "Command History" },
-      { "<leader><space>", Util.telescope("files"),                                  desc = "Find Files (root dir)" },
       -- find
       { "<leader>sab",      "<cmd>Telescope buffers<cr>",                          desc = "Buffers" },
       { "<leader>sf",      Util.telescope("files"),                                  desc = "Find Files (root dir)" },
