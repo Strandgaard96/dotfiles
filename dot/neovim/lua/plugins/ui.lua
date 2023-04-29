@@ -85,13 +85,13 @@ return {
 		"nvim-neo-tree/neo-tree.nvim",
 		cmd = "Neotree",
 		keys = {
-		      {
-        "<leader>fe",
-        function()
-          require("neo-tree.command").execute({ toggle = true, dir = require("util").get_root() })
-        end,
-        desc = "Explorer NeoTree (root dir)",
-      },
+			{
+				"<leader>fe",
+				function()
+					require("neo-tree.command").execute({ toggle = true, dir = require("util").get_root() })
+				end,
+				desc = "Explorer NeoTree (root dir)",
+			},
 			{
 				"<leader>fE",
 				function()
@@ -134,6 +134,62 @@ return {
 		},
 	},
 
+	-- https://github.com/qpkorr/vim-bufkill To prevent the buffer close issue
+	{
+		"akinsho/bufferline.nvim",
+		event = "VeryLazy",
+		opts = {
+			options = {
+				diagnostics = "nvim_lsp",
+				always_show_bufferline = false,
+				offsets = {
+					{
+						filetype = "neo-tree",
+						text = "Neo-tree",
+						highlight = "Directory",
+						text_align = "left",
+					},
+				},
+			},
+		},
+	},
+	-- git signs
+	{
+		"lewis6991/gitsigns.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		opts = {
+			signs = {
+				add = { text = "▎" },
+				change = { text = "▎" },
+				delete = { text = "" },
+				topdelete = { text = "" },
+				changedelete = { text = "▎" },
+				untracked = { text = "▎" },
+			},
+			on_attach = function(buffer)
+				local gs = package.loaded.gitsigns
+
+				local function map(mode, l, r, desc)
+					vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
+				end
+
+        -- stylua: ignore start
+        map("n", "]h", gs.next_hunk, "Next Hunk")
+        map("n", "[h", gs.prev_hunk, "Prev Hunk")
+        map({ "n", "v" }, "<leader>ghs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
+        map({ "n", "v" }, "<leader>ghr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
+        map("n", "<leader>ghS", gs.stage_buffer, "Stage Buffer")
+        map("n", "<leader>ghu", gs.undo_stage_hunk, "Undo Stage Hunk")
+        map("n", "<leader>ghR", gs.reset_buffer, "Reset Buffer")
+        map("n", "<leader>ghp", gs.preview_hunk, "Preview Hunk")
+        map("n", "<leader>ghb", function() gs.blame_line({ full = true }) end, "Blame Line")
+        map("n", "<leader>ghd", gs.diffthis, "Diff This")
+        map("n", "<leader>ghD", function() gs.diffthis("~") end, "Diff This ~")
+        map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
+			end,
+		},
+	},
+
 	-- better vim.ui
 	{
 		"stevearc/dressing.nvim",
@@ -144,57 +200,52 @@ return {
 				require("lazy").load({ plugins = { "dressing.nvim" } })
 				return vim.ui.select(...)
 			end
-			---@diagnostic disable-next-line: duplicate-set-field
-			vim.ui.input = function(...)
-				require("lazy").load({ plugins = { "dressing.nvim" } })
-				return vim.ui.input(...)
-			end
 		end,
 	},
 
 	-- statusline
-  {
-    "nvim-lualine/lualine.nvim",
-    event = "VeryLazy",
-    opts = function(plugin)
-      local icons = require("config").icons
+	{
+		"nvim-lualine/lualine.nvim",
+		event = "VeryLazy",
+		opts = function(plugin)
+			local icons = require("config").icons
 
-      local function fg(name)
-        return function()
-          ---@type {foreground?:number}?
-          local hl = vim.api.nvim_get_hl_by_name(name, true)
-          return hl and hl.foreground and { fg = string.format("#%06x", hl.foreground) }
-        end
-      end
+			local function fg(name)
+				return function()
+					---@type {foreground?:number}?
+					local hl = vim.api.nvim_get_hl_by_name(name, true)
+					return hl and hl.foreground and { fg = string.format("#%06x", hl.foreground) }
+				end
+			end
 
-      return {
-        options = {
-          theme = "auto",
-          globalstatus = true,
-          disabled_filetypes = { statusline = { "dashboard", "lazy", "alpha" } },
-        },
-        sections = {
-          lualine_a = { "mode" },
-          lualine_b = { "branch" },
-          lualine_c = {
-            {
-              "diagnostics",
-              symbols = {
-                error = icons.diagnostics.Error,
-                warn = icons.diagnostics.Warn,
-                info = icons.diagnostics.Info,
-                hint = icons.diagnostics.Hint,
-              },
-            },
-            { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-            { "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" } },
+			return {
+				options = {
+					theme = "auto",
+					globalstatus = true,
+					disabled_filetypes = { statusline = { "dashboard", "lazy", "alpha" } },
+				},
+				sections = {
+					lualine_a = { "mode" },
+					lualine_b = { "branch" },
+					lualine_c = {
+						{
+							"diagnostics",
+							symbols = {
+								error = icons.diagnostics.Error,
+								warn = icons.diagnostics.Warn,
+								info = icons.diagnostics.Info,
+								hint = icons.diagnostics.Hint,
+							},
+						},
+						{ "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+						{ "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" } },
             -- stylua: ignore
             {
               function() return require("nvim-navic").get_location() end,
               cond = function() return package.loaded["nvim-navic"] and require("nvim-navic").is_available() end,
             },
-          },
-          lualine_x = {
+					},
+					lualine_x = {
             -- stylua: ignore
             {
               function() return require("noice").api.status.command.get() end,
@@ -207,31 +258,32 @@ return {
               cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
               color = fg("Constant") ,
             },
-            { require("lazy.status").updates, cond = require("lazy.status").has_updates, color = fg("Special") },
-            {
-              "diff",
-              symbols = {
-                added = icons.git.added,
-                modified = icons.git.modified,
-                removed = icons.git.removed,
-              },
-            },
-          },
-          lualine_y = {
-            { "progress", separator = " ", padding = { left = 1, right = 0 } },
-            { "location", padding = { left = 0, right = 1 } },
-          },
-          lualine_z = {
-            function()
-              return " " .. os.date("%R")
-            end,
-          },
-        },
-        extensions = { "neo-tree" },
-      }
-    end,
-  },
-
-
-
+						{
+							require("lazy.status").updates,
+							cond = require("lazy.status").has_updates,
+							color = fg("Special"),
+						},
+						{
+							"diff",
+							symbols = {
+								added = icons.git.added,
+								modified = icons.git.modified,
+								removed = icons.git.removed,
+							},
+						},
+					},
+					lualine_y = {
+						{ "progress", separator = " ", padding = { left = 1, right = 0 } },
+						{ "location", padding = { left = 0, right = 1 } },
+					},
+					lualine_z = {
+						function()
+							return " " .. os.date("%R")
+						end,
+					},
+				},
+				extensions = { "neo-tree" },
+			}
+		end,
+	},
 }

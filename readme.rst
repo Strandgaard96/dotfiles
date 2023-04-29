@@ -50,7 +50,7 @@ Useful tools for linux commandline
 .. _bat: https://github.com/sharkdp/bat
 .. _exa: https://github.com/ogham/exa
 .. _fd : https://github.com/sharkdp/fd
-.. _autojump: https://github.com/wting/autojump
+.. _zoxide: https://github.com/ajeetdsouza/zoxide
 
 Relevant links
 _________________

@@ -1,7 +1,0 @@
-_tma() {
-    TMUX_SESSIONS=$(tmux ls -F '#S' | xargs)
-
-    local cur=${COMP_WORDS[COMP_CWORD]}
-    COMPREPLY=( $(compgen -W "$TMUX_SESSIONS" -- $cur) )
-}
-complete -F _tma tma

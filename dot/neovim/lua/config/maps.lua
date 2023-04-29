@@ -74,7 +74,6 @@ map("n", "<leader>d", '""dd', { noremap = true, desc = "Cut line" })
 map("v", "<leader>d", '""d', { noremap = true, desc = "Cut" })
 map("n", "<leader>D", '""D', { noremap = true, desc = "Cut rest of line" })
 
-
 -- Reselect visual selection after indenting # Neat
 map("v", "<", "<gv", { noremap = true, desc = "Reselect when indenting" })
 map("v", ">", ">gv", { noremap = true, desc = "Reselect when indenting" })
@@ -84,11 +83,6 @@ map("v", ">", ">gv", { noremap = true, desc = "Reselect when indenting" })
 map("v", "y", "myy`y", { noremap = true, desc = "Maintain the cursor position when yanking a visual selection" })
 
 -- Trouble key maps
-map("n", "<leader>xx", "<cmd>TroubleToggle<cr>", { silent = true, noremap = true })
-map("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", { silent = true, noremap = true })
-map("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", { silent = true, noremap = true })
-map("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>", { silent = true, noremap = true })
-map("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", { silent = true, noremap = true })
 map("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", { silent = true, noremap = true })
 
 -- save file
@@ -102,6 +96,8 @@ map("n", "<leader>fT", function()
 	Util.float_term()
 end, { desc = "Terminal (cwd)" })
 map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
+
+map("n", "<leader>ud", Util.toggle_diagnostics, { desc = "Toggle Diagnostics" })
 
 -- Unbind this immensly annoying keybind
 map("n", "q:", "<nop>", { noremap = true, desc = "Quit on mistype" })
