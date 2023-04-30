@@ -4,7 +4,7 @@
 return {
 
 	"MattesGroeger/vim-bookmarks", -- Easy bookmark shortcuts
-	"norcalli/nvim-colorizer.lua",
+	{ "norcalli/nvim-colorizer.lua", config = true },
 	--'chaoren/vim-wordmotion',      -- Better word motion
 
 	{

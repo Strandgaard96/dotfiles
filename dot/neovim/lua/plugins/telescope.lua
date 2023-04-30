@@ -27,8 +27,8 @@ return {
 			{ "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
 			-- find
 			{ "<leader>sab", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
-			{ "<leader>srf", Util.telescope("files"), desc = "Find Files (root dir)" },
-			{ "<leader>sf", Util.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
+			{ "<leader>srf", Util.telescope("files", { cwd = false }), desc = "Find Files (root dir)" },
+			{ "<leader>sf", Util.telescope("files"), desc = "Find Files (cwd)" },
 			{ "<leader>sre", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
 			-- git
 			{ "<leader>sgc", "<cmd>Telescope git_commits<CR>", desc = "commits" },

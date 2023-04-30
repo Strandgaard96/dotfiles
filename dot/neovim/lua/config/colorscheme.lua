@@ -13,6 +13,7 @@ require("tokyonight").setup({
 	on_colors = function(colors)
 		colors.hint = colors.orange
 		colors.error = "#ff0000"
+		colors.border = "#565f89" -- Set the window split line color!!
 	end,
 })
 

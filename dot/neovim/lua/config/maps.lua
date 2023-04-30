@@ -41,13 +41,30 @@ map("n", "bd", ":bdelete<cr>", { noremap = true })
 map("n", "<Tab>", ":bnext<cr>", { noremap = true })
 map("n", "<S-Tab>", ":bprevious<cr>", { noremap = true })
 
--- Yank settings
--- Send yank register zero to ocs52
-map("n", "<Leader>y", function()
-	local content = vim.fn.getreg("0")
-	local escape = vim.fn.system("yank", content)
-	vim.fn.writefile({ escape }, "/dev/tty", "b")
-end, { desc = "Yank OSC52" })
+-- vim script code from https://sunaku.github.io/tmux-yank-osc52.html.
+vim.api.nvim_exec(
+	[[
+" copy to attached terminal using the yank(1) script:
+" https://github.com/sunaku/home/blob/master/bin/yank
+function! Yank(text) abort
+  let escape = system('yank', a:text)
+  if v:shell_error
+    echoerr escape
+  else
+    call writefile([escape], '/dev/tty', 'b')
+  endif
+endfunction
+noremap <silent> <Leader>y y:<C-U>call Yank(@0)<CR>
+
+" automatically run yank(1) whenever yanking in Vim
+" (this snippet was contributed by Larry Sanderson)
+function! CopyYank() abort
+  call Yank(join(v:event.regcontents, "\n"))
+endfunction
+autocmd TextYankPost * call CopyYank()
+]],
+	false
+)
 
 -- Useful stuff for copying stuf between vim sessions.
 -- Copy the current visual slection to ~/.vbuf
@@ -68,11 +85,16 @@ map("n", "<Leader>p", ":set invpaste<cr>", { desc = "Toggle pastemode" }) -- for
 
 -- Start spelling mode
 map("n", "<Leader>z", ":set spell!<cr>", { desc = "Toggle spellmode" })
+--
+-- Delete without yank
+map("n", "d", '"_d', { noremap = true, desc = "Delete without yank" })
+map("n", "D", '"_D', { noremap = true, desc = "Delete without tank" })
+map("v", "d", '"_d', { noremap = true, desc = "Delete without yank" })
 
 -- Cut commands
-map("n", "<leader>d", '""dd', { noremap = true, desc = "Cut line" })
-map("v", "<leader>d", '""d', { noremap = true, desc = "Cut" })
-map("n", "<leader>D", '""D', { noremap = true, desc = "Cut rest of line" })
+map("n", "<leader>d", "dd", { noremap = true, desc = "Cut line" })
+map("v", "<leader>d", "d", { noremap = true, desc = "Cut" })
+map("n", "<leader>D", "D", { noremap = true, desc = "Cut rest of line" })
 
 -- Reselect visual selection after indenting # Neat
 map("v", "<", "<gv", { noremap = true, desc = "Reselect when indenting" })
@@ -108,11 +130,6 @@ vim.api.nvim_set_keymap(
 	":lua require('neogen').generate()<CR>",
 	{ noremap = true, silent = true, desc = "Generate docstring" }
 )
-
--- Delete without yank
-map("n", "d", '"_d', { noremap = true, desc = "Delete without yank" })
-map("n", "D", '"_D', { noremap = true, desc = "Delete without tank" })
-map("v", "d", '"_d', { noremap = true, desc = "Delete without yank" })
 
 --" I feel like going back a word should be consistent with w. Move backwards one word. Usual is b and B
 --nnoremap W b

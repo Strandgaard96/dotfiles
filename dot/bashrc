@@ -142,6 +142,7 @@ PathFull="\W"
 NewLine="\n"
 Jobs="\j"
 
+a=#00FF
 # Run this to get the file curl -L https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh > ~/.bash_git
 # Source git file to have promp work
 if test -f $HOME/.bash_git; then source $HOME/.bash_git; fi

@@ -11,8 +11,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.runtimepath:prepend(lazypath)
 
--- Leader key. This is required to be here by lazy!
-vim.g.mapleader = ","
+require("config.base") -- Standard VIM settings, loaded before all the plugins.
 
 require("lazy").setup("plugins", {
 	git = {
@@ -32,7 +31,5 @@ require("lazy").setup("plugins", {
 		border = "rounded",
 	},
 })
-
-require("config.base") -- Standard VIM settings
 require("config.maps") -- Most key mappings
 require("config.colorscheme") -- Set colorscheme

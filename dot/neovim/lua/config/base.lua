@@ -19,8 +19,12 @@ vim.opt.smarttab = true
 vim.opt.softtabstop = 0
 vim.opt.tabstop = 4
 vim.opt.grepprg = "rg --vimgrep"
+vim.opt.termguicolors = true
 
-vim.opt.clipboard = "unnamed,unnamedplus"
+-- Leader key. This is required to be before lazy is loaded in top level init.lua
+vim.g.mapleader = ","
+
+vim.opt.clipboard = "unnamedplus"
 vim.opt.hlsearch = true -- highlight searched words
 vim.opt.ignorecase = true -- Case-insensitive searching
 vim.opt.lazyredraw = true -- will buffer screen updates instead of updating all the time.:help 'ttyfast'
@@ -70,6 +74,14 @@ vim.opt.spelllang = "en"
 vim.opt.spellsuggest = "best,10" -- show only the top 10 candidates
 
 vim.opt.autoread = true -- Update buffer if file has changed outside vim.
+--
+-- bookmark
+vim.api.nvim_exec(
+	[[
+let g:bookmark_sign = '•'
+]],
+	false
+)
 
 -- https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
 vim.api.nvim_exec(
@@ -169,11 +181,3 @@ vim.api.nvim_create_autocmd("FileType", {
 --vim.opt.ruler=true -- show the ruler
 -- See https://vimhelp.org/options.txt.html#%27statusline%27 for formatting explanation
 --vim.opt.rulerformat=[[=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)]]
-
--- bookmark
-vim.api.nvim_exec(
-	[[
-let g:bookmark_sign = '•'
-]],
-	false
-)
