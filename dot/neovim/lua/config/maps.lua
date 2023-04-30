@@ -65,6 +65,7 @@ autocmd TextYankPost * call CopyYank()
 ]],
 	false
 )
+
 -- Useful stuff for copying stuf between vim sessions.
 -- Copy the current visual slection to ~/.vbuf
 map("v", "<S-y>", ":w! ~/.vbuf<cr>")
@@ -94,12 +95,6 @@ map("v", "d", '"_d', { noremap = true, desc = "Delete without yank" })
 map("n", "<leader>d", "dd", { noremap = true, desc = "Cut line" })
 map("v", "<leader>d", "d", { noremap = true, desc = "Cut" })
 map("n", "<leader>D", "D", { noremap = true, desc = "Cut rest of line" })
-
--- Map movement keys to danish keyboard
-map("n", "æ", "l", { noremap = true, desc = "Move right" })
-map("n", "l", "k", { noremap = true, desc = "Move Up" })
-map("n", "k", "j", { noremap = true, desc = "Move Down" })
-map("n", "j", "h", { noremap = true, desc = "Move left" })
 
 -- Reselect visual selection after indenting # Neat
 map("v", "<", "<gv", { noremap = true, desc = "Reselect when indenting" })
@@ -135,11 +130,6 @@ vim.api.nvim_set_keymap(
 	":lua require('neogen').generate()<CR>",
 	{ noremap = true, silent = true, desc = "Generate docstring" }
 )
-
--- Delete without yank
-map("n", "d", '"_d', { noremap = true, desc = "Delete without yank" })
-map("n", "D", '"_D', { noremap = true, desc = "Delete without tank" })
-map("v", "d", '"_d', { noremap = true, desc = "Delete without yank" })
 
 --" I feel like going back a word should be consistent with w. Move backwards one word. Usual is b and B
 --nnoremap W b
