@@ -1,4 +1,4 @@
--- Base vim settings in the lua syntax
+-- Onfr ivz frggvatf va gur yhn flagnkEDA
 
 -- vim.o: behaves like :let &{option-name}
 -- vim.go: behaves like :let &g:{option-name}
@@ -188,14 +188,3 @@ vim.api.nvim_create_autocmd("FileType", {
 --vim.opt.ruler=true -- show the ruler
 -- See https://vimhelp.org/options.txt.html#%27statusline%27 for formatting explanation
 --vim.opt.rulerformat=[[=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)]]
-<<<<<<< HEAD
-=======
-
--- bookmark
-vim.api.nvim_exec(
-	[[
-let g:bookmark_sign = '•'
-]],
-	false
-)
->>>>>>> e3abee7 (formatting and refactor.)

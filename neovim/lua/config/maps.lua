@@ -76,6 +76,7 @@ map("n", "<Leader>p", ":set invpaste<cr>", { desc = "Toggle pastemode" }) -- for
 
 -- Start spelling mode
 map("n", "<Leader>z", ":set spell!<cr>", { desc = "Toggle spellmode" })
+
 -- Delete without yank
 map("n", "d", '"_d', { noremap = true, desc = "Delete without yank" })
 map("n", "D", '"_D', { noremap = true, desc = "Delete without tank" })
@@ -90,24 +91,6 @@ map("n", "<leader>D", "D", { noremap = true, desc = "Cut rest of line" })
 map("n", "<leader>d", '""dd', { noremap = true, desc = "Cut line" })
 map("v", "<leader>d", '""d', { noremap = true, desc = "Cut" })
 map("n", "<leader>D", '""D', { noremap = true, desc = "Cut rest of line" })
-
--- Map movement keys to danish keyboard
-map("n", "æ", "l", { noremap = true, desc = "Move right" })
-map("n", "l", "k", { noremap = true, desc = "Move Up" })
-map("n", "k", "j", { noremap = true, desc = "Move Down" })
-map("n", "j", "h", { noremap = true, desc = "Move left" })
-
-vim.keymap.set("n", "<Leader>oy", function()
-	local content = vim.fn.getreg("0")
-	-- local escape = vim.fn.system("yank", content)
-	-- local filename = vim.fn.expand('$HOME/.vbufb')
-	-- local file = assert(io.open(filename, "w"))
-	-- file:write(escape)
-	-- file:close()
-	local f = io.popen("yank", "w")
-	f:write(content)
-	f:close()
-end, { desc = "Yank OSC52" })
 
 ---------------------
 ---- ETC -----
