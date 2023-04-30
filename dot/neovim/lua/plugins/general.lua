@@ -4,7 +4,7 @@
 return {
 
 	"MattesGroeger/vim-bookmarks", -- Easy bookmark shortcuts
-	"ap/vim-css-color", -- Preview CSS Colors
+	"norcalli/nvim-colorizer.lua",
 	--'chaoren/vim-wordmotion',      -- Better word motion
 
 	{

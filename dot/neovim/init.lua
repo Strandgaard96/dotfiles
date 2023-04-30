@@ -28,6 +28,9 @@ require("lazy").setup("plugins", {
 		-- This needs to be set to false for older git versions!!!!! Eg remote clusters
 		filter = true,
 	},
+	ui = {
+		border = "rounded",
+	},
 })
 
 require("config.base") -- Standard VIM settings

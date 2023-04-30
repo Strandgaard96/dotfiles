@@ -6,7 +6,16 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
-		dependencies = { "nvim-lua/plenary.nvim" },
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			{
+				"nvim-telescope/telescope-fzf-native.nvim",
+				build = "make",
+				config = function()
+					require("telescope").load_extension("fzf")
+				end,
+			},
+		},
 		version = false, -- telescope did only one release, so use HEAD for now
 		keys = {
 			{ "<leader>,", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
@@ -18,12 +27,8 @@ return {
 			{ "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
 			-- find
 			{ "<leader>sab", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
-			{
-				"<leader>sf",
-				Util.telescope("files"),
-				desc = "Find Files (root dir)",
-			},
-			{ "<leader>srf", Util.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
+			{ "<leader>srf", Util.telescope("files"), desc = "Find Files (root dir)" },
+			{ "<leader>sf", Util.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
 			{ "<leader>sre", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
 			-- git
 			{ "<leader>sgc", "<cmd>Telescope git_commits<CR>", desc = "commits" },
@@ -130,17 +135,6 @@ return {
 					},
 				},
 			},
-		},
-	},
-
-	{
-		"telescope.nvim",
-		dependencies = {
-			"nvim-telescope/telescope-fzf-native.nvim",
-			build = "make",
-			config = function()
-				require("telescope").load_extension("fzf")
-			end,
 		},
 	},
 }
