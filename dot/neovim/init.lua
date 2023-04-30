@@ -36,4 +36,3 @@ require("lazy").setup("plugins", {
 require("config.base") -- Standard VIM settings
 require("config.maps") -- Most key mappings
 require("config.colorscheme") -- Set colorscheme
-require("config.ide")
