@@ -50,20 +50,14 @@ map("n", "<S-Tab>", ":bprevious<cr>", { noremap = true })
 ---- Copy Paste -----
 ---------------------
 
--- greatest remap ever. Paste over word. Preserve the paste.
-map("x", "<leader>p", [["_dP]])
 
--- Yank settings
--- Send yank register zero to ocs52
-map("n", "<Leader>y", function()
-	local content = vim.fn.getreg("0")
-	local escape = vim.fn.system("yank", content)
-	vim.fn.writefile({ escape }, "/dev/tty", "b")
-end, { desc = "Yank OSC52" })
-
--- next greatest remap ever : asbjornHaland
-map({ "n", "v" }, "<leader>y", [["+y]])
-map("n", "<leader>Y", [["+Y]])
+-- Useful stuff for copying stuf between vim sessions.
+-- Copy the current visual slection to ~/.vbuf
+map("v", "<S-y>", ":w! ~/.vbuf<cr>")
+-- Copy the current line to the buffer file if no visual selection
+map("n", "<S-y>", ":.w! ~/.vbuf<cr>")
+-- Paste the contents of the buffer file
+map("n", "<S-p>", ":r ~/.vbuf<cr>")
 
 -- Remove all white trails
 map("n", "<Leader>nw", [[:let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>]], { desc = "Remove whitespaces" })
@@ -87,10 +81,16 @@ map("n", "<leader>d", "dd", { noremap = true, desc = "Cut line" })
 map("v", "<leader>d", "d", { noremap = true, desc = "Cut" })
 map("n", "<leader>D", "D", { noremap = true, desc = "Cut rest of line" })
 
+<<<<<<< HEAD
 -- Cut commands
 map("n", "<leader>d", '""dd', { noremap = true, desc = "Cut line" })
 map("v", "<leader>d", '""d', { noremap = true, desc = "Cut" })
 map("n", "<leader>D", '""D', { noremap = true, desc = "Cut rest of line" })
+=======
+-- Reselect visual selection after indenting # Neat
+map("v", "<", "<gv", { noremap = true, desc = "Reselect when indenting" })
+map("v", ">", ">gv", { noremap = true, desc = "Reselect when indenting" })
+>>>>>>> f632355 (fix so it works on remote again)
 
 ---------------------
 ---- ETC -----
@@ -126,19 +126,6 @@ vim.api.nvim_set_keymap(
 	{ noremap = true, silent = true, desc = "Generate docstring" }
 )
 
--- Easier access to substitute.
-map("n", "<leader>su", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
---Make file exectuable. nice.
-map("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
-
--- Delete without yank
-map("n", "d", '"_d', { noremap = true, desc = "Delete without yank" })
-map("n", "D", '"_D', { noremap = true, desc = "Delete without tank" })
-map("v", "d", '"_d', { noremap = true, desc = "Delete without yank" })
-
--- Reselect visual selection after indenting # Neat
-map("v", "<", "<gv", { noremap = true, desc = "Reselect when indenting" })
-map("v", ">", ">gv", { noremap = true, desc = "Reselect when indenting" })
 
 -- Start spelling mode
 map("n", "<Leader>z", ":set spell!<cr>", { desc = "Toggle spellmode" })
