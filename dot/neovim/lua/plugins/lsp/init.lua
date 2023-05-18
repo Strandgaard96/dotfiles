@@ -50,6 +50,7 @@ return {
 			-- LSP Server Settings
 			---@type lspconfig.options
 			servers = {
+				ruff_lsp = {},
 				pyright = {},
 				lua_ls = {
 					-- mason = false, -- set to false if you don't want this server to be installed with mason
