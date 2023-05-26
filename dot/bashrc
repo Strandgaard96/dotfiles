@@ -172,6 +172,10 @@ case $HOSTNAME in
         export PS1="$Cyan\h$Color_Off $IBlue\W$Color_Off";;
 esac
 
+
+# Enable vim mode
+set -o vi
+
 # If this is on interactive node, change color
 if test ! -z $JOB_ID; then
     export PS1="$Red\h $IBlue\W$Color_Off"
