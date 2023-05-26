@@ -39,7 +39,8 @@ return {
 
 	{ "folke/which-key.nvim", config = true }, -- Show
 
-	--IDE like
+	"ojroques/nvim-osc52",
+
 	{ "windwp/nvim-autopairs", event = "VeryLazy", config = true }, --For auto creating closing bracket
 
 	-- Detect tabstop and shiftwidth automatically. Since i added this, i removed the functions doing this before.

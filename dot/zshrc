@@ -1,3 +1,4 @@
+
 #!/usr/bin/env zsh
 
 #zmodload zsh/zprof
@@ -115,22 +116,13 @@ esac
 # Remove rprompt on enter
 setopt TRANSIENT_RPROMPT
 
-# enable vim key
-bindkey -v
-
-export KEYTIMEOUT=1
-
-export VI_MODE_SET_CURSOR=true
-
-# Edit line in vim with ctrl-e:
-autoload edit-command-line; zle -N edit-command-line
-bindkey '^e' edit-command-line
-
 # Plugins
 plugins=(
     zsh-syntax-highlighting
     zsh-autosuggestions
+    vi-mode
 )
+VI_MODE_SET_CURSOR=true
 
 test -d $ZSH && source $ZSH/oh-my-zsh.sh
 
