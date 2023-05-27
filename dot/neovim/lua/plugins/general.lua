@@ -39,6 +39,8 @@ return {
 
 	{ "folke/which-key.nvim", config = true }, -- Show
 
+	"mbbill/undotree",
+
 	"ojroques/nvim-osc52",
 
 	{ "windwp/nvim-autopairs", event = "VeryLazy", config = true }, --For auto creating closing bracket
