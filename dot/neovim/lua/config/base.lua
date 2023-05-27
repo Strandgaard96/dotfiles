@@ -12,11 +12,11 @@
 -- Indent settings
 vim.opt.autoindent = true
 vim.opt.expandtab = true
-vim.opt.indentexpr = O
+--vim.opt.indentexpr = O
 vim.opt.shiftwidth = 4
 vim.opt.smartindent = true
 vim.opt.smarttab = true
-vim.opt.softtabstop = 0
+vim.opt.softtabstop = 4
 vim.opt.tabstop = 4
 vim.opt.grepprg = "rg --vimgrep"
 vim.opt.termguicolors = true
@@ -24,8 +24,9 @@ vim.opt.termguicolors = true
 -- Leader key. This is required to be before lazy is loaded in top level init.lua
 vim.g.mapleader = ","
 
-vim.opt.clipboard = "unnamedplus"
-vim.opt.hlsearch = true -- highlight searched words
+-- vim.opt.clipboard = "unnamedplus" i should strive to keep vim and system clipboard separate.
+vim.opt.hlsearch = false -- highlight searched words
+vim.opt.incsearch = true -- highlight searched words
 vim.opt.ignorecase = true -- Case-insensitive searching
 vim.opt.lazyredraw = true -- will buffer screen updates instead of updating all the time.:help 'ttyfast'
 vim.opt.list = true -- Highlight unwanted spaces
@@ -49,6 +50,12 @@ vim.opt.sidescroll = 1
 vim.opt.sidescrolloff = 15
 vim.opt.signcolumn = "yes:1" -- always show sign column (bookmarks, gitgutter,..)
 vim.opt.smartcase = true -- if a pattern contains an uppercase letter, it is case sensitive
+
+-- Undotree stuff
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.opt.undofile = true
 
 -- Some wildcard options
 vim.opt.wildmode = { "longest", "list", "full" }

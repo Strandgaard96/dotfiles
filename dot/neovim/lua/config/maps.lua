@@ -17,6 +17,15 @@ local function map(mode, lhs, rhs, opts)
 	end
 end
 
+---------------------
+---- NAVIGATION -----
+---------------------
+
+map("v", "J", ":m '>+1<CR>gv=gv")
+map("v", "K", ":m '<-2<CR>gv=gv")
+map("n", "<C-d>", "<C-d>zz")
+map("n", "<C-u>", "<C-u>zz")
+
 -- Better up and down allegedly
 map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -29,10 +38,6 @@ map("n", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result
 map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 
--- better indenting
-map("v", "<", "<gv")
-map("v", ">", ">gv")
-
 -- Navigate buffers
 -- Much like a browser, just tab between buffers
 map("n", "bn", ":bnext<cr>", { noremap = true })
@@ -41,31 +46,22 @@ map("n", "bd", ":bdelete<cr>", { noremap = true })
 map("n", "<Tab>", ":bnext<cr>", { noremap = true })
 map("n", "<S-Tab>", ":bprevious<cr>", { noremap = true })
 
+---------------------
+---- Copy Paste -----
+---------------------
+
+-- greatest remap ever. Paste over word. Preserve the paste.
+vim.keymap.set("x", "<leader>p", [["_dP]])
+
+-- next greatest remap ever : asbjornHaland
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
+vim.keymap.set("n", "<leader>Y", [["+Y]])
+
 -- OSC 52 keymaps
-vim.keymap.set("n", "<leader>c", require("osc52").copy_operator, { expr = true })
-vim.keymap.set("n", "<leader>cc", "<leader>c_", { remap = true })
-vim.keymap.set("v", "<leader>c", require("osc52").copy_visual)
+map("n", "<leader>c", require("osc52").copy_operator, { expr = true })
+map("n", "<leader>cc", "<leader>c_", { remap = true })
+map("v", "<leader>c", require("osc52").copy_visual)
 
--- Useful stuff for copying stuf between vim sessions.
--- Copy the current visual slection to ~/.vbuf
-map("v", "<S-y>", ":w! ~/.vbuf<cr>")
--- Copy the current line to the buffer file if no visual selection
-map("n", "<S-y>", ":.w! ~/.vbuf<cr>")
--- Paste the contents of the buffer file
-map("n", "<S-p>", ":r ~/.vbuf<cr>")
-
--- Remove all white trails
-map("n", "<Leader>nw", [[:let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>]], { desc = "Remove whitespaces" })
-
--- Format buffer based on isort and black. This func can be found in an lsp !
-map("n", "<Leader>nf", ":!format %<cr>", { silent = true, noremap = true, desc = "Format file" })
-
--- Use paste mode to prevent funcy paste for text copied outside of vim
-map("n", "<Leader>p", ":set invpaste<cr>", { desc = "Toggle pastemode" }) -- for that stackoverflow
-
--- Start spelling mode
-map("n", "<Leader>z", ":set spell!<cr>", { desc = "Toggle spellmode" })
---
 -- Delete without yank
 map("n", "d", '"_d', { noremap = true, desc = "Delete without yank" })
 map("n", "D", '"_D', { noremap = true, desc = "Delete without tank" })
@@ -76,9 +72,33 @@ map("n", "<leader>d", "dd", { noremap = true, desc = "Cut line" })
 map("v", "<leader>d", "d", { noremap = true, desc = "Cut" })
 map("n", "<leader>D", "D", { noremap = true, desc = "Cut rest of line" })
 
+---------------------
+---- ETC -----
+---------------------
+
+-- Unbind this immensly annoying keybind
+map("n", "q:", "<nop>", { noremap = true, desc = "Quit on mistype" })
+
+vim.api.nvim_set_keymap(
+	"n",
+	"<Leader>nd",
+	":lua require('neogen').generate()<CR>",
+	{ noremap = true, silent = true, desc = "Generate docstring" }
+)
+
+-- Easier access to substitute.
+map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+--Make file exectuable. nice.
+map("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+
 -- Reselect visual selection after indenting # Neat
 map("v", "<", "<gv", { noremap = true, desc = "Reselect when indenting" })
 map("v", ">", ">gv", { noremap = true, desc = "Reselect when indenting" })
+
+-- Start spelling mode
+map("n", "<Leader>z", ":set spell!<cr>", { desc = "Toggle spellmode" })
+-- Format buffer based on isort and black. This func can be found in an lsp !
+map("n", "<Leader>nf", ":!format %<cr>", { silent = true, noremap = true, desc = "Format file" })
 
 -- Maintain the cursor position when yanking a visual selection
 -- http://ddrscott.github.io/blog/2016/yank-without-jank/
@@ -100,21 +120,3 @@ end, { desc = "Terminal (cwd)" })
 map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 
 map("n", "<leader>ud", Util.toggle_diagnostics, { desc = "Toggle Diagnostics" })
-
--- Unbind this immensly annoying keybind
-map("n", "q:", "<nop>", { noremap = true, desc = "Quit on mistype" })
-
-vim.api.nvim_set_keymap(
-	"n",
-	"<Leader>nd",
-	":lua require('neogen').generate()<CR>",
-	{ noremap = true, silent = true, desc = "Generate docstring" }
-)
-
---" I feel like going back a word should be consistent with w. Move backwards one word. Usual is b and B
---nnoremap W b
---vnoremap W b-
-
---centered when jumping
---nnoremap n nzzzv
---nnoremap N Nzzzv
