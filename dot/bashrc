@@ -176,6 +176,24 @@ if test ! -z $JOB_ID; then
     export PS1="$Red\h $IBlue\W$Color_Off"
 fi
 
+if [ -z "$PS1NOGIT" ]
+then
+export PS1="$PS1"'$(git branch &>/dev/null;\
+if [ $? -eq 0 ]; then \
+  echo "$(echo `git status` | grep "nothing to commit" > /dev/null 2>&1; \
+  if [ "$?" -eq "0" ]; then \
+    # @4 - Clean repository - nothing to commit
+    echo "'$Green'"$(__git_ps1 " (%s)"); \
+  else \
+    # @5 - Changes to working tree
+    echo "'$Red'"$(__git_ps1 " {%s}"); \
+  fi)"; \
+fi)'
+
+fi
+
+
+
 export PS1='$(_conda_info)'$PS1"$Color_Off → "
 
 # If this is an xterm set the title to user@host:dir
