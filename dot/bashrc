@@ -174,7 +174,7 @@ esac
 
 
 # Enable vim mode
-set -o vi
+#set -o vi
 
 # If this is on interactive node, change color
 if test ! -z $JOB_ID; then
