@@ -32,13 +32,8 @@ set colored-stats on
 "\e[B": history-search-forward
 
 
-# macOS Option + Left/Right arrow keys to move the cursor wordwise
-"\e\e[C": forward-word
-"\e\e[D": backward-word
-
 # Do not autocomplete hidden files unless the pattern explicitly begins with a dot
 set match-hidden-files off
-
 
 # If there are more than 200 possible completions for a word, ask to show them all
 set completion-query-items 200

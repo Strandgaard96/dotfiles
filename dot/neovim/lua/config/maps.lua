@@ -51,16 +51,11 @@ map("n", "<S-Tab>", ":bprevious<cr>", { noremap = true })
 ---------------------
 
 -- greatest remap ever. Paste over word. Preserve the paste.
-vim.keymap.set("x", "<leader>p", [["_dP]])
+map("x", "<leader>p", [["_dP]])
 
 -- next greatest remap ever : asbjornHaland
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
-vim.keymap.set("n", "<leader>Y", [["+Y]])
-
--- OSC 52 keymaps
-map("n", "<leader>c", require("osc52").copy_operator, { expr = true })
-map("n", "<leader>cc", "<leader>c_", { remap = true })
-map("v", "<leader>c", require("osc52").copy_visual)
+map({ "n", "v" }, "<leader>y", [["+y]])
+map("n", "<leader>Y", [["+Y]])
 
 -- Delete without yank
 map("n", "d", '"_d', { noremap = true, desc = "Delete without yank" })

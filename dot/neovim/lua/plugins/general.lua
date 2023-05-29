@@ -41,7 +41,7 @@ return {
 
 	"mbbill/undotree",
 
-	"ojroques/nvim-osc52",
+	{ "ojroques/nvim-osc52", config = true },
 
 	{ "windwp/nvim-autopairs", event = "VeryLazy", config = true }, --For auto creating closing bracket
 
