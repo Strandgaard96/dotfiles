@@ -157,6 +157,8 @@ if test -f ~/.bash_prompt; then . ~/.bash_prompt; fi
 if test -f ~/.bash_functions; then . ~/.bash_functions; fi
 
 if test $TERM == "xterm"; then export TERM=xterm-256color; fi
+# Enable vim mode
+#set -o vi
 
 if [ -x /usr/bin/dircolors ]; then
 	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"

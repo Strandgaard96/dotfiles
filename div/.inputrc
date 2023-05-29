@@ -31,6 +31,8 @@ set colored-stats on
 "\e[A": history-search-backward
 "\e[B": history-search-forward
 
+"\e[1;5C": forward-word
+"\e[1;5D": backward-word
 
 # Do not autocomplete hidden files unless the pattern explicitly begins with a dot
 set match-hidden-files off
@@ -53,5 +55,3 @@ set input-meta on
 set output-meta on
 set convert-meta off
 
-# Use Alt/Meta + Delete to delete the preceding word
-"\e[3;3~": kill-word
