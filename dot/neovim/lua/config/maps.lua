@@ -67,6 +67,18 @@ map("n", "<leader>d", "dd", { noremap = true, desc = "Cut line" })
 map("v", "<leader>d", "d", { noremap = true, desc = "Cut" })
 map("n", "<leader>D", "D", { noremap = true, desc = "Cut rest of line" })
 
+vim.keymap.set("n", "<Leader>oy", function()
+	local content = vim.fn.getreg("0")
+	-- local escape = vim.fn.system("yank", content)
+	-- local filename = vim.fn.expand('$HOME/.vbufb')
+	-- local file = assert(io.open(filename, "w"))
+	-- file:write(escape)
+	-- file:close()
+	local f = io.popen("yank", "w")
+	f:write(content)
+	f:close()
+end, { desc = "Yank OSC52" })
+
 ---------------------
 ---- ETC -----
 ---------------------
@@ -115,3 +127,6 @@ end, { desc = "Terminal (cwd)" })
 map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 
 map("n", "<leader>ud", Util.toggle_diagnostics, { desc = "Toggle Diagnostics" })
+
+map("i", "<M-k>", "<ESC>:m .+1<cr>==gi", { noremap = true, desc = "Neat scroll map insert" })
+map("i", "<M-k>", "<ESC>:m .+1<cr>==gi", { noremap = true })

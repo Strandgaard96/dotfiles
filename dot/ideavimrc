@@ -1,0 +1,325 @@
+"" Source your .vimrc
+"source ~/.vimrc
+
+" Don't use Ex mode, use Q for formatting.
+map Q gq
+
+"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
+"" Map \r to the Reformat Code action
+"map \r <Action>(ReformatCode)
+
+"" Map <leader>d to start debug
+map <leader>d <Action>(Debug)
+
+"" .ideavimrc - magidc
+"" https://github.com/magidc/dotfiles/blob/master/.ideavimrc
+
+"" Settings ========================================================
+set scrolloff=10
+set number
+set relativenumber
+set showmode
+set showcmd
+set smartcase
+set commentary
+set incsearch
+set hlsearch
+set visualbell
+set clipboard+=unnamed
+set clipboard+=ideaput
+let mapleader = ","
+
+"" Choosing handlers in conflicting Intellij/IdeaVim keymaps =======
+
+""https://github.com/JetBrains/ideavim/blob/master/doc/sethandler.md
+sethandler <C-i> n-v-i:vim
+sethandler <C-o> n-v-i:vim
+sethandler <C-d> n-v-i:vim
+sethandler <C-u> n-v-i:vim
+sethandler <C-h> n-v-i:vim
+sethandler <C-j> n-v-i:vim
+sethandler <C-k> n-v-i:vim
+sethandler <C-l> n-v-i:vim
+
+"" Key mappings ====================================================
+" NORMAL MODE
+" Edit
+"Replace word with paste
+noremap <a-p> "_diwP
+
+" Neat way of moving lines around
+nnoremap <a-j> :m .+1<cr>==
+nnoremap <a-k> :m .-2<cr>==
+
+"Change function argument
+nmap <a-a> cia
+" Method text objects operation replacement
+nmap <a-s> daa
+
+nnoremap yim :action MethodUp<cr>f{vi{y
+nnoremap dim :action MethodUp<cr>f{vi{d
+nnoremap cim :action MethodUp<cr>f{vi{c
+nnoremap yam :action MethodUp<cr>v0Of{%y
+nnoremap dam :action MethodUp<cr>v0Of{%d
+nnoremap cam :action MethodUp<cr>v0Of{%c
+
+" Motions
+"nnoremap E ge
+nnoremap m ]m
+nnoremap M [m
+nnoremap H ^
+nnoremap L $
+nnoremap <C-o> :action Back<cr>
+nnoremap <C-i> :action Forward<cr>
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+nnoremap n nzz
+nnoremap N Nzz
+
+"This unsets the "last search pattern" register by hitting return
+nnoremap <CR> :noh<CR><CR>
+
+" Windowssymotionsymotion-s)-s)no and buffers (leader w)
+nnoremap <c-h> <c-w>h
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
+nnoremap <a-w> :action CloseAllEditorsButActive<cr>
+nnoremap <a-q> :action CloseContent<cr>
+nnoremap <a-t> :action NewScratchFile<cr>
+nnoremap <leader>wv :action SplitVertically<cr>
+nnoremap <leader>ws :action SplitHorizontally<cr>
+nnoremap <leader>wu :action Unsplit<cr>
+nnoremap <leader>wm :action MoveEditorToOppositeTabGroup<cr>
+nnoremap <Leader>wn :action EditSourceInNewWindow<CR>
+
+" Folds
+map | :action CollapseAllRegions<CR>
+map -- :action ExpandAllRegions<CR>
+
+" Macros and registers
+" Execute macro saved in 'q' register
+nnoremap qj @q
+
+" Finder (leader f)
+map <leader>ff :action GotoClass<cr>
+map <leader>fn :action GotoFile<cr>
+map <leader>fa :action GotoAction<cr>
+map <leader>fg :action FindInPath<cr>
+map <leader>sre :action RecentFiles<cr>
+map <leader>fm :action RecentLocations<cr>
+map <leader>fs :action GotoSymbol<cr>
+map <leader>fz :action Find<cr>
+map <leader>fr :action Replace<cr>
+map <leader>fR :action ReplaceInPath<cr>
+map <leader>fx :action PasteMultiple<cr>
+map <leader>ft :action ActivateTODOToolWindow<cr>
+
+" Views (leader v)
+map <leader>vf :action ActivateProjectToolWindow<cr>
+map <leader>vp :action ActivateProblemsViewToolWindow<cr>
+map <leader>vs :action ActivateStructureToolWindow<cr>
+map <leader>vt :action ActivateTerminalToolWindow<cr>
+map <leader>vv :action ActivateServicesToolWindow<cr>
+map <leader>vd :action ActivateDebugToolWindow<cr>
+map <leader>vq :action CloseActiveTab<cr>
+
+" Debug (leader d)
+nnoremap <leader>dr :action Run<cr>
+nnoremap <leader>dR :action ChooseRunConfiguration<cr>
+nnoremap <leader>dd :action Debug<cr>
+
+nnoremap <leader>dD :action ChooseDebugConfiguration<cr>
+nnoremap <leader>dk :action Stop<cr>
+nnoremap <leader>db :action ToggleLineBreakpoint<cr>
+nnoremap <leader>da :action XDebugger.MuteBreakpoints<cr>
+nnoremap <leader>dv :action StepOver<cr>
+nnoremap <leader>di :action StepInto<cr>
+nnoremap <leader>do :action StepOut<cr>
+nnoremap <leader>dc :action Resume<cr>
+map <leader>dx :action QuickEvaluateExpression<cr>
+map <leader>de :action EvaluateExpression<cr>
+map <leader>dw :action Debugger.AddToWatch<cr>
+
+" Code navigation (leader c)
+nnoremap <leader>cd :action GotoDeclaration<cr>
+nnoremap <leader>ct :action GotoTypeDeclaration<cr>
+nnoremap <leader>ci :action GotoImplementation<cr>
+nnoremap <leader>cs :action GotoSuperMethod<cr>
+nnoremap <leader>cr :action ShowUsages<cr>
+nnoremap <leader>cv :action QuickJavaDoc<cr>
+nnoremap <leader>ch :action CallHierarchy<CR>
+nnoremap <leader>cn :action ShowNavBar<CR>
+nnoremap <leader>cf :action FileStructurePopup<CR>
+
+" Refactoring (leader r)
+map <leader>re :action Refactorings.QuickListPopupAction<CR>
+map <leader>rn :action RenameElement<cr>
+map <leader>rv :action IntroduceVariable<cr>
+map <leader>rc :action IntroduceConstant<cr>
+map <leader>rf :action IntroduceField<cr>
+map <leader>rx :action ExtractMethod<cr>
+map <leader>rf :action ReformatCode<cr>
+map <leader>ro :action OptimizeImports<cr>
+map <leader>ri :action Inline<cr>
+map <leader>ra :action AnonymousToInner<cr>
+map <leader>rm :action Move<cr>
+
+" Source generation (leader s)
+nnoremap <leader>sc :action GenerateConstructor<cr>
+nnoremap <leader>sg :action GenerateGetterAndSetter<cr>
+nnoremap <leader>se :action GenerateEquals<cr>
+nnoremap <leader>sn :action NewClass<cr>
+
+" Errors and diagnostics (leader e)
+map <leader>en :action GotoNextError<cr>
+map <leader>ep :action GotoPreviousError<cr>
+
+" Display Modes (leader m)
+map <leader>md :action ToggleDistractionFreeMode<cr>
+map <leader>mz :action ToggleZenMode<cr>
+map <leader>mf :action ToggleFullScreen<cr>
+
+" INSERT MODE
+"Neeeeat remaps
+inoremap <a-j> <ESC>:m .+1<cr>==gi
+inoremap <a-k> <ESC>:m .-2<cr>==gi
+
+" VISUAL MODE
+" Easy visual indentation
+vnoremap < <gv
+vnoremap > >gv
+nnoremap + v
+vnoremap + :action EditorSelectWord<cr>
+vnoremap _ :action EditorUnSelectWord<cr>
+
+" Plugin Settings ==================================================
+set surround
+set highlightedyank
+set sneak
+set NERDTree
+set argtextobj
+set vim-multiple-cursors
+
+" Which-key settings
+set which-key
+" disable the timeout option
+set notimeout
+let g:WhichKey_FontSize = 16
+let g:WhichKey_CommandColor = "#41ead4"
+let g:WhichKey_PrefixColor = "#f335b2"
+let g:WhichKey_SortOrder = "by_key_prefix_first"
+
+let g:WhichKeyDesc_leader = "<leader> Leader key"
+let g:WhichKeyDesc_easymotion = "s Jump with Easymotion"
+let g:WhichKeyDesc_leader_deleteargument = "<leader>x Delete function argument"
+let g:WhichKeyDesc_leader_changeargument = "<leader>a Delete function argument"
+let g:WhichKeyDesc_leader_replacewithpaste = "<leader>p Replace with paste"
+let g:WhichKeyDesc_leader_changeparentheses = "<leader>/ Change inside parentheses"
+let g:WhichKeyDesc_leader_changequotes = "<leader>z Change inside quotes"
+let g:WhichKeyDesc_leader_changeword = "<leader>c Change whole word"
+let g:WhichKeyDesc_leader_newline = "<leader>o New line in normal mode"
+let g:WhichKeyDesc_leader_newprevline = "<leader>O New line before in normal mode"
+
+" Windows and buffers (leader w)
+let g:WhichKeyDesc_leader_window = "<leader>w Window actions"
+let g:WhichKeyDesc_window_splitvertical = "<leader>wv Split vertically"
+let g:WhichKeyDesc_window_splithorizontal = "<leader>ws Split horizontally"
+let g:WhichKeyDesc_window_splitundo = "<leader>wu Unsplit"
+let g:WhichKeyDesc_window_movetooppositetabgroup = "<leader>wm Move editor to opposite tab group"
+let g:WhichKeyDesc_window_editinnewwindow = "<leader>wn Edit in new window"
+
+" Folds
+let g:WhichKeyDesc_fold_collapseall = "| Collapse all folds"
+let g:WhichKeyDesc_fold_expandall = "-- Expand all folds"
+
+" Macros and registers
+let g:WhichKeyDesc_leader_executequickmacro = "<leader>q Execute macro stored in 'q' register"
+
+" Finder (leader f)
+let g:WhichKeyDesc_leader_finder = "<leader>f Finder actions"
+let g:WhichKeyDesc_finder_class = "<leader>ff Find class"
+let g:WhichKeyDesc_finder_actions = "<leader>fa Find actions"
+let g:WhichKeyDesc_finder_file = "<leader>fn Find files (Name)"
+let g:WhichKeyDesc_finder_grep = "<leader>fg Find in files (Grep)"
+let g:WhichKeyDesc_finder_history = "<leader>sre Find recent files (History)"
+let g:WhichKeyDesc_finder_location = "<leader>fm Find recent locations (Marks)"
+let g:WhichKeyDesc_finder_symbol = "<leader>fs Find symbol"
+let g:WhichKeyDesc_finder_find = "<leader>fz Find in current file"
+let g:WhichKeyDesc_finder_replace = "<leader>fr Find and replace in current file <Ctrl-r>"
+let g:WhichKeyDesc_finder_replaceinfiles = "<leader>fR Find and replace in files"
+let g:WhichKeyDesc_finder_clipboard = "<leader>fx Find in clipboard"
+let g:WhichKeyDesc_finder_todo = "<leader>ft Find in TODO list"
+
+" Views (leader v)
+let g:WhichKeyDesc_leader_views = "<leader>v View actions"
+let g:WhichKeyDesc_views_project = "<leader>vf Project view (Files)"
+let g:WhichKeyDesc_views_problems = "<leader>vp Problems and diganostics view"
+let g:WhichKeyDesc_views_structure = "<leader>vs Structure view"
+let g:WhichKeyDesc_views_terminal = "<leader>vt Terminal"
+let g:WhichKeyDesc_views_services = "<leader>vv Services view"
+let g:WhichKeyDesc_views_debug = "<leader>vd Debug view"
+let g:WhichKeyDesc_views_close = "<leader>vq Close view"
+
+" Debug (leader d)
+let g:WhichKeyDesc_leader_debug = "<leader>d Debug actions"
+let g:WhichKeyDesc_debug_run = "<leader>dr Run"
+let g:WhichKeyDesc_debug_chooserun = "<leader>dR Choose run"
+let g:WhichKeyDesc_debug_debug = "<leader>dd Debug"
+let g:WhichKeyDesc_debug_choosedebug = "<leader>dD Choose debug"
+let g:WhichKeyDesc_debug_stop = "<leader>dk Stop (Kill)"
+let g:WhichKeyDesc_debug_togglelinebreakpoint = "<leader>db Toggle breakpoint"
+let g:WhichKeyDesc_debug_muteallbreakpoints = "<leader>da Mute All breakpoints"
+let g:WhichKeyDesc_debug_stepover = "<leader>dv Step oVer"
+let g:WhichKeyDesc_debug_stepinto = "<leader>di Step into"
+let g:WhichKeyDesc_debug_stepout = "<leader>do Step Out"
+let g:WhichKeyDesc_debug_continue = "<leader>dc Continue"
+let g:WhichKeyDesc_debug_quickevaluate = "<leader>dx Evaluate selectec expression"
+let g:WhichKeyDesc_debug_evaluate = "<leader>de Evaluate expression"
+let g:WhichKeyDesc_debug_watch = "<leader>dw Add to watch"
+
+" Code navigation (leader c)
+let g:WhichKeyDesc_leader_code = "<leader>c Code actions"
+let g:WhichKeyDesc_code_gotodeclaration = "<leader>cd Go to declaration"
+let g:WhichKeyDesc_code_gototypedeclaration = "<leader>ct Go to type declaration"
+let g:WhichKeyDesc_code_gotoimplementation = "<leader>ci Go to implementation"
+let g:WhichKeyDesc_code_gotosupermethod = "<leader>cs Go to super method"
+let g:WhichKeyDesc_code_gotousages = "<leader>cr Show usages (References)"
+let g:WhichKeyDesc_code_doc = "<leader>cv Show docs (hooVer)"
+let g:WhichKeyDesc_code_callhierarchy = "<leader>ch Show call hierarchy"
+let g:WhichKeyDesc_code_navbar = "<leader>cn Show navigation bar"
+let g:WhichKeyDesc_code_filestructure = "<leader>cf Show file structure"
+
+" Refactoring (leader r)
+let g:WhichKeyDesc_leader_refactor = "<leader>r Refactoring actions"
+let g:WhichKeyDesc_refactor_showactions = "<leader>re Show actions"
+let g:WhichKeyDesc_refactor_renameelement = "<leader>rn Rename element"
+let g:WhichKeyDesc_refactor_introducevariable = "<leader>rv Introduce variable"
+let g:WhichKeyDesc_refactor_introduceconstant = "<leader>rc Introduce constant"
+let g:WhichKeyDesc_refactor_introducefield = "<leader>rf Introduce field"
+let g:WhichKeyDesc_refactor_extractmethod = "<leader>re Extract method"
+let g:WhichKeyDesc_refactor_formatcode = "<leader>rf Format code"
+let g:WhichKeyDesc_refactor_optimizeimports = "<leader>ro Optmize imports"
+let g:WhichKeyDesc_refactor_inline = "<leader>ri Inline"
+let g:WhichKeyDesc_refactor_anonymoustoinner = "<leader>ra Anonymous To inner"
+let g:WhichKeyDesc_refactor_move = "<leader>rm Move"
+
+" Source generation (leader s)
+let g:WhichKeyDesc_leader_source = "<leader>s Source generation actions"
+let g:WhichKeyDesc_source_constructor = "<leader>sc Generate constructor"
+let g:WhichKeyDesc_source_gettersetter = "<leader>sg Generate getters and setters"
+let g:WhichKeyDesc_source_equals = "<leader>se Generate equals and hashCode"
+let g:WhichKeyDesc_source_newclass = "<leader>sn New class"
+
+" Errors and diagnostics (leader e)
+let g:WhichKeyDesc_leader_error = "<leader>e Error and diagnostics actions"
+let g:WhichKeyDesc_error_next = "<leader>en Go to next error"
+let g:WhichKeyDesc_error_previous = "<leader>ep Go to previous error"
+
+" Git (leader g)
+
+" Display Modes (leader m)
+let g:WhichKeyDesc_leader_display = "<leader>m Display modes"
+let g:WhichKeyDesc_display_distractionfreemode = "<leader>md Toggle distraction free mode"
+let g:WhichKeyDesc_display_zenmode = "<leader>mz Toggle Zen mode"
+let g:WhichKeyDesc_display_fullscreen = "<leader>mf Toggle full screen"
