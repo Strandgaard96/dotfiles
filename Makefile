@@ -49,6 +49,12 @@ ${HOME}/.config/nvim: ${HOME}/.config
 ${HOME}/.ssh:
 	mkdir -p $@
 
+${HOME}/.config/i3status: ${HOME}/.config
+	mkdir $@
+
+${HOME}/.config/i3: ${HOME}/.config
+	mkdir $@
+
 directories: ${HOME}/bin ${HOME}/opt ${HOME}/.config/nvim
 
 # Executables
@@ -65,8 +71,6 @@ ${HOME}/opt/tmux-3.2a:
 	bash ./setup/tmux_tpm.sh
 	bash ./setup/tmux_plugins.sh
 
-${HOME}/bin/zsh:
-	bash ./setup/zsh_install.sh
 
 ${HOME}/.oh-my-zsh:
 	bash ./setup/zsh_ohmyzsh.sh
@@ -98,7 +102,7 @@ ${HOME}/.%:
 	# Symbolic lincs to the dotfiles in the repo
 	ln -s `pwd`/$< $@
 
-dotfiles_defaults: ${HOME}/.bashrc ${HOME}/.bash_profile ${HOME}/.bash_aliases ${HOME}/.bash_paths ${HOME}/.condarc ${HOME}/.gitconfig ${HOME}/.tmux.conf ${HOME}/.tmux-osx ${HOME}/.tmux-linux ${HOME}/.config/nvim/init.lua ${HOME}/.config/nvim/lua ${HOME}/.zshrc ${HOME}/.config/neofetch ${HOME}/.hushlogin
+dotfiles_defaults: ${HOME}/.bashrc ${HOME}/.bash_profile ${HOME}/.bash_aliases ${HOME}/.bash_paths ${HOME}/.condarc ${HOME}/.gitconfig ${HOME}/.tmux.conf ${HOME}/.tmux-osx ${HOME}/.tmux-linux ${HOME}/.config/nvim/init.lua ${HOME}/.config/nvim/lua ${HOME}/.config/neofetch ${HOME}/.hushlogin
 
 ${HOME}/.bash_aliases: ./dot/bash_aliases
 ${HOME}/.bash_paths: ./dot/bash_paths
@@ -110,23 +114,25 @@ ${HOME}/.hushlogin: ./dot/hushlogin
 ${HOME}/.tmux-linux: ./dot/tmux.linux.conf
 ${HOME}/.tmux-osx: ./dot/tmux.osx.conf
 ${HOME}/.tmux.conf: ./dot/tmux.conf
-${HOME}/.zshrc: ./dot/zshrc
 
 ${HOME}/.config/nvim/init.lua: ./dot/neovim/init.lua
 ${HOME}/.config/nvim/lua: ./dot/neovim/lua
-#${HOME}/.vsnip: ./dot/neovim/snippets
 
-dotfiles_deb: ${HOME}/.inputrc
+dotfiles_deb: ${HOME}/.inputrc ${HOME}/.Xresources ${HOME}/.config/dunstrc ${HOME}/.config/i3status/config ${HOME}/.i3/config
 
 ${HOME}/.inputrc: ./dot.deb/inputrc
+${HOME}/.Xresources: ./dot.deb/Xresources
+${HOME}/.config/dunstrc: ./dot.deb/dunstrc
+${HOME}/.config/i3status/config: ./dot.deb/i3status/config
+${HOME}/.config/i3/config: ./dot.deb/i3/config
 
 #
 ${HOME}/.fzf:
 	bash ./setup/fzf_setup.sh
-
+	bash .setup/setup_zoxide.sh
 # Meta
 
-install: dotfiles bin ${HOME}/opt/neovim ${HOME}/.fzf install_${OS} ${HOME}/opt/tmux-3.2a ${HOME}/bin/zsh ${HOME}/.oh-my-zsh
+install: dotfiles bin ${HOME}/opt/neovim ${HOME}/.fzf install_${OS} ${HOME}/opt/tmux-3.2a ${HOME}/.oh-my-zsh
 
 # tmux installation is troublesome and not needed on remotes anyway. So made new target for this
 install_remote: dotfiles bin ${HOME}/opt/neovim ${HOME}/.fzf install_${OS}
