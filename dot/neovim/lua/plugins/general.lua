@@ -39,6 +39,15 @@ return {
 
 	{ "folke/which-key.nvim", config = true }, -- Show
 
+	-- Lua
+	{
+		"folke/persistence.nvim",
+		event = "BufReadPre", -- this will only start session saving when an actual file was opened
+		opts = {
+			-- add any custom options here
+		},
+	},
+
 	"mbbill/undotree",
 
 	{ "ojroques/nvim-osc52", config = true },
