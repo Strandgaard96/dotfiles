@@ -43,19 +43,19 @@ ${HOME}/opt:
 ${HOME}/.config:
 	mkdir -p $@
 
-${HOME}/.config/nvim: ${HOME}/.config
+${HOME}/.config/nvim:
 	mkdir -p $@
 
 ${HOME}/.ssh:
 	mkdir -p $@
 
-${HOME}/.config/i3status: ${HOME}/.config
-	mkdir $@
+${HOME}/.config/i3status:
+	mkdir -p $@
 
-${HOME}/.config/i3: ${HOME}/.config
-	mkdir $@
+${HOME}/.config/i3:
+	mkdir -p $@
 
-directories: ${HOME}/bin ${HOME}/opt ${HOME}/.config/nvim
+directories: ${HOME}/bin ${HOME}/opt ${HOME}/.config ${HOME}/.config/i3status ${HOME}/.config/i3 ${HOME}/.config/nvim
 
 # Executables
 
@@ -67,7 +67,7 @@ ${HOME}/opt/neovim:
 	NEOVIM_SETUP=1
 
 ${HOME}/opt/tmux-3.2a:
-	bash ./setup/tmux_compile.sh 1> /dev/null
+	#bash ./setup/tmux_compile.sh 1> /dev/null
 	bash ./setup/tmux_tpm.sh
 	bash ./setup/tmux_plugins.sh
 
@@ -118,18 +118,17 @@ ${HOME}/.tmux.conf: ./dot/tmux.conf
 ${HOME}/.config/nvim/init.lua: ./dot/neovim/init.lua
 ${HOME}/.config/nvim/lua: ./dot/neovim/lua
 
-dotfiles_deb: ${HOME}/.inputrc ${HOME}/.Xresources ${HOME}/.config/dunstrc ${HOME}/.config/i3status/config ${HOME}/.i3/config
+dotfiles_deb: ${HOME}/.inputrc ${HOME}/.Xresources ${HOME}/.config/i3status/config ${HOME}/.config/i3/config
 
 ${HOME}/.inputrc: ./dot.deb/inputrc
 ${HOME}/.Xresources: ./dot.deb/Xresources
-${HOME}/.config/dunstrc: ./dot.deb/dunstrc
 ${HOME}/.config/i3status/config: ./dot.deb/i3status/config
 ${HOME}/.config/i3/config: ./dot.deb/i3/config
 
 #
 ${HOME}/.fzf:
 	bash ./setup/fzf_setup.sh
-	bash .setup/setup_zoxide.sh
+	-bash ./setup/setup_zoxide.sh
 # Meta
 
 install: dotfiles bin ${HOME}/opt/neovim ${HOME}/.fzf install_${OS} ${HOME}/opt/tmux-3.2a ${HOME}/.oh-my-zsh
@@ -141,6 +140,9 @@ install_remote: dotfiles bin ${HOME}/opt/neovim ${HOME}/.fzf install_${OS}
 
 install_apt:
 	sudo apt-get install $$(cat ./lists/packages.apt)
+
+install_deb:
+	@#
 
 install_binaries:
 	bash .setup/get_binaries.sh
