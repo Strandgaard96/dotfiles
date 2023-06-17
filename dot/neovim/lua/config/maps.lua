@@ -21,8 +21,8 @@ end
 ---- NAVIGATION -----
 ---------------------
 
-map("v", "K", ":m '<-2<CR>gv=gv")
 map("v", "J", ":m '>+1<CR>gv=gv")
+map("v", "K", ":m '<-2<CR>gv=gv")
 map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")
 
@@ -102,10 +102,10 @@ map("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 map("v", "<", "<gv", { noremap = true, desc = "Reselect when indenting" })
 map("v", ">", ">gv", { noremap = true, desc = "Reselect when indenting" })
 
+map("n", "leader", "<cmd>TroubleToggle lsp_references<cr>", { silent = true, noremap = true })
+
 -- Start spelling mode
 map("n", "<Leader>z", ":set spell!<cr>", { desc = "Toggle spellmode" })
--- Format buffer based on isort and black. This func can be found in an lsp !
-map("n", "<Leader>nf", ":!format %<cr>", { silent = true, noremap = true, desc = "Format file" })
 
 -- Maintain the cursor position when yanking a visual selection
 -- http://ddrscott.github.io/blog/2016/yank-without-jank/
@@ -124,6 +124,7 @@ end, { desc = "Terminal (root dir)" })
 map("n", "<leader>fT", function()
 	Util.float_term()
 end, { desc = "Terminal (cwd)" })
+--Normal mode in terminal
 map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 
 map("n", "<leader>ud", Util.toggle_diagnostics, { desc = "Toggle Diagnostics" })

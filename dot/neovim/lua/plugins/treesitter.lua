@@ -75,6 +75,9 @@ return {
 						["if"] = "@function.inner",
 						["ac"] = "@class.outer",
 						["ic"] = "@class.inner",
+						["ar"] = "@assignment.rhs",
+						["a="] = "@assignment.outer",
+						["al"] = "@assignment.lhs",
 					},
 				},
 				move = {
