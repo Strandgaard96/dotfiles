@@ -33,3 +33,5 @@ require("lazy").setup("plugins", {
 })
 require("config.maps") -- Most key mappings
 require("config.colorscheme") -- Set colorscheme
+-- Borders for LspInfo winodw
+require('lspconfig.ui.windows').default_options.border = 'single'

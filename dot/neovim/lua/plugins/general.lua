@@ -42,7 +42,7 @@ return {
 	-- Lua
 	{
 		"folke/persistence.nvim",
-		event = "BufReadPre", -- this will only start session saving when an actual file was opened
+		event = "BufReadPre", -- this will only start session saving when an actual file was openeddash
 		opts = {
 			-- add any custom options here
 		},

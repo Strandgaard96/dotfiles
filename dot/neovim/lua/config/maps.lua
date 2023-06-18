@@ -102,17 +102,12 @@ map("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 map("v", "<", "<gv", { noremap = true, desc = "Reselect when indenting" })
 map("v", ">", ">gv", { noremap = true, desc = "Reselect when indenting" })
 
-map("n", "leader", "<cmd>TroubleToggle lsp_references<cr>", { silent = true, noremap = true })
-
 -- Start spelling mode
 map("n", "<Leader>z", ":set spell!<cr>", { desc = "Toggle spellmode" })
 
 -- Maintain the cursor position when yanking a visual selection
 -- http://ddrscott.github.io/blog/2016/yank-without-jank/
 map("v", "y", "myy`y", { noremap = true, desc = "Maintain the cursor position when yanking a visual selection" })
-
--- Trouble key maps
-map("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", { silent = true, noremap = true })
 
 -- save file
 map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
@@ -129,5 +124,13 @@ map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 
 map("n", "<leader>ud", Util.toggle_diagnostics, { desc = "Toggle Diagnostics" })
 
+-- Scrolling lines in insert mode
 map("i", "<M-k>", "<ESC>:m .+1<cr>==gi", { noremap = true, desc = "Neat scroll map insert" })
 map("i", "<M-k>", "<ESC>:m .+1<cr>==gi", { noremap = true })
+
+-- Peristence
+-- -- restore the session for the current directory
+vim.api.nvim_set_keymap("n", "<leader>qs", [[<cmd>lua require("persistence").load()<cr>]], {})
+
+-- restore the last session
+vim.api.nvim_set_keymap("n", "<leader>ql", [[<cmd>lua require("persistence").load({ last = true })<cr>]], {})
