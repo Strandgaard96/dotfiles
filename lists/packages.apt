@@ -1,5 +1,6 @@
 i3
 bat
+tmux
 exa
 polybar
 tree
@@ -8,7 +9,6 @@ curl
 zsh
 xclip
 xsel
+fd-find
 rofi
 ripgrep
-fd
-zoxide

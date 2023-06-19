@@ -124,6 +124,10 @@ plugins=(
 )
 VI_MODE_SET_CURSOR=true
 
+# Edit line in vim with ctrl-e:
+autoload edit-command-line; zle -N edit-command-line
+bindkey '^e' edit-command-line
+
 test -d $ZSH && source $ZSH/oh-my-zsh.sh
 
 export LC_ALL=en_US.UTF-8
@@ -180,3 +184,6 @@ if test -f /usr/share/autojump/autojump.sh; then . /usr/share/autojump/autojump.
 
 # zoxide
 eval "$(zoxide init zsh)"
+
+# Only works on zsh
+#matrix() { echo -e "\e[1;40m" ; clear ; while :; do echo $LINES $COLUMNS $(( $RANDOM % $COLUMNS)) $(( $RANDOM % 72 )) ;sleep 0.05; done|awk '{ letters="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()"; c=$4;        letter=substr(letters,c,1);a[$3]=0;for (x in a) {o=a[x];a[x]=a[x]+1; printf "\033[%s;%sH\033[2;32m%s",o,x,letter; printf "\033[%s;%sH\033[1;37m%s\033[0;0H",a[x],x,letter;if (a[x] >= $1) { a[x]=0; } }}' }

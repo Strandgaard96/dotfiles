@@ -14,15 +14,21 @@ return {
 			local dashboard = require("alpha.themes.dashboard")
 			-- ASCII TEXT: https://github.com/glepnir/dashboard-nvim/wiki/Ascii-Header-Text
 			local logo = [[
-              ▀████▀▄▄              ▄█
-                █▀    ▀▀▄▄▄▄▄    ▄▄▀▀█
-        ▄        █          ▀▀▀▀▄  ▄▀
-       ▄▀ ▀▄      ▀▄              ▀▄▀
-      ▄▀    █     █▀   ▄█▀▄      ▄█
-      ▀▄     ▀▄  █     ▀██▀     ██▄█
-       ▀▄    ▄▀ █   ▄██▄   ▄  ▄  ▀▀ █
-        █  ▄▀  █    ▀██▀    ▀▀ ▀▀  ▄▀
-       █   █  █      ▄▄           ▄▀
+⠀⠀⢰⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⠆⠀⠀
+⠀⣄⠈⠻⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⠏⠀⣀⠀
+⠀⠘⣿⣦⡈⠻⠀⣄⠀⠀⠀⠀⠀⢀⣴⢸⠟⣡⣴⡿⠃⠀
+⠐⣶⣌⡻⢿⠰⣄⠻⣷⣦⡀⢀⣴⣿⠟⣠⣸⡿⢛⣡⡴⠂
+⠠⣈⠻⢿⡆⣀⠻⣷⡬⢋⣴⠹⢋⣵⡿⠟⠀⣶⣿⠟⢁⡀
+⠀⠹⣷⣤⡁⠸⣿⡎⣴⡿⢋⡄⡿⢋⣴⡿⠀⢩⣴⣿⠏⠀
+⠠⣤⣌⠙⠇⢷⣦⡁⢛⣴⡿⠃⣰⠟⣫⣴⠇⠼⠛⣁⣠⠄
+⠀⠹⠿⣷⡆⢈⡙⠃⡿⣫⡾⢇⢁⣾⠿⢋⡄⣴⣾⡿⠋⠀
+⠀⠳⣶⣌⡁⠸⢿⠀⣾⢟⣵⠎⠈⣤⣾⡿⠐⢉⣥⡶⠂⠀
+⠀⠠⣬⣙⠳⠸⣦⢈⣵⠟⣡⡞⠘⣋⣥⡶⠠⠿⢛⣁⠀⠀
+⠀⠀⠙⠿⢿⡀⣌⢘⡵⢟⣫⡄⠼⢟⣫⠅⣴⡿⠛⠁⠀⠀
+⠀⠀⠀⠰⣶⣦⡌⣨⠶⢛⡩⢠⡾⣿⡋⢀⣷⡶⠂⠀⠀⠀
+⠀⠀⠀⠀⢠⣭⢡⡴⢞⣻⢅⡷⠿⡛⢁⣩⣥⠄⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⣠⣵⠾⠟⠁⠐⠛⠛⠐⣛⣛⡁⠀⠀⠀⠀⠀
+⠀⠀⠀⠠⠚⠉⠁⠀⠀⠀⠀⠀⠀⠀⠈⠉⠛⠂⠀⠀⠀⠀
       ]]
 
 			dashboard.section.header.val = vim.split(logo, "\n")
@@ -31,6 +37,7 @@ return {
 				dashboard.button("n", " " .. " New file", ":ene <BAR> startinsert <CR>"),
 				dashboard.button("r", " " .. " Recent files", ":Telescope oldfiles <CR>"),
 				dashboard.button("g", " " .. " Find text", ":Telescope live_grep <CR>"),
+				dashboard.button("p", "P" .. " Open projects", ":Telescope projects <CR>"),
 				dashboard.button("c", " " .. " Config", ":e $MYVIMRC <CR>"),
 				dashboard.button("l", "L " .. " Lazy", ":Lazy<CR>"),
 				dashboard.button("q", " " .. " Quit", ":qa<CR>"),
