@@ -1,13 +1,9 @@
 "" Source your .vimrc
 "source ~/.vimrc
 
-" Standard vim mappings from my neovim ==========================================
-vmap K :m <-2<CR>gv=gv  
-vmap J :m >+1<CR>gv=gv  
-nnoremap <C-d> <C-d>zz
-nnoremap <C-u> <C-u>zz
-
-
+" Maintain the cursor position when yanking a visual selection
+" http://ddrscott.github.io/blog/2016/yank-without-jank/
+" map("v", "y", "myy`y", { noremap = true, desc = "Maintain the cursor position when yanking a visual selection" })
 
 
 "" IDE specific Key mappings ====================================================
@@ -33,6 +29,41 @@ set visualbell
 set clipboard+=unnamed
 set clipboard+=ideaput
 let mapleader = ","
+
+
+" Standard vim mappings from my neovim ==========================================
+vmap K :m '<-2<CR>gv=gv
+vmap J :m '>+1<CR>gv=gv
+nnoremap <C-d> <C-d>zz
+
+nmap <expr> <silent> j v:count == 0 ? 'gj' : 'j'
+nmap <expr> <silent> k v:count == 0 ? 'gk' : 'k'
+
+" -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
+" map("n", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
+" map("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
+" map("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
+" map("n", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
+" map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
+" map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
+
+" greatest remap ever. Paste over word. Preserve the paste.
+xmap <leader>p [["_P]]
+
+" Delete without yank
+nnoremap d "_d
+nnoremap D "_D
+vnoremap d "_d
+
+" Cut commands
+nnoremap <leader>d dd
+vnoremap <leader>d d
+nnoremap <leader>D D
+
+" Reselect visual selection after indenting # Neat
+vnoremap < <gv
+vnoremap > >gv
+
 
 "" Choosing handlers in conflicting Intellij/IdeaVim keymaps =======
 
@@ -88,22 +119,22 @@ map <leader>vv :action ActivateServicesToolWindow<cr>
 map <leader>vd :action ActivateDebugToolWindow<cr>
 map <leader>vq :action CloseActiveTab<cr>
 
-" Debug (leader d)
-nnoremap <leader>dr :action Run<cr>
-nnoremap <leader>dR :action ChooseRunConfiguration<cr>
-nnoremap <leader>dd :action Debug<cr>
+" Debug leader x)
+nnoremap <leader>xr :action Run<cr>
+nnoremap <leader>xR :action ChooseRunConfiguration<cr>
+nnoremap <leader>xd :action Debug<cr>
 
-nnoremap <leader>dD :action ChooseDebugConfiguration<cr>
-nnoremap <leader>dk :action Stop<cr>
-nnoremap <leader>db :action ToggleLineBreakpoint<cr>
-nnoremap <leader>da :action XDebugger.MuteBreakpoints<cr>
-nnoremap <leader>dv :action StepOver<cr>
-nnoremap <leader>di :action StepInto<cr>
-nnoremap <leader>do :action StepOut<cr>
-nnoremap <leader>dc :action Resume<cr>
-map <leader>dx :action QuickEvaluateExpression<cr>
-map <leader>de :action EvaluateExpression<cr>
-map <leader>dw :action Debugger.AddToWatch<cr>
+nnoremap <leader>xD :action ChooseDebugConfiguration<cr>
+nnoremap <leader>xk :action Stop<cr>
+nnoremap <leader>xb :action ToggleLineBreakpoint<cr>
+nnoremap <leader>xa :action XDebugger.MuteBreakpoints<cr>
+nnoremap <leader>xv :action StepOver<cr>
+nnoremap <leader>xi :action StepInto<cr>
+nnoremap <leader>xo :action StepOut<cr>
+nnoremap <leader>xc :action Resume<cr>
+map <leader>xx :action QuickEvaluateExpression<cr>
+map <leader>xe :action EvaluateExpression<cr>
+map <leader>xw :action Debugger.AddToWatch<cr>
 
 " Code navigation (leader c)
 nnoremap <leader>cd :action GotoDeclaration<cr>
@@ -216,22 +247,22 @@ let g:WhichKeyDesc_views_services = "<leader>vv Services view"
 let g:WhichKeyDesc_views_debug = "<leader>vd Debug view"
 let g:WhichKeyDesc_views_close = "<leader>vq Close view"
 
-" Debug (leader d)
-let g:WhichKeyDesc_leader_debug = "<leader>d Debug actions"
-let g:WhichKeyDesc_debug_run = "<leader>dr Run"
-let g:WhichKeyDesc_debug_chooserun = "<leader>dR Choose run"
-let g:WhichKeyDesc_debug_debug = "<leader>dd Debug"
-let g:WhichKeyDesc_debug_choosedebug = "<leader>dD Choose debug"
-let g:WhichKeyDesc_debug_stop = "<leader>dk Stop (Kill)"
-let g:WhichKeyDesc_debug_togglelinebreakpoint = "<leader>db Toggle breakpoint"
-let g:WhichKeyDesc_debug_muteallbreakpoints = "<leader>da Mute All breakpoints"
-let g:WhichKeyDesc_debug_stepover = "<leader>dv Step oVer"
-let g:WhichKeyDesc_debug_stepinto = "<leader>di Step into"
-let g:WhichKeyDesc_debug_stepout = "<leader>do Step Out"
-let g:WhichKeyDesc_debug_continue = "<leader>dc Continue"
-let g:WhichKeyDesc_debug_quickevaluate = "<leader>dx Evaluate selectec expression"
-let g:WhichKeyDesc_debug_evaluate = "<leader>de Evaluate expression"
-let g:WhichKeyDesc_debug_watch = "<leader>dw Add to watch"
+" Debug (leader x)
+let g:WhichKeyDesc_leader_debug = "<leader>x Debug actions"
+let g:WhichKeyDesc_debug_run = "<leader>xr Run"
+let g:WhichKeyDesc_debug_chooserun = "<leader>xR Choose run"
+let g:WhichKeyDesc_debug_debug = "<leader>xd Debug"
+let g:WhichKeyDesc_debug_choosedebug = "<leader>xD Choose debug"
+let g:WhichKeyDesc_debug_stop = "<leader>xk Stop (Kill)"
+let g:WhichKeyDesc_debug_togglelinebreakpoint = "<leader>xb Toggle breakpoint"
+let g:WhichKeyDesc_debug_muteallbreakpoints = "<leader>xa Mute All breakpoints"
+let g:WhichKeyDesc_debug_stepover = "<leader>xv Step oVer"
+let g:WhichKeyDesc_debug_stepinto = "<leader>xi Step into"
+let g:WhichKeyDesc_debug_stepout = "<leader>xo Step Out"
+let g:WhichKeyDesc_debug_continue = "<leader>xc Continue"
+let g:WhichKeyDesc_debug_quickevaluate = "<leader>xx Evaluate selectec expression"
+let g:WhichKeyDesc_debug_evaluate = "<leader>xe Evaluate expression"
+let g:WhichKeyDesc_debug_watch = "<leader>xw Add to watch"
 
 " Code navigation (leader c)
 let g:WhichKeyDesc_leader_code = "<leader>c Code actions"
