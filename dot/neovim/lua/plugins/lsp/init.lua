@@ -33,8 +33,8 @@ return {
 			diagnostics = {
 				underline = false,
 				update_in_insert = false,
-				virtual_text = { spacing = 4, prefix = "●" },
-				-- virtual_text = false, --Reenable this if you want inline diagnostics
+				-- virtual_text = { spacing = 4, prefix = "●" },
+				virtual_text = false, --Reenable this if you want inline diagnostics
 				signs = false,
 				severity_sort = true,
 			},
