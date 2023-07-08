@@ -66,10 +66,10 @@ ${HOME}/opt/neovim:
 	bash setup.$(OS)/nvim_setup.sh
 	NEOVIM_SETUP=1
 
-${HOME}/opt/tmux-3.2a:
-	#bash ./setup/tmux_compile.sh 1> /dev/null
-	bash ./setup/tmux_tpm.sh
-	bash ./setup/tmux_plugins.sh
+# ${HOME}/opt/tmux-3.2a:
+# 	#bash ./setup/tmux_compile.sh 1> /dev/null
+# 	bash ./setup/tmux_tpm.sh
+# 	bash ./setup/tmux_plugins.sh
 
 
 ${HOME}/.oh-my-zsh:
@@ -128,13 +128,13 @@ ${HOME}/.config/i3/config: ./dot.deb/i3/config
 #
 ${HOME}/.fzf:
 	bash ./setup/fzf_setup.sh
-	-bash ./setup/setup_zoxide.sh
+	bash ./setup/setup_zoxide.sh
 # Meta
 
-install: dotfiles bin ${HOME}/opt/neovim ${HOME}/.fzf install_${OS} ${HOME}/opt/tmux-3.2a ${HOME}/.oh-my-zsh
+install: dotfiles bin ${HOME}/opt/neovim install_binaries ${HOME}/.fzf install_${OS} ${HOME}/.oh-my-zsh
 
 # tmux installation is troublesome and not needed on remotes anyway. So made new target for this
-install_remote: dotfiles bin ${HOME}/opt/neovim ${HOME}/.fzf install_${OS}
+install_remote: dotfiles bin ${HOME}/opt/neovim ${HOME}/.fzf install_${OS} install_binaries
 # Guide for setting up zsh
 # https://www.drewsilcock.co.uk/compiling-zsh
 
@@ -145,7 +145,7 @@ install_deb:
 	@#
 
 install_binaries:
-	bash .setup/get_binaries.sh
+	bash ./setup/get_binaries.sh
 
 install_fonts:
 	bash ./fonts/setup_mononoki.sh

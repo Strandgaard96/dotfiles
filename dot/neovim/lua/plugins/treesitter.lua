@@ -40,7 +40,6 @@ return {
 				"c",
 				"html",
 				"python",
-				"help",
 				"json",
 				"lua",
 				"luadoc",

@@ -15,7 +15,7 @@ return {
 			{
 				"hrsh7th/cmp-nvim-lsp",
 				cond = function()
-					return require("util").has("nvim-cmp")
+					require("util").has("cmp")
 				end,
 			},
 		},
@@ -52,6 +52,7 @@ return {
 			servers = {
 				ruff_lsp = {},
 				pyright = {},
+				stylua = {},
 				lua_ls = {
 					-- mason = false, -- set to false if you don't want this server to be installed with mason
 					settings = {
