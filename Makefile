@@ -55,6 +55,7 @@ fonts:
 install: dotfiles neovim ${HOME}/.fzf ${HOME}/.oh-my-zsh install_apt fonts
 
 install_remote: dotfiles neovim binaries ${HOME}/.fzf
+	#
 # Guide for setting up zsh
 # https://www.drewsilcock.co.uk/compiling-zsh
 
