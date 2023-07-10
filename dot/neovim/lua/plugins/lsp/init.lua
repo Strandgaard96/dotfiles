@@ -9,13 +9,13 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			{ "folke/neoconf.nvim", cmd = "Neoconf", config = true },
-			{ "folke/neodev.nvim", opts = { experimental = { pathStrict = true } } },
+			{ "folke/neodev.nvim", opts = {} },
 			"mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 			{
 				"hrsh7th/cmp-nvim-lsp",
 				cond = function()
-					require("util").has("cmp")
+					return require("util").has("nvim-cmp")
 				end,
 			},
 		},
@@ -50,7 +50,7 @@ return {
 			-- LSP Server Settings
 			---@type lspconfig.options
 			servers = {
-				ruff_lsp = {},
+				-- ruff_lsp = {},
 				pyright = {},
 				stylua = {},
 				lua_ls = {

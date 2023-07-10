@@ -29,7 +29,6 @@ return {
       { "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
     },
 	},
-
 	-- auto completion
 	{
 		"hrsh7th/nvim-cmp",
@@ -42,7 +41,9 @@ return {
 			"saadparwaiz1/cmp_luasnip",
 		},
 		opts = function()
+			vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
 			local cmp = require("cmp")
+			local defaults = require("cmp.config.default")()
 			return {
 				completion = {
 					completeopt = "menu,menuone,noinsert",
@@ -71,16 +72,21 @@ return {
 					{ name = "buffer" },
 					{ name = "path" },
 				}),
-				window = {
-					-- These to set borders on the snippet ui.
-					completion = cmp.config.window.bordered(),
-					documentation = cmp.config.window.bordered(),
+				formatting = {
+					format = function(_, item)
+						local icons = require("lazyvim.config").icons.kinds
+						if icons[item.kind] then
+							item.kind = icons[item.kind] .. item.kind
+						end
+						return item
+					end,
 				},
 				experimental = {
 					ghost_text = {
-						hl_group = "LspCodeLens",
+						hl_group = "CmpGhostText",
 					},
 				},
+				sorting = defaults.sorting,
 			}
 		end,
 	},
