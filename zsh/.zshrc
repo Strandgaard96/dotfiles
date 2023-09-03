@@ -161,7 +161,7 @@ if test -f ~/.bash_aliases; then . ~/.bash_aliases; fi
 # export PATH="$HOME/opt/anaconda3/bin:$PATH"  # commented out by conda initialize
 
 # fuzzy search
-# test -f ~/.fzf.zsh && source ~/.fzf.zsh
+test -f ~/.fzf.zsh && source ~/.fzf.zsh
 
 # Silver surver init for fzf. Currently not used.  
 if type ag &> /dev/null; then
