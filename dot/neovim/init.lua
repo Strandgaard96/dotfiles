@@ -4,8 +4,8 @@ if not vim.loop.fs_stat(lazypath) then
 		"git",
 		"clone",
 		"--filter=blob:none",
-		"--single-branch",
 		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable",
 		lazypath,
 	})
 end
@@ -34,4 +34,4 @@ require("lazy").setup("plugins", {
 require("config.maps") -- Most key mappings
 require("config.colorscheme") -- Set colorscheme
 -- Borders for LspInfo winodw
-require('lspconfig.ui.windows').default_options.border = 'single'
+require("lspconfig.ui.windows").default_options.border = "single"
