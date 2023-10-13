@@ -55,7 +55,7 @@ return {
 			servers = {
 				-- ruff_lsp = {},
 				pyright = {},
-				stylua = {},
+				-- stylua = {},
 				lua_ls = {
 					-- mason = false, -- set to false if you don't want this server to be installed with mason
 					settings = {
