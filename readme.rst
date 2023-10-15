@@ -13,23 +13,24 @@ A makefile is used to create all relevant symlinks and directories. Also downloa
 
     # fresh installation on new system
 
-    make install_apt # only for systems you have sudo. Installs all packages in list file
+    make install_apt # only for systems you have sudo. Installs all packages via apt-get. 
+
     make install # Compile and download dependencies (such as tmux and neovim)
 
-    # Install without tmux. To be used on remote to prevent compiler issues
-    make install_remote # Compile and download dependencies (such as zsh and neovim)
+    # Install without certain features. To be used on remote to prevent compiler and version issues that can not be fixed without sudo.
+    make install_remote
 
 
-Testing
------
-I have made a dockerfile that works for testing install_remote. Tmux and zsh is still trouble sometimes but the image can still be used to test the basic dotfiles and neovim.
-docker-test.sh creates a docker image and then a container based on this image.
-To test, ensure docker is installed and that the docker deamon is dunning. Then run the following in bash
-
-.. code-block:: bash
-
-    # Setup docker env
-    ./docker-test.sh
+.. Testing
+.. -----
+.. I have made a dockerfile that works for testing install_remote. Tmux and zsh is still trouble sometimes but the image can still be used to test the basic dotfiles and neovim.
+.. docker-test.sh creates a docker image and then a container based on this image.
+.. To test, ensure docker is installed and that the docker deamon is dunning. Then run the following in bash
+..
+.. .. code-block:: bash
+..
+..     # Setup docker env
+..     ./docker-test.sh
 
 My tools
 ---------
@@ -55,8 +56,3 @@ Links for inspiration on future additions.
 - `<https://github.com/charnley/dotfiles>`_
 - `<https://github.com/brainfucksec/neovim-lua>`_
 - `<https://github.com/mathiasbynens/dotfiles>`_
-
-Some script for downloading binaries.
-- https://gist.github.com/sjparkinson/327dc78c60ab81a06c946630b4288910
-
-

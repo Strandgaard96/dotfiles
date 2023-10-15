@@ -26,11 +26,12 @@ endif
 # Default targets
 all: dotfiles bin
 
-tmux_plugins:
-	bash ./setup/tmux_plugins.sh
-
-tmux_tpm:
-	bash ./setup/tmux_tpm.sh
+# Tmux stuff i kindof deprecated. I want to just install it directly. Less trouble. 
+# tmux_plugins:
+# 	bash ./setup/tmux_plugins.sh
+#
+# tmux_tpm:
+# 	bash ./setup/tmux_tpm.sh
 
 # Directories
 
@@ -65,12 +66,6 @@ ${HOME}/bin/vim:
 ${HOME}/opt/neovim:
 	bash setup.$(OS)/nvim_setup.sh
 	NEOVIM_SETUP=1
-
-# ${HOME}/opt/tmux-3.2a:
-# 	#bash ./setup/tmux_compile.sh 1> /dev/null
-# 	bash ./setup/tmux_tpm.sh
-# 	bash ./setup/tmux_plugins.sh
-
 
 ${HOME}/.oh-my-zsh:
 	bash ./setup/zsh_ohmyzsh.sh
@@ -129,12 +124,14 @@ ${HOME}/.config/i3/config: ./dot.deb/i3/config
 ${HOME}/.fzf:
 	bash ./setup/fzf_setup.sh
 	bash ./setup/setup_zoxide.sh
+
+
 # Meta
 
 install: dotfiles bin ${HOME}/opt/neovim install_binaries ${HOME}/.fzf install_${OS} ${HOME}/.oh-my-zsh
 
-# tmux installation is troublesome and not needed on remotes anyway. So made new target for this
-install_remote: dotfiles bin ${HOME}/opt/neovim ${HOME}/.fzf install_${OS} install_binaries
+# zsh installation is troublesome and not needed on remotes anyway. So made new target for this
+install_remote: dotfiles bin ${HOME}/opt/neovim install_binaries ${HOME}/.fzf install_${OS}
 # Guide for setting up zsh
 # https://www.drewsilcock.co.uk/compiling-zsh
 
