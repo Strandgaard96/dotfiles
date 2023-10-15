@@ -203,6 +203,8 @@ case "$TERM" in xterm* | rxvt*)
 *) ;;
 esac
 
+test -f $HOME/.fzf.bash && source ~/.fzf.bash
+
 # Dont send me messages
 if $(tty -s); then mesg n; fi
 

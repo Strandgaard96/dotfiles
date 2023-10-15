@@ -1,8 +1,11 @@
 Dotfiles
 ========
 
-My dotfiles. Entirely based on a clone of this repo `charnley/dotfiles <https://github.com/charnley/dotfiles>`_ 
-with additional personal modifications and additions.
+My dotfiles.
+
+|desktop|
+
+.. |desktop| image:: https://raw.githubusercontent.com/Strandgaard96/dotfiles/main/dot/desktop.png
 
 Setup
 -----
@@ -11,14 +14,11 @@ A makefile is used to create all relevant symlinks and directories. Also downloa
 
 .. code-block:: bash
 
-    # fresh installation on new system
-
     make install_apt # only for systems you have sudo. Installs all packages via apt-get. 
 
-    make install # Compile and download dependencies (such as tmux and neovim)
+    make install # Set everything up on local machine with sudo.
 
-    # Install without certain features. To be used on remote to prevent compiler and version issues that can not be fixed without sudo.
-    make install_remote
+    make install_remote # Install without certain features. To be used on remote to prevent compiler and version issues that can not be fixed without sudo.
 
 
 .. Testing
@@ -34,7 +34,7 @@ A makefile is used to create all relevant symlinks and directories. Also downloa
 
 My tools
 ---------
-Useful tools for linux commandline
+Useful tools for linux commandline that I use.
 
 - bat_ - A cat(1) clone with wings
 - exa_ - A Modern replacement for ls
@@ -51,6 +51,9 @@ Useful tools for linux commandline
 
 Relevant links
 _________________
+
+This repo is based on a clone of `charnley/dotfiles <https://github.com/charnley/dotfiles>`_ 
+
 Links for inspiration on future additions. 
 
 - `<https://github.com/charnley/dotfiles>`_
