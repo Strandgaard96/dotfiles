@@ -5,7 +5,9 @@ My dotfiles.
 
 |desktop|
 
-.. |desktop| image:: https://github.com/Strandgaard96/dotfiles/blob/b58b8b97a42d8d5b27342e126f03cd602c96a424/dot/desktop.png
+.. |desktop| image:: https://raw.githubusercontent.com/Strandgaard96/dotfiles/main/dot/desktop.png
+
+
 
 Setup
 -----
