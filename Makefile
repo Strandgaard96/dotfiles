@@ -72,13 +72,10 @@ ${HOME}/.oh-my-zsh:
 	bash ./setup/zsh_ohmyzsh_plugins.sh
 
 # TODO for bin folder, I should probably use CMakefile for rule generation
-bin: ${HOME}/bin bindir_default bindir_$(OS) bindir_dev
+bin: ${HOME}/bin bindir_default bindir_$(OS) 
 
 bindir_default:
 	@bash ./setup/install_bin_directories.sh bin
-
-bindir_dev:
-	@bash ./setup/install_bin_directories.sh bin.dev
 
 bindir_deb:
 	@bash ./setup/install_bin_directories.sh bin.deb
@@ -120,15 +117,13 @@ ${HOME}/.Xresources: ./dot.deb/Xresources
 ${HOME}/.config/i3status/config: ./dot.deb/i3status/config
 ${HOME}/.config/i3/config: ./dot.deb/i3/config
 
-#
+# fuzzzzzy find 
 ${HOME}/.fzf:
 	bash ./setup/fzf_setup.sh
-	bash ./setup/setup_zoxide.sh
-
 
 # Meta
 
-install: dotfiles bin ${HOME}/opt/neovim install_binaries ${HOME}/.fzf install_${OS} ${HOME}/.oh-my-zsh
+install: dotfiles bin ${HOME}/opt/neovim install_binaries ${HOME}/.fzf install_${OS} ${HOME}/.oh-my-zsh install_apt
 
 # zsh installation is troublesome and not needed on remotes anyway. So made new target for this
 install_remote: dotfiles bin ${HOME}/opt/neovim install_binaries ${HOME}/.fzf install_${OS}

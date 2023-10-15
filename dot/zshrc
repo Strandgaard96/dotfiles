@@ -158,7 +158,7 @@ source ${HOME}/.bash_paths
 if test -f ~/.bash_aliases; then . ~/.bash_aliases; fi
 
 # export PATH="$HOME/opt/anaconda3/bin:$PATH"  # commented out by conda initialize
-k
+
 if type ag &> /dev/null; then
     export FZF_DEFAULT_COMMAND='ag -p ~/.gitignore -g "" "${FZF_BASE:-.}"'
     export FZF_CTRL_T_COMMAND='ag -p ~/.gitignore -g "" "${FZF_BASE:-.}"'
