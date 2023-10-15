@@ -1,0 +1,18 @@
+{
+  "extras": [
+    "lazyvim.plugins.extras.coding.yanky",
+    "lazyvim.plugins.extras.formatting.black",
+    "lazyvim.plugins.extras.lang.python",
+    "lazyvim.plugins.extras.util.project",
+    "plugins.extras.personal.bigfile",
+    "plugins.extras.personal.hardtime",
+    "plugins.extras.personal.neogen",
+    "plugins.extras.personal.nvim-colorizer",
+    "plugins.extras.personal.undotree",
+    "plugins.extras.personal.vim-sleuth"
+  ],
+  "news": {
+    "NEWS.md": "2123"
+  },
+  "version": 2
+}
