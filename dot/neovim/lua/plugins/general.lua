@@ -96,6 +96,7 @@ return {
 	{ "danymat/neogen", opts = { snippet_engine = "luasnip" } }, -- generate docstrings (with treesitter)
 
 	-- better diagnostics list and others
+	-- TODO
 	{
 		"folke/trouble.nvim",
 		cmd = { "TroubleToggle", "Trouble" },

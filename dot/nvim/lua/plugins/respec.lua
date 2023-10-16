@@ -7,7 +7,7 @@ return {
   {
     "linux-cultist/venv-selector.nvim",
     opts = {
-      anaconda_base_path = "/home/magstr/miniconda3/",
+      search = false,
       anaconda_base_path = "/home/magstr/miniconda3/",
       anaconda_envs_path = "/home/magstr/miniconda3/envs",
     },

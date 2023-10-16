@@ -1,7 +1,10 @@
-
 #!/usr/bin/env zsh
 
 #zmodload zsh/zprof
+
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+unsetopt CDABLE_VARS
 
 # Disable auto-update prompt
 DISABLE_AUTO_UPDATE=true
@@ -130,8 +133,6 @@ bindkey '^e' edit-command-line
 
 test -d $ZSH && source $ZSH/oh-my-zsh.sh
 
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
 
 # History
 HISTSIZE=10000000
@@ -161,6 +162,7 @@ if test -f ~/.bash_aliases; then . ~/.bash_aliases; fi
 # fuzzy search
 test -f ~/.fzf.zsh && source ~/.fzf.zsh
 
+# Silver surver init for fzf. Currently not used.  
 if type ag &> /dev/null; then
     export FZF_DEFAULT_COMMAND='ag -p ~/.gitignore -g "" "${FZF_BASE:-.}"'
     export FZF_CTRL_T_COMMAND='ag -p ~/.gitignore -g "" "${FZF_BASE:-.}"'
@@ -170,17 +172,11 @@ fi
 bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line
 
-export LC_ALL=en_US.UTF-8
-
-unsetopt CDABLE_VARS
-
+# Source local zshrc if present. 
 test -f $HOME/.zshrc.local && source $HOME/.zshrc.local
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
-
-# autojump
-if test -f /usr/share/autojump/autojump.sh; then . /usr/share/autojump/autojump.sh; fi
 
 # zoxide
 eval "$(zoxide init zsh)"
