@@ -6,3 +6,5 @@ pkgs_dirs:
 channels:
   - conda-forge
   - defaults
+solver: libmamba
+channel_priority: strict

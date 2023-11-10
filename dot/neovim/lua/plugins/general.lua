@@ -78,13 +78,9 @@ return {
 	"tpope/vim-sleuth",
 
 	{
-		-- Add indentation guides evenairline on blank lines
 		"lukas-reineke/indent-blankline.nvim",
-		-- See `:help indent_blankline.txt`
-		opts = {
-			char = "┊",
-			show_trailing_blankline_indent = false,
-		},
+		main = "ibl",
+		opts = {},
 	},
 
 	{
@@ -100,6 +96,7 @@ return {
 	{ "danymat/neogen", opts = { snippet_engine = "luasnip" } }, -- generate docstrings (with treesitter)
 
 	-- better diagnostics list and others
+	-- TODO
 	{
 		"folke/trouble.nvim",
 		cmd = { "TroubleToggle", "Trouble" },

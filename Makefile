@@ -26,11 +26,12 @@ endif
 # Default targets
 all: dotfiles bin
 
-tmux_plugins:
-	bash ./setup/tmux_plugins.sh
-
-tmux_tpm:
-	bash ./setup/tmux_tpm.sh
+# Tmux stuff i kindof deprecated. I want to just install it directly. Less trouble. 
+# tmux_plugins:
+# 	bash ./setup/tmux_plugins.sh
+#
+# tmux_tpm:
+# 	bash ./setup/tmux_tpm.sh
 
 # Directories
 
@@ -66,24 +67,24 @@ ${HOME}/opt/neovim:
 	bash setup.$(OS)/nvim_setup.sh
 	NEOVIM_SETUP=1
 
+<<<<<<< HEAD
 # ${HOME}/opt/tmux-3.2a:
 # 	#bash ./setup/tmux_compile.sh 1> /dev/null
 # 	bash ./setup/tmux_tpm.sh
 # 	bash ./setup/tmux_plugins.sh
 
 
+=======
+>>>>>>> main
 ${HOME}/.oh-my-zsh:
 	bash ./setup/zsh_ohmyzsh.sh
 	bash ./setup/zsh_ohmyzsh_plugins.sh
 
 # TODO for bin folder, I should probably use CMakefile for rule generation
-bin: ${HOME}/bin bindir_default bindir_$(OS) bindir_dev
+bin: ${HOME}/bin bindir_default bindir_$(OS) 
 
 bindir_default:
 	@bash ./setup/install_bin_directories.sh bin
-
-bindir_dev:
-	@bash ./setup/install_bin_directories.sh bin.dev
 
 bindir_deb:
 	@bash ./setup/install_bin_directories.sh bin.deb
@@ -102,11 +103,12 @@ ${HOME}/.%:
 	# Symbolic lincs to the dotfiles in the repo
 	ln -s `pwd`/$< $@
 
-dotfiles_defaults: ${HOME}/.bashrc ${HOME}/.bash_profile ${HOME}/.bash_aliases ${HOME}/.bash_paths ${HOME}/.condarc ${HOME}/.gitconfig ${HOME}/.tmux.conf ${HOME}/.tmux-osx ${HOME}/.tmux-linux ${HOME}/.config/nvim/init.lua ${HOME}/.config/nvim/lua ${HOME}/.config/neofetch ${HOME}/.hushlogin
+dotfiles_defaults: ${HOME}/.bashrc ${HOME}/.bash_profile ${HOME}/.bash_prompt ${HOME}/.bash_aliases ${HOME}/.bash_paths ${HOME}/.condarc ${HOME}/.gitconfig ${HOME}/.tmux.conf ${HOME}/.tmux-osx ${HOME}/.tmux-linux ${HOME}/.config/nvim/init.lua ${HOME}/.config/nvim/lua ${HOME}/.config/neofetch ${HOME}/.hushlogin
 
 ${HOME}/.bash_aliases: ./dot/bash_aliases
 ${HOME}/.bash_paths: ./dot/bash_paths
 ${HOME}/.bash_profile: ./dot/bash_profile
+${HOME}/.bash_prompt: ./dot/bash_prompt
 ${HOME}/.bashrc: ./dot/bashrc
 ${HOME}/.condarc: ./dot/condarc
 ${HOME}/.gitconfig: ./dot/gitconfig
@@ -125,16 +127,17 @@ ${HOME}/.Xresources: ./dot.deb/Xresources
 ${HOME}/.config/i3status/config: ./dot.deb/i3status/config
 ${HOME}/.config/i3/config: ./dot.deb/i3/config
 
-#
+# fuzzzzzy find 
 ${HOME}/.fzf:
 	bash ./setup/fzf_setup.sh
-	bash ./setup/setup_zoxide.sh
+
 # Meta
 
-install: dotfiles bin ${HOME}/opt/neovim install_binaries ${HOME}/.fzf install_${OS} ${HOME}/.oh-my-zsh
+install: dotfiles bin ${HOME}/opt/neovim install_binaries ${HOME}/.fzf install_${OS} ${HOME}/.oh-my-zsh install_apt
 
-# tmux installation is troublesome and not needed on remotes anyway. So made new target for this
-install_remote: dotfiles bin ${HOME}/opt/neovim ${HOME}/.fzf install_${OS} install_binaries
+# zsh installation is troublesome and not needed on remotes anyway. So made new target for this
+install_remote: dotfiles bin ${HOME}/opt/neovim install_binaries ${HOME}/.fzf install_${OS}
+>>>>>>> main
 # Guide for setting up zsh
 # https://www.drewsilcock.co.uk/compiling-zsh
 
