@@ -2,22 +2,23 @@
 # $@ - sources
 # $< - target
 
-# Check operating system
-ifeq '$(findstring ;,$(PATH))' ';' # Windows
-	detected_OS := Windows
-else
-	detected_OS := $(shell uname 2>/dev/null || echo Unknown)
-	detected_OS := $(patsubst CYGWIN%,Cygwin,$(detected_OS))
-	detected_OS := $(patsubst MSYS%,MSYS,$(detected_OS))
-	detected_OS := $(patsubst MINGW%,MSYS,$(detected_OS))
-endif
 
-ifeq ($(detected_OS),Darwin) # Mac OS X
-	OS = osx
+# OS Detection
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+    OS = deb
 endif
-
-ifeq ($(detected_OS),Linux) # Linux
-	OS = deb
+ifeq ($(UNAME_S),Darwin)
+    OS = osx
+endif
+ifeq ($(findstring MINGW,$(UNAME_S)),MINGW)
+    OS = Windows
+endif
+ifeq ($(findstring MSYS,$(UNAME_S)),MSYS)
+    OS = Windows
+endif
+ifeq ($(findstring CYGWIN,$(UNAME_S)),CYGWIN)
+    OS = Windows
 endif
 
 # Dummy targets
@@ -31,34 +32,40 @@ all: dotfiles bin
 # 	bash ./setup/tmux_plugins.sh
 #
 # tmux_tpm:
-# 	bash ./setup/tmux_tpm.sh
+
+# Path Variables
+BIN_PATH := ${HOME}/bin
+OPT_PATH := ${HOME}/opt
+CONFIG_PATH := ${HOME}/.config
+NVIM_PATH := ${HOME}/.config/nvim
+SSH_PATH := ${HOME}/.ssh
+I3STATUS_PATH := ${HOME}/.config/i3status
+I3_PATH := ${HOME}/.config/i3
 
 # Directories
-
-${HOME}/bin:
+$(BIN_PATH):
 	mkdir -p $@
 
-${HOME}/opt:
+$(OPT_PATH):
 	mkdir -p $@
 
-${HOME}/.config:
+$(CONFIG_PATH):
 	mkdir -p $@
 
-${HOME}/.config/nvim:
+$(NVIM_PATH):
 	mkdir -p $@
 
-${HOME}/.ssh:
+$(SSH_PATH):
 	mkdir -p $@
 
-${HOME}/.config/i3status:
+$(I3STATUS_PATH):
 	mkdir -p $@
 
-${HOME}/.config/i3:
+$(I3_PATH):
 	mkdir -p $@
 
-directories: ${HOME}/bin ${HOME}/opt ${HOME}/.config ${HOME}/.config/i3status ${HOME}/.config/i3 ${HOME}/.config/nvim
+directories: $(BIN_PATH) $(OPT_PATH) $(CONFIG_PATH) $(I3STATUS_PATH) $(I3_PATH) $(NVIM_PATH)
 
-# Executables
 
 ${HOME}/bin/vim:
 	ln -fs `pwd`/bin.$(OS)/vim ${HOME}/bin/vim
