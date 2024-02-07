@@ -19,6 +19,8 @@
 # set $mod to super key
 set $mod Mod4
 
+# set lock Caps_Lock
+
 # Set Font for Window Titles.
 font xft:mononoki 13
 
@@ -54,8 +56,16 @@ bindsym XF86AudioStop exec ~/bin/spot "stop"
 
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp     exec xbacklight -inc 20 # increase screen brightness
-bindsym XF86MonBrightnessDown   exec xbacklight -dec 20 # decrease screen brightness
+# bindsym XF86MonBrightnessUp exec --no-startup-id light -A 1 # increase screen brightness
+# bindsym XF86MonBrightnessDown exec --no-startup-id light -U 1 # decrease screen brightness
+# bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5%
+# bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
+# bindsym XF86MonBrightnessUp exec brightnessctl s +10% > /dev/null
+# bindsym XF86MonBrightnessDown exec brightnessctl s 10%- > /dev/null
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec brightnessctl -d "intel_backlight" set +8%
+bindsym XF86MonBrightnessDown exec brightnessctl -d "intel_backlight" set 8%-
+
 
 # Do not focus on window, on mouse hover
 focus_follows_mouse no
@@ -153,6 +163,17 @@ workspace 8 output DP2-2
 workspace 9 output DP2-2
 workspace 10 output DP2-2
 
+# Assign Workspaces:
+assign [class="alacritty"] workspace 1
+assign [class="firefox"] workspace 2
+assign [class="Slack"] workspace 3
+assign [class="pycharm"] workspace 4
+
+
+exec --no-startup-id exec /usr/bin/firefox
+exec --no-startup-id exec alacritty
+exec --no-startup-id exec slack
+
 # reload the configuration file
 bindsym $mod+Shift+C reload
 
@@ -212,7 +233,7 @@ exec --no-startup-id xset -b
 # exec --no-startup-id sudo powertop --auto-tune
 
 # Reset Caps_Lock as Super
-exec --no-startup-id setxkbmap -option caps:hyper
+# exec --no-startup-id setxkbmap -option caps:hyper
 
 # Set background color
 exec --no-startup-id xsetroot -solid '#131313'
