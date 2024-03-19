@@ -1,10 +1,17 @@
 {
   "extras": [
+    "lazyvim.plugins.extras.coding.codeium",
     "lazyvim.plugins.extras.coding.yanky",
+    "lazyvim.plugins.extras.dap.core",
+    "lazyvim.plugins.extras.dap.nlua",
     "lazyvim.plugins.extras.formatting.black",
+    "lazyvim.plugins.extras.lang.markdown",
     "lazyvim.plugins.extras.lang.python",
+    "lazyvim.plugins.extras.lang.python-semshi",
+    "lazyvim.plugins.extras.lang.yaml",
     "lazyvim.plugins.extras.util.project",
     "plugins.extras.personal.bigfile",
+    "plugins.extras.personal.diffview",
     "plugins.extras.personal.hardtime",
     "plugins.extras.personal.neogen",
     "plugins.extras.personal.nvim-colorizer",
@@ -14,5 +21,5 @@
   "news": {
     "NEWS.md": "2123"
   },
-  "version": 2
+  "version": 3
 }

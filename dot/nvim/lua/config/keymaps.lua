@@ -104,7 +104,7 @@ map("n", "<Leader>z", ":set spell!<cr>", { desc = "Toggle spellmode" })
 map("v", "y", "myy`y", { noremap = true, desc = "Maintain the cursor position when yanking a visual selection" })
 
 -- save file
-map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
+map({ "i", "v", "n", "s" }, "<C-S>", "<cmd>w<cr><esc>", { desc = "Save file" })
 
 -- map("n", "<leader>ud", Util.toggle_diagnostics, { desc = "Toggle Diagnostics" })
 
