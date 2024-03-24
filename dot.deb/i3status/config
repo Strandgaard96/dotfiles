@@ -1,100 +1,73 @@
 general {
-    colors = true
-    color_good = "#eeeeee"
-    color_bad = "#cc3366"
-    color_degraded = "#999999"
-    interval = 5
+        colors = false
+        interval = 5
+        color_good = "#2391E3"
+        color_bad = "#E0D758"
+        color_degraded = "#D42E58"
 }
 
-#    color_good = "#049cfb"
-#    color_bad = "#cc3366"
-#    color_degraded = "#999999"
-
-
-order += "wireless wlp0s20f3"
-order += "ethernet enp0s31f6"
-order += "path_exists VPN"
-order += "volume master"
-order += "disk /"
-order += "battery 0"
-order += "cpu_temperature 0"
+order += "cpu_usage"
+order += "memory"
 order += "load"
-order += "tztime day"
-order += "tztime hour"
+order += "disk /"
+order += "tztime local"
+order += "battery all"
+#order += "ethernet _first_"
+# order += "ipv6"
+# order += "disk /home"
+#order += "wireless _first_"
+order += "wireless wlp0s20f3"
 
+cpu_usage {
+        format = "  %usage "
+}
 
+load {
+        format ="  %1min "
+        # max_threshold = 0.3
+}
 
-
-wireless wlan0 {
-    format_up = " (%quality %essid %ip) "
-    format_down = "wifi"
+disk "/" {
+        # format = " hdd %avail "
+        format = "  %avail "
 }
 
 wireless wlp0s20f3 {
     format_up = " (%quality %essid %ip) "
     format_down = " wifi "
 }
-
-ethernet enp0s31f6 {
-    # if you use %speed, i3status requires root privileges
-    format_up = " %ip (%speed) "
-    format_down = " lan "
+ethernet _first_ {
+# if you use %speed, i3status requires root privileges
+        format_up = "  %speed "
+        format_down = "  "
 }
 
-
-battery 0 {
-    format = " %status %percentage %remaining "
-    format_down = ""
-    last_full_capacity = true
-    integer_battery_capacity = true
-    low_threshold = 11
-    threshold_type = percentage
-    hide_seconds = true
-    status_chr = "⚡"
-    status_bat = "🔋"
-    status_unk = "🙂"
-    status_full = "💙"
-
+battery all {
+        # format = "%status %percentage %remaining %emptytime"
+        format = "   %status %percentage"
+        format_down = "  "
+        last_full_capacity = true
+        integer_battery_capacity = true
+        # status_chr = " "
+        status_chr = "⚡"
+        # status_bat = "bat"
+        # status_bat = "☉"
+        status_bat = " "
+        # status_unk = "?"
+        status_unk = ""
+        # status_full = ""
+        status_full = "☻"
+        low_threshold = 15
+        threshold_type = time
 }
 
-run_watch DHCP {
-    pidfile = "/var/run/dhclient*.pid"
+memory {
+        format = "  %available "
+        threshold_degraded = "256M"
+        format_degraded = "  %available!! "
 }
 
-run_watch VPN {
-    pidfile = "/var/run/vpnc/pid"
-}
-
-path_exists VPN {
-    # path exists when a VPN tunnel launched by nmcli/nm-applet is active
-    path = "/proc/sys/net/ipv4/conf/tun0"
-    # format = "vpn %status"
-    format = " vpn "
-}
-
-tztime day {
-    format = " %Y-%m-%d "
-}
-
-tztime hour {
-    format = " %H:%M  "
-}
-
-load {
-    format = " cpu %1min "
-}
-
-disk "/" {
-    format = " %avail "
-}
-
-volume master {
-    format = " ♪  %volume "
-    device = "default"
-    mixer = "Master"
-    mixer_idx = 0
-}
-
-cpu_temperature 0 {
-    format = " %degrees °C "
+tztime local {
+        # format = "%Y-%m-%d %H:%M:%S"
+        format = "  %a, %I:%M %p "
 }

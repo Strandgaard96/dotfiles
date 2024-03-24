@@ -1,6 +1,10 @@
 ### bashrc configuration file ###
 
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
 # Preserve bash history in multiple terminal windows
+export HISTFILE=~/.history
 export HISTCONTROL=ignoredups:erasedups:ignorespace
 export HISTIGNORE='lth:ls:bf:fg:history:l:sound:dock:undock:headphones:top:htop:l:mocp:rm'
 export HISTSIZE=1000000     # big big history

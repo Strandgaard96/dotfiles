@@ -12,4 +12,14 @@ return {
       anaconda_envs_path = "/home/magstr/miniconda3/envs",
     },
   },
+  {
+    "folke/flash.nvim",
+    opts = {
+      modes = {
+        search = {
+          enabled = false,
+        },
+      },
+    },
+  },
 }

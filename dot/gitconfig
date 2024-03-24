@@ -27,3 +27,5 @@
 	useConfigOnly = true
 	name = Strandgaard96
 	email = magnus.str@gmail.com
+[init]
+	defaultBranch = main

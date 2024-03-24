@@ -95,7 +95,8 @@ case $(hostname) in
     fend0[1-5].cluster )
         PROMPT='${PURPLE}%m$RESET ${PURPLE}>$RESET ';;
     magnus-work )
-        PROMPT='${BLUE}%m$RESET ${BLUE}>$RESET ';;
+        # PROMPT='${BLUE}%m$RESET ${BLUE}>$RESET ';;
+        PROMPT=' ${BLUE}>$RESET ';;
     *slid* )
         export EASYBUILD_PREFIX_ME=/home/niflheim/jchang/modules
         module use $EASYBUILD_PREFIX_ME/modules/all
