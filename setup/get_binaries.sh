@@ -21,6 +21,10 @@ curl -L -o $DWNLLDIR/bat-v0.22.1-i686-unknown-linux-musl.tar.gz https://github.c
 tar xzf $DWNLLDIR/bat-v0.22.1-i686-unknown-linux-musl.tar.gz --directory $INSTALL_DIR
 mv $INSTALL_DIR/bat-v0.22.1-i686-unknown-linux-musl/bat ~/bin
 
+# Get diff-so-fancy
+curl -L -o $INSTALL_DIR/diff-so-fancy https://github.com/so-fancy/diff-so-fancy/releases/latest/download/diff-so-fancy
+mv $INSTALL_DIR/diff-so-fancy ~/bin
+
 # Get fd
 # You can use fd to generate input for the command-line fuzzy finder fzf. Check fzf github
 curl -L -o $DWNLLDIR/fd-v8.7.0-i686-unknown-linux-musl.tar.gz https://github.com/sharkdp/fd/releases/download/v8.7.0/fd-v8.7.0-i686-unknown-linux-musl.tar.gz
@@ -32,5 +36,3 @@ curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | 
 
 # TODO
 # Make something that also moves the manual pages for the stuff!!!!!!
-
-

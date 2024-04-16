@@ -49,6 +49,9 @@ fi
 
 test -f $HOME/.fzf.bash && source ~/.fzf.bash
 
+# Set ripgrep config path
+export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
+
 # Dont send me messages
 if $(tty -s); then mesg n; fi
 
