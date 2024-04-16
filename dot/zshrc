@@ -169,6 +169,10 @@ if type ag &> /dev/null; then
     export FZF_CTRL_T_COMMAND='ag -p ~/.gitignore -g "" "${FZF_BASE:-.}"'
 fi
 
+# Need to be set for ripgrep to find config.
+export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
+
+
 # home and end
 bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line

@@ -12,7 +12,8 @@ My dotfiles.
 Setup
 -----
 
-A makefile is used to create all relevant symlinks and directories. Also downloads various tools. 
+A makefile is used to create all relevant symlinks and directories. Also downloads various tools. There are multiple build targets. 
+If you are running on a system without sudo, do install_remote
 
 .. code-block:: bash
 
@@ -36,7 +37,7 @@ A makefile is used to create all relevant symlinks and directories. Also downloa
 
 My tools
 ---------
-Useful tools for linux commandline that I use.
+Useful tools for linux commandline that are incredibly useful. 
 
 - bat_ - A cat(1) clone with wings
 - exa_ - A Modern replacement for ls

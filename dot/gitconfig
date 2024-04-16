@@ -2,12 +2,19 @@
 	diff = auto
 	status = auto
 	branch = auto
+	ui = true
 [color "diff"]
-	meta = yellow
+	meta = 11
+	frag = magenta bold
+	func = 146 bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
 [core]
 	excludesfile = ~/.gitignore
 	editor = vim -u NONE
-	pager = less -q
+	pager = diff-so-fancy | less --tabs=4 -RF
 	autocrlf = input
 [alias]
 	lg = log --graph --abbrev-commit --decorate --format=format:'%C(blue)%h%C(reset) - %C(green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(yellow)%d%C(reset)' --all
@@ -29,3 +36,10 @@
 	email = magnus.str@gmail.com
 [init]
 	defaultBranch = main
+[interactive]
+	diffFilter = diff-so-fancy --patch
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
