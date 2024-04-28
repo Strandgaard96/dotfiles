@@ -1,9 +1,9 @@
 general {
-        colors = false
+        colors = True
         interval = 5
-        color_good = "#2391E3"
-        color_bad = "#E0D758"
-        color_degraded = "#D42E58"
+        # color_good = "#2391E3"
+        # color_bad = "#E0D758"
+        # color_degraded = "#D42E58"
 }
 
 order += "cpu_usage"
