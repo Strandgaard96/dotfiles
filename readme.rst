@@ -44,6 +44,7 @@ Useful tools for linux commandline that are incredibly useful.
 - fd_ - A simple, fast and user-friendly alternative to 'find'
 - zooxide_ - A cd command that learns - easily navigate directories from the command line
 - ripgrep_ - Ripgrep recursively searches directories for a regex pattern while respecting your gitignore
+- diff-so-fancy_ - Good-lookin' diffs. Actually… nah… The best-lookin' diffs. 🎉 
 
 
 .. _bat: https://github.com/sharkdp/bat
