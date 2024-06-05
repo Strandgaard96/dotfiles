@@ -101,7 +101,7 @@ ${HOME}/.%:
 	# Symbolic lincs to the dotfiles in the repo
 	ln -s `pwd`/$< $@
 
-dotfiles_defaults: ${HOME}/.bashrc ${HOME}/.bash_profile ${HOME}/.bash_prompt ${HOME}/.bash_aliases ${HOME}/.bash_paths ${HOME}/.condarc ${HOME}/.gitconfig ${HOME}/.tmux.conf ${HOME}/.tmux-osx ${HOME}/.tmux-linux ${HOME}/.config/nvim/init.lua ${HOME}/.config/nvim/lua ${HOME}/.config/neofetch ${HOME}/.hushlogin
+dotfiles_defaults: ${HOME}/.bashrc ${HOME}/.bash_profile ${HOME}/.bash_prompt ${HOME}/.bash_aliases ${HOME}/.bash_paths ${HOME}/.condarc ${HOME}/.gitconfig ${HOME}/.tmux.conf ${HOME}/.tmux-linux ${HOME}/.config/nvim/init.lua ${HOME}/.config/nvim/lua ${HOME}/.config/neofetch ${HOME}/.hushlogin
 
 ${HOME}/.bash_aliases: ./dot/bash_aliases
 ${HOME}/.bash_paths: ./dot/bash_paths
@@ -111,8 +111,8 @@ ${HOME}/.bashrc: ./dot/bashrc
 ${HOME}/.condarc: ./dot/condarc
 ${HOME}/.gitconfig: ./dot/gitconfig
 ${HOME}/.hushlogin: ./dot/hushlogin
-${HOME}/.tmux-linux: ./dot/tmux.linux.conf
-${HOME}/.tmux-osx: ./dot/tmux.osx.conf
+# ${HOME}/.tmux-linux: ./dot/tmux.linux.conf
+# ${HOME}/.tmux-osx: ./dot/tmux.osx.conf
 ${HOME}/.tmux.conf: ./dot/tmux.conf
 
 ${HOME}/.config/nvim/init.lua: ./dot/neovim/init.lua
@@ -139,7 +139,7 @@ install_remote: dotfiles bin ${HOME}/opt/neovim install_binaries ${HOME}/.fzf in
 # https://www.drewsilcock.co.uk/compiling-zsh
 
 install_apt:
-	sudo apt-get install $$(cat ./lists/packages.apt)
+	sudo apt-get install $$(cat ./dot/packages.apt)
 
 install_deb:
 	@#
