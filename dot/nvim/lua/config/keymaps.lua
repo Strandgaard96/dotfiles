@@ -57,9 +57,9 @@ map("n", "D", '"_D', { noremap = true, desc = "Delete without tank" })
 map("v", "d", '"_d', { noremap = true, desc = "Delete without yank" })
 
 -- Cut commands
-map("n", "<leader>d", "dd", { noremap = true, desc = "Cut line" })
-map("v", "<leader>d", "d", { noremap = true, desc = "Cut" })
-map("n", "<leader>D", "D", { noremap = true, desc = "Cut rest of line" })
+map("n", "<leader>dc", "dd", { noremap = true, desc = "Cut line" })
+map("v", "<leader>dc", "d", { noremap = true, desc = "Cut" })
+map("n", "<leader>Dc", "D", { noremap = true, desc = "Cut rest of line" })
 
 vim.keymap.set("n", "<Leader>oy", function()
   local content = vim.fn.getreg("0")
@@ -79,13 +79,6 @@ end, { desc = "Yank OSC52" })
 
 -- Unbind this immensly annoying keybind
 map("n", "q:", "<nop>", { noremap = true, desc = "Quit on mistype" })
-
-vim.api.nvim_set_keymap(
-  "n",
-  "<Leader>nd",
-  ":lua require('neogen').generate()<CR>",
-  { noremap = true, silent = true, desc = "Generate docstring" }
-)
 
 -- Easier access to substitute.
 map("n", "<leader>su", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])

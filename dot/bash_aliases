@@ -35,6 +35,9 @@ alias gpl='git pull --rebase'
 # Call function to show branch commit log
 alias ggl='fzf_log'
 
+# Lazygit
+alias lg='lazygit'
+
 alias cona='conda activate'
 alias cond='conda deactivate'
 alias cmol='conda activate mols_test'
