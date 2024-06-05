@@ -10,10 +10,12 @@ A makefile is used to create all relevant symlinks and directories. Also
 downloads various tools. There are multiple build targets. If you are
 running on a system without sudo, do install_remote
 
-```bash
-make install_apt # only for systems you have sudo. Installs all packages via apt-get. Much of the functionality in the dotfiles rely on installing these packages
+NB! It is reccomended to run make with the -n options to do a dry-run first, in case anything crashes.
 
-make install # Set everything up on local machine with sudo.
+```bash
+sudo make install_apt # only for systems you have sudo. Installs all packages via apt-get. Much of the functionality in the dotfiles rely on installing these packages
+
+sudo make install # Set everything up on local machine with sudo.
 
 make install_remote # Install without certain features. To be used on remote to prevent compiler and version issues that can not be fixed without sudo.
 ```
