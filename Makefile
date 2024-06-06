@@ -122,8 +122,8 @@ ${HOME}/.gitconfig: ./dot/gitconfig
 ${HOME}/.hushlogin: ./dot/hushlogin
 ${HOME}/.tmux.conf: ./dot/tmux.conf
 
-${HOME}/.config/nvim/init.lua: ./dot/neovim/init.lua
-${HOME}/.config/nvim/lua: ./dot/neovim/lua
+# ${HOME}/.config/nvim/init.lua: ./dot/neovim/init.lua
+# ${HOME}/.config/nvim/lua: ./dot/neovim/lua
 
 dotfiles_deb: ${HOME}/.inputrc ${HOME}/.Xresources ${HOME}/.config/i3status/config ${HOME}/.config/i3/config
 
