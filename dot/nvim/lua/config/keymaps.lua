@@ -57,9 +57,9 @@ map("n", "D", '"_D', { noremap = true, desc = "Delete without tank" })
 map("v", "d", '"_d', { noremap = true, desc = "Delete without yank" })
 
 -- Cut commands
-map("n", "<leader>dc", "dd", { noremap = true, desc = "Cut line" })
-map("v", "<leader>dc", "d", { noremap = true, desc = "Cut" })
-map("n", "<leader>Dc", "D", { noremap = true, desc = "Cut rest of line" })
+map("n", "dc", "dd", { noremap = true, desc = "Cut line" })
+map("v", "dc", "d", { noremap = true, desc = "Cut" })
+map("n", "Dc", "D", { noremap = true, desc = "Cut rest of line" })
 
 vim.keymap.set("n", "<Leader>oy", function()
   local content = vim.fn.getreg("0")
