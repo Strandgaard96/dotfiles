@@ -120,8 +120,6 @@ ${HOME}/.bashrc: ./dot/bashrc
 ${HOME}/.condarc: ./dot/condarc
 ${HOME}/.gitconfig: ./dot/gitconfig
 ${HOME}/.hushlogin: ./dot/hushlogin
-# ${HOME}/.tmux-linux: ./dot/tmux.linux.conf
-# ${HOME}/.tmux-osx: ./dot/tmux.osx.conf
 ${HOME}/.tmux.conf: ./dot/tmux.conf
 
 ${HOME}/.config/nvim/init.lua: ./dot/neovim/init.lua
@@ -140,7 +138,7 @@ ${HOME}/.fzf:
 
 # Meta
 
-install: dotfiles bin ${HOME}/opt/neovim install_binaries ${HOME}/.fzf install_${OS} ${HOME}/.oh-my-zsh install_apt
+install: dotfiles bin ${HOME}/opt/neovim ${HOME}/.fzf install_${OS} ${HOME}/.oh-my-zsh install_apt install_fonts
 
 # zsh installation is troublesome and not needed on remotes anyway. So made new target for this
 install_remote: dotfiles bin ${HOME}/opt/neovim install_binaries ${HOME}/.fzf install_${OS}
