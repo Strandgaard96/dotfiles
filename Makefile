@@ -129,18 +129,23 @@ ${HOME}/.fzf:
 
 # Meta
 
-install: dotfiles bin ${HOME}/opt/neovim ${HOME}/.fzf install_${OS} ${HOME}/.oh-my-zsh install_apt install_fonts
+install: dotfiles bin ${HOME}/opt/neovim ${HOME}/.fzf ${HOME}/.oh-my-zsh install_apt install_fonts
 
 # zsh installation is troublesome and not needed on remotes anyway. So made new target for this
-install_remote: dotfiles bin ${HOME}/opt/neovim install_binaries ${HOME}/.fzf install_${OS}
+install_remote: dotfiles bin ${HOME}/opt/neovim install_binaries ${HOME}/.fzf
 # Guide for setting up zsh
 # https://www.drewsilcock.co.uk/compiling-zsh
+
+install_pi: dotfiles bin ${HOME}/.fzf install_apt_pi
+
+install_apt_pi:
+	sudo apt-get install $$(cat ./dot/packages_pi.apt)
 
 install_apt:
 	sudo apt-get install $$(cat ./dot/packages.apt)
 
-install_deb:
-	@#
+# For install raspberry pi stuff
+install_pi:
 
 install_binaries:
 	bash ./setup/get_binaries.sh

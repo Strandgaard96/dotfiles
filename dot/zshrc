@@ -124,7 +124,7 @@ setopt TRANSIENT_RPROMPT
 plugins=(
     zsh-syntax-highlighting
     zsh-autosuggestions
-    vi-mode
+    zsh-vi-mode
 )
 VI_MODE_SET_CURSOR=true
 
@@ -160,8 +160,7 @@ if test -f ~/.bash_aliases; then . ~/.bash_aliases; fi
 
 # export PATH="$HOME/opt/anaconda3/bin:$PATH"  # commented out by conda initialize
 
-# fuzzy search
-test -f ~/.fzf.zsh && source ~/.fzf.zsh
+
 
 # Silver surver init for fzf. Currently not used.  
 if type ag &> /dev/null; then
@@ -185,6 +184,14 @@ test -f $HOME/.zshrc.local && source $HOME/.zshrc.local
 
 # zoxide
 eval "$(zoxide init zsh)"
+
+# Set up fzf key bindings and fuzzy completion
+# source <(fzf --zsh)
+# Define an init function and append to zvm_after_init_commands
+function my_init() {
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+}
+zvm_after_init_commands+=(my_init)
 
 # Only works on zsh
 #matrix() { echo -e "\e[1;40m" ; clear ; while :; do echo $LINES $COLUMNS $(( $RANDOM % $COLUMNS)) $(( $RANDOM % 72 )) ;sleep 0.05; done|awk '{ letters="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()"; c=$4;        letter=substr(letters,c,1);a[$3]=0;for (x in a) {o=a[x];a[x]=a[x]+1; printf "\033[%s;%sH\033[2;32m%s",o,x,letter; printf "\033[%s;%sH\033[1;37m%s\033[0;0H",a[x],x,letter;if (a[x] >= $1) { a[x]=0; } }}' }

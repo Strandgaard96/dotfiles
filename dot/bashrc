@@ -48,7 +48,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # fzf init
-test -f $HOME/.fzf.bash && source ~/.fzf.bash
+# test -f $HOME/.fzf.bash && source ~/.fzf.bash
 
 # Set ripgrep config path
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
