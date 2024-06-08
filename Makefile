@@ -37,7 +37,6 @@ all: dotfiles bin
 BIN_PATH := ${HOME}/bin
 OPT_PATH := ${HOME}/opt
 CONFIG_PATH := ${HOME}/.config
-NVIM_PATH := ${HOME}/.config/nvim
 SSH_PATH := ${HOME}/.ssh
 I3STATUS_PATH := ${HOME}/.config/i3status
 I3_PATH := ${HOME}/.config/i3
@@ -52,9 +51,6 @@ $(OPT_PATH):
 $(CONFIG_PATH):
 	mkdir -p $@
 
-$(NVIM_PATH):
-	mkdir -p $@
-
 $(SSH_PATH):
 	mkdir -p $@
 
@@ -64,7 +60,18 @@ $(I3STATUS_PATH):
 $(I3_PATH):
 	mkdir -p $@
 
-directories: $(BIN_PATH) $(OPT_PATH) $(CONFIG_PATH) $(I3STATUS_PATH) $(I3_PATH) $(NVIM_PATH)
+directories: $(BIN_PATH) $(OPT_PATH) $(CONFIG_PATH) $(I3STATUS_PATH) $(I3_PATH)
+	
+bin: ${HOME}/bin bindir_default bindir_$(OS) 
+
+bindir_default:
+	@bash ./setup/install_bin_directories.sh bin
+
+bindir_deb:
+	@bash ./setup/install_bin_directories.sh bin.deb
+
+bindir_hpc:
+	@bash ./setup/install_bin_directories.sh bin.hpc
 
 
 ${HOME}/bin/vim:
@@ -78,18 +85,6 @@ ${HOME}/.oh-my-zsh:
 	bash ./setup/zsh_ohmyzsh.sh
 	bash ./setup/zsh_ohmyzsh_plugins.sh
 
-# TODO for bin folder, I should probably use CMakefile for rule generation
-bin: ${HOME}/bin bindir_default bindir_$(OS) 
-
-bindir_default:
-	@bash ./setup/install_bin_directories.sh bin
-
-bindir_deb:
-	@bash ./setup/install_bin_directories.sh bin.deb
-
-bindir_hpc:
-	@bash ./setup/install_bin_directories.sh bin.hpc
-
 # Dotfiles
 
 dotfiles: directories dotfiles_defaults dotfiles_$(OS)
@@ -99,9 +94,9 @@ ${HOME}/.%:
 	# Move previous dotfiles to backup file
 	test -f $@ && mv $@ $@.bk;:
 	# Symbolic lincs to the dotfiles in the repo
-	ln -s `pwd`/$< $@
+	ln -sf `pwd`/$< $@
 
-dotfiles_defaults: ${HOME}/.bashrc ${HOME}/.bash_profile ${HOME}/.bash_prompt ${HOME}/.bash_aliases ${HOME}/.bash_paths ${HOME}/.condarc ${HOME}/.gitconfig ${HOME}/.tmux.conf ${HOME}/.tmux-linux ${HOME}/.config/nvim/init.lua ${HOME}/.config/nvim/lua ${HOME}/.hushlogin
+dotfiles_defaults: ${HOME}/.bashrc ${HOME}/.bash_profile ${HOME}/.bash_prompt ${HOME}/.bash_aliases ${HOME}/.bash_paths ${HOME}/.condarc ${HOME}/.gitconfig ${HOME}/.tmux.conf ${HOME}/.tmux-linux  ${HOME}/.hushlogin ${HOME}/.config/nvim/ 
 
 ${HOME}/.bash_aliases: ./dot/bash_aliases
 ${HOME}/.bash_paths: ./dot/bash_paths
@@ -113,8 +108,8 @@ ${HOME}/.gitconfig: ./dot/gitconfig
 ${HOME}/.hushlogin: ./dot/hushlogin
 ${HOME}/.tmux.conf: ./dot/tmux.conf
 
-# ${HOME}/.config/nvim/init.lua: ./dot/neovim/init.lua
-# ${HOME}/.config/nvim/lua: ./dot/neovim/lua
+# This ensures that lazyvim gets copied over. Nice
+${HOME}/.config/nvim: ./dot/nvim
 
 dotfiles_deb: ${HOME}/.inputrc ${HOME}/.Xresources ${HOME}/.config/i3status/config ${HOME}/.config/i3/config
 
@@ -127,28 +122,28 @@ ${HOME}/.config/i3/config: ./dot.deb/i3/config
 ${HOME}/.fzf:
 	bash ./setup/fzf_setup.sh
 
-# Meta
-
-install: dotfiles bin ${HOME}/opt/neovim ${HOME}/.fzf ${HOME}/.oh-my-zsh install_apt install_fonts
-
-# zsh installation is troublesome and not needed on remotes anyway. So made new target for this
-install_remote: dotfiles bin ${HOME}/opt/neovim install_binaries ${HOME}/.fzf
-# Guide for setting up zsh
-# https://www.drewsilcock.co.uk/compiling-zsh
-
-install_pi: dotfiles bin ${HOME}/.fzf install_apt_pi
-
 install_apt_pi:
 	sudo apt-get install $$(cat ./dot/packages_pi.apt)
 
 install_apt:
 	sudo apt-get install $$(cat ./dot/packages.apt)
 
-# For install raspberry pi stuff
-install_pi:
-
-install_binaries:
+binaries:
 	bash ./setup/get_binaries.sh
 
-install_fonts:
+fonts:
 	bash ./fonts/setup_mononoki.sh
+
+
+#The major targets that install for different systems. 
+
+install: dotfiles bin ${HOME}/opt/neovim ${HOME}/.fzf ${HOME}/.oh-my-zsh install_apt fonts
+
+# zsh installation is troublesome and not needed on remotes anyway. So made new target for this
+install_remote: dotfiles bin ${HOME}/opt/neovim binaries ${HOME}/.fzf
+# Guide for setting up zsh
+# https://www.drewsilcock.co.uk/compiling-zsh
+
+install_pi: dotfiles bin ${HOME}/.fzf install_apt_pi fonts
+
+install_debug: dotfiles bin
