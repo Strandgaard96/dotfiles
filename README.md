@@ -6,15 +6,11 @@ My dotfiles.
 
 ## Setup
 
-A makefile is used to create all relevant symlinks and directories. Also
-downloads various tools. There are multiple build targets. If you are
-running on a system without sudo, do install_remote
-
-NB! It is reccomended to run make with the -n options to do a dry-run first, in case anything crashes.
+I use a makefile to create all relevant symlinks and directories.
+Commandline tools are also installed.
+There are multiple build targets that can be used depending on purpose. If you are running on a system without sudo, do install_remote
 
 ```bash
-sudo make install_apt # only for systems you have sudo. Installs all packages via apt-get. Much of the functionality in the dotfiles rely on installing these packages
-
 sudo make install # Set everything up on local machine with sudo.
 
 make install_remote # Install without certain features. To be used on remote to prevent compiler and version issues that can not be fixed without sudo.
@@ -22,7 +18,7 @@ make install_remote # Install without certain features. To be used on remote to 
 
 ## My tools
 
-Useful tools for linux commandline that are incredibly useful.
+Useful tools for linux commandline that are amazing:
 
 - [bat](https://github.com/sharkdp/bat) - A cat(1) clone with wings
 - [exa](https://github.com/ogham/exa) - A Modern replacement for ls
@@ -41,7 +37,7 @@ Useful tools for linux commandline that are incredibly useful.
 This repo is based on a clone of
 [charnley/dotfiles](https://github.com/charnley/dotfiles)
 
-Links for inspiration on future additions.
+Links for inspiration on future additions:
 
 - <https://github.com/charnley/dotfiles>
 - <https://github.com/brainfucksec/neovim-lua>
