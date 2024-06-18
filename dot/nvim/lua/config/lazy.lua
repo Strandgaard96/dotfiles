@@ -28,6 +28,9 @@ require("lazy").setup({
   },
   install = { colorscheme = { "tokyonight", "habamax" } },
   checker = { enabled = true, notify = false }, -- automatically check for plugin updates
+  ui = {
+    border = "rounded",
+  },
   performance = {
     rtp = {
       -- disable some rtp plugins
@@ -44,3 +47,7 @@ require("lazy").setup({
     },
   },
 })
+
+require("dap-python").resolve_python = function()
+  return "/home/magstr/miniconda3/envs/GA_env_new/bin/python"
+end
