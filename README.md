@@ -1,13 +1,15 @@
 # Dotfiles
 
-My dotfiles.
+My dotfiles for Linux based systems.
+
+All the nice dotfiles config files are found in `dot` and `dot.deb`
 
 ![desktop](https://raw.githubusercontent.com/Strandgaard96/dotfiles/main/dot/desktop.png)
 
 ## Setup
 
-I use a makefile to create all relevant symlinks and directories.
-Commandline tools are also installed.
+I use a makefile to create all relevant symlinks and directories as well as installing various commandline tools and neovim. Use at own discretion.
+
 There are multiple build targets that can be used depending on purpose. If you are running on a system without sudo, do install_remote
 
 ```bash
@@ -18,7 +20,7 @@ make install_remote # Install without certain features. To be used on remote to 
 
 ## My tools
 
-Useful tools for linux commandline that are amazing:
+Amazing linux tools that I use in the dotfiles.
 
 - [bat](https://github.com/sharkdp/bat) - A cat(1) clone with wings
 - [exa](https://github.com/ogham/exa) - A Modern replacement for ls
