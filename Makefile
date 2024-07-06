@@ -3,24 +3,6 @@
 # $< - target
 
 
-# OS Detection
-UNAME_S := $(shell uname -s)
-ifeq ($(UNAME_S),Linux)
-    OS = deb
-endif
-ifeq ($(UNAME_S),Darwin)
-    OS = osx
-endif
-ifeq ($(findstring MINGW,$(UNAME_S)),MINGW)
-    OS = Windows
-endif
-ifeq ($(findstring MSYS,$(UNAME_S)),MSYS)
-    OS = Windows
-endif
-ifeq ($(findstring CYGWIN,$(UNAME_S)),CYGWIN)
-    OS = Windows
-endif
-
 # Dummy targets
 .PHONY: install install_remote clean dotfiles directories
 
@@ -62,7 +44,7 @@ $(I3_PATH):
 
 directories: $(BIN_PATH) $(OPT_PATH) $(CONFIG_PATH) $(I3STATUS_PATH) $(I3_PATH)
 	
-bin: ${HOME}/bin bindir_default bindir_$(OS) 
+bin: ${HOME}/bin bindir_default
 
 bindir_default:
 	@bash ./setup/install_bin_directories.sh bin
@@ -75,10 +57,10 @@ bindir_hpc:
 
 
 ${HOME}/bin/vim:
-	ln -fs `pwd`/bin.$(OS)/vim ${HOME}/bin/vim
+	ln -fs `pwd`/bin/vim ${HOME}/bin/vim
 
 ${HOME}/opt/neovim:
-	bash setup.$(OS)/nvim_setup.sh
+	bash setup/nvim_setup.sh
 	NEOVIM_SETUP=1
 
 ${HOME}/.oh-my-zsh:
@@ -87,7 +69,7 @@ ${HOME}/.oh-my-zsh:
 
 # Dotfiles
 
-dotfiles: directories dotfiles_defaults dotfiles_$(OS)
+dotfiles: directories dotfiles_defaults
 
 # This matches stem. If we have a ${HOME}/.bash_paths target feks then this will run
 ${HOME}/.%:
@@ -96,7 +78,7 @@ ${HOME}/.%:
 	# Symbolic lincs to the dotfiles in the repo
 	ln -sf `pwd`/$< $@
 
-dotfiles_defaults: ${HOME}/.bashrc ${HOME}/.bash_profile ${HOME}/.bash_prompt ${HOME}/.bash_aliases ${HOME}/.bash_paths ${HOME}/.condarc ${HOME}/.gitconfig ${HOME}/.tmux.conf ${HOME}/.hushlogin ${HOME}/.config/nvim/ 
+dotfiles_defaults: ${HOME}/.bashrc ${HOME}/.bash_profile ${HOME}/.bash_prompt ${HOME}/.bash_aliases ${HOME}/.bash_paths ${HOME}/.condarc ${HOME}/.gitconfig ${HOME}/.tmux.conf ${HOME}/.hushlogin ${HOME}/.config/nvim/ ${HOME}/.inputrc ${HOME}/.Xresources ${HOME}/.config/i3status/config ${HOME}/.config/i3/config
 
 ${HOME}/.bash_aliases: ./dot/bash_aliases
 ${HOME}/.bash_paths: ./dot/bash_paths
@@ -110,8 +92,6 @@ ${HOME}/.tmux.conf: ./dot/tmux.conf
 
 # This ensures that lazyvim gets copied over. Nice
 ${HOME}/.config/nvim: ./dot/nvim
-
-dotfiles_deb: ${HOME}/.inputrc ${HOME}/.Xresources ${HOME}/.config/i3status/config ${HOME}/.config/i3/config
 
 ${HOME}/.inputrc: ./dot.deb/inputrc
 ${HOME}/.Xresources: ./dot.deb/Xresources

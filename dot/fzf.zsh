@@ -31,6 +31,6 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --color=spinner:#ff007c \
 "
 export FZF_DEFAULT_COMMAND='fd --hidden --follow --exclude=.git'
-export FZF_CTRL_T_COMMAND='fd -t f -t d -E=.git --exclude=.git'
+export FZF_CTRL_T_COMMAND='fd -t f -HF -E=.git --exclude=.git -I'
 # export FZF_TMUX_OPTS='-p 90%'
 

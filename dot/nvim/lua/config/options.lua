@@ -50,6 +50,34 @@ vim.opt.undofile = true
 -- Disable diagonstics
 vim.diagnostic.disable()
 
+vim.opt.wildmode = "list:longest,list:full" -- for : stuff
+vim.opt.wildignore:append({ ".javac", "node_modules", "*.pyc" })
+vim.opt.wildignore:append({ ".aux", ".out", ".toc" }) -- LaTeX
+vim.opt.wildignore:append({
+  ".o",
+  ".obj",
+  ".dll",
+  ".exe",
+  ".so",
+  ".a",
+  ".lib",
+  ".pyc",
+  ".pyo",
+  ".pyd",
+  ".swp",
+  ".swo",
+  ".class",
+  ".DS_Store",
+  ".git",
+  ".hg",
+  ".orig",
+})
+vim.opt.suffixesadd:append({ ".md", ".py" }) -- search for suffexes using gf
+
+vim.opt.autoread = true -- Update buffer if file has changed outside vim.
+
+vim.opt.spellsuggest = "best,10" -- show only the top 10 candidates
+
 --
 -- -- Some wildcard options
 -- vim.opt.wildmode = { "longest", "list", "full" }
@@ -71,7 +99,4 @@ vim.diagnostic.disable()
 -- vim.api.nvim_exec([[ command Q q ]], false) -- common typo
 --
 -- -- Spelling # do  :set spell to highlight possible spelling mistakes. Probably wont use this too much
--- vim.opt.spelllang = "en"
--- vim.opt.spellsuggest = "best,10" -- show only the top 10 candidates
 --
--- vim.opt.autoread = true -- Update buffer if file has changed outside vim.
