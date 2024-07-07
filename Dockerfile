@@ -1,21 +1,29 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
+MAINTAINER Magnus Strandgaard
 
+# OS updates and install
+RUN apt-get -qq update
+RUN apt-get install git sudo zsh -qq -y
+RUN apt-get update && apt-get install make
 
-RUN apt-get update && apt-get install build-essential -y
-RUN apt-get install -y  git
+# Create test user and add to sudoers
+RUN useradd -m -s /bin/zsh tester
+RUN usermod -aG sudo tester
+RUN echo "tester   ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers
 
-ARG DEBIAN_FRONTEND=noninteractive
-RUN apt-get install -y cmake
-RUN apt-get -y install zsh
-RUN apt-get -y install curl
-RUN apt-get -y install wget
-RUN apt-get install -y pkg-config
-RUN apt-get install -y libssl-dev
-RUN apt-get install -y python3.8
-RUN apt-get install -y vim
+# Add dotfiles and chown
+ADD . /home/tester/projects/dotfiles
+RUN chown -R tester:tester /home/tester
 
-RUN useradd -ms /bin/bash username
-COPY --chown=username . /home/username/.dotfiles
+# Switch testuser
+USER tester
+ENV HOME /home/tester
 
-ENTRYPOINT cd ~/.dotfiles; bash
+# Change working directory
+WORKDIR /home/tester/projects/dotfiles
+
+# # Run setup
+# RUN ./setup
+
+CMD ["/bin/bash"]

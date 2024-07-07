@@ -8,4 +8,4 @@
 docker build -t dotfiles .
 
 # Run a container
-docker run --interactive --tty --user username dotfiles
+docker run --interactive --tty --user tester dotfiles
