@@ -1,0 +1,10 @@
+#!/bin/bash
+
+loc=$1
+
+if test -z $loc
+then
+    curl -s 'wttr.in/Copenhagen'"?M"
+else
+    curl -s 'wttr.in/'"$loc"'?M'
+fi

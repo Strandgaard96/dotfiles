@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# Bash script for setting up tmux env. Not if tux-ressurect is enabled this is not needed.
+# ---------------------
+
+tmux new-session -n 'Cosmere' -d
+tmux send 'conda activate mols_test' ENTER;
+tmux split-window -h;
+tmux send 'htop' ENTER;
+tmux split-window -v;
+tmux send 'conda activate mols_test' ENTER;
+tmux send 'ga' ENTER;
+tmux send 'jupyter lab' ENTER;
+tmux select-pane -t 1;
+sleep 1
+tmux new-window -n 'Sunray/Steno' 'ssh -J sunray -X fend02'
+tmux split-window -h;
+tmux send 'ssh -X sunray' ENTER;
+tmux resize-pane -R 20
+sleep 1
+tmux new-window -n 'Niflheim_J' 'ssh -X slidJ'
+tmux select-window -t 2
+tmux -2 attach-session -d

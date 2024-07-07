@@ -1,0 +1,81 @@
+# For the benefit of emacs users: -*- shell-script -*-
+#
+#  _ _____ _     _            _
+# (_)___ /| |__ | | ___   ___| | _____
+# | | |_ \| '_ \| |/ _ \ / __| |/ / __|
+# | |___) | |_) | | (_) | (__|   <\__ \
+# |_|____/|_.__/|_|\___/ \___|_|\_\___/
+
+# Global variables
+align=center
+separator=true
+color=#f8f8f2
+separator_block_width=15
+markup=pango
+
+
+[battery]
+command=/home/magstr/git/i3blocks-contrib/battery2/battery2
+markup=pango
+interval=30
+# label=BAT
+#LABEL=⚡
+#BAT_NUMBER=0
+
+[volume]
+command=/home/magstr/git/i3blocks-contrib/volume/volume
+# command=$SCRIPT_DIR/volume
+label=♪ 
+# LABEL=VOL 
+interval=1
+signal=10
+#STEP=5%
+#MIXER=[determined automatically]
+#SCONTROL=[determined automatically]
+#NATURAL_MAPPING=0
+
+[wifi]
+command=iwgetid -r | tr '\n' ' ' && grep $(iwgetid -m | awk '{ printf "%s", $1 }') /proc/net/wireless | awk '{ printf "%i%\n", int($3 * 100 / 70) }'
+instance=wlp11s0f3u1
+interval=5
+color=#00FF00
+
+
+# [home]
+# label=:
+# color=#1793D1
+# command=df -h /home | awk 'FNR==2 { gsub(/[A-Za-z]/, ""); printf "%i<span color=\"#50fa7b\">GiB</span>\n", $4 }'
+# interval=3
+
+# [gpu_stats]
+# command=nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits | awk '{ printf "%02i<span color=\"#ffb86c\">%</span>", $0}' && nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits | awk '{ printf " %i<span color=\"#ffb86c\">°C</span>\n", $0}'
+# interval=2
+
+# [cpu_stats]
+# command=sar -u 1 1 | awk 'FNR == 5 { printf "%04.1f<span color=\"#ff5555\">%</span>", (100 - $8) } ' && sensors | awk '{ if ($1 == "CPU" && $2 == "Temperature:") { gsub(/[+°C]/, "") ; printf " %i<span color=\"#ff5555\">°C</span>\n", $3 } }'
+# color=#b58900
+# interval=2
+
+[cpu_usage]
+command=/home/magstr/git/i3blocks-contrib/cpu_usage/cpu_usage
+interval=10
+label=CPU
+#min_width=CPU: 100.00%
+#T_WARN=50
+#T_CRIT=80
+#DECIMALS=2
+color=#EBDBB2
+#COLOR_WARN=#FFFC00
+#COLOR_CRIT=#FF0000
+
+[memory]
+command=/home/magstr/git/i3blocks-contrib/memory/memory
+label=MEM
+interval=30
+
+
+[date]
+label=
+command=date "+%H:%M:%S %d/%m/%y"
+interval=60
+color=#50C878
