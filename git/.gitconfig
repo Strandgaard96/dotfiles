@@ -1,0 +1,87 @@
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	ui = true
+[color "diff"]
+	meta = 11
+	frag = magenta bold
+	func = 146 bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[core]
+	excludesfile = ~/.gitignore
+	editor = vim -u NONE
+	pager = diff-so-fancy | less --tabs=4 -RF
+	autocrlf = input
+[alias]
+	lg = log --graph --abbrev-commit --decorate --format=format:'%C(blue)%h%C(reset) - %C(green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(yellow)%d%C(reset)' --all
+	argh = reset --hard HEAD
+	fix-who = commit --amend --reset-author
+	next = rebase --continue
+
+  # Format: commitHash YYYY-MM-DD Commit Message [Author]
+  l = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+  
+  # Format: * commitHash  Commit Message. 4 weeks ago by Author
+  lg = log --graph --pretty=format:'%Cred%h%Creset %C(yellow)%d%Creset %s %Cgreen%ar%Creset by %C(yellow)%an%Creset' --abbrev-commit
+  
+  # Oneline Log format
+  ll = log --oneline
+  
+  ## Detailed Log Format (Last 10 commits)
+  lf = log --name-status -10
+
+  co = checkout
+  cob = checkout -b
+
+  b = branch
+  b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
+
+  c = commit --verbose
+  ca = commit -a --verbose
+  cm = commit -m
+  cam = commit -a -m
+
+  s = status
+  st = status -s
+
+  # Convenient to see diff in minified files
+  dw = diff --color-words
+  ds = diff --staged
+
+  # List Aliases
+  # For Windows
+  # la = !git config --list | findstr "alias"
+  # For Linux / Mac
+  la = "!git config -l | grep alias | cut -c 7-"
+  
+  
+  # BE CAUTIOUS - Reset Hard
+  rh = reset --hard HEAD
+
+
+[push]
+	default = simple
+	autoSetupRemote = true
+[credential]
+	helper = store --file ~/.ssh/gitcredentials
+[include]
+	path = ~/.gitconfig.local
+[diff]
+	ignoreSubmodules = dirty
+[user]
+	useConfigOnly = true
+	name = Strandgaard96
+	email = magnus.str@gmail.com
+[init]
+	defaultBranch = main
+[interactive]
+	diffFilter = diff-so-fancy --patch
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
