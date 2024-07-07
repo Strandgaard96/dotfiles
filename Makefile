@@ -15,33 +15,7 @@ all: dotfiles bin
 #
 # tmux_tpm:
 
-# Path Variables
-BIN_PATH := ${HOME}/bin
-OPT_PATH := ${HOME}/opt
-SSH_PATH := ${HOME}/.ssh
-
-# Directories
-$(BIN_PATH):
-	mkdir -p $@
-
-$(OPT_PATH):
-	mkdir -p $@
-
-$(SSH_PATH):
-	mkdir -p $@
-
-directories: $(BIN_PATH) $(OPT_PATH)
-	
-bin: ${HOME}/bin bindir_default
-
-bindir_default:
-	@bash ./setup/install_bin_directories.sh bin
-
-
-${HOME}/bin/vim:
-	ln -fs `pwd`/bin/vim ${HOME}/bin/vim
-
-${HOME}/opt/neovim:
+neovim:
 	bash setup/nvim_setup.sh
 	NEOVIM_SETUP=1
 
@@ -58,12 +32,9 @@ ${HOME}/.oh-my-zsh:
 	bash ./setup/zsh_ohmyzsh.sh
 	bash ./setup/zsh_ohmyzsh_plugins.sh
 
-# Dotfiles
-
-dotfiles: directories dotfiles_defaults
 
 # This symlinks the dotfiles with stow
-dotfiles_defaults:
+dotfiles:
 	stow -v bash git zsh alacritty nvim lazygit ripgrep div bat tmux i3 fzf
 
 # fuzzzzzy find 
@@ -85,13 +56,13 @@ fonts:
 
 #The major targets that install for different systems. 
 
-install: dotfiles bin ${HOME}/opt/neovim ${HOME}/.fzf ${HOME}/.oh-my-zsh install_apt fonts
+install: dotfiles neovim ${HOME}/.fzf ${HOME}/.oh-my-zsh install_apt fonts
 
 # zsh installation is troublesome and not needed on remotes anyway. So made new target for this
-install_remote: dotfiles bin ${HOME}/opt/neovim binaries ${HOME}/.fzf
+install_remote: dotfiles ${HOME}/opt/neovim binaries ${HOME}/.fzf
 # Guide for setting up zsh
 # https://www.drewsilcock.co.uk/compiling-zsh
 
-install_pi: dotfiles bin ${HOME}/.fzf install_apt_pi fonts
+install_pi: dotfiles ${HOME}/.fzf install_apt_pi fonts
 
-install_debug: dotfiles bin
+install_debug: dotfiles
