@@ -2,7 +2,7 @@
 
 My dotfiles for Linux based systems.
 
-![desktop](https://raw.githubusercontent.com/Strandgaard96/dotfiles/main/dot/desktop.png)
+![desktop](https://raw.githubusercontent.com/Strandgaard96/dotfiles/main/desktop.png)
 
 ## Setup
 
