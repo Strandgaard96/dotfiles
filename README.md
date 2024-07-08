@@ -2,13 +2,11 @@
 
 My dotfiles for Linux based systems.
 
-All the nice dotfiles config files are found in `dot` and `dot.deb`
-
 ![desktop](https://raw.githubusercontent.com/Strandgaard96/dotfiles/main/dot/desktop.png)
 
 ## Setup
 
-I use a makefile to create all relevant symlinks and directories as well as installing various commandline tools and neovim. Use at own discretion.
+I use stow and a makefile to create all relevant symlinks and directories as well as installing various commandline tools and neovim. Use at own discretion.
 
 There are multiple build targets that can be used depending on purpose. If you are running on a system without sudo, do install_remote
 
