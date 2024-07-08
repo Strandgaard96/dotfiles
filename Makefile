@@ -7,7 +7,7 @@
 .PHONY: install install_remote clean dotfiles directories
 
 # Default targets
-all: dotfiles bin
+all: dotfiles
 
 # Tmux stuff i kindof deprecated. I want to just install it directly. Less trouble. 
 # tmux_plugins:
@@ -26,17 +26,19 @@ ${HOME}/.oh-my-zsh:
 
 # This symlinks the dotfiles with stow
 dotfiles:
-	stow -v bash git zsh alacritty nvim lazygit ripgrep div bat tmux i3 fzf
+	bash ./backup_existing_dots.sh
+
+	stow -v git zsh alacritty nvim lazygit ripgrep div bat tmux i3 fzf bin
 
 # fuzzzzzy find 
 ${HOME}/.fzf:
 	bash ./setup/fzf_setup.sh
 
 install_apt_pi:
-	sudo apt-get install $$(cat ./dot/packages_pi.apt)
+	apt-get install $$(cat ./packages/packages_pi.apt) -y
 
 install_apt:
-	sudo apt-get install $$(cat ./dot/packages.apt)
+	apt-get install $$(cat ./packages/packages.apt) -y
 
 binaries:
 	bash ./setup/get_binaries.sh
@@ -50,7 +52,7 @@ fonts:
 install: dotfiles neovim ${HOME}/.fzf ${HOME}/.oh-my-zsh install_apt fonts
 
 # zsh installation is troublesome and not needed on remotes anyway. So made new target for this
-install_remote: dotfiles ${HOME}/opt/neovim binaries ${HOME}/.fzf
+install_remote: dotfiles neovim binaries ${HOME}/.fzf
 # Guide for setting up zsh
 # https://www.drewsilcock.co.uk/compiling-zsh
 
