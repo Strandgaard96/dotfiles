@@ -4,7 +4,7 @@ if [[ ! "$PATH" == */home/magstr/.fzf/bin* ]]; then
   PATH="${PATH:+${PATH}:}/home/magstr/.fzf/bin"
 fi
 
-source <(fzf --zsh)
+source <(fzf --bash)
 
 # Fzf
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
@@ -33,4 +33,3 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
 export FZF_DEFAULT_COMMAND='fd --hidden --follow --exclude=.git'
 export FZF_CTRL_T_COMMAND='fd -t f -HF -E=.git --exclude=.git -I'
 # export FZF_TMUX_OPTS='-p 90%'
-
