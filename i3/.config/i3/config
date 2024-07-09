@@ -19,9 +19,17 @@
 # set $mod to super key
 set $mod Mod4
 
+set $fm eDP-1
+set $sm DP-1-3
+
+exec --no-startup-id picom
+
 # Set Font for Window Titles.
 # font xft:mononoki 13
 font pango: Mononoki Nerd Font Mono 16
+
+# Set Desktop image
+exec --no-startup-id nitrogen --restore
 
 # Close a window
 bindsym $mod+q kill
@@ -164,33 +172,35 @@ assign [class="Slack"] workspace $workspace4
 assign [class="pycharm"] workspace $workspace5
 
 # move focused container to workspace
-bindsym $mod+Shift+exclam move workspace 1
-bindsym $mod+Shift+quotedbl move workspace 2
-bindsym $mod+Shift+numbersign move workspace 3
-bindsym $mod+Shift+currency move workspace 4
-bindsym $mod+Shift+percent move workspace 5
-bindsym $mod+Shift+ampersand move workspace 6
-bindsym $mod+Shift+slash move workspace 7
-bindsym $mod+Shift+parenleft move workspace 8
-bindsym $mod+Shift+parenright move workspace 9
-bindsym $mod+Shift+equal move workspace 10
+bindsym $mod+Shift+exclam move workspace $workspace1
+bindsym $mod+Shift+quotedbl move workspace $workspace2
+bindsym $mod+Shift+numbersign move workspace $workspace3
+bindsym $mod+Shift+currency move workspace $workspace4
+bindsym $mod+Shift+percent move workspace $workspace5
+bindsym $mod+Shift+ampersand move workspace $workspace6
+bindsym $mod+Shift+slash move workspace $workspace7
+bindsym $mod+Shift+parenleft move workspace $workspace8
+bindsym $mod+Shift+parenright move workspace $workspace9
+bindsym $mod+Shift+equal move workspace $workspace10
 
+exec --no-startup-id xrandr --output $sm --right-of $fm
 
 # Setup if dual-monitor setup is present
-workspace $workspace1 output eDP-1
-workspace $workspace2 output DP-1-3
-# workspace 3 output HDMI1
-# workspace 4 output HDMI1
-# workspace 5 output HDMI1
-# workspace 6 output DP2-2
-# workspace 7 output DP2-2
-# workspace 8 output DP2-2
-# workspace 9 output DP2-2
-# workspace 10 output DP2-2
+workspace $workspace1 output $sm
+workspace $workspace2 output $sm
+workspace $workspace3 output $sm
+workspace $workspace4 output $sm
+workspace $workspace5 output $sm
+# workspace $workspace6 output $sm
+# workspace $workspace7 output $sm
+# workspace $workspace8 output $sm
+# workspace $workspace9 output $sm
+# workspace $workspace10 output $sm
 
 
 exec --no-startup-id exec /usr/bin/firefox
 exec --no-startup-id exec alacritty
+exec --no-startup-id exec spotify
 exec --no-startup-id exec slack
 
 # reload the configuration file
@@ -201,6 +211,7 @@ bindsym $mod+Shift+R restart
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+E exit
+
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -259,8 +270,8 @@ exec --no-startup-id xset -b
 
 # Disable window bar
 # Don't worry, window-bar is there for tabs and stack
-for_window [class="^.*"] border pixel 0
-new_window pixel 1 
+default_border pixel 1
+default_floating_border pixel 1
 
 # Looks
 
@@ -289,7 +300,21 @@ client.background           $subtle_bg
 # finds out, if available)
 bar {
     strip_workspace_numbers yes
+    # output primary
+    # output $fm
     i3bar_command $HOME/.config/polybar/launch.sh
+    # status_command i3status
+    # colors {
+    #     background #282A36
+    #     statusline #F8F8F2
+    #     separator  #44475A
+    #
+    #     focused_workspace  #44475A #44475A #F8F8F2
+    #     active_workspace   #282A36 #44475A #F8F8F2
+    #     inactive_workspace #282A36 #282A36 #BFBFBF
+    #     urgent_workspace   #FF5555 #FF5555 #F8F8F2
+    #     binding_mode       #FF5555 #FF5555 #F8F8F2
+    # }
  
 # #status_command i3status
 }
