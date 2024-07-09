@@ -9,14 +9,8 @@
 # Default targets
 all: dotfiles
 
-# Tmux stuff i kindof deprecated. I want to just install it directly. Less trouble. 
-# tmux_plugins:
-# 	bash ./setup/tmux_plugins.sh
-#
-# tmux_tpm:
-
 neovim:
-	bash setup/nvim_setup.sh
+	bash ./setup/nvim_setup.sh
 	NEOVIM_SETUP=1
 
 <<<<<<< HEAD
@@ -36,7 +30,6 @@ ${HOME}/.oh-my-zsh:
 # This symlinks the dotfiles with stow
 dotfiles:
 	bash ./backup_existing_dots.sh
-
 	stow -v git zsh alacritty nvim lazygit ripgrep div bat tmux i3 fzf bin
 
 # fuzzzzzy find 
@@ -56,11 +49,10 @@ fonts:
 	bash ./fonts/setup_mononoki.sh
 
 
-#The major targets that install for different systems. 
+#### The major targets that install for different systems ####
 
 install: dotfiles neovim ${HOME}/.fzf ${HOME}/.oh-my-zsh install_apt fonts
 
-# zsh installation is troublesome and not needed on remotes anyway. So made new target for this
 install_remote: dotfiles neovim binaries ${HOME}/.fzf
 # Guide for setting up zsh
 # https://www.drewsilcock.co.uk/compiling-zsh
