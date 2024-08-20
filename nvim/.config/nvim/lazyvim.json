@@ -24,11 +24,12 @@
     "plugins.extras.personal.diffview",
     "plugins.extras.personal.hardtime",
     "plugins.extras.personal.nvim-colorizer",
+    "plugins.extras.personal.oil",
     "plugins.extras.personal.undotree",
     "plugins.extras.personal.vim-sleuth"
   ],
   "news": {
-    "NEWS.md": "6077"
+    "NEWS.md": "6520"
   },
   "version": 6
 }
