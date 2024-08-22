@@ -323,14 +323,15 @@ client.background           $subtle_bg
     #     urgent_workspace   #FF5555 #FF5555 #F8F8F2
     #     binding_mode       #FF5555 #FF5555 #F8F8F2
     # }
+
+# Set Desktop image
+exec_always --no-startup-id nitrogen --restore
+# exec_always --no-startup-id nitrogen --restore
  
 # #status_command i3status
 # }
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
-# Set Desktop image
-exec_always --no-startup-id nitrogen --restore
-# exec_always --no-startup-id nitrogen --restore
 
 # # Start i3blocks to display a workspace bar
 # bar {

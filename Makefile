@@ -6,6 +6,7 @@
 # Dummy targets
 .PHONY: install install_remote clean dotfiles directories
 
+
 # Default targets
 all: dotfiles
 
