@@ -21,8 +21,10 @@ set $mod Mod4
 
 set $fm eDP-1
 set $sm DP-1-3
+set $tm HDMI-2
 exec --no-startup-id picom &
 exec --no-startup-id xrandr --output $sm --auto --right-of $fm
+# exec --no-startup-id xrandr --output $tm --auto --right-of $fm
 
 # Configure 5px of space between windows and to the screen edges.
 gaps inner 10px
@@ -43,10 +45,13 @@ bindsym $mod+q kill
 bindsym $mod+l exec i3lock -c 000000 -d
 
 # Lock and suspend
-bindsym $mod+shift+l exec i3lock -c 000000 -d & sudo /usr/sbin/pm-suspend
+bindsym $mod+shift+l exec i3lock -i ~/Pictures/Wallpapers/wallhaven-l8v3ey.png -c 000000 -d & sudo /usr/sbin/pm-suspend
 
 # Print Screen = Screenshot
-bindsym Print exec scrot ~/img/screenshots/screenshot-%y%m%d-%H%M%S.png
+# bindsym Print exec scrot ~/img/screenshots/screenshot-%y%m%d-%H%M%S.png
+#
+bindsym Print       exec flameshot full
+bindsym Shift+Print exec flameshot gui
 
 # volume bindings
 #bindsym Control+Up              exec ~/bin/sound "+1"
@@ -196,10 +201,10 @@ bindsym $mod+Shift+equal move workspace $workspace10
 
 
 # Setup if dual-monitor setup is present
-workspace $workspace1 output $sm $fm 
-workspace $workspace2 output $sm $fm 
-workspace $workspace3 output $sm $fm 
-workspace $workspace4 output $sm $fm 
+workspace $workspace1 output $sm $tm $fm
+workspace $workspace2 output $sm $tm $fm
+workspace $workspace3 output $sm $tm $fm
+workspace $workspace4 output $sm $tm $fm
 workspace $workspace5 output $fm 
 # workspace $workspace7 output $sm
 # workspace $workspace8 output $sm
