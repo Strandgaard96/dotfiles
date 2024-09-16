@@ -12,7 +12,6 @@ all: dotfiles
 
 neovim:
 	bash ./setup/nvim_setup.sh
-	NEOVIM_SETUP=1
 
 ${HOME}/.oh-my-zsh:
 	bash ./setup/zsh_ohmyzsh.sh
