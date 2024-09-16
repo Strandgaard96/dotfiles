@@ -152,6 +152,8 @@ ZSH_AUTOSUGGEST_COMPLETION_IGNORE="git *"
 # I don't like underline
 ZSH_HIGHLIGHT_STYLES[path]=none
 ZSH_HIGHLIGHT_STYLES[path_prefix]=none
+# Color of comments
+ZSH_HIGHLIGHT_STYLES[comment]='fg=#FB00A2,bold'
 
 # all my paths
 source ${HOME}/.bash_paths
@@ -161,12 +163,6 @@ if test -f ~/.bash_aliases; then . ~/.bash_aliases; fi
 # export PATH="$HOME/opt/anaconda3/bin:$PATH"  # commented out by conda initialize
 
 
-
-# Silver surver init for fzf. Currently not used.  
-if type ag &> /dev/null; then
-    export FZF_DEFAULT_COMMAND='ag -p ~/.gitignore -g "" "${FZF_BASE:-.}"'
-    export FZF_CTRL_T_COMMAND='ag -p ~/.gitignore -g "" "${FZF_BASE:-.}"'
-fi
 
 # Need to be set for ripgrep to find config.
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
@@ -185,8 +181,6 @@ test -f $HOME/.zshrc.local && source $HOME/.zshrc.local
 # zoxide
 eval "$(zoxide init zsh)"
 
-# Set up fzf key bindings and fuzzy completion
-# source <(fzf --zsh)
 # Define an init function and append to zvm_after_init_commands
 function my_init() {
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
