@@ -42,7 +42,7 @@ alias cona='conda activate'
 alias cond='conda deactivate'
 alias cmol='conda activate mols_test'
 
-alias unmount=fusermount -u
+alias unmount="fusermount -u"
 
 # Call function
 alias gc='gitclone' # from bin

@@ -24,7 +24,7 @@ Amazing linux tools that I use in the dotfiles.
 - [exa](https://github.com/ogham/exa) - A Modern replacement for ls
 - [fd](https://github.com/sharkdp/fd) - A simple, fast and
   user-friendly alternative to 'find'
-- [zooxide](<>) - A cd command that learns - easily navigate directories
+  j [zooxide](<>) - A cd command that learns - easily navigate directories
   from the command line
 - [ripgrep](https://github.com/BurntSushi/ripgrep) - Ripgrep
   recursively searches directories for a regex pattern while

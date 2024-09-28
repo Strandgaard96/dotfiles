@@ -23,8 +23,8 @@ set $fm eDP-1
 set $sm DP-1-3
 set $tm HDMI-2
 exec --no-startup-id picom &
-exec --no-startup-id xrandr --output $sm --auto --right-of $fm
-# exec --no-startup-id xrandr --output $tm --auto --right-of $fm
+# exec --no-startup-id xrandr --output $sm --auto --right-of $fm
+exec --no-startup-id xrandr --output $tm --auto --right-of $fm
 
 # Configure 5px of space between windows and to the screen edges.
 gaps inner 10px
@@ -161,8 +161,9 @@ set $workspace1 "1:"
 set $workspace2 "2:"
 set $workspace3 "3:"
 set $workspace4 "4:"
-set $workspace5 ""
-# set $workspace6 "5"
+set $workspace5 "5:󱚥"
+set $workspace6 "6"
+set $workspace7 ""
 # set $workspace7 "6:"
 # set $workspace8 "7:"
 # set $workspace9 "8:"
@@ -183,7 +184,7 @@ bindsym $mod+9 workspace $workspace9
 # Assign Workspaces:
 assign [class="alacritty"] workspace $workspace1
 assign [class="Google-chrome"] workspace $workspace2
-assign [class="Spotify"] workspace $workspace5
+assign [class="Spotify"] workspace $workspace7
 assign [class="Slack"] workspace $workspace3
 assign [class="pycharm"] workspace $workspace4
 
@@ -205,11 +206,27 @@ workspace $workspace1 output $sm $tm $fm
 workspace $workspace2 output $sm $tm $fm
 workspace $workspace3 output $sm $tm $fm
 workspace $workspace4 output $sm $tm $fm
-workspace $workspace5 output $fm 
+workspace $workspace5 output $sm $tm $fm
+workspace $workspace6 output $sm $tm $fm
+workspace $workspace7 output $fm 
+workspace $workspace8 output $sm $tm $fm
 # workspace $workspace7 output $sm
 # workspace $workspace8 output $sm
 # workspace $workspace9 output $sm
 # workspace $workspace10 output $sm
+
+# For working passwords
+exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets
+
+
+
+# Prevent pop ups from runing the tiling
+for_window [window_role="pop-up"]                       floating enable
+for_window [window_role="bubble"]                       floating enable 
+for_window [window_role="task_dialog"]                  floating enable
+for_window [window_role="Preferences"]                  floating enable
+for_window [window_type="dialog"]                       floating enable 
+for_window [window_type="menu"]                         floating enable
 
 
 exec --no-startup-id spotify

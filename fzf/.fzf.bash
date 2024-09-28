@@ -4,8 +4,6 @@ if [[ ! "$PATH" == */home/magstr/.fzf/bin* ]]; then
   PATH="${PATH:+${PATH}:}/home/magstr/.fzf/bin"
 fi
 
-source <(fzf --bash)
-
 # Fzf
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --highlight-line \

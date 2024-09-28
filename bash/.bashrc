@@ -47,8 +47,8 @@ if [ -x /usr/bin/dircolors ]; then
 	alias egrep='egrep --color=auto'
 fi
 
-# fzf init
-# test -f $HOME/.fzf.bash && source ~/.fzf.bash
+# Set up fzf key bindings and fuzzy completion
+eval "$(fzf --bash)"
 
 # Set ripgrep config path
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
