@@ -1,6 +1,6 @@
 FROM ubuntu:22.04
 
-MAINTAINER Magnus Strandgaard
+LABEL org.opencontainers.image.authors="Magnus Strandgaard"
 
 # OS updates and install
 RUN apt-get -qq update
@@ -23,7 +23,7 @@ ENV HOME=/home/tester
 # Change working directory
 WORKDIR /home/tester/dotfiles
 
-RUN sudo make install
+# RUN sudo make install
 
 # # Run setup
 # RUN ./setup

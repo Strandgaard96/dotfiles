@@ -20,8 +20,8 @@ ${HOME}/.oh-my-zsh:
 
 # This symlinks the dotfiles with stow
 dotfiles:
-	bash ./backup_existing_dots.sh
-	stow -v git bash alacritty nvim lazygit ripgrep div bat tmux i3 fzf bin
+	bash -c ./backup_existing_dots.sh
+	stow -v git alacritty nvim lazygit ripgrep div bat tmux i3 fzf bin
 
 # fuzzzzzy find 
 ${HOME}/.fzf:
