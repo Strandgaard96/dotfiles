@@ -26,7 +26,7 @@ if test -d "$HOME/opt/miniconda3"; then CONDA_PREFIX="$HOME/opt/miniconda3"; fi
 if test -d "$HOME/miniconda3"; then CONDA_PREFIX="$HOME/miniconda3"; fi
 
 # Add conda to path
-if test -d $CONDA_PREFIX/etc/profile.d; then source $CONDA_PREFIX/etc/profile.d/conda.sh; fi
+test ! -z "$CONDA_PREFIX" && test -d $CONDA_PREFIX/etc/profile.d && source $CONDA_PREFIX/etc/profile.d/conda.sh
 unset CONDA_PREFIX # don't activate by default
 
 export PATH

@@ -11,22 +11,22 @@ RUN apt-get install git sudo zsh -qq -y
 RUN apt-get update && sudo apt-get install make curl stow vim wget unzip -y
 
 # Create test user and add to sudoers
-RUN useradd -m -s /bin/zsh tester && \
-    usermod -aG sudo tester && \
-    echo "tester ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers
+RUN useradd -m -s /bin/zsh magstr && \
+    usermod -aG sudo magstr && \
+    echo "magstr ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 # Add dotfiles and chown
-COPY . /home/tester/dotfiles
-RUN chown -R tester:tester /home/tester
+COPY . /home/magstr/dotfiles
+RUN chown -R magstr:magstr /home/magstr
 
 # Switch to testuser
-USER tester
+USER magstr
 
 # Set HOME explicitly
-ENV HOME=/home/tester
+ENV HOME=/home/magstr
 
 # Change working directory
-WORKDIR /home/tester/dotfiles
+WORKDIR /home/magstr/dotfiles
 
 # Optionally run setup if needed
 # RUN ./setup

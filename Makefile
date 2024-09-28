@@ -18,11 +18,12 @@ ${HOME}/.oh-my-zsh:
 # This symlinks the dotfiles with stow
 dotfiles:
 	bash -c ./backup_existing_dots.sh
-	stow -v git alacritty nvim lazygit ripgrep div bat tmux i3 fzf bin
+	stow -v git alacritty nvim lazygit ripgrep div bat tmux i3 bash bin
 
 # fuzzzzzy find 
 ${HOME}/.fzf:
 	bash ./setup/fzf_setup.sh
+	bash ./setup/setup_zoxide.sh
 
 install_apt_pi:
 	apt-get install $$(cat ./packages/packages_pi.apt) -y
