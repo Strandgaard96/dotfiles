@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Define the path to the .bashrc file and its backup
-BASHRC="$HOME/.bashrc"
-BACKUP="$HOME/.bashrc.bk"
+BASHRC=$HOME/.bashrc
+BACKUP=$HOME/.bashrc.bk
 
 # Check if the .bashrc file exists
 if [ -f "$BASHRC" ]; then

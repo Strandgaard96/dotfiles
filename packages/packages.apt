@@ -1,3 +1,6 @@
+wget
+unzip
+vim
 i3
 bat
 tmux
