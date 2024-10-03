@@ -22,45 +22,45 @@
 	fix-who = commit --amend --reset-author
 	next = rebase --continue
 
-  # Format: commitHash YYYY-MM-DD Commit Message [Author]
-  l = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
-  
-  # Format: * commitHash  Commit Message. 4 weeks ago by Author
-  lg = log --graph --pretty=format:'%Cred%h%Creset %C(yellow)%d%Creset %s %Cgreen%ar%Creset by %C(yellow)%an%Creset' --abbrev-commit
-  
-  # Oneline Log format
-  ll = log --oneline
-  
-  ## Detailed Log Format (Last 10 commits)
-  lf = log --name-status -10
+	# Format: commitHash YYYY-MM-DD Commit Message [Author]
+	l = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
 
-  co = checkout
-  cob = checkout -b
+	# Format: * commitHash  Commit Message. 4 weeks ago by Author
+	lg = log --graph --pretty=format:'%Cred%h%Creset %C(yellow)%d%Creset %s %Cgreen%ar%Creset by %C(yellow)%an%Creset' --abbrev-commit
 
-  b = branch
-  b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
+	# Oneline Log format
+	ll = log --oneline
 
-  c = commit --verbose
-  ca = commit -a --verbose
-  cm = commit -m
-  cam = commit -a -m
+	## Detailed Log Format (Last 10 commits)
+	lf = log --name-status -10
 
-  s = status
-  st = status -s
+	co = checkout
+	cob = checkout -b
 
-  # Convenient to see diff in minified files
-  dw = diff --color-words
-  ds = diff --staged
+	b = branch
+	b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
 
-  # List Aliases
-  # For Windows
-  # la = !git config --list | findstr "alias"
-  # For Linux / Mac
-  la = "!git config -l | grep alias | cut -c 7-"
-  
-  
-  # BE CAUTIOUS - Reset Hard
-  rh = reset --hard HEAD
+	c = commit --verbose
+	ca = commit -a --verbose
+	cm = commit -m
+	cam = commit -a -m
+
+	s = status
+	st = status -s
+
+	# Convenient to see diff in minified files
+	dw = diff --color-words
+	ds = diff --staged
+
+	# List Aliases
+	# For Windows
+	# la = !git config --list | findstr "alias"
+	# For Linux / Mac
+	la = "!git config -l | grep alias | cut -c 7-"
+
+
+	# BE CAUTIOUS - Reset Hard
+	rh = reset --hard HEAD
 
 
 [push]

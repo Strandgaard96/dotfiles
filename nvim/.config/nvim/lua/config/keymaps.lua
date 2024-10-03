@@ -100,10 +100,9 @@ map("v", "y", "myy`y", { noremap = true, desc = "Maintain the cursor position wh
 map({ "i", "v", "n", "s" }, "<C-S>", "<cmd>w<cr><esc>", { desc = "Save file" })
 
 -- map("n", "<leader>ud", Util.toggle_diagnostics, { desc = "Toggle Diagnostics" })
-
 -- Scrolling lines in insert mode
+map("i", "<M-j>", "<ESC>:m .-1<cr>==gi", { noremap = true })
 map("i", "<M-k>", "<ESC>:m .+1<cr>==gi", { noremap = true, desc = "Neat scroll map insert" })
-map("i", "<M-k>", "<ESC>:m .+1<cr>==gi", { noremap = true })
 
 -- -- Peristence
 -- -- -- restore the session for the current directory

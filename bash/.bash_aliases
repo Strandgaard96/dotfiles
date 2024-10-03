@@ -97,10 +97,8 @@ fi
 command -v bat &>/dev/null && alias c='bat' || alias c='cat'
 command -v fd &>/dev/null && alias fd='fd --hidden --follow' || alias fd='find . -name'
 command -v rg &>/dev/null && alias rg='rg --hidden --follow --smart-case --no-ignore 2>/dev/null' || alias rg='grep --color=auto --exclude-dir=.git -R'
-command -v exa &>/dev/null && alias ll='exa -l --group-directories-first --sort modified --reverse --icons --no-user --color-scale' || alias ll='ls --color=auto --group-directories-first -lth'
-command -v exa &>/dev/null && alias la='ll -a' || alias la='ll -A'
-command -v exa &>/dev/null && alias la='ll -a' || alias la='ll -A'
-command -v exa &>/dev/null && alias lk='ll -s=size' || alias lk='ll -r --sort=size' # The or statement only executes if the previous returns error.
+command -v eza &>/dev/null && alias ll='eza -l --group-directories-first --sort modified --reverse --icons --no-user --color-scale --git' || alias ll='ls --color=auto --group-directories-first -lth'
+command -v eza &>/dev/null && alias la='eza -l -a' || alias la='ll -A'
 
 # Font
 # I followed this guide to get font that worked with icons: https://bytexd.com/how-to-install-nerd-fonts-on-linux/
