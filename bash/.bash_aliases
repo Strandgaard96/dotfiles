@@ -97,7 +97,8 @@ fi
 command -v bat &>/dev/null && alias c='bat' || alias c='cat'
 command -v fd &>/dev/null && alias fd='fd --hidden --follow' || alias fd='find . -name'
 command -v rg &>/dev/null && alias rg='rg --hidden --follow --smart-case --no-ignore 2>/dev/null' || alias rg='grep --color=auto --exclude-dir=.git -R'
-command -v eza &>/dev/null && alias ll='eza -l --group-directories-first --sort modified --reverse --icons --no-user --color-scale --git' || alias ll='ls --color=auto --group-directories-first -lth'
+command -v eza &>/dev/null && alias ll='eza -l --group-directories-first --sort modified --reverse --icons --no-user --color-scale' || alias ll='ls --color=auto --group-directories-first -lth'
+command -v eza &>/dev/null && alias llg='eza -l --group-directories-first --sort modified --reverse --icons --no-user --color-scale --git' || alias ll='ls --color=auto --group-directories-first -lth'
 command -v eza &>/dev/null && alias la='eza -l -a' || alias la='ll -A'
 
 # Font

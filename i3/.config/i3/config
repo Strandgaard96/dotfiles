@@ -33,6 +33,9 @@ gaps inner 10px
 # for a total gap of 10px to the screen edges, and 5px between windows.
 gaps outer 5px
 
+ # Hide gaps when there is only 1 window
+smart_gaps on
+
 
 for_window [floating] move position center
 
@@ -45,10 +48,11 @@ font pango: Mononoki Nerd Font Mono 16
 bindsym $mod+q kill
 
 # Lock Computer
-bindsym $mod+l exec i3lock -c 000000 -d
+bindsym $mod+9 exec i3lock -c 000000 -d
 
 # Lock and suspend
-bindsym $mod+shift+l exec i3lock -i ~/Pictures/Wallpapers/wallhaven-l8v3ey.png -c 000000 -d & sudo /usr/sbin/pm-suspend
+bindsym $mod+shift+9 exec i3lock -i ~/Pictures/Wallpapers/wallhaven-l8v3ey.png -c 000000 -d & sudo /usr/sbin/pm-suspend
+
 
 # Print Screen = Screenshot
 # bindsym Print exec scrot ~/img/screenshots/screenshot-%y%m%d-%H%M%S.png
@@ -113,10 +117,10 @@ bindsym $mod+d exec rofi -show run
 #bindsym $mod+space exec rofi -show run
 
 # change focus
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # move focused window
 bindsym $mod+Shift+Left move left
@@ -125,10 +129,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+shift+h split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+bindsym $mod+shift+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
@@ -182,7 +186,6 @@ bindsym $mod+5 workspace $workspace5
 bindsym $mod+6 workspace $workspace6
 bindsym $mod+7 workspace $workspace7
 bindsym $mod+8 workspace $workspace8
-bindsym $mod+9 workspace $workspace9
 
 # Assign Workspaces:
 assign [class="alacritty"] workspace $workspace1
@@ -200,8 +203,8 @@ bindsym $mod+Shift+percent move workspace $workspace5
 bindsym $mod+Shift+ampersand move workspace $workspace6
 bindsym $mod+Shift+slash move workspace $workspace7
 bindsym $mod+Shift+parenleft move workspace $workspace8
-bindsym $mod+Shift+parenright move workspace $workspace9
-bindsym $mod+Shift+equal move workspace $workspace10
+# bindsym $mod+Shift+parenright move workspace $workspace9
+# bindsym $mod+Shift+equal move workspace $workspace10
 
 
 # Setup if dual-monitor setup is present
