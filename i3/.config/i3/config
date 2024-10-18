@@ -1,4 +1,4 @@
-# MTS Configuration
+# i3 Configuration
 
 # Inspiration
 # - https://github.com/Plonq/dotfiles/blob/master/i3/.config/i3/config
@@ -19,13 +19,19 @@
 # set $mod to super key
 set $mod Mod4
 
+
+### Monitor stuff
 set $fm eDP-1
 set $sm DP-1-3
 set $tm HDMI-2
 exec --no-startup-id picom &
-exec --no-startup-id xrandr --output $sm --auto --right-of $fm
+# exec --no-startup-id xrandr --output $sm --auto --right-of $fm
 # exec --no-startup-id xrandr --output $tm --auto --right-of $fm
 
+# Setup monitors with xrandr
+exec --no-startup-id ~/bin/monitor.py -u
+
+### Gaps 
 # Configure 5px of space between windows and to the screen edges.
 gaps inner 10px
 
@@ -37,15 +43,30 @@ gaps outer 5px
 smart_gaps on
 
 
+### Windows 
 for_window [floating] move position center
 
-# Set Font for Window Titles.
-# font xft:mononoki 13
-font pango: Mononoki Nerd Font Mono 16
+no_focus [class="jetbrains-pycharm" window_type="dialog"]
+for_window [class="jetbrains-pycharm" window_type="dialog"] floating enable border normal move position center
+# for_window [class="jetbrains-.*" title="win0"] floating enable border none
 
+# Prevent pop ups from runing the tiling
+for_window [window_role="pop-up"]                       floating enable
+for_window [window_role="bubble"]                       floating enable 
+for_window [window_role="task_dialog"]                  floating enable
+for_window [window_role="Preferences"]                  floating enable
+for_window [window_type="dialog"]                       floating enable 
+for_window [window_type="menu"]                         floating enable
+
+for_window [class="Pavucontrol"] floating enable
+for_window [class="blueman-manager"] floating enable
 
 # Close a window
 bindsym $mod+q kill
+
+
+# Set Font for Window Titles.
+font pango: Mononoki Nerd Font Mono 16
 
 # Lock Computer
 bindsym $mod+9 exec i3lock -c 000000 -d
@@ -55,10 +76,9 @@ bindsym $mod+shift+9 exec i3lock -i ~/Pictures/Wallpapers/wallhaven-l8v3ey.png -
 
 
 # Print Screen = Screenshot
-# bindsym Print exec scrot ~/img/screenshots/screenshot-%y%m%d-%H%M%S.png
-#
 bindsym Print       exec flameshot full
 bindsym Shift+Print exec flameshot gui
+
 
 # volume bindings
 #bindsym Control+Up              exec ~/bin/sound "+1"
@@ -78,20 +98,6 @@ bindsym XF86AudioStop exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer
 bindsym XF86AudioPrev exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
 bindsym XF86AudioNext exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
 
-# spotify bindings
-# bindsym XF86AudioPlay exec ~/bin/spot
-# bindsym XF86AudioPrev exec ~/bin/spot "prev"
-# bindsym XF86AudioNext exec ~/bin/spot "next"
-# bindsym XF86AudioStop exec ~/bin/spot "stop"
-
-
-# Sreen brightness controls
-# bindsym XF86MonBrightnessUp exec --no-startup-id light -A 1 # increase screen brightness
-# bindsym XF86MonBrightnessDown exec --no-startup-id light -U 1 # decrease screen brightness
-# bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5%
-# bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
-# bindsym XF86MonBrightnessUp exec brightnessctl s +10% > /dev/null
-# bindsym XF86MonBrightnessDown exec brightnessctl s 10%- > /dev/null
 
 # Do not focus on window, on mouse hover
 focus_follows_mouse no
@@ -112,9 +118,9 @@ bindsym $mod+Shift+Return scratchpad show
 bindsym $mod+Shift+Q kill
 
 # start dmenu (a program launcher)
-#bindsym $mod+d exec dmenu_run -b -fn -misc-*-*-*-*-*-18-*-*-*-*-*-*-*
 bindsym $mod+d exec rofi -show run
-#bindsym $mod+space exec rofi -show run
+
+### NAVIGATION 
 
 # change focus
 bindsym $mod+h focus left
@@ -146,22 +152,10 @@ bindsym $mod+e layout default
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-#bindsym $mod+space focus mode_toggle
+bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
-
-# # switch to workspace
-# bindsym $mod+1 workspace 1
-# bindsym $mod+2 workspace 2
-# bindsym $mod+3 workspace 3
-# bindsym $mod+4 workspace 4
-# bindsym $mod+5 workspace 5
-# bindsym $mod+6 workspace 6
-# bindsym $mod+7 workspace 7
-# bindsym $mod+8 workspace 8
-# bindsym $mod+9 workspace 9
-# bindsym $mod+0 workspace 10
 
 # nombres del area de trabajo
 set $workspace1 "1:"
@@ -193,6 +187,7 @@ assign [class="Google-chrome"] workspace $workspace2
 assign [class="Spotify"] workspace $workspace7
 assign [class="Slack"] workspace $workspace3
 assign [class="pycharm"] workspace $workspace4
+assign [class="code"] workspace $workspace5
 
 # move focused container to workspace
 bindsym $mod+Shift+exclam move workspace $workspace1
@@ -224,15 +219,6 @@ workspace $workspace8 output $sm $tm $fm
 # For working passwords
 exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets
 
-
-
-# Prevent pop ups from runing the tiling
-for_window [window_role="pop-up"]                       floating enable
-for_window [window_role="bubble"]                       floating enable 
-for_window [window_role="task_dialog"]                  floating enable
-for_window [window_role="Preferences"]                  floating enable
-for_window [window_type="dialog"]                       floating enable 
-for_window [window_type="menu"]                         floating enable
 
 
 exec --no-startup-id spotify
@@ -273,19 +259,29 @@ mode "resize" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-
+# Resize window (you can also use the mouse for that)
 bindsym $mod+r mode "resize"
+mode "Resize" {
+        # These bindings trigger as soon as you enter the resize mode
+        bindsym j resize shrink width 5 px or 5 ppt
+        bindsym k resize grow height 5 px or 5 ppt
+        bindsym l resize shrink height 5 px or 5 ppt
+        bindsym h resize grow width 5 px or 5 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # exit resize mode: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
 
 # AUTOSTART
 # automatically starting applications on i3 startup
 
-# Resoulution
-#exec --no-startup-id ~/bin/monitor.py -u
-
-#exec --no-startup-id dropbox start # Start Dropbox
-#exec --no-startup-id pactl load-module module-bluetooth-discover # Bluetooth policies
-#exec --no-startup-id nm-applet -sm-disable # Start  Network Manager
-# exec --no-startup-id blueman-applet # Start bluetooth manager
 
 # Disable Screen saver
 exec --no-startup-id xset s off
@@ -293,6 +289,8 @@ exec --no-startup-id xset -dpms
 
 # Disable beep
 exec --no-startup-id xset -b
+
+exec_always --no-startup-id dunst -config ~/.config/dunst/dunstrc
 
 # Enable power-save
 # exec --no-startup-id sudo pm-powersave
@@ -327,88 +325,9 @@ client.placeholder          $subtle_bg      $subtle_bg      $dim_txt            
 client.background           $subtle_bg
 
 
-# # interface      <border> <background> <text> <indicator> <child_border>
-# client.focused             #037400   #037400    #ffffff    #2e9ef4
-# client.focused_inactive    #222222   #222222    #ffffff    #484e50
-# client.unfocused           #222222   #222222    #ffffff    #222222
-# client.urgent              #2f343a   #900000    #ffffff    #900000
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-# bar {
-#     strip_workspace_numbers yes
-#     # output primary
-#     # output $fm
-#     i3bar_command $HOME/.config/polybar/launch.sh
-    # status_command i3status
-    # colors {
-    #     background #282A36
-    #     statusline #F8F8F2
-    #     separator  #44475A
-    #
-    #     focused_workspace  #44475A #44475A #F8F8F2
-    #     active_workspace   #282A36 #44475A #F8F8F2
-    #     inactive_workspace #282A36 #282A36 #BFBFBF
-    #     urgent_workspace   #FF5555 #FF5555 #F8F8F2
-    #     binding_mode       #FF5555 #FF5555 #F8F8F2
-    # }
-
 # Set Desktop image
 exec_always --no-startup-id nitrogen --restore
-# exec_always --no-startup-id nitrogen --restore
- 
-# #status_command i3status
-# }
+
+# Polybar 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
-
-# # Start i3blocks to display a workspace bar
-# bar {
-#     font pango: Mononoki Nerd Font Mono 16
-#     i3bar_command i3bar
-#     output primary
-#     position top
-#      status_command i3status
-# #    status_command 2> i3blocks.err i3blocks -vvv | tee /home/magstr/i3blocks.out
-# # status_command 2>/tmp/i3blocks.err /path/to/i3blocks -vvv -c /path/to/config | tee /tmp/i3blocks.out
-#     strip_workspace_numbers yes
-#     # tray_output nonprimary
-#     colors {
-#         background $subtle_bg
-#         statusline $highlight_txt
-#     }
-#
-#     # colors {
-#     #     background #282A36
-#     #     statusline #F8F8F2
-#     #     separator  #44475A
-#     #
-#     #     focused_workspace  #44475A #44475A #F8F8F2
-#     #     active_workspace   #282A36 #44475A #F8F8F2
-#     #     inactive_workspace #282A36 #282A36 #BFBFBF
-#     #     urgent_workspace   #FF5555 #FF5555 #F8F8F2
-#     #     binding_mode       #FF5555 #FF5555 #F8F8F2
-#     # }
-# }
-#
-# #
-# bar {
-#     font pango: Mononoki Nerd Font Mono 16
-#     i3bar_command i3bar
-#     output nonprimary
-#     position top
-#     strip_workspace_numbers yes
-#     # tray_output DP-4
-#
-#     colors {
-#         background #282A36
-#         statusline #F8F8F2
-#         separator  #44475A
-#
-#         focused_workspace  #44475A #44475A #F8F8F2
-#         active_workspace   #282A36 #44475A #F8F8F2
-#         inactive_workspace #282A36 #282A36 #BFBFBF
-#         urgent_workspace   #FF5555 #FF5555 #F8F8F2
-#         binding_mode       #FF5555 #FF5555 #F8F8F2
-#     }
-# }
-#
