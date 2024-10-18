@@ -51,7 +51,7 @@ def set_monitor(monitor, resolution="auto", position=None, debug=False):
 
     if resolution == "auto":
         cmd += ["--auto"]
-    elif resolution == "off" or not resulution:
+    elif resolution == "off" or not resolution:
         cmd += ["--off"]
     else:
         cmd += ["--mode " + resolution]
@@ -140,7 +140,8 @@ def main():
         if len(external_monitors) == 0:
             quit("No external monitors")
 
-        previous = None
+        previous = args.native
+        set_monitor(args.native, resolution=native_res, debug=args.debug)
 
         for monitor, resolution in zip(external_monitors, external_resolutions):
 
@@ -152,8 +153,6 @@ def main():
             set_monitor(monitor, resolution="auto", debug=args.debug, position=pos)
 
             previous = monitor
-
-        set_monitor(args.native, resolution="off", debug=args.debug)
 
     else:
 
