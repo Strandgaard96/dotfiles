@@ -24,12 +24,12 @@ Amazing linux tools that I use in the dotfiles.
 - [exa](https://github.com/ogham/exa) - A Modern replacement for ls
 - [fd](https://github.com/sharkdp/fd) - A simple, fast and
   user-friendly alternative to 'find'
-  j [zooxide](<>) - A cd command that learns - easily navigate directories
+- [zooxide](https://github.com/ajeetdsouza/zoxide) - A cd command that learns - easily navigate directories
   from the command line
 - [ripgrep](https://github.com/BurntSushi/ripgrep) - Ripgrep
   recursively searches directories for a regex pattern while
   respecting your gitignore
-- [diff-so-fancy](<>) - Good-lookin' diffs. Actually... nah... The
+- [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy) - Good-lookin' diffs. Actually... nah... The
   best-lookin' diffs. 🎉
 
 ### Relevant links
