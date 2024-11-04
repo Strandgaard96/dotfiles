@@ -1,10 +1,5 @@
-"" Source your .vimrc
-"source ~/.vimrc
-
-" Maintain the cursor position when yanking a visual selection
-" http://ddrscott.github.io/blog/2016/yank-without-jank/
-" map("v", "y", "myy`y", { noremap = true, desc = "Maintain the cursor position when yanking a visual selection" })
-
+"" Source my .vimrc
+source ~/.vimrc
 
 "" IDE specific Key mappings ====================================================
 
@@ -16,54 +11,94 @@
 "" https://github.com/magidc/dotfiles/blob/master/.ideavimrc
 
 "" Settings ========================================================
-set scrolloff=10
-set number
-set relativenumber
-set showmode
-set showcmd
-set smartcase
-set commentary
-set incsearch
-set hlsearch
-set visualbell
-set clipboard+=unnamed
+
 set clipboard+=ideaput
-let mapleader = ","
+
+" LAZYVIM LIKE OPTIONS"
+" Enable auto write
+set autowrite
+set completeopt=menu,menuone,noselect
+" Hide * markup for bold and italic, but not markers with substitutions
+set conceallevel=2
+" Confirm to save changes before exiting modified buffer
+set confirm
+" Enable highlighting of the current line
+set cursorline
+" Use spaces instead of tabs
+set expandtab
+set foldlevel=99
+set formatoptions=jcroqlnt " tcqj
+set grepformat=%f:%l:%c:%m
+set grepprg=rg\ --vimgrep
+" Ignore case
+set ignorecase
+" Preview incremental substitute
+set inccommand=nosplit
+set jumpoptions=view
+" Global statusline
+set laststatus=3
+" Wrap lines at convenient points
+set linebreak
+" Show some invisible characters (tabs...)
+set list
+" Enable mouse mode
+set mouse=a
+" Print line number
+set number
+" Popup blend
+set pumblend=10
+" Maximum number of entries in a popup
+set pumheight=10
+" Relative line numbers
+set relativenumber
+" Lines of context
+set scrolloff=4
+" Round indent
+set shiftround
+" Size of an indent
+set shiftwidth=2
+" Don't show mode since we have a statusline
+set showmode=false
+" Columns of context
+set sidescrolloff=8
+" Always show the signcolumn
+set signcolumn=yes
+" Don't ignore case with capitals
+set smartcase
+" Insert indents automatically
+set smartindent
+set spelllang=en
+" Put new windows below current
+set splitbelow
+set splitkeep=screen
+" Put new windows right of current
+set splitright
+" Number of spaces tabs count for
+set tabstop=2
+" True color support
+set termguicolors
+set timeoutlen=300
+" Enable undo file
+set undofile
+set undolevels=10000
+" Save swap file and trigger CursorHold
+set updatetime=200
+" Allow cursor to move where there is no text in visual block mode
+set virtualedit=block
+" Command-line completion mode
+set wildmode=longest:full,full
+" Minimum window width
+set winminwidth=5
+" Disable line wrap
+set nowrap
 
 
-" Standard vim mappings from my neovim ==========================================
-vmap K :m '<-2<CR>gv=gv
-vmap J :m '>+1<CR>gv=gv
-nnoremap <C-d> <C-d>zz
-
-nmap <expr> <silent> j v:count == 0 ? 'gj' : 'j'
-nmap <expr> <silent> k v:count == 0 ? 'gk' : 'k'
-
-" -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
-" map("n", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
-" map("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
-" map("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
-" map("n", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
-" map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
-" map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
-
-" greatest remap ever. Paste over word. Preserve the paste.
-xmap <leader>p [["_P]]
-
-" Delete without yank
-nnoremap d "_d
-nnoremap D "_D
-vnoremap d "_d
-
-" Cut commands
-nnoremap <leader>d dd
-vnoremap <leader>d d
-nnoremap <leader>D D
-
-" Reselect visual selection after indenting # Neat
-vnoremap < <gv
-vnoremap > >gv
-
+" gcc and gc<action> mappings.
+Plug 'tpope/vim-commentary'
+" s action, such as cs"' (replace " with '), ds" (unquote)
+Plug 'tpope/vim-surround'
+" similar to flash.nvim
+Plug 'justinmk/vim-sneak'
 
 "" Choosing handlers in conflicting Intellij/IdeaVim keymaps =======
 
@@ -86,8 +121,8 @@ nnoremap <C-i> :action Forward<cr>
 nnoremap <a-w> :action CloseAllEditorsButActive<cr>
 nnoremap <a-q> :action CloseContent<cr>
 nnoremap <a-t> :action NewScratchFile<cr>
-nnoremap <leader>wv :action SplitVertically<cr>
-nnoremap <leader>ws :action SplitHorizontally<cr>
+nnoremap <leader>- :action SplitVertically<cr>
+nnoremap <leader>| :action SplitHorizontally<cr>
 nnoremap <leader>wu :action Unsplit<cr>
 nnoremap <leader>wm :action MoveEditorToOppositeTabGroup<cr>
 nnoremap <Leader>wn :action EditSourceInNewWindow<CR>
@@ -97,11 +132,11 @@ map | :action CollapseAllRegions<CR>
 map -- :action ExpandAllRegions<CR>
 
 " Finder (leader f)
-map <leader>ff :action GotoClass<cr>
-map <leader>fn :action GotoFile<cr>
+map <leader>fc :action GotoClass<cr>
+map <leader>ff :action GotoFile<cr>
 map <leader>fa :action GotoAction<cr>
 map <leader>fg :action FindInPath<cr>
-map <leader>sre :action RecentFiles<cr>
+map <leader>fo :action RecentFiles<cr>
 map <leader>fm :action RecentLocations<cr>
 map <leader>fs :action GotoSymbol<cr>
 map <leader>fz :action Find<cr>
@@ -209,8 +244,8 @@ let g:WhichKeyDesc_leader_newprevline = "<leader>O New line before in normal mod
 
 " Windows and buffers (leader w)
 let g:WhichKeyDesc_leader_window = "<leader>w Window actions"
-let g:WhichKeyDesc_window_splitvertical = "<leader>wv Split vertically"
-let g:WhichKeyDesc_window_splithorizontal = "<leader>ws Split horizontally"
+let g:WhichKeyDesc_window_splitvertical = "<leader>| Split vertically"
+let g:WhichKeyDesc_window_splithorizontal = "<leader>- Split horizontally"
 let g:WhichKeyDesc_window_splitundo = "<leader>wu Unsplit"
 let g:WhichKeyDesc_window_movetooppositetabgroup = "<leader>wm Move editor to opposite tab group"
 let g:WhichKeyDesc_window_editinnewwindow = "<leader>wn Edit in new window"
@@ -224,9 +259,9 @@ let g:WhichKeyDesc_leader_executequickmacro = "<leader>q Execute macro stored in
 
 " Finder (leader f)
 let g:WhichKeyDesc_leader_finder = "<leader>f Finder actions"
-let g:WhichKeyDesc_finder_class = "<leader>ff Find class"
+let g:WhichKeyDesc_finder_class = "<leader>fc Find class"
 let g:WhichKeyDesc_finder_actions = "<leader>fa Find actions"
-let g:WhichKeyDesc_finder_file = "<leader>fn Find files (Name)"
+let g:WhichKeyDesc_finder_file = "<leader>ff Find files (Name)"
 eet g:WhichKeyDesc_finder_grep = "<leader>fg Find in files (Grep)"
 let g:WhichKeyDesc_finder_history = "<leader>sre Find recent files (History)"
 let g:WhichKeyDesc_finder_location = "<leader>fm Find recent locations (Marks)"
@@ -302,7 +337,6 @@ let g:WhichKeyDesc_leader_error = "<leader>e Error and diagnostics actions"
 let g:WhichKeyDesc_error_next = "<leader>en Go to next error"
 let g:WhichKeyDesc_error_previous = "<leader>ep Go to previous error"
 
-" Git (leader g)
 
 " Display Modes (leader m)
 let g:WhichKeyDesc_leader_display = "<leader>m Display modes"
