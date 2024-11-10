@@ -1,5 +1,7 @@
 "" Source my .vimrc
-source ~/.vimrc
+" source ~/.vimrc
+"
+source /home/magstr/dotfiles/div/.idea-lazy.vim
 
 "" IDE specific Key mappings ====================================================
 
@@ -12,96 +14,8 @@ source ~/.vimrc
 
 "" Settings ========================================================
 
-set clipboard+=ideaput
-
-" LAZYVIM LIKE OPTIONS"
-" Enable auto write
-set autowrite
-set completeopt=menu,menuone,noselect
-" Hide * markup for bold and italic, but not markers with substitutions
-set conceallevel=2
-" Confirm to save changes before exiting modified buffer
-set confirm
-" Enable highlighting of the current line
-set cursorline
-" Use spaces instead of tabs
-set expandtab
-set foldlevel=99
-set formatoptions=jcroqlnt " tcqj
-set grepformat=%f:%l:%c:%m
-set grepprg=rg\ --vimgrep
-" Ignore case
-set ignorecase
-" Preview incremental substitute
-set inccommand=nosplit
-set jumpoptions=view
-" Global statusline
-set laststatus=3
-" Wrap lines at convenient points
-set linebreak
-" Show some invisible characters (tabs...)
-set list
-" Enable mouse mode
-set mouse=a
-" Print line number
-set number
-" Popup blend
-set pumblend=10
-" Maximum number of entries in a popup
-set pumheight=10
-" Relative line numbers
-set relativenumber
-" Lines of context
-set scrolloff=4
-" Round indent
-set shiftround
-" Size of an indent
-set shiftwidth=2
-" Don't show mode since we have a statusline
-set showmode=false
-" Columns of context
-set sidescrolloff=8
-" Always show the signcolumn
-set signcolumn=yes
-" Don't ignore case with capitals
-set smartcase
-" Insert indents automatically
-set smartindent
-set spelllang=en
-" Put new windows below current
-set splitbelow
-set splitkeep=screen
-" Put new windows right of current
-set splitright
-" Number of spaces tabs count for
-set tabstop=2
-" True color support
-set termguicolors
-set timeoutlen=300
-" Enable undo file
-set undofile
-set undolevels=10000
-" Save swap file and trigger CursorHold
-set updatetime=200
-" Allow cursor to move where there is no text in visual block mode
-set virtualedit=block
-" Command-line completion mode
-set wildmode=longest:full,full
-" Minimum window width
-set winminwidth=5
-" Disable line wrap
-set nowrap
-
-
-" gcc and gc<action> mappings.
-Plug 'tpope/vim-commentary'
-" s action, such as cs"' (replace " with '), ds" (unquote)
-Plug 'tpope/vim-surround'
-" similar to flash.nvim
-Plug 'justinmk/vim-sneak'
 
 "" Choosing handlers in conflicting Intellij/IdeaVim keymaps =======
-
 ""https://github.com/JetBrains/ideavim/blob/master/doc/sethandler.md
 sethandler <C-i> n-v-i:vim
 sethandler <C-o> n-v-i:vim
@@ -132,18 +46,18 @@ map | :action CollapseAllRegions<CR>
 map -- :action ExpandAllRegions<CR>
 
 " Finder (leader f)
-map <leader>fc :action GotoClass<cr>
-map <leader>ff :action GotoFile<cr>
-map <leader>fa :action GotoAction<cr>
-map <leader>fg :action FindInPath<cr>
-map <leader>fo :action RecentFiles<cr>
-map <leader>fm :action RecentLocations<cr>
-map <leader>fs :action GotoSymbol<cr>
-map <leader>fz :action Find<cr>
-map <leader>fr :action Replace<cr>
-map <leader>fR :action ReplaceInPath<cr>
-map <leader>fx :action PasteMultiple<cr>
-map <leader>ft :action ActivateTODOToolWindow<cr>
+" map <leader>fc :action GotoClass<cr>
+" map <leader>ff :action GotoFile<cr>
+" map <leader>fa :action GotoAction<cr>
+" map <leader>fg :action FindInPath<cr>
+" map <leader>fo :action RecentFiles<cr>
+" map <leader>fm :action RecentLocations<cr>
+" map <leader>fs :action GotoSymbol<cr>
+" map <leader>fz :action Find<cr>
+" map <leader>fr :action Replace<cr>
+" map <leader>fR :action ReplaceInPath<cr>
+" map <leader>fx :action PasteMultiple<cr>
+" map <leader>ft :action ActivateTODOToolWindow<cr>
 
 " Views (leader v)
 map <leader>vf :action ActivateProjectToolWindow<cr>
@@ -155,32 +69,31 @@ map <leader>vd :action ActivateDebugToolWindow<cr>
 map <leader>vq :action CloseActiveTab<cr>
 
 " Debug leader x)
-nnoremap <leader>xr :action Run<cr>
-nnoremap <leader>xR :action ChooseRunConfiguration<cr>
-nnoremap <leader>xd :action Debug<cr>
-
-nnoremap <leader>xD :action ChooseDebugConfiguration<cr>
-nnoremap <leader>xk :action Stop<cr>
-nnoremap <leader>xb :action ToggleLineBreakpoint<cr>
-nnoremap <leader>xa :action XDebugger.MuteBreakpoints<cr>
-nnoremap <leader>xv :action StepOver<cr>
-nnoremap <leader>xi :action StepInto<cr>
-nnoremap <leader>xo :action StepOut<cr>
-nnoremap <leader>xc :action Resume<cr>
-map <leader>xx :action QuickEvaluateExpression<cr>
-map <leader>xe :action EvaluateExpression<cr>
-map <leader>xw :action Debugger.AddToWatch<cr>
+" nnoremap <leader>xr :action Run<cr>
+" nnoremap <leader>xR :action ChooseRunConfiguration<cr>
+" nnoremap <leader>xd :action Debug<cr>
+" nnoremap <leader>xD :action ChooseDebugConfiguration<cr>
+" nnoremap <leader>xk :action Stop<cr>
+" nnoremap <leader>xb :action ToggleLineBreakpoint<cr>
+" nnoremap <leader>xa :action XDebugger.MuteBreakpoints<cr>
+" nnoremap <leader>xv :action StepOver<cr>
+" nnoremap <leader>xi :action StepInto<cr>
+" nnoremap <leader>xo :action StepOut<cr>
+" nnoremap <leader>xc :action Resume<cr>
+" map <leader>xx :action QuickEvaluateExpression<cr>
+" map <leader>xe :action EvaluateExpression<cr>
+" map <leader>xw :action Debugger.AddToWatch<cr>
 
 " Code navigation (leader c)
-nnoremap <leader>cd :action GotoDeclaration<cr>
-nnoremap <leader>ct :action GotoTypeDeclaration<cr>
-nnoremap <leader>ci :action GotoImplementation<cr>
-nnoremap <leader>cs :action GotoSuperMethod<cr>
-nnoremap <leader>cr :action ShowUsages<cr>
-nnoremap <leader>cv :action QuickJavaDoc<cr>
-nnoremap <leader>ch :action CallHierarchy<CR>
-nnoremap <leader>cn :action ShowNavBar<CR>
-nnoremap <leader>cf :action FileStructurePopup<CR>
+" nnoremap <leader>cd :action GotoDeclaration<cr>
+" nnoremap <leader>ct :action GotoTypeDeclaration<cr>
+" nnoremap <leader>ci :action GotoImplementation<cr>
+" nnoremap <leader>cs :action GotoSuperMethod<cr>
+" nnoremap <leader>cr :action ShowUsages<cr>
+" nnoremap <leader>cv :action QuickJavaDoc<cr>
+" nnoremap <leader>ch :action CallHierarchy<CR>
+" nnoremap <leader>cn :action ShowNavBar<CR>
+" nnoremap <leader>cf :action FileStructurePopup<CR>
 
 " Refactoring (leader r)
 map <leader>re :action Refactorings.QuickListPopupAction<CR>
@@ -196,14 +109,10 @@ map <leader>ra :action AnonymousToInner<cr>
 map <leader>rm :action Move<cr>
 
 " Source generation (leader s)
-nnoremap <leader>sc :action GenerateConstructor<cr>
-nnoremap <leader>sg :action GenerateGetterAndSetter<cr>
-nnoremap <leader>se :action GenerateEquals<cr>
-nnoremap <leader>sn :action NewClass<cr>
-
-" Errors and diagnostics (leader e)
-map <leader>en :action GotoNextError<cr>
-map <leader>ep :action GotoPreviousError<cr>
+nnoremap <leader>gn :action GenerateConstructor<cr>
+" nnoremap <leader>sg :action GenerateGetterAndSetter<cr>
+" nnoremap <leader>se :action GenerateEquals<cr>
+" nnoremap <leader>sn :action NewClass<cr>
 
 " Display Modes (leader m)
 map <leader>md :action ToggleDistractionFreeMode<cr>
@@ -215,12 +124,6 @@ vnoremap + :action EditorSelectWord<cr>
 vnoremap _ :action EditorUnSelectWord<cr>
 
 " Plugin Settings ==================================================
-set surround
-set highlightedyank
-set sneak
-set NERDTree
-set argtextobj
-set vim-multiple-cursors
 
 " Which-key settings
 set which-key
