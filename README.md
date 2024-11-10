@@ -32,7 +32,7 @@ Amazing linux tools that I use in the dotfiles.
 - [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy) - Good-lookin' diffs. Actually... nah... The
   best-lookin' diffs. 🎉
 
-### Relevant links
+### Inspiration
 
 This repo is based on a clone of
 [charnley/dotfiles](https://github.com/charnley/dotfiles)

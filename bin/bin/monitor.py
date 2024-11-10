@@ -144,6 +144,7 @@ def main():
         set_monitor(args.native, resolution=native_res, debug=args.debug)
 
         for monitor, resolution in zip(external_monitors, external_resolutions):
+            print(monitor, resolution)
 
             if previous is None:
                 pos = "--pos 0x0"
@@ -157,6 +158,10 @@ def main():
     else:
 
         set_monitor(args.native, resolution=native_res, debug=args.debug)
+
+    # Be sure to refresh desktop image and polybar at the end
+    shell("polybar-msg cmd restart", shell=True)
+    shell("nitrogen --restore", shell=True)
 
     return
 
