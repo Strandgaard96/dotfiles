@@ -31,6 +31,10 @@ exec --no-startup-id picom &
 # Setup monitors with xrandr
 exec --no-startup-id ~/bin/monitor.py -u
 
+# Set dk keyboard layout
+exec "setxkbmap -layout dk"
+
+
 ### Gaps 
 # Configure 5px of space between windows and to the screen edges.
 gaps inner 10px
