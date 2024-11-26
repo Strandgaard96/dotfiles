@@ -24,7 +24,7 @@ set $mod Mod4
 set $fm eDP-1
 set $sm DP-1-3
 # set $sm DP-1
-set $tm HDMI-2
+# set $tm HDMI-2
 exec --no-startup-id picom &
 # exec --no-startup-id xrandr --output $sm --auto --right-of $fm
 # exec --no-startup-id xrandr --output $tm --auto --right-of $fm
@@ -51,8 +51,14 @@ smart_gaps on
 ### Windows 
 for_window [floating] move position center
 
-no_focus [class="jetbrains-pycharm" window_type="dialog"]
-for_window [class="jetbrains-pycharm" window_type="dialog"] floating enable border normal move position center
+# Open the main PyCharm window in tiling mode
+# for_window [class="jetbrains-pycharm" window_role="editor"] floating disable
+
+# Enable floating mode for dialog/pop-up windows and center them on the screen
+for_window [class="jetbrains-pycharm-ce" window_type="dialog"] floating enable, move position center
+
+# no_focus [class="jetbrains-pycharm" window_type="dialog"]
+# for_window [class="jetbrains-pycharm" window_type="dialog"] floating enable border normal move position center
 # for_window [class="jetbrains-.*" title="win0"] floating enable border none
 
 # Prevent pop ups from runing the tiling
