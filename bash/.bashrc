@@ -50,9 +50,6 @@ fi
 # Set ripgrep config path
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
-# Dont send me messages
-if $(tty -s); then mesg n; fi
-
 # Source local bashrc if present
 if test -f $HOME/.bashrc_local; then source $HOME/.bashrc_local; fi
 

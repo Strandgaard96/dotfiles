@@ -1,5 +1,9 @@
 #!/usr/bin/env zsh
+#
+# TODO https://www.youtube.com/watch?v=eLEo4OQ-cuQ
+# TODO https://gist.github.com/LukeSmithxyz/e62f26e55ea8b0ed41a65912fbebbe52
 
+# Profiling zsh
 #zmodload zsh/zprof
 
 export LC_ALL=en_US.UTF-8
@@ -9,15 +13,9 @@ unsetopt CDABLE_VARS
 # Disable auto-update prompt
 DISABLE_AUTO_UPDATE=true
 
-# TODO https://www.youtube.com/watch?v=eLEo4OQ-cuQ
-# TODO https://gist.github.com/LukeSmithxyz/e62f26e55ea8b0ed41a65912fbebbe52
-
-# export fpath=($HOME/opt/zsh/share/zsh/5.8/functions "${fpath[@]}" )
-
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-# colors
 #load colors
 autoload colors && colors
 for COLOR in RED GREEN YELLOW BLUE MAGENTA CYAN BLACK WHITE; do
@@ -26,9 +24,6 @@ for COLOR in RED GREEN YELLOW BLUE MAGENTA CYAN BLACK WHITE; do
 done
 eval RESET='%{$reset_color%}'
 
-# https://github.com/subnixr/minimal/blob/master/minimal.zsh
-MNML_OK_COLOR="2"
-MNML_ERR_COLOR="1"
 
 function git_fast_status() {
     local color="%{\e[0;32m%}"
@@ -162,11 +157,8 @@ if test -f ~/.bash_aliases; then . ~/.bash_aliases; fi
 
 # export PATH="$HOME/opt/anaconda3/bin:$PATH"  # commented out by conda initialize
 
-
-
 # Need to be set for ripgrep to find config.
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
-
 
 # home and end
 bindkey "^[[1~" beginning-of-line
