@@ -39,17 +39,6 @@ function git_fast_status() {
     printf '%b' "$color$bname%{\e[0m%}"
 }
 
-function mnml_git {
-    local statc="%{\e[0;32m%}" # assume clean
-    local bname="$(git rev-parse --abbrev-ref HEAD 2> /dev/null)"
-
-    if [ -n "$bname" ]; then
-        if [ -n "$(git status --porcelain 2> /dev/null)" ]; then
-            statc="%{\e[0;31m%}"
-        fi
-        printf '%b' "$statc$bname%{\e[0m%}"
-    fi
-}
 
 function conda_env {
     if test -n "$CONDA_PREFIX"
@@ -66,24 +55,13 @@ function conda_env {
 # %n usernamne
 # %1~ dirname
 
+# Setup default simple prompt
 PROMPT='→ '
-# RPROMPT='%1~ $(mnml_git)'
-# RPROMPT='$(conda_env) $(mnml_git) %(4~|.../%3~|%~)'
-RPROMPT='$(conda_env) $(git_fast_status) %(4~|.../%3~|%~)'
+RPROMPT='$(conda_env) %(4~|.../%3~|%~)'
 
 
-# Check for host names
-#valid_hostnames=(laptop)
-#needle=`hostname`
-# matching https://unix.stackexchange.com/questions/411304/how-do-i-check-whether-a-zsh-array-contains-a-given-value
-#if [[ ${valid_hostnames[(ie)$needle]} -le ${#valid_hostnames} ]]
-#then
-#    PROMPT='> '
-#else
-    # PROMPT='%F{blue}%m > '
-#    PROMPT='%m > '
-#fi
 
+# Change prompt depending on host
 case $(hostname) in
     sunray )
         PROMPT='${GREEN}%m$RESET ${GREEN}>$RESET ';;
@@ -93,24 +71,14 @@ case $(hostname) in
         # PROMPT='${BLUE}%m$RESET ${BLUE}>$RESET ';;
         PROMPT=' ${BLUE}>$RESET ';;
     *slid* )
-        export EASYBUILD_PREFIX_ME=/home/niflheim/jchang/modules
-        module use $EASYBUILD_PREFIX_ME/modules/all
-        export EASYBUILD_PREFIX=/home/energy/modules
-        module use $EASYBUILD_PREFIX/modules/all
-        export VASP_PP_PATH=/home/niflheim2/arbh/pot/
-        export VASP_COMMAND='mpiexec vasp_std'
         module load X11
-        export SCMLICENSE=/home/energy/modules/software/ADF/DEV/license_pdes.txt
-        export SCM_OPENGL1_FALLBACK=1
-        export SCM_OPENGL_SOFTWARE=1
-        # set p4vasp environment variables
-        export PATH=$PATH:/home/energy/arbh/p4vasp/bin
-        module use /home/energy/stly/modules/modules/all
         PROMPT='${YELLOW}%m$RESET ${YELLOW}>$RESET ';;
     * )
         PROMPT='${BLUE}%m ${YELLOW}>$RESET ';;
 esac
 
+# Prepend the git status variable to the existing PROMPT
+PROMPT=' $(git_fast_status)'"$PROMPT"
 
 # Remove rprompt on enter
 setopt TRANSIENT_RPROMPT
@@ -124,8 +92,7 @@ plugins=(
 VI_MODE_SET_CURSOR=true
 
 # Edit line in vim with ctrl-e:
-autoload edit-command-line; zle -N edit-command-line
-bindkey '^e' edit-command-line
+bindkey "^o" edit-command-line
 
 test -d $ZSH && source $ZSH/oh-my-zsh.sh
 
@@ -140,7 +107,7 @@ setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_SPACE
 setopt HIST_SAVE_NO_DUPS
-HISTORY_IGNORE="b:e:cd:gs:gd:ll:ls:"
+HISTORY_IGNORE="b:e:cd:gs:gd:ll:ls:lg:up"
 ZSH_AUTOSUGGEST_HISTORY_IGNORE="cd *"
 ZSH_AUTOSUGGEST_COMPLETION_IGNORE="git *"
 
@@ -150,10 +117,6 @@ ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 # Color of comments
 ZSH_HIGHLIGHT_STYLES[comment]='fg=#FB00A2,bold'
 
-# all my paths
-source ${HOME}/.bash_paths
-
-if test -f ~/.bash_aliases; then . ~/.bash_aliases; fi
 
 # export PATH="$HOME/opt/anaconda3/bin:$PATH"  # commented out by conda initialize
 
@@ -166,6 +129,11 @@ bindkey "^[[4~" end-of-line
 
 # Source local zshrc if present. 
 test -f $HOME/.zshrc.local && source $HOME/.zshrc.local
+
+# all my paths
+if test -f ${HOME}/.bash_paths; then . ${HOME}/.bash_paths; fi
+
+if test -f ~/.bash_aliases; then . ~/.bash_aliases; fi
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
@@ -180,6 +148,6 @@ function my_init() {
 zvm_after_init_commands+=(my_init)
 
 # Only works on zsh
-#matrix() { echo -e "\e[1;40m" ; clear ; while :; do echo $LINES $COLUMNS $(( $RANDOM % $COLUMNS)) $(( $RANDOM % 72 )) ;sleep 0.05; done|awk '{ letters="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()"; c=$4;        letter=substr(letters,c,1);a[$3]=0;for (x in a) {o=a[x];a[x]=a[x]+1; printf "\033[%s;%sH\033[2;32m%s",o,x,letter; printf "\033[%s;%sH\033[1;37m%s\033[0;0H",a[x],x,letter;if (a[x] >= $1) { a[x]=0; } }}' }
+matrix() { echo -e "\e[1;40m" ; clear ; while :; do echo $LINES $COLUMNS $(( $RANDOM % $COLUMNS)) $(( $RANDOM % 72 )) ;sleep 0.05; done|awk '{ letters="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()"; c=$4;        letter=substr(letters,c,1);a[$3]=0;for (x in a) {o=a[x];a[x]=a[x]+1; printf "\033[%s;%sH\033[2;32m%s",o,x,letter; printf "\033[%s;%sH\033[1;37m%s\033[0;0H",a[x],x,letter;if (a[x] >= $1) { a[x]=0; } }}' }
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"

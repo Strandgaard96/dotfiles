@@ -18,13 +18,12 @@ export PROMPT_COMMAND='history -a'
 set -o vi
 
 # source and export paths before aliases to ensure binaries are detected in ~/bin
-source $HOME/.bash_paths
+if test -f ~/.bash_paths; then . ~/.bash_aliases; fi
 
 # all my aliases
 if test -f ~/.bash_aliases; then . ~/.bash_aliases; fi
 
 # bash completion
-# The dot before /etc means source the content of the file!
 if test -f /etc/bash_completion; then . /etc/bash_completion; fi
 
 # Run this to get the file curl -L https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh > ~/.bash_git
