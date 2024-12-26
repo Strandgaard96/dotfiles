@@ -129,7 +129,7 @@ bindkey "^[[4~" end-of-line
 
 # Source local zshrc if present. 
 test -f $HOME/.zshrc.local && source $HOME/.zshrc.local
-
+#
 # all my paths
 if test -f ${HOME}/.bash_paths; then . ${HOME}/.bash_paths; fi
 

@@ -5,6 +5,7 @@ return {
     opts = {
       ensure_istalled = {
         "csv",
+        "cpp",
       },
     },
   },

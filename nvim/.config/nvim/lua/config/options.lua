@@ -14,6 +14,12 @@
 -- Leader key. This is required to be before lazy is loaded in top level init.lua
 vim.g.mapleader = ","
 
+-- Stop snacks animation
+vim.g.snacks_animate = false
+
+-- Set python lsp
+vim.g.lazyvim_python_lsp = "basedpyright"
+
 -- vim.opt.clipboard = "unnamedplus" i should strive to keep vim and system clipboard separate.
 -- vim.opt.hlsearch = false -- highlight searched words
 -- vim.opt.incsearch = true -- highlight searched words

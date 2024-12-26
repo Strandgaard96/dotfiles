@@ -57,3 +57,4 @@ if test -f $HOME/.bashrc_local; then source $HOME/.bashrc_local; fi
 
 # zoxide init
 eval "$(zoxide init bash)"
+. "$HOME/.cargo/env"
