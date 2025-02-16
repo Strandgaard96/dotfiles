@@ -1,7 +1,7 @@
 wget
 unzip
 bat
-exa
+eza
 tree
 git
 curl

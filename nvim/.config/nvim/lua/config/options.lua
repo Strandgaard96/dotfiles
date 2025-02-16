@@ -20,6 +20,10 @@ vim.g.snacks_animate = false
 -- Set python lsp
 vim.g.lazyvim_python_lsp = "basedpyright"
 
+-- Set textwidth and another command to ensure LaTeX lines are sort of wrapped.
+vim.opt.formatoptions:append("wa")
+vim.opt.textwidth = 150
+
 -- vim.opt.clipboard = "unnamedplus" i should strive to keep vim and system clipboard separate.
 -- vim.opt.hlsearch = false -- highlight searched words
 -- vim.opt.incsearch = true -- highlight searched words

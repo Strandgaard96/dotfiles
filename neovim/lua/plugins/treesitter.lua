@@ -44,6 +44,7 @@ return {
 				"lua",
 				"luadoc",
 				"luap",
+				"latex",
 				"yaml",
 				"markdown",
 				"markdown_inline",

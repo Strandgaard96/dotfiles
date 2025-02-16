@@ -55,6 +55,25 @@ if test -f $HOME/.bashrc_local; then source $HOME/.bashrc_local; fi
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh
 
+# Set up fzf key bindings and fuzzy completion
+eval "$(fzf --bash)"
+
 # zoxide init
 eval "$(zoxide init bash)"
 . "$HOME/.cargo/env"
+
+# # >>> conda initialize >>>
+# # !! Contents within this block are managed by 'conda init' !!
+# __conda_setup="$('/home/magstr/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "/home/magstr/miniconda3/etc/profile.d/conda.sh" ]; then
+#         . "/home/magstr/miniconda3/etc/profile.d/conda.sh"
+#     else
+#         export PATH="/home/magstr/miniconda3/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
+# # <<< conda initialize <<<
+#

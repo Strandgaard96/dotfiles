@@ -1,5 +1,6 @@
 return {
   "m4xshen/hardtime.nvim", -- Help learn proper nvim workflow
+  enable = false,
   opts = {
     restricted_keys = {
       ["h"] = { "v" },

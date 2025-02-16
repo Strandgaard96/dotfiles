@@ -25,7 +25,7 @@ set $fm eDP-1
 set $sm DP-1-3
 # set $sm DP-1
 set $tm HDMI-2
-exec --no-startup-id picom &
+exec_always --no-startup-id picom &
 # exec --no-startup-id xrandr --output $sm --auto --right-of $fm
 # exec --no-startup-id xrandr --output $tm --auto --right-of $fm
 
@@ -33,7 +33,8 @@ exec --no-startup-id picom &
 exec --no-startup-id ~/bin/monitor.py -u
 
 # Set dk keyboard layout
-exec "setxkbmap -layout dk"
+exec --no-startup-id "setxkbmap dk"
+
 
 
 ### Gaps 
