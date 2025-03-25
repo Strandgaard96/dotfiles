@@ -17,10 +17,11 @@ ${HOME}/.oh-my-zsh:
 
 # This symlinks the dotfiles with stow
 dotfiles:
+	echo "Backup dots"
 	bash -c ./setup/backup_existing_dots.sh
-	#stow -v git alacritty nvim lazygit ripgrep div bat tmux i3 bash bin
+	echo "Running simulation of stowing the dotfiles"
+	stow -v -t ${HOME} -n git alacritty nvim lazygit ripgrep div bat tmux i3 bash bin
 
-# fuzzzzzy find 
 ${HOME}/.fzf:
 	bash ./setup/fzf_setup.sh
 	bash ./setup/setup_zoxide.sh
@@ -39,11 +40,9 @@ fonts:
 
 #### The major targets that install for different systems ####
 
-install: install_apt neovim ${HOME}/.fzf ${HOME}/.oh-my-zsh fonts dotfiles
+install: dotfiles install_apt neovim ${HOME}/.fzf ${HOME}/.oh-my-zsh fonts
 
-install_remote: neovim binaries ${HOME}/.fzf dotfiles
-# Guide for setting up zsh
-# https://www.drewsilcock.co.uk/compiling-zsh
+install_remote: dotfiles neovim binaries ${HOME}/.fzf
 
-install_pi: install_apt_pi ${HOME}/.fzf fonts dotfiles
+install_pi: dotfiles install_apt_pi ${HOME}/.fzf fonts
 

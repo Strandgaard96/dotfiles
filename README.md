@@ -21,7 +21,7 @@ make install_remote # Install without certain features. To be used on remote to 
 Amazing linux tools that I use in the dotfiles.
 
 - [bat](https://github.com/sharkdp/bat) - A cat(1) clone with wings
-- [exa](https://github.com/ogham/exa) - A Modern replacement for ls
+- [eza](https://github.com/eza-community/eza) - A Modern alternative to ls
 - [fd](https://github.com/sharkdp/fd) - A simple, fast and
   user-friendly alternative to 'find'
 - [zooxide](https://github.com/ajeetdsouza/zoxide) - A cd command that learns - easily navigate directories

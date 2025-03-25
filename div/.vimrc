@@ -19,14 +19,8 @@ endif
 " Get the defaults that most users want.
 source $VIMRUNTIME/defaults.vim
 
-if has("vms")
-  set nobackup		" do not keep a backup file, use versions instead
-else
-  set backup		" keep a backup file (restore to previous version)
-  if has('persistent_undo')
-    set undofile	" keep an undo file (undo changes after closing)
-  endif
-endif
+set nobackup		" do not keep a backup file, use versions instead
+set undofile	" keep an undo file (undo changes after closing)
 
 if &t_Co > 2 || has("gui_running")
   " Switch on highlighting the last used search pattern.
@@ -41,7 +35,31 @@ augroup vimrcEx
   autocmd FileType text setlocal textwidth=78
 augroup END
 
+""""" Undo stuff for nativevim
+set undofile
+set undolevels=1000         " How many undos
+set undoreload=10000        " number of lines to save for undo
+
+set backup                        " enable backups
+set swapfile                      " enable swaps
+set undodir=$HOME/.vim/tmp/undo     " undo files
+set backupdir=$HOME/.vim/tmp/backup " backups
+set directory=$HOME/.vim/tmp/swap   " swap files
+
+" Make those folders automatically if they don't already exist.
+if !isdirectory(expand(&undodir))
+    call mkdir(expand(&undodir), "p")
+endif
+if !isdirectory(expand(&backupdir))
+    call mkdir(expand(&backupdir), "p")
+endif
+if !isdirectory(expand(&directory))
+    call mkdir(expand(&directory), "p")
+endif
+""""" Undo stuff for nativevim
+
 set number
+syntax on
 " Add optional packages.
 "
 " The matchit plugin makes the % command work better, but it is not backwards
@@ -53,6 +71,14 @@ if has('syntax') && has('eval')
 endif
 
 
+" indentation options
+" Note: smartindent is seriously outdated. cindent, even, is unnecessary.
+" Let the filetype plugins do the work.
+set shiftwidth=2
+set tabstop=2
+filetype indent on
+"set autoindent
+set cindent
 set scrolloff=10
 set number
 set relativenumber
@@ -65,6 +91,12 @@ set visualbell
 set clipboard+=unnamed
 let mapleader = ","
 
+" keep a lot of history
+set history=100
+
+" keep lots of stuff
+set viminfo+=:100
+set viminfo+=/100
 
 "  Key maps and settings
 

@@ -17,5 +17,10 @@ return {
         border = "rounded",
       },
     },
+    opts = {
+      inlay_hints = {
+        enabled = false,
+      },
+    },
   },
 }

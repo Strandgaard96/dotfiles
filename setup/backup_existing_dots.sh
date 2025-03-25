@@ -1,14 +1,20 @@
 #!/bin/bash
 
-# Define the path to the .bashrc file and its backup
-BASHRC=$HOME/.bashrc
-BACKUP=$HOME/.bashrc.bk
+HOME_DIR=${HOME}
+BACKUP_DIR="$HOME_DIR/name_backup"
 
-# Check if the .bashrc file exists
-if [ -f "$BASHRC" ]; then
-  # Move the .bashrc file to .bashrc.bk
-  mv "$BASHRC" "$BACKUP"
-  echo "Moved $BASHRC to $BACKUP"
-else
-  echo "$BASHRC does not exist"
-fi
+# Create the backup directory if it doesn't already exist
+mkdir -p "$BACKUP_DIR"
+
+# Loop over dotfiles in the home directory
+for dotfile in "$HOME_DIR"/.*; do
+    # Skip the special directories . and ..
+    if [[ "$dotfile" == "$HOME_DIR/." || "$dotfile" == "$HOME_DIR/.." ]]; then
+        continue
+    fi
+
+    # Move each dotfile/dot-directory into the backup folder
+    mv -- "$dotfile" "$BACKUP_DIR"
+done
+
+echo "Moved all dotfiles (excluding . and ..) from $HOME_DIR to $BACKUP_DIR"

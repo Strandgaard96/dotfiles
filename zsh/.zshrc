@@ -51,6 +51,7 @@ function conda_env {
     print "%b" "$CONDA_ENV"
 }
 
+
 # %m hostname
 # %n usernamne
 # %1~ dirname
@@ -82,6 +83,8 @@ PROMPT=' $(git_fast_status)'"$PROMPT"
 
 # Remove rprompt on enter
 setopt TRANSIENT_RPROMPT
+
+autoload -U compinit; compinit
 
 # Plugins
 plugins=(

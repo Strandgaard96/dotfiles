@@ -18,7 +18,7 @@ export PROMPT_COMMAND='history -a'
 set -o vi
 
 # source and export paths before aliases to ensure binaries are detected in ~/bin
-if test -f ~/.bash_paths; then . ~/.bash_aliases; fi
+if test -f ~/.bash_paths; then . ~/.bash_paths; fi
 
 # all my aliases
 if test -f ~/.bash_aliases; then . ~/.bash_aliases; fi
@@ -55,8 +55,8 @@ if test -f $HOME/.bashrc_local; then source $HOME/.bashrc_local; fi
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh
 
-# Set up fzf key bindings and fuzzy completion
-eval "$(fzf --bash)"
+# Add fzf
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # zoxide init
 eval "$(zoxide init bash)"

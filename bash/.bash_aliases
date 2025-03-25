@@ -94,7 +94,7 @@ if test -x "$(command -v sinfo)"; then
 fi
 
 # Check for installed commands and set aliases if active
-command -v bat &>/dev/null && alias c='bat' || alias c='cat'
+command -v bat &>/dev/null && alias c='bat -p' || alias c='cat'
 command -v fd &>/dev/null && alias fd='fd --hidden --follow' || alias fd='find . -name'
 command -v rg &>/dev/null && alias rg='rg --hidden --follow --smart-case --no-ignore 2>/dev/null' || alias rg='grep --color=auto --exclude-dir=.git -R'
 command -v eza &>/dev/null && alias ll='eza -l --group-directories-first --sort modified --reverse --icons --no-user --color-scale' || alias ll='ls --color=auto --group-directories-first -lth'
@@ -277,6 +277,9 @@ function rs() {
 # Turn up or down the brightness from commandline
 alias lightup='brightnessctl -d "intel_backlight" set +10%'
 alias lightdown='brightnessctl -d "intel_backlight" set 10%-'
+
+# Tailscale
+alias ts=tailscale
 
 # One liner for delte multiple files mathicng patterns recursively
 #find . \( -name "*.er" -o -name "*.err" -o -name "*.opt" -o -name "*orca_trj.xyz" -o -name "*.out" \) -type f -delete
