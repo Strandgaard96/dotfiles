@@ -18,7 +18,7 @@ vim.g.mapleader = ","
 vim.g.snacks_animate = false
 
 -- Set python lsp
-vim.g.lazyvim_python_lsp = "basedpyright"
+vim.g.lazyvim_python_lsp = "pyright"
 
 -- Set textwidth and another command to ensure LaTeX lines are sort of wrapped.
 vim.opt.formatoptions:append("wa")
