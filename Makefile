@@ -25,7 +25,6 @@ dotfiles:
 
 ${HOME}/.fzf:
 	bash ./setup/fzf_setup.sh
-	bash ./setup/setup_zoxide.sh
 
 install_apt_pi:
 	apt-get install $$(cat ./packages/packages_pi.apt) -y
@@ -45,5 +44,5 @@ install: dotfiles install_apt neovim ${HOME}/.fzf ${HOME}/.oh-my-zsh fonts
 
 install_remote: dotfiles neovim binaries ${HOME}/.fzf
 
-install_pi: dotfiles install_apt_pi ${HOME}/.fzf fonts
+install_pi: dotfiles install_apt_pi ${HOME}/.fzf fonts binaries
 
