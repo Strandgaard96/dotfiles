@@ -12,6 +12,10 @@ for dotfile in "$HOME_DIR"/.*; do
     if [[ "$dotfile" == "$HOME_DIR/." || "$dotfile" == "$HOME_DIR/.." ]]; then
         continue
     fi
+    # If it's a directory, skip it as well
+    if [[ -d "$dotfile" ]]; then
+        continue
+    fi
 
     # Move each dotfile/dot-directory into the backup folder
     mv -- "$dotfile" "$BACKUP_DIR"
