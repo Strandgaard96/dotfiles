@@ -48,6 +48,6 @@ require("lazy").setup({
   },
 })
 
-require("dap-python").resolve_python = function()
-  return "/home/magstr/miniconda3/envs/GA_env_new/bin/python"
-end
+-- require("dap-python").resolve_python = function()
+--   return "/home/magstr/miniconda3/envs/GA_env_new/bin/python"
+-- end

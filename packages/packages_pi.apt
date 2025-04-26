@@ -2,6 +2,7 @@ bat
 curl
 stow
 fd-find
+vim
 git
 ripgrep
 unzip

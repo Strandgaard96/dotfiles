@@ -1,9 +1,12 @@
 # Setup fzf
 # ---------
-if [[ ! "$PATH" == */home/magstr/.fzf/bin* ]]; then
-  PATH="${PATH:+${PATH}:}/home/magstr/.fzf/bin"
+
+if [[ ! "$PATH" == *"$HOME".fzf/bin* ]]; then
+  PATH="${PATH:+${PATH}:}$HOME/.fzf/bin"
 fi
 
+# Set up fzf key bindings and fuzzy completion
+eval "$(fzf --bash)"
 # Fzf
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --highlight-line \

@@ -3,6 +3,8 @@
 # Set and source relevant paths
 #------
 
+export PATH=$PATH:/usr/local/go/bin
+
 # my sa project
 export MOLPERT="/home/magstr/git/Molpert"
 export MOLECULE_AUTO_CORRECT="/home/magstr/git/MoleculeAutoCorrect/"

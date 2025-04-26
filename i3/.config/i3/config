@@ -19,22 +19,18 @@
 # set $mod to super key
 set $mod Mod4
 
-
 ### Monitor stuff
 set $fm eDP-1
 set $sm DP-1-3
 # set $sm DP-1
 set $tm HDMI-2
 exec --no-startup-id picom -b &
-# exec --no-startup-id xrandr --output $sm --auto --right-of $fm
-# exec --no-startup-id xrandr --output $tm --auto --right-of $fm
 
 # Setup monitors with xrandr
-exec --no-startup-id ~/bin/monitor.py -u
+exec --no-startup-id ~/bin/monitor.py --dock
 
 # Set dk keyboard layout
 exec --no-startup-id "setxkbmap dk"
-
 
 
 ### Gaps 
@@ -78,7 +74,6 @@ for_window [class="blueman-manager"] floating enable
 
 # Close a window
 bindsym $mod+q kill
-
 
 # Set Font for Window Titles.
 font pango: Mononoki Nerd Font Mono 16
