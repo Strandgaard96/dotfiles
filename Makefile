@@ -19,7 +19,6 @@ ${HOME}/.oh-my-zsh:
 dotfiles:
 	echo "Backup dots"
 	bash -c ./setup/backup_existing_dots.sh
-	echo "Running simulation of stowing the dotfiles"
 	stow -v -t ${HOME} bin
 	stow -v -t ${HOME} git alacritty nvim lazygit ripgrep div bat tmux i3 bash
 

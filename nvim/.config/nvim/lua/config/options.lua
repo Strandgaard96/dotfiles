@@ -110,3 +110,17 @@ vim.opt.spellsuggest = "best,10" -- show only the top 10 candidates
 --
 -- -- Spelling # do  :set spell to highlight possible spelling mistakes. Probably wont use this too much
 --
+--
+--
+--
+-- DADBOD DATABASE
+-- Example: lua/plugins/dadbod_config.lua (or similar)
+
+-- Ensure the global variable is initialized if it doesn't exist
+vim.g.dbs = vim.g.dbs or {}
+
+-- Add your Docker PostgreSQL connection
+vim.g.dbs["redditdb2"] = "postgresql://some_user@localhost:5432/redditdb"
+
+-- Add any other database connections here
+-- vim.g.dbs['my_other_db'] = 'mysql://user@host/db'
