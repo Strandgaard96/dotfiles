@@ -20,6 +20,8 @@ vim.g.snacks_animate = false
 -- Set python lsp
 vim.g.lazyvim_python_lsp = "pyright"
 
+-- vim.g.clipboard = { name = "xclip" }
+
 -- Set textwidth and another command to ensure LaTeX lines are sort of wrapped.
 vim.opt.formatoptions:append("wa")
 vim.opt.textwidth = 150
@@ -58,7 +60,7 @@ vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
 -- Disable diagonstics
-vim.diagnostic.disable()
+vim.diagnostic.enable(false)
 
 vim.opt.wildmode = "list:longest,list:full" -- for : stuff
 vim.opt.wildignore:append({ ".javac", "node_modules", "*.pyc" })

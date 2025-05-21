@@ -6,9 +6,9 @@
 # Profiling zsh
 #zmodload zsh/zprof
 
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
-unsetopt CDABLE_VARS
+# export LC_ALL=en_US.UTF-8
+# export LANG=en_US.UTF-8
+# unsetopt CDABLE_VARS
 
 # Disable auto-update prompt
 DISABLE_AUTO_UPDATE=true
@@ -71,6 +71,10 @@ case $(hostname) in
     magnus-work )
         # PROMPT='${BLUE}%m$RESET ${BLUE}>$RESET ';;
         PROMPT=' ${BLUE}>$RESET ';;
+    5CG51253CB )
+        source ~/.zshprompt;;
+
+        # PROMPT=' ${BLUE}>$RESET ';;
     *slid* )
         module load X11
         PROMPT='${YELLOW}%m$RESET ${YELLOW}>$RESET ';;
@@ -154,3 +158,6 @@ zvm_after_init_commands+=(my_init)
 matrix() { echo -e "\e[1;40m" ; clear ; while :; do echo $LINES $COLUMNS $(( $RANDOM % $COLUMNS)) $(( $RANDOM % 72 )) ;sleep 0.05; done|awk '{ letters="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()"; c=$4;        letter=substr(letters,c,1);a[$3]=0;for (x in a) {o=a[x];a[x]=a[x]+1; printf "\033[%s;%sH\033[2;32m%s",o,x,letter; printf "\033[%s;%sH\033[1;37m%s\033[0;0H",a[x],x,letter;if (a[x] >= $1) { a[x]=0; } }}' }
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/bin/terraform terraform

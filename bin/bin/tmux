@@ -1,8 +1,0 @@
-#/bin/bash
-
-# Unsure if this is needed anywhere
-# ---------------------
-
-version=3.2a
-
-LD_LIBRARY_PATH=$HOME/opt/local/lib $HOME/opt/tmux-${version}/tmux "$@"

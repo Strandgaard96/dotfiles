@@ -9,6 +9,12 @@ export PATH=$PATH:$GOROOT/bin
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 
+# END_AWS_SSO_CLI
+export PATH="/home/linuxbrew/.linuxbrew/opt/openjdk@8/bin:$PATH"
+
+# END_AWS_SSO_CLI
+export PATH="/home/linuxbrew/.linuxbrew/opt/openjdk@8/bin:$PATH"
+
 # my sa project
 export MOLPERT="/home/magstr/git/Molpert"
 export MOLECULE_AUTO_CORRECT="/home/magstr/git/MoleculeAutoCorrect/"

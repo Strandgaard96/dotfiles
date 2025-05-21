@@ -90,6 +90,8 @@ set hlsearch
 set visualbell
 set clipboard+=unnamed
 let mapleader = ","
+set belloff=all
+
 
 " keep a lot of history
 set history=100

@@ -9,9 +9,6 @@ export EDITOR=vim
 # Easy access
 alias dotf='cd $HOME/git/dotfiles'
 
-# Easy copy xtb logfiles to traj
-alias tlog='cp xtbopt.log traj.xyz'
-
 # Sort according to modified and see timestamps
 alias cl='clear'
 
@@ -43,6 +40,10 @@ alias cond='conda deactivate'
 alias cmol='conda activate mols_test'
 
 alias unmount="fusermount -u"
+
+# AWS
+alias awso='aws-sso'
+alias te='terraform'
 
 # Call function
 alias gc='gitclone' # from bin
