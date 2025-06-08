@@ -1,5 +1,5 @@
 return {
-  "epwalsh/obsidian.nvim",
+  "obsidian-nvim/obsidian.nvim",
   version = "*", -- recommended, use latest release instead of latest commit
   lazy = true,
   ft = "markdown",
@@ -15,8 +15,11 @@ return {
     -- Required.
     "nvim-lua/plenary.nvim",
 
-    -- see below for full list of optional dependencies 👇
+    -- see above for full list of optional dependencies ☝️
   },
+  ---@module 'obsidian'
+  --
+  ---@type obsidian.config.ClientOpts
   opts = {
     workspaces = {
       {
@@ -35,6 +38,13 @@ return {
       default_tags = { "daily-notes" },
       -- Optional, if you want to automatically insert a template from your template directory like 'daily.md'
       template = nil,
+    },
+    completion = {
+      blink = true,
+      nvim_cmp = false,
+    },
+    picker = {
+      name = "snacks.pick",
     },
 
     -- see below for full list of options 👇

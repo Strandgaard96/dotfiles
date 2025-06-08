@@ -41,6 +41,8 @@ alias cmol='conda activate mols_test'
 
 alias unmount="fusermount -u"
 
+alias open="wsl-open"
+
 # AWS
 alias awso='aws-sso'
 alias te='terraform'
