@@ -4,6 +4,7 @@ fd-find
 git
 i3
 polybar
+tre-command
 ripgrep
 rofi
 tmux

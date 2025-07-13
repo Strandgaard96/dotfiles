@@ -43,6 +43,8 @@ alias unmount="fusermount -u"
 
 alias open="wsl-open"
 
+# Use bat for manpages
+export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
 # AWS
 alias awso='aws-sso'
 alias te='terraform'
@@ -120,6 +122,11 @@ else
 	#echo "var is set to '$HOSTNAME'";
 	: ${hostn:=$HOSTNAME}
 fi
+
+function prev() {
+	PREV=$(echo $(history | tail -n2 | head -n1) | sed 's/[0-9]* //')
+	sh -c "pet new $(printf %q "$PREV")"
+}
 
 # Set alias for repo  based on host
 function ga() {
@@ -208,27 +215,123 @@ _conda_info() {
 
 # Extraction function for all types
 extract() {
-	if [ -f $1 ]; then
-		case $1 in
-		*.tar.bz2) tar xvjf $1 ;;
-		*.tar.gz) tar xvzf $1 ;;
-		*.bz2) bunzip2 $1 ;;
-		*.rar) unrar x $1 ;;
-			#            *.gz)        gunzip $1 ;;
-		*.gz) tar xvf $1 ;;
-		*.tar) tar xvf $1 ;;
-		*.tbz2) tar xvjf $1 ;;
-		*.tgz) tar xvzf $1 ;;
-		*.zst) tar -I zstd xvzf $1 ;;
-		*.zip) unzip $1 ;;
-		*.Z) uncompress $1 ;;
-		*.7z) 7z x $1 ;;
-		*.tar.*) tar xvf $1 ;;
-		*) echo "don't know how to extract '$1'..." ;;
-		esac
-	else
-		echo "'$1' is not a valid file!"
+	local archive="$1"
+	local output_dir="$2"
+
+	# Check if archive file exists
+	if [ ! -f "$archive" ]; then
+		echo "'$archive' is not a valid file!"
+		return 1
 	fi
+
+	# If output directory is specified, create it and change to it
+	if [ -n "$output_dir" ]; then
+		mkdir -p "$output_dir"
+		if [ $? -ne 0 ]; then
+			echo "Failed to create output directory '$output_dir'"
+			return 1
+		fi
+		echo "Extracting to: $output_dir"
+	fi
+
+	# Extract based on file extension
+	case "$archive" in
+	*.tar.bz2)
+		if [ -n "$output_dir" ]; then
+			tar xvjf "$archive" -C "$output_dir"
+		else
+			tar xvjf "$archive"
+		fi
+		;;
+	*.tar.gz)
+		if [ -n "$output_dir" ]; then
+			tar xvzf "$archive" -C "$output_dir"
+		else
+			tar xvzf "$archive"
+		fi
+		;;
+	*.bz2)
+		if [ -n "$output_dir" ]; then
+			bunzip2 -c "$archive" >"$output_dir/$(basename "$archive" .bz2)"
+		else
+			bunzip2 "$archive"
+		fi
+		;;
+	*.rar)
+		if [ -n "$output_dir" ]; then
+			unrar x "$archive" "$output_dir/"
+		else
+			unrar x "$archive"
+		fi
+		;;
+	*.gz)
+		if [ -n "$output_dir" ]; then
+			tar xvf "$archive" -C "$output_dir"
+		else
+			tar xvf "$archive"
+		fi
+		;;
+	*.tar)
+		if [ -n "$output_dir" ]; then
+			tar xvf "$archive" -C "$output_dir"
+		else
+			tar xvf "$archive"
+		fi
+		;;
+	*.tbz2)
+		if [ -n "$output_dir" ]; then
+			tar xvjf "$archive" -C "$output_dir"
+		else
+			tar xvjf "$archive"
+		fi
+		;;
+	*.tgz)
+		if [ -n "$output_dir" ]; then
+			tar xvzf "$archive" -C "$output_dir"
+		else
+			tar xvzf "$archive"
+		fi
+		;;
+	*.zst)
+		if [ -n "$output_dir" ]; then
+			tar -I zstd -xvf "$archive" -C "$output_dir"
+		else
+			tar -I zstd -xvf "$archive"
+		fi
+		;;
+	*.zip)
+		if [ -n "$output_dir" ]; then
+			unzip "$archive" -d "$output_dir"
+		else
+			unzip "$archive"
+		fi
+		;;
+	*.Z)
+		if [ -n "$output_dir" ]; then
+			uncompress -c "$archive" >"$output_dir/$(basename "$archive" .Z)"
+		else
+			uncompress "$archive"
+		fi
+		;;
+	*.7z)
+		if [ -n "$output_dir" ]; then
+			7z x "$archive" -o"$output_dir"
+		else
+			7z x "$archive"
+		fi
+		;;
+	*.tar.*)
+		if [ -n "$output_dir" ]; then
+			tar xvf "$archive" -C "$output_dir"
+		else
+			tar xvf "$archive"
+		fi
+		;;
+	*)
+		echo "don't know how to extract '$archive'..."
+		return 1
+		;;
+	esac
 }
 
 # Move 'up' so many directories instead of using several cd ../../, etc.
@@ -275,6 +378,12 @@ function help() {
 
 function rs() {
 	rsync -avP "$1:$2" $3
+}
+
+uvenv() {
+	uv venv
+	# shellcheck source=/dev/null
+	source .venv/bin/activate
 }
 
 # Turn up or down the brightness from commandline

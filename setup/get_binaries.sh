@@ -37,5 +37,10 @@ mv $INSTALL_DIR/fd-v8.7.0-i686-unknown-linux-musl/fd ~/bin
 # Get and install zoxide
 curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
 
+# Get tre
+curl -L -o $DWNLLDIR/tre-v0.4.0-x86_64-unknown-linux-musl.tar.gz https://github.com/dduan/tre/releases/download/v0.4.0/tre-v0.4.0-x86_64-unknown-linux-musl.tar.gz
+tar xzf $DWNLLDIR/tre-v0.4.0-x86_64-unknown-linux-musl.tar.gz --directory $INSTALL_DIR
+mv $INSTALL_DIR/tre-v0.4.0-x86_64-unknown-linux-musl.tar.gz/tre ~/bin
+
 # TODO
 # Make something that also moves the manual pages for the stuff!!!!!!

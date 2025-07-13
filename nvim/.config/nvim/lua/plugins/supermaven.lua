@@ -8,7 +8,7 @@ return {
     opts = {
       sources = {
         -- Add 'avante' to the list
-        default = { "avante", "lsp", "path", "snippets", "buffer" },
+        default = { "lsp", "path", "snippets", "buffer" },
 
         providers = {
           avante = {

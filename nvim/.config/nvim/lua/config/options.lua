@@ -10,12 +10,23 @@
 -- vim.opt.tabstop = 4
 -- vim.opt.grepprg = "rg --vimgrep"
 -- vim.opt.termguicolors = true
+--
+--
+
+-- This is to fix avante error
+vim.g.root_spec = { { ".git" }, "lsp", "cwd" }
 
 -- Leader key. This is required to be before lazy is loaded in top level init.lua
 vim.g.mapleader = ","
 
 -- Stop snacks animation
 vim.g.snacks_animate = false
+
+-- Disable text wrapping
+vim.opt.wrap = false
+vim.opt.linebreak = false
+vim.opt.textwidth = 300
+vim.opt.wrapmargin = 0
 
 -- Set python lsp
 vim.g.lazyvim_python_lsp = "pyright"
