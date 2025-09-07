@@ -8,6 +8,7 @@ mkdir -p "$BACKUP_DIR"
 
 # Loop over dotfiles in the home directory
 for dotfile in "$HOME_DIR"/.*; do
+
     # Skip the special directories . and ..
     if [[ "$dotfile" == "$HOME_DIR/." || "$dotfile" == "$HOME_DIR/.." ]]; then
         continue
