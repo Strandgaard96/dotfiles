@@ -11,15 +11,16 @@ all: dotfiles
 neovim:
 	bash ./setup/nvim_setup.sh
 
+
 ${HOME}/.oh-my-zsh:
 	bash ./setup/zsh_ohmyzsh.sh
 	bash ./setup/zsh_ohmyzsh_plugins.sh
 
 # This symlinks the dotfiles with stow
 dotfiles:
-	echo "Backup dots"
-	bash -c ./setup/backup_existing_dots.sh
-	stow -v -t ${HOME} bin
+	echo "Ready for dots"
+	# bash -c ./setup/backup_existing_dots.sh
+	# stow -v -t ${HOME} bin
 	#stow -v -t ${HOME} git alacritty nvim lazygit ripgrep div bat tmux i3 bash
 
 ${HOME}/.fzf:
