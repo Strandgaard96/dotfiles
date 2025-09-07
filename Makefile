@@ -20,7 +20,7 @@ ${HOME}/.oh-my-zsh:
 dotfiles:
 	echo "Ready for dots"
 	# bash -c ./setup/backup_existing_dots.sh
-	# stow -v -t ${HOME} bin
+	stow -v -t ${HOME} bash
 	#stow -v -t ${HOME} git alacritty nvim lazygit ripgrep div bat tmux i3 bash
 
 ${HOME}/.fzf:
