@@ -1,6 +1,7 @@
 bat
 curl
 fd-find
+zoxide
 git
 i3
 polybar
