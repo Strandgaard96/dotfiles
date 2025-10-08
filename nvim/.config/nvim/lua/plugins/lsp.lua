@@ -18,6 +18,18 @@ return {
       },
     },
     opts = {
+      servers = {
+        jsonls = {
+          format = {
+            enable = false,
+          },
+        },
+        json = {
+          format = {
+            enable = false,
+          },
+        },
+      },
       inlay_hints = {
         enabled = false,
       },

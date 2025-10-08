@@ -38,7 +38,7 @@ mv $INSTALL_DIR/fd-v8.7.0-i686-unknown-linux-musl/fd ~/bin
 curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
 
 # Dops
-wget "https://github.com/Mikescher/better-docker-ps/releases/latest/download/dops_linux-amd64-static" -O "/usr/local/bin/dops" && sudo chmod +x "/usr/local/bin/dops"
+wget "https://github.com/Mikescher/better-docker-ps/releases/latest/download/dops_linux-amd64-static" -O "${HOME}/bin/dops" && sudo chmod +x "/usr/local/bin/dops"
 
 # Get tre
 curl -L -o $DWNLLDIR/tre-v0.4.0-x86_64-unknown-linux-musl.tar.gz https://github.com/dduan/tre/releases/download/v0.4.0/tre-v0.4.0-x86_64-unknown-linux-musl.tar.gz

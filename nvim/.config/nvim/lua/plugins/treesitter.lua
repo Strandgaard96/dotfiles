@@ -3,6 +3,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
+      auto_install = true,
       ensure_istalled = {
         "csv",
         "cpp",
@@ -11,7 +12,7 @@ return {
   },
 
   {
-    "echasnovski/mini.ai",
+    "nvim-mini/mini.ai",
     event = "VeryLazy",
     opts = function()
       local ai = require("mini.ai")
