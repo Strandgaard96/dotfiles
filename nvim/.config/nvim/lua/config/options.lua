@@ -37,6 +37,13 @@ vim.g.lazyvim_python_lsp = "pyright"
 vim.opt.formatoptions:append("wa")
 vim.opt.textwidth = 150
 
+-- To improve performance
+vim.opt.syntax = "off"
+vim.o.spell = false
+vim.o.foldenable = false
+vim.g.matchparen_timeout = 2
+vim.g.matchparen_insert_timeout = 2
+
 -- vim.opt.clipboard = "unnamedplus" i should strive to keep vim and system clipboard separate.
 -- vim.opt.hlsearch = false -- highlight searched words
 -- vim.opt.incsearch = true -- highlight searched words

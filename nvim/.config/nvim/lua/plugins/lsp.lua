@@ -1,38 +1,52 @@
--- -- This ensures nice borders on lsp hover
--- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
--- vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+-- File: nvim/.config/nvim/lua/plugins/lsp.lua
 
 -- For LSP window border
 require("lspconfig.ui.windows").default_options.border = "single"
 
 return {
-  -- lspconfig
   {
     "neovim/nvim-lspconfig",
-    window = {
-      completion = {
-        border = "rounded",
-      },
-      documentation = {
-        border = "rounded",
-      },
-    },
-    opts = {
-      servers = {
-        jsonls = {
-          format = {
-            enable = false,
+    ---@class PluginLspOpts
+    opts = function(_, opts)
+      -- Merge the existing opts table from LazyVim
+      -- Find the jsonls server settings and disable formatting
+      opts.servers = opts.servers or {}
+      opts.servers.jsonls = vim.tbl_deep_extend("force", opts.servers.jsonls or {}, {
+        -- Settings passed to vscode-json-language-server
+        -- See https://github.com/microsoft/vscode-json-languageservice/blob/main/docs/configuration.md
+        settings = {
+          json = {
+            format = {
+              enable = false, -- Explicitly disable formatting
+            },
+            validate = { enable = true },
           },
         },
-        json = {
-          format = {
-            enable = false,
+        -- Disable formatting capabilities even if the server offers them
+        capabilities = vim.tbl_deep_extend("force", {}, opts.capabilities or {}, {
+          textDocument = {
+            formatting = false,
+            rangeFormatting = false,
           },
+        }),
+        -- Ensure init_options also reflects no formatter if needed, though settings usually suffice
+        init_options = {
+          provideFormatter = false,
         },
-      },
-      inlay_hints = {
+      })
+
+      -- You had this here before, keep it if you still want it
+      opts.inlay_hints = {
         enabled = false,
-      },
-    },
+      }
+
+      -- Set border options (these might be superseded by LazyVim defaults or other plugins like noice.nvim)
+      opts.window = {
+        completion = { border = "rounded" },
+        documentation = { border = "rounded" },
+      }
+
+      return opts
+    end,
   },
 }
