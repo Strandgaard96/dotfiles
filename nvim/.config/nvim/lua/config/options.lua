@@ -23,19 +23,20 @@ vim.g.mapleader = ","
 vim.g.snacks_animate = false
 
 -- Disable text wrapping
-vim.opt.wrap = false
-vim.opt.linebreak = false
-vim.opt.textwidth = 300
-vim.opt.wrapmargin = 0
+-- vim.opt.wrap = false
+-- vim.opt.linebreak = false
+-- vim.opt.textwidth = 300
+-- vim.opt.wrapmargin = 0
 
 -- Set python lsp
-vim.g.lazyvim_python_lsp = "pyright"
+-- vim.g.lazyvim_python_lsp = "pyright"
+vim.g.lazyvim_python_lsp = "ty"
 
 -- vim.g.clipboard = { name = "xclip" }
 
 -- Set textwidth and another command to ensure LaTeX lines are sort of wrapped.
-vim.opt.formatoptions:append("wa")
-vim.opt.textwidth = 150
+-- vim.opt.formatoptions:append("wa")
+-- vim.opt.textwidth = 150
 
 -- To improve performance
 vim.opt.syntax = "off"
@@ -107,6 +108,8 @@ vim.opt.suffixesadd:append({ ".md", ".py" }) -- search for suffexes using gf
 vim.opt.autoread = true -- Update buffer if file has changed outside vim.
 
 vim.opt.spellsuggest = "best,10" -- show only the top 10 candidates
+
+vim.lsp.set_log_level("off")
 
 --
 -- -- Some wildcard options

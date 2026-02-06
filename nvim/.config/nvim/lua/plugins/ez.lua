@@ -74,4 +74,15 @@ return {
       -- your options here
     },
   },
+
+  -- Fix annoying auto pair to better one.
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    opts = {},
+  },
+  {
+    "nvim-mini/mini.pairs",
+    enabled = false,
+  },
 }

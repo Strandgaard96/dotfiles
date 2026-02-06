@@ -1,0 +1,7 @@
+return {
+  -- THIS IS NEEDED FOR THE BLINK COMPLETION TO WORK
+  "MeanderingProgrammer/render-markdown.nvim",
+  opts = {
+    completions = { lsp = { enabled = true } },
+  },
+}

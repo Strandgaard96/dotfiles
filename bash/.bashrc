@@ -11,6 +11,15 @@ export HISTSIZE=1000000     # big big history
 export HISTFILESIZE=1000000 # big big history
 shopt -s histappend         # append to history, don't overwrite it
 
+# Pretty man pages
+export LESS_TERMCAP_mb=$'\e[1;32m'
+export LESS_TERMCAP_md=$'\e[1;32m'
+export LESS_TERMCAP_me=$'\e[0m'
+export LESS_TERMCAP_se=$'\e[0m'
+export LESS_TERMCAP_so=$'\e[01;33m'
+export LESS_TERMCAP_ue=$'\e[0m'
+export LESS_TERMCAP_us=$'\e[1;4;31m'
+
 # Enable vim mode
 #set -o vi
 
@@ -49,9 +58,6 @@ fi
 
 # Set ripgrep config path
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
-
-# Source local bashrc if present
-if test -f $HOME/.bashrc_local; then source $HOME/.bashrc_local; fi
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh
@@ -135,6 +141,21 @@ set_bash_prompt() {
         # Alternative: show the name: venv_str="($(basename "$VIRTUAL_ENV")) "
     fi
 
+    # --- Check for Terraform Workspace ---
+    local tf_workspace_str=""
+    if [ -d ".terraform" ] && command -v terraform >/dev/null 2>&1; then
+        local workspace=$(terraform workspace show 2>/dev/null)
+        if [ -n "$workspace" ] && [ "$workspace" != "default" ]; then
+            tf_workspace_str="[tf:$workspace] "
+        elif [ -n "$workspace" ] && [ "$workspace" = "default" ]; then
+            tf_workspace_str="[tf:default] "
+        fi
+        # Color the terraform workspace info
+        if [ -n "$tf_workspace_str" ]; then
+            tf_workspace_str="\[\e[38;5;99m\]${tf_workspace_str}${COLOR_RESET}"
+        fi
+    fi
+
     # --- Set Terminal Title ---
     # Set title to AWS profile if available, otherwise fallback to user@host:path
     if [ -n "$title_profile" ]; then
@@ -145,14 +166,15 @@ set_bash_prompt() {
 
     # --- Construct the PS1 String ---
     # First line: Profile, Venv, User, Host, Path, Git
-    PS1="${profile_str}${venv_str}${COLOR_USER}\u${COLOR_AT}@${COLOR_HOST}\h${COLOR_RESET}:${COLOR_PATH}\w${COLOR_GIT}\$(__git_ps1 ' (%s)')${COLOR_RESET}"
+    # PS1="${profile_str}${venv_str}${COLOR_USER}\u${COLOR_AT}@${COLOR_HOST}\h${COLOR_RESET}:${COLOR_PATH}\w${COLOR_GIT}\$(__git_ps1 ' (%s)')${COLOR_RESET}"
+    PS1="${profile_str}${tf_workspace_str}${venv_str}${COLOR_USER}\u${COLOR_AT}@${COLOR_HOST}\h${COLOR_RESET}:${COLOR_PATH}\w${COLOR_GIT}\$(__git_ps1 ' (%s)')${COLOR_RESET}"
     # Newline
     PS1+="\n"
     # Second line: Exit status (if non-zero) and prompt symbol
     # if [ $exit_status -ne 0 ]; then
     #     PS1+="${COLOR_STATUS_ERR}${exit_status} ${COLOR_RESET}" # Show non-zero exit status in red
     # fi
-    PS1+="> " # Prompt symbol ($ for user, # for root) followed by space
+    PS1+="${COLOR_HOST}> ${COLOR_RESET}" # Prompt symbol ($ for user, # for root) followed by space
 
     # Note: We don't need to manually call settitle here anymore,
     # as it's handled within set_bash_prompt which runs via PROMPT_COMMAND.
@@ -177,3 +199,8 @@ export WAYLAND_DISPLAY=
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 complete -C /usr/bin/terraform terraform
+export ZED_ALLOW_EMULATED_GPU=1
+alias zed="WAYLAND_DISPLAY= zed"
+
+# Source local bashrc if present
+if test -f $HOME/.bashrc_local; then source $HOME/.bashrc_local; fi

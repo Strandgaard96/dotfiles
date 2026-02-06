@@ -9,20 +9,8 @@ export PATH=$PATH:$GOROOT/bin
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 
-# END_AWS_SSO_CLI
-export PATH="/home/linuxbrew/.linuxbrew/opt/openjdk@8/bin:$PATH"
-
-# END_AWS_SSO_CLI
-export PATH="/home/linuxbrew/.linuxbrew/opt/openjdk@8/bin:$PATH"
-
-# END_AWS_SSO_CLI
-export PATH="/home/linuxbrew/.linuxbrew/opt/openjdk@8/bin:$PATH"
-
-# END_AWS_SSO_CLI
-export PATH="/home/linuxbrew/.linuxbrew/opt/openjdk@8/bin:$PATH"
-
-# END_AWS_SSO_CLI
-export PATH="/home/linuxbrew/.linuxbrew/opt/openjdk@8/bin:$PATH"
+# notes path (zk)
+test -d "$HOME/notes" && export ZK_NOTEBOOK_DIR="$HOME/notes" && export OBSIDIAN_VAULT_PATH="${HOME}/notes"
 
 # END_AWS_SSO_CLI
 export PATH="/home/linuxbrew/.linuxbrew/opt/openjdk@8/bin:$PATH"
